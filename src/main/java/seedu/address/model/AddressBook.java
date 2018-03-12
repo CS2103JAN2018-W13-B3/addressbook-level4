@@ -2,12 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -59,6 +54,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
+    /**
+     * Remove a specific tag from every person in the address book
+     * @param target Tag to be removed
+     */
+    public void removeTag(Tag target) {
+        Iterator<Person> it = this.persons.iterator();
+        while(it.hasNext()) {
+            Person person = it.next();
+            person.removeTag(target);
+        }
+
+    }
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
