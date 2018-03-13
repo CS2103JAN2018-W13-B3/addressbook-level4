@@ -17,12 +17,12 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -53,7 +53,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different activity -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -84,15 +84,15 @@ public class FindCommandTest {
     /**
      * Asserts that {@code command} is successfully executed, and<br>
      *     - the command feedback is equal to {@code expectedMessage}<br>
-     *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
-     *     - the {@code AddressBook} in model remains the same after executing the {@code command}
+     *     - the {@code FilteredList<Activity>} is equal to {@code expectedList}<br>
+     *     - the {@code Calendar} in model remains the same after executing the {@code command}
      */
-    private void assertCommandSuccess(FindCommand command, String expectedMessage, List<Person> expectedList) {
-        AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
+    private void assertCommandSuccess(FindCommand command, String expectedMessage, List<Activity> expectedList) {
+        Calendar expectedAddressBook = new Calendar(model.getAddressBook());
         CommandResult commandResult = command.execute();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
-        assertEquals(expectedList, model.getFilteredPersonList());
+        assertEquals(expectedList, model.getFilteredActivityList());
         assertEquals(expectedAddressBook, model.getAddressBook());
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Calendar save file which contains the same Activity values as in
+{@code TypicalPersons#getTypicalAddressBook()}-->
+<addressbook>
+    <activities>
+        <name>Alice Pauline</name>
+        <dateTime>85355255</dateTime>
+        <remark>123, Jurong West Ave 6, #08-111</remark>
+        <tagged>friends</tagged>
+    </activities>
+    <activities>
+        <name>Benson Meier</name>
+        <dateTime>98765432</dateTime>
+        <remark>311, Clementi Ave 2, #02-25</remark>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </activities>
+    <activities>
+        <name>Carl Kurz</name>
+        <dateTime>95352563</dateTime>
+        <remark>wall street</remark>
+    </activities>
+    <activities>
+        <name>Daniel Meier</name>
+        <dateTime>87652533</dateTime>
+        <remark>10th street</remark>
+    </activities>
+    <activities>
+        <name>Elle Meyer</name>
+        <dateTime>9482224</dateTime>
+        <remark>michegan ave</remark>
+    </activities>
+    <activities>
+        <name>Fiona Kunz</name>
+        <dateTime>9482427</dateTime>
+        <remark>little tokyo</remark>
+    </activities>
+    <activities>
+        <name>George Best</name>
+        <dateTime>9482442</dateTime>
+        <remark>4th street</remark>
+    </activities>
+    <tags>friends</tags>
+    <tags>owesMoney</tags>
+</addressbook>

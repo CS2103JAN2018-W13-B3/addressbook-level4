@@ -7,30 +7,29 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Person;
+import seedu.address.model.activity.Activity;
 
 /**
- * A utility class for Person.
+ * A utility class for Activity.
  */
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code activity}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Activity activity) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(activity);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code activity}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Activity activity) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + activity.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + activity.getDateTime().toString() + " ");
+        sb.append(PREFIX_ADDRESS + activity.getRemark().value + " ");
+        activity.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

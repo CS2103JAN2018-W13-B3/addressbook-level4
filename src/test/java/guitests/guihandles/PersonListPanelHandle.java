@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.scene.control.ListView;
-import seedu.address.model.person.Person;
-import seedu.address.ui.PersonCard;
+import seedu.address.model.activity.Activity;
+import seedu.address.ui.ActivityCard;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
+ * Provides a handle for {@code ActivityListPanel} containing the list of {@code ActivityCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<PersonCard>> {
+public class PersonListPanelHandle extends NodeHandle<ListView<ActivityCard>> {
     public static final String PERSON_LIST_VIEW_ID = "#personListView";
 
-    private Optional<PersonCard> lastRememberedSelectedPersonCard;
+    private Optional<ActivityCard> lastRememberedSelectedPersonCard;
 
-    public PersonListPanelHandle(ListView<PersonCard> personListPanelNode) {
+    public PersonListPanelHandle(ListView<ActivityCard> personListPanelNode) {
         super(personListPanelNode);
     }
 
@@ -25,10 +25,10 @@ public class PersonListPanelHandle extends NodeHandle<ListView<PersonCard>> {
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      */
     public PersonCardHandle getHandleToSelectedCard() {
-        List<PersonCard> personList = getRootNode().getSelectionModel().getSelectedItems();
+        List<ActivityCard> personList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (personList.size() != 1) {
-            throw new AssertionError("Person list size expected 1.");
+            throw new AssertionError("Activity list size expected 1.");
         }
 
         return new PersonCardHandle(personList.get(0).getRoot());
@@ -45,7 +45,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<PersonCard>> {
      * Returns true if a card is currently selected.
      */
     public boolean isAnyCardSelected() {
-        List<PersonCard> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
+        List<ActivityCard> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedCardsList.size() > 1) {
             throw new AssertionError("Card list size expected 0 or 1.");
@@ -55,14 +55,14 @@ public class PersonListPanelHandle extends NodeHandle<ListView<PersonCard>> {
     }
 
     /**
-     * Navigates the listview to display and select the person.
+     * Navigates the listview to display and select the activity.
      */
-    public void navigateToCard(Person person) {
-        List<PersonCard> cards = getRootNode().getItems();
-        Optional<PersonCard> matchingCard = cards.stream().filter(card -> card.person.equals(person)).findFirst();
+    public void navigateToCard(Activity activity) {
+        List<ActivityCard> cards = getRootNode().getItems();
+        Optional<ActivityCard> matchingCard = cards.stream().filter(card -> card.activity.equals(activity)).findFirst();
 
         if (!matchingCard.isPresent()) {
-            throw new IllegalArgumentException("Person does not exist.");
+            throw new IllegalArgumentException("Activity does not exist.");
         }
 
         guiRobot.interact(() -> {
@@ -73,35 +73,35 @@ public class PersonListPanelHandle extends NodeHandle<ListView<PersonCard>> {
     }
 
     /**
-     * Returns the person card handle of a person associated with the {@code index} in the list.
+     * Returns the activity card handle of a activity associated with the {@code index} in the list.
      */
     public PersonCardHandle getPersonCardHandle(int index) {
-        return getPersonCardHandle(getRootNode().getItems().get(index).person);
+        return getPersonCardHandle(getRootNode().getItems().get(index).activity);
     }
 
     /**
-     * Returns the {@code PersonCardHandle} of the specified {@code person} in the list.
+     * Returns the {@code PersonCardHandle} of the specified {@code activity} in the list.
      */
-    public PersonCardHandle getPersonCardHandle(Person person) {
+    public PersonCardHandle getPersonCardHandle(Activity activity) {
         Optional<PersonCardHandle> handle = getRootNode().getItems().stream()
-                .filter(card -> card.person.equals(person))
+                .filter(card -> card.activity.equals(activity))
                 .map(card -> new PersonCardHandle(card.getRoot()))
                 .findFirst();
-        return handle.orElseThrow(() -> new IllegalArgumentException("Person does not exist."));
+        return handle.orElseThrow(() -> new IllegalArgumentException("Activity does not exist."));
     }
 
     /**
-     * Selects the {@code PersonCard} at {@code index} in the list.
+     * Selects the {@code ActivityCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
     }
 
     /**
-     * Remembers the selected {@code PersonCard} in the list.
+     * Remembers the selected {@code ActivityCard} in the list.
      */
     public void rememberSelectedPersonCard() {
-        List<PersonCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
+        List<ActivityCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
             lastRememberedSelectedPersonCard = Optional.empty();
@@ -111,11 +111,11 @@ public class PersonListPanelHandle extends NodeHandle<ListView<PersonCard>> {
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
+     * Returns true if the selected {@code ActivityCard} is different from the value remembered by the most recent
      * {@code rememberSelectedPersonCard()} call.
      */
     public boolean isSelectedPersonCardChanged() {
-        List<PersonCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
+        List<ActivityCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
             return lastRememberedSelectedPersonCard.isPresent();
