@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= CLIndar - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-W13-B3/main/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2103JAN2018-W13-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -780,18 +780,18 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user*: University students
+*Target user*: University Computing students
 
 *Target user profile*:
 
-* has a need to manage a significant number of assignments and events
+* has a need to manage a significant number of tasks and events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* is reasonably comfortable using Linux-style commands and CLI apps
 
-*Value proposition*: The user will have all their assignment and event
-tasks in one app. This creates convenience for the user. The CLI also makes it
+*Value proposition*: The user will have all their tasks and events in one app.
+This creates convenience for the user. The CLI also makes it
 faster than a typical mouse/GUI-driven app
 
 [appendix]
@@ -804,7 +804,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |figure out how to use the application
 
-|`* * *` |student |add a new assignment |record a new assignment to remind myself
+|`* * *` |student |add a new task |record a new task to remind myself
 
 |`* * *` |student |add a new event |record a new event to remind myself
 
@@ -812,59 +812,59 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |student |add items to bring for an event |attend an event with all the required items
 
-|`* * *` |student |view upcoming assignments (in order of earliest to latest) |manage my time and finish my tasks on time
+|`* * *` |student |view upcoming tasks (in order of earliest to latest) |manage my time and finish my tasks on time
 
 |`* * *` |student |view upcoming events (in order of earliest to latest) |attend my events
 
 |`* * *` |student |view free time slots |arrange for other events
 
-|`* * *` |student |change the deadline of an assignment |adjust my schedule when a deadline changes
+|`* * *` |student |change the deadline of a task |adjust my schedule when a deadline changes
 
 |`* * *` |student |change the time of an event |see the updated schedule in case there are changes
 
 |`* * *` |student |change the location of an event |be in the right location when the location changes
 
-|`* * *` |student |delete an assignment |remove assignments I no longer need to complete
+|`* * *` |student |delete a task |remove tasks I no longer need to complete
 
 |`* * *` |student |delete an event |remove events I no longer need to attend
 
-|`* * *` |student |find an assignment by name |locate details of an assignment without having to go through the entire list
+|`* * *` |student |find a task by name |locate details of a task without having to go through the entire list
 
 |`* * *` |student |find an event by name |locate details of an event without having to go through the entire list
 
-|`* * *` |student |mark an assignment as complete |tell which assignments are completed and which are not
+|`* * *` |student |mark a task as complete |tell which tasks are completed and which are not
 
-|`* * *` |student |view completed assignments |be assured I have completed an assignment
+|`* * *` |student |view completed tasks |be assured I have completed a task
 
-|`* * *` |forgetful student |view overdue assignments |be assured I did not miss any deadline
+|`* * *` |forgetful student |view overdue tasks |be assured I did not miss any deadline
 
-|`* * *` |forgetful student |get notification for upcoming assignments |never forget to complete my assignments
+|`* * *` |forgetful student |get notification for upcoming tasks |never forget to complete my tasks
 
 |`* * *` |forgetful student |get notification for upcoming events |never forget to attend my events
 
-|`* *` |busy student |sort assignments based on priority |allocate sufficient time for each assignment
+|`* *` |busy student |sort tasks based on priority |allocate sufficient time for each task
 
-|`* *` |busy student |filter assignments based on time period |view only assignments with deadlines within a certain time period
+|`* *` |busy student |filter tasks based on time period |view only tasks with deadlines within a certain time period
 
 |`* *` |busy student |filter events based on time period |view only events within a certain time period
 
-|`* *` |busy student |filter assignments based on tags |view only certain assignments when there are too many assignments to view
+|`* *` |busy student |filter tasks based on tags |view only certain tasks when there are too many tasks to view
 
 |`* *` |busy student |filter events based on tags |view only certain events when there are too many events to view
 
-|`* *` |procrastinating student |add estimated time needed to complete an assignment |estimate when to start on an assignment to complete it on time
+|`* *` |procrastinating student |add estimated time needed to complete a task |estimate when to start on a task to complete it on time
 
-|`* *` |procrastinating student |view contact details of activity in-charge for a deadline extension |have enough time to complete my assignments despite my tight schedule
+|`* *` |procrastinating student |view contact details of person in-charge for a deadline extension |have enough time to complete my task despite my tight schedule
 
 |`* *` |busy student |view free time slots before a deadline |know how much time I have when I'm actually free to finish my tasks
 
 |`* *` |student |view common free time slots among my group mates |arrange a group meeting
 
-|`* *` |organised student |add multiple deadlines for an assignment |keep track of project progress
+|`* *` |organised student |add multiple deadlines for a task |keep track of project progress
 
 |`* *` |NUS student |import timetable from NUSMods |avoid the trouble of keying in my lecture and tutorial schedules manually
 
-|`*` |student |be rewarded for completing an assignment |feel a sense of achievement
+|`*` |student |be rewarded for completing a task |feel a sense of achievement
 
 |`*` |student |hide private events |minimize chance of someone else seeing them by accident
 |=======================================================================
@@ -872,88 +872,88 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `TaskManager` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `CLIndar` and the *Actor* is the `User`, unless specified otherwise)
 
 [discrete]
 
-=== Use case: Add assignment
+=== Use case: Add task
 
 *MSS*
 
-1. User requests to add in new assignment
-2. User supplies the detail of assignment as format specified by the command
-3. The details of assignment is parsed and checked by the TaskManager
-4. TaskManager adds in the task.
-
-*Extensions*
-
-[none]
-*3a. The details of assignment does not match the format or invalid
-+
-[none]
-** 3a1. TaskManager shows an error message.
-+
-Use case ends
-
-=== Use case: Add events
-
-*MSS*
-
-1. User requests to add in new event
-2. User supplies the detail of event as format specified by the command
-3. The details of event is parsed and checked by the TaskManager
-4. TaskManager adds in the event.
-
-*Extensions*
-
-[none]
-*3a. The details of event does not match the format or invalid
-+
-[none]
-** 3a1. TaskManager shows an error message.
-+
-Use case ends
-
-=== Use case: Complete assignment
-
-*MSS*
-
-1. User requests to mark an assignment as completed
-2. TaskManager shows a list of uncompleted assignments.
-3. The user selects the task to be marked as completed by the index.
-4. TaskManager mark the selected assignment as completed/
+1. User adds a task into CLIndar by typing a command
+2. CLIndar parses command typed and adds in the task
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+*2a. CLIndar detects that the format of the command typed is invalid
++
+[none]
+** 3a1. CLIndar shows an error message
++
+Use case ends.
+
+=== Use case: Add events
+
+*MSS*
+
+1. User adds an event into CLIndar by typing a command
+2. CLIndar parses command typed and adds in the event
++
+Use case ends.
+
+*Extensions*
+
+[none]
+*3a. CLIndar detects that the format of the command typed is invalid
++
+[none]
+** 3a1. CLIndar shows an error message
++
+Use case ends.
+
+=== Use case: Complete task
+
+*MSS*
+
+1. User requests to mark a task as completed by typing a command
+2. CLIndar shows a list of uncompleted tasks
+3. User selects the task to be marked as completed by the index
+4. CLIndar marks the selected task as completed
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
 +
 Use case ends.
 
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. TaskManager shows an error message.
+** 3a1. CLIndar shows an error message
 +
 Use case resumes at step 2.
 
 
-=== Use case: Show urgent assignment
+=== Use case: Show urgent task
 
 *MSS*
 
-1. User requests to show all assignments before a certain date.
-2. TaskManager shows a list of uncompleted assignments with deadline before the provided date.
+1. User requests to show all tasks before a certain date by typing a command
+2. CLIndar shows a list of uncompleted tasks with deadline before the provided date
 +
 Use case ends.
 
 *Extensions*
-* 1a. The given date is invalid.
+* 1a. The given date is invalid
 +
 [none]
-** 1a1. TaskManager shows an error message.
+** 1a1. CLIndar shows an error message
 +
 Use case resumes at step 1.
 
@@ -967,7 +967,7 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
-.  Should be able to hold up to 500 assignments and 500 events without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 500 tasks and 500 events without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  The system should respond within two seconds when the user enters a command.
 .  The system CLI commands should be easy to remember for the average English speaker.
@@ -979,17 +979,17 @@ _{More to be added}_
 [appendix]
 == Glossary
 
-[[assignments]] Assignments::
-A particular task or duty assigned by in this case a professor.
+[[tasks]] Tasks::
+A particular work assigned by a professor.
 
 [[completed]] Completed::
-An assignment or event that has finished.
+A task or event that has finished.
 
 [[deadline]] Deadline::
-The date and time by which an event will happen or an assignment is due.
+The date and time by which an event will happen or a task is due.
 
 [[duration]] Duration::
-The amount of time left to complete an assignment or prepare for an event.
+The amount of time left to complete a task or prepare for an event.
 
 [[events]] Events::
 A thing that will occur in a certain place at a particular interval of time.
@@ -1004,13 +1004,13 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others.
 
 [[overdue]] Overdue::
-An assignment that has not been completed past the deadline.
+A task that has not been completed past the deadline.
 
 [[things-to-bring]] Things to bring::
 Things to be brought for an event that is going to happen.
 
 [[urgent]] Urgent::
-An assignment due or event that will happen within the next 24 hours.
+A task due or event that will happen within the next 24 hours.
 
 [appendix]
 == Product Survey
