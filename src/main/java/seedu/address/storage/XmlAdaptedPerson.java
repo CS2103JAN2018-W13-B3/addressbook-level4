@@ -9,7 +9,10 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.activity.*;
+import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.DateTime;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,7 +85,8 @@ public class XmlAdaptedPerson {
         final Name name = new Name(this.name);
 
         if (this.dateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
         }
         if (!DateTime.isValidDateAndTime(this.dateTime)) {
             throw new IllegalValueException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
