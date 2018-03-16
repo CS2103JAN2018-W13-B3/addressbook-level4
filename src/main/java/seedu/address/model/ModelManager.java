@@ -11,10 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.CalendarChangedEvent;
+import seedu.address.commons.events.model.DeskBoardChangedEvent;
 import seedu.address.model.activity.Activity;
-import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
+import seedu.address.model.activity.exceptions.DuplicateActivityException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,51 +23,51 @@ import seedu.address.model.activity.exceptions.ActivityNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final Calendar addressBook;
+    private final DeskBoard deskBoard;
     private final FilteredList<Activity> filteredActivities;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given deskBoard and userPrefs.
      */
-    public ModelManager(ReadOnlyCalendar addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyDeskBoard deskBoard, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(deskBoard, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with desk board: " + deskBoard + " and user prefs " + userPrefs);
 
-        this.addressBook = new Calendar(addressBook);
-        filteredActivities = new FilteredList<>(this.addressBook.getPersonList());
+        this.deskBoard = new DeskBoard(deskBoard);
+        filteredActivities = new FilteredList<>(this.deskBoard.getActivityList());
     }
 
     public ModelManager() {
-        this(new Calendar(), new UserPrefs());
+        this(new DeskBoard(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyCalendar newData) {
-        addressBook.resetData(newData);
+    public void resetData(ReadOnlyDeskBoard newData) {
+        deskBoard.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyCalendar getAddressBook() {
-        return addressBook;
+    public ReadOnlyDeskBoard getDeskBoard() {
+        return deskBoard;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new CalendarChangedEvent(addressBook));
+        raise(new DeskBoardChangedEvent(deskBoard));
     }
 
     @Override
     public synchronized void deleteActivity(Activity target) throws ActivityNotFoundException {
-        addressBook.removePerson(target);
+        deskBoard.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addActivity(Activity activity) throws DuplicateActivityException {
-        addressBook.addActivity(activity);
+        deskBoard.addActivity(activity);
         updateFilteredActivityList(PREDICATE_SHOW_ALL_ACTIVITY);
         indicateAddressBookChanged();
     }
@@ -77,7 +77,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws DuplicateActivityException, ActivityNotFoundException {
         requireAllNonNull(target, editedActivity);
 
-        addressBook.updateActivity(target, editedActivity);
+        deskBoard.updateActivity(target, editedActivity);
         indicateAddressBookChanged();
     }
 
@@ -85,7 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Activity} backed by the internal list of
-     * {@code addressBook}
+     * {@code deskBoard}
      */
     @Override
     public ObservableList<Activity> getFilteredActivityList() {
@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return deskBoard.equals(other.deskBoard)
                 && filteredActivities.equals(other.filteredActivities);
     }
 

@@ -36,14 +36,14 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
- * A system test class for Calendar, which provides access to handles of GUI components and helper methods
+ * A system test class for DeskBoard, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
 public abstract class RemarkBookSystemTest {
@@ -82,7 +82,7 @@ public abstract class RemarkBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected Calendar getInitialData() {
+    protected DeskBoard getInitialData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
@@ -141,7 +141,7 @@ public abstract class RemarkBookSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredActivityList().size());
+        assertEquals(getModel().getDeskBoard().getActivityList().size(), getModel().getFilteredActivityList().size());
     }
 
     /**
@@ -149,7 +149,7 @@ public abstract class RemarkBookSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredActivityList().size() < getModel().getAddressBook().getPersonList().size());
+        assertTrue(getModel().getFilteredActivityList().size() < getModel().getDeskBoard().getActivityList().size());
     }
 
     /**
@@ -165,7 +165,7 @@ public abstract class RemarkBookSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getDeskBoard().getActivityList().size());
     }
 
     /**
@@ -178,7 +178,7 @@ public abstract class RemarkBookSystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(expectedModel, getModel());
-        assertEquals(expectedModel.getAddressBook(), testApp.readStorageAddressBook());
+        assertEquals(expectedModel.getDeskBoard(), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredActivityList());
     }
 

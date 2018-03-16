@@ -10,10 +10,12 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Activity in the remark book.
+ * Represents a Activity in the desk board.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Activity {
+
+    private static final String  ACTIVITY_TYPE = "BASE TYPE";
 
     private final Name name;
     private final DateTime dateTime;
@@ -24,7 +26,7 @@ public class Activity {
     /**
      * Every field must be present and not null.
      */
-    public Activity(Name name, DateTime dateTime,Remark remark, Set<Tag> tags) {
+    public Activity(Name name, DateTime dateTime, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, dateTime, remark, tags);
         this.name = name;
         this.dateTime = dateTime;
@@ -53,6 +55,10 @@ public class Activity {
         return Collections.unmodifiableSet(tags.toSet());
     }
 
+    //TODO: Make this method abstract
+    public String getActivityType() {
+        return ACTIVITY_TYPE;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

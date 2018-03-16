@@ -4,8 +4,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.activity.Activity;
-import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
+import seedu.address.model.activity.exceptions.DuplicateActivityException;
+
 
 /**
  * The API of the Model component.
@@ -15,10 +16,10 @@ public interface Model {
     Predicate<Activity> PREDICATE_SHOW_ALL_ACTIVITY = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyCalendar newData);
+    void resetData(ReadOnlyDeskBoard newData);
 
-    /** Returns the Calendar */
-    ReadOnlyCalendar getAddressBook();
+    /** Returns the DeskBoard */
+    ReadOnlyDeskBoard getDeskBoard();
 
     /** Deletes the given activity. */
     void deleteActivity(Activity target) throws ActivityNotFoundException;

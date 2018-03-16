@@ -39,7 +39,7 @@ public class RemarkBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final DeskBoardParser parser = new DeskBoardParser();
 
     @Test
     public void parseCommand_add() throws Exception {

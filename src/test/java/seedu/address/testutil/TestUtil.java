@@ -35,20 +35,20 @@ public class TestUtil {
      * Returns the middle index of the activity in the {@code model}'s activity list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getPersonList().size() / 2);
+        return Index.fromOneBased(model.getDeskBoard().getActivityList().size() / 2);
     }
 
     /**
      * Returns the last index of the activity in the {@code model}'s activity list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getPersonList().size());
+        return Index.fromOneBased(model.getDeskBoard().getActivityList().size());
     }
 
     /**
      * Returns the activity in the {@code model}'s activity list at {@code index}.
      */
     public static Activity getPerson(Model model, Index index) {
-        return model.getAddressBook().getPersonList().get(index.getZeroBased());
+        return model.getDeskBoard().getActivityList().get(index.getZeroBased());
     }
 }

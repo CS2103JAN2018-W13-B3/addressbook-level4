@@ -10,8 +10,9 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private String calendarFilePath = "data/addressbook.xml";
-    private String calendarName = "MyCalendar";
+    //TODO: Change the file path latter
+    private String deskBoardFilePath = "data/deskboard.xml";
+    private String deskBoardName = "MyDeskBoard";
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
@@ -29,20 +30,20 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public String getCalendarFilePath() {
-        return calendarFilePath;
+    public String getDeskBoardFilePath() {
+        return deskBoardFilePath;
     }
 
-    public void setCalendarFilePath(String calendarFilePath) {
-        this.calendarFilePath = calendarFilePath;
+    public void setDeskBoardFilePath(String deskBoardFilePath) {
+        this.deskBoardFilePath = deskBoardFilePath;
     }
 
-    public String getCalendarName() {
-        return calendarName;
+    public String getDeskBoardName() {
+        return deskBoardName;
     }
 
-    public void setCalendarName(String calendarName) {
-        this.calendarName = calendarName;
+    public void setDeskBoardName(String deskBoardName) {
+        this.deskBoardName = deskBoardName;
     }
 
     @Override
@@ -57,21 +58,21 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(calendarFilePath, o.calendarFilePath)
-                && Objects.equals(calendarName, o.calendarName);
+                && Objects.equals(deskBoardFilePath, o.deskBoardFilePath)
+                && Objects.equals(deskBoardName, o.deskBoardName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, calendarFilePath, calendarName);
+        return Objects.hash(guiSettings, deskBoardFilePath, deskBoardName);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
-        sb.append("\nLocal data file location : " + calendarFilePath);
-        sb.append("\nCalendar name : " + calendarName);
+        sb.append("\nLocal data file location : " + deskBoardFilePath);
+        sb.append("\nDeskBoard name : " + deskBoardName);
         return sb.toString();
     }
 

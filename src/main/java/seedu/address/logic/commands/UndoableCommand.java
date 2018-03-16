@@ -5,23 +5,23 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACTIVITY;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyCalendar;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
+import seedu.address.model.ReadOnlyDeskBoard;
 
 /**
  * Represents a command which can be undone and redone.
  */
 public abstract class UndoableCommand extends Command {
-    private ReadOnlyCalendar previousAddressBook;
+    private ReadOnlyDeskBoard previousDeskBoard;
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
 
     /**
      * Stores the current state of {@code model#addressBook}.
      */
-    private void saveAddressBookSnapshot() {
+    private void saveDeskBoardSnapshot() {
         requireNonNull(model);
-        this.previousAddressBook = new Calendar(model.getAddressBook());
+        this.previousDeskBoard = new DeskBoard(model.getDeskBoard());
     }
 
     /**
@@ -31,13 +31,13 @@ public abstract class UndoableCommand extends Command {
     protected void preprocessUndoableCommand() throws CommandException {}
 
     /**
-     * Reverts the Calendar to the state before this command
+     * Reverts the DeskBoard to the state before this command
      * was executed and updates the filtered activity list to
      * show all persons.
      */
     protected final void undo() {
-        requireAllNonNull(model, previousAddressBook);
-        model.resetData(previousAddressBook);
+        requireAllNonNull(model, previousDeskBoard);
+        model.resetData(previousDeskBoard);
         model.updateFilteredActivityList(PREDICATE_SHOW_ALL_ACTIVITY);
     }
 
@@ -58,7 +58,7 @@ public abstract class UndoableCommand extends Command {
 
     @Override
     public final CommandResult execute() throws CommandException {
-        saveAddressBookSnapshot();
+        saveDeskBoardSnapshot();
         preprocessUndoableCommand();
         return executeUndoableCommand();
     }

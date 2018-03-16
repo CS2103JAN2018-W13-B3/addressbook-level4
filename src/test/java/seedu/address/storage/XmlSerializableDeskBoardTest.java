@@ -11,12 +11,12 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.testutil.TypicalPersons;
 
-public class XmlSerializableCalendarTest {
+public class XmlSerializableDeskBoardTest {
 
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableCalendarTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableDeskBoardTest/");
     private static final File TYPICAL_PERSONS_FILE = new File(TEST_DATA_FOLDER + "typicalPersonsAddressBook.xml");
     private static final File INVALID_PERSON_FILE = new File(TEST_DATA_FOLDER + "invalidPersonAddressBook.xml");
     private static final File INVALID_TAG_FILE = new File(TEST_DATA_FOLDER + "invalidTagAddressBook.xml");
@@ -26,17 +26,17 @@ public class XmlSerializableCalendarTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        XmlSerializableCalendar dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
-                XmlSerializableCalendar.class);
-        Calendar addressBookFromFile = dataFromFile.toModelType();
-        Calendar typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        XmlSerializableDeskBoard dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
+                XmlSerializableDeskBoard.class);
+        DeskBoard addressBookFromFile = dataFromFile.toModelType();
+        DeskBoard typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableCalendar dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
-                XmlSerializableCalendar.class);
+        XmlSerializableDeskBoard dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
+                XmlSerializableDeskBoard.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
@@ -44,8 +44,8 @@ public class XmlSerializableCalendarTest {
     @Test
 
     public void toModelType_invalidTagFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableCalendar dataFromFile = XmlUtil.getDataFromFile(INVALID_TAG_FILE,
-                XmlSerializableCalendar.class);
+        XmlSerializableDeskBoard dataFromFile = XmlUtil.getDataFromFile(INVALID_TAG_FILE,
+                XmlSerializableDeskBoard.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }

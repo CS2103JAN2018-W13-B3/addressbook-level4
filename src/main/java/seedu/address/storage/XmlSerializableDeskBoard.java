@@ -8,25 +8,25 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Calendar;
-import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.DeskBoard;
+import seedu.address.model.ReadOnlyDeskBoard;
 
 /**
- * An Immutable Calendar that is serializable to XML format
+ * An Immutable DeskBoard that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableCalendar {
+public class XmlSerializableDeskBoard {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedActivity> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableCalendar.
+     * Creates an empty XmlSerializableDeskBoard.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableCalendar() {
+    public XmlSerializableDeskBoard() {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -34,27 +34,27 @@ public class XmlSerializableCalendar {
     /**
      * Conversion
      */
-    public XmlSerializableCalendar(ReadOnlyCalendar src) {
+    public XmlSerializableDeskBoard(ReadOnlyDeskBoard src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getActivityList().stream().map(XmlAdaptedActivity::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code Calendar} object.
+     * Converts this addressbook into the model's {@code DeskBoard} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
+     * {@code XmlAdaptedActivity} or {@code XmlAdaptedTag}.
      */
-    public Calendar toModelType() throws IllegalValueException {
-        Calendar addressBook = new Calendar();
+    public DeskBoard toModelType() throws IllegalValueException {
+        DeskBoard deskBoard = new DeskBoard();
         for (XmlAdaptedTag t : tags) {
-            addressBook.addTag(t.toModelType());
+            deskBoard.addTag(t.toModelType());
         }
-        for (XmlAdaptedPerson p : persons) {
-            addressBook.addActivity(p.toModelType());
+        for (XmlAdaptedActivity p : persons) {
+            deskBoard.addActivity(p.toModelType());
         }
-        return addressBook;
+        return deskBoard;
     }
 
     @Override
@@ -63,11 +63,11 @@ public class XmlSerializableCalendar {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableCalendar)) {
+        if (!(other instanceof XmlSerializableDeskBoard)) {
             return false;
         }
 
-        XmlSerializableCalendar otherAb = (XmlSerializableCalendar) other;
+        XmlSerializableDeskBoard otherAb = (XmlSerializableDeskBoard) other;
         return persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
     }
 }

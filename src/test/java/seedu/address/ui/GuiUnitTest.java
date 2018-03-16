@@ -12,7 +12,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.ui.testutil.UiPartRule;
 
 /**
- * A GUI unit test class for Calendar.
+ * A GUI unit test class for DeskBoard.
  */
 public abstract class GuiUnitTest {
     @Rule

@@ -18,8 +18,8 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyCalendar;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
+import seedu.address.model.ReadOnlyDeskBoard;
 import seedu.address.model.Model;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.exceptions.DuplicateActivityException;
@@ -102,12 +102,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyCalendar newData) {
+        public void resetData(ReadOnlyDeskBoard newData) {
             fail("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyCalendar getAddressBook() {
+        public ReadOnlyDeskBoard getDeskBoard() {
             fail("This method should not be called.");
             return null;
         }
@@ -145,8 +145,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyCalendar getAddressBook() {
-            return new Calendar();
+        public ReadOnlyDeskBoard getDeskBoard() {
+            return new DeskBoard();
         }
     }
 
@@ -163,8 +163,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyCalendar getAddressBook() {
-            return new Calendar();
+        public ReadOnlyDeskBoard getDeskBoard() {
+            return new DeskBoard();
         }
     }
 

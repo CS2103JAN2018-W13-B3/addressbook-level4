@@ -8,25 +8,25 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.CalendarChangedEvent;
+import seedu.address.commons.events.model.DeskBoardChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.ReadOnlyDeskBoard;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of Calendar data in local storage.
+ * Manages storage of DeskBoard data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private CalendarStorage calendarStorage;
+    private DeskBoardStorage deskBoardStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(CalendarStorage calendarStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(DeskBoardStorage deskBoardStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.calendarStorage = calendarStorage;
+        this.deskBoardStorage = deskBoardStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -48,46 +48,46 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ Calendar methods ==============================
+    // ================ DeskBoard methods ==============================
 
     @Override
-    public String getCalendarFilePath() {
-        return calendarStorage.getCalendarFilePath();
+    public String getDeskBoardFilePath() {
+        return deskBoardStorage.getDeskBoardFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyCalendar> readCalendar() throws DataConversionException, IOException {
-        return readCalendar(calendarStorage.getCalendarFilePath());
+    public Optional<ReadOnlyDeskBoard> readDeskBoard() throws DataConversionException, IOException {
+        return readDeskBoard(deskBoardStorage.getDeskBoardFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyCalendar> readCalendar(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyDeskBoard> readDeskBoard(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return calendarStorage.readCalendar(filePath);
+        return deskBoardStorage.readDeskBoard(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCalendar addressBook) throws IOException {
-        saveAddressBook(addressBook, calendarStorage.getCalendarFilePath());
+    public void saveDeskBoard(ReadOnlyDeskBoard deskBoard) throws IOException {
+        saveDeskBoard(deskBoard, deskBoardStorage.getDeskBoardFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCalendar addressBook, String filePath) throws IOException {
+    public void saveDeskBoard(ReadOnlyDeskBoard deskBoard, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        calendarStorage.saveAddressBook(addressBook, filePath);
+        deskBoardStorage.saveDeskBoard(deskBoard, filePath);
     }
 
     @Override
-    public void backupAddressBook(ReadOnlyCalendar addressBook) throws IOException {
-        calendarStorage.backupAddressBook(addressBook);
+    public void backupDeskBoard(ReadOnlyDeskBoard deskBoard) throws IOException {
+        deskBoardStorage.backupDeskBoard(deskBoard);
     }
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(CalendarChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+    public void handleDeskBoardChangedEvent(DeskBoardChangedEvent dbce) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(dbce, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveDeskBoard(dbce.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

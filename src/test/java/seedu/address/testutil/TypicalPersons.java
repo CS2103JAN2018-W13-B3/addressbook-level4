@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.exceptions.DuplicateActivityException;
 
@@ -60,10 +58,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code Calendar} with all the typical persons.
+     * Returns an {@code DeskBoard} with all the typical persons.
      */
-    public static Calendar getTypicalAddressBook() {
-        Calendar ab = new Calendar();
+    public static DeskBoard getTypicalAddressBook() {
+        DeskBoard ab = new DeskBoard();
         for (Activity activity : getTypicalPersons()) {
             try {
                 ab.addActivity(activity);

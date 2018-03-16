@@ -69,7 +69,7 @@ public class DeleteCommandSystemTest extends RemarkBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getDeskBoard().getActivityList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
 
@@ -98,7 +98,7 @@ public class DeleteCommandSystemTest extends RemarkBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getDeskBoard().getActivityList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
 

@@ -14,10 +14,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.Calendar;
-import seedu.address.storage.XmlAdaptedPerson;
+import seedu.address.model.DeskBoard;
+import seedu.address.storage.XmlAdaptedActivity;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableCalendar;
+import seedu.address.storage.XmlSerializableDeskBoard;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;
@@ -47,7 +47,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, Calendar.class);
+        XmlUtil.getDataFromFile(null, DeskBoard.class);
     }
 
     @Test
@@ -59,45 +59,45 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, Calendar.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, DeskBoard.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, Calendar.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, DeskBoard.class);
     }
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        Calendar dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableCalendar.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        DeskBoard dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableDeskBoard.class).toModelType();
+        assertEquals(9, dataFromFile.getActivityList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedActivity actualPerson = XmlUtil.getDataFromFile(
+                MISSING_PERSON_FIELD_FILE, XmlAdaptedActivityWithRootElement.class);
+        XmlAdaptedActivity expectedPerson = new XmlAdaptedActivity(
                 null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedActivity actualPerson = XmlUtil.getDataFromFile(
+                INVALID_PERSON_FIELD_FILE, XmlAdaptedActivityWithRootElement.class);
+        XmlAdaptedActivity expectedPerson = new XmlAdaptedActivity(
                 VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedActivity actualPerson = XmlUtil.getDataFromFile(
+                VALID_PERSON_FILE, XmlAdaptedActivityWithRootElement.class);
+        XmlAdaptedActivity expectedPerson = new XmlAdaptedActivity(
                 VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
@@ -105,7 +105,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new Calendar());
+        XmlUtil.saveDataToFile(null, new DeskBoard());
     }
 
     @Test
@@ -117,30 +117,30 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new Calendar());
+        XmlUtil.saveDataToFile(MISSING_FILE, new DeskBoard());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
-        XmlSerializableCalendar dataToWrite = new XmlSerializableCalendar(new Calendar());
+        XmlSerializableDeskBoard dataToWrite = new XmlSerializableDeskBoard(new DeskBoard());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableCalendar dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableCalendar.class);
+        XmlSerializableDeskBoard dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableDeskBoard.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new Calendar());
-        dataToWrite = new XmlSerializableCalendar(
+        AddressBookBuilder builder = new AddressBookBuilder(new DeskBoard());
+        dataToWrite = new XmlSerializableDeskBoard(
                 builder.withPerson(new PersonBuilder().build()).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableCalendar.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableDeskBoard.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedActivity}
      * objects.
      */
     @XmlRootElement(name = "activity")
-    private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
+    private static class XmlAdaptedActivityWithRootElement extends XmlAdaptedActivity {}
 }

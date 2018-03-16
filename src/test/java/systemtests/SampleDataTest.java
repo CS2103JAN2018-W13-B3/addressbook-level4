@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
@@ -18,7 +18,7 @@ public class SampleDataTest extends RemarkBookSystemTest {
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected Calendar getInitialData() {
+    protected DeskBoard getInitialData() {
         return null;
     }
 

@@ -30,6 +30,7 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE = "Could not save data to file";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
+    //TODO: Change to a new icon
     private static final String ICON_APPLICATION = "/images/calendar_32.png";
 
     private Logic logic;

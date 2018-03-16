@@ -49,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane activityListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -120,12 +120,12 @@ public class MainWindow extends UiPart<Stage> {
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         activityListPanel = new ActivityListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
+        activityListPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getCalendarFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getDeskBoardFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);

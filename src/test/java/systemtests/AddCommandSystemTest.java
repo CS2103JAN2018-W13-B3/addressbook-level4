@@ -137,7 +137,7 @@ public class AddCommandSystemTest extends RemarkBookSystemTest {
         /* Case: add a duplicate activity except with different tags -> rejected */
         // "friends" is an existing tag used in the default model, see TypicalPersons#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
-        // Calendar#addActivity(Activity)
+        // DeskBoard#addActivity(Activity)
         command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 

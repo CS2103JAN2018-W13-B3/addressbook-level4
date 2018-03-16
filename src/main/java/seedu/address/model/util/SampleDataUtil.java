@@ -3,48 +3,66 @@ package seedu.address.model.util;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.Calendar;
-import seedu.address.model.ReadOnlyCalendar;
-import seedu.address.model.activity.*;
+import seedu.address.model.DeskBoard;
+import seedu.address.model.ReadOnlyDeskBoard;
+import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.DateTime;
+import seedu.address.model.activity.Event;
+import seedu.address.model.activity.Location;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.Remark;
+import seedu.address.model.activity.Task;
 import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code Calendar} with sample data.
+ * Contains utility methods for populating {@code DeskBoard} with sample data.
  */
 public class SampleDataUtil {
     public static Activity[] getSamplePersons() {
         return new Activity[] {
-            new Activity(new Name("Alex Yeoh"), new DateTime("01/02/1991 23:59:59"),
-                new Remark("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Activity(new Name("Bernice Yu"), new DateTime("02/02/1992 23:59:59"),
-                new Remark("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Activity(new Name("Charlotte Oliveiro"), new DateTime("03/02/1991 23:59:59"),
-                new Remark("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Activity(new Name("David Li"), new DateTime("04/02/1991 23:59:59"),
-                new Remark("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Activity(new Name("Irfan Ibrahim"), new DateTime("12/02/1991 23:59:59"),
-                new Remark("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Activity(new Name("Roy Balakrishnan"), new DateTime("12/05/1991 23:59:59"),
-                new Remark("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Task(new Name("Task 1"), new DateTime("01/01/2018 23:59"),
+                    new Remark("Submit through ivle"), getTagSet("Completed")),
+            new Task (new Name("Task 2"), new DateTime("02/02/2018 23:59"),
+                    new Remark("Submit through ivle"), getTagSet("Completed")),
+            new Task (new Name("Task 3"), new DateTime("03/03/2018 23:59"),
+                    new Remark("Submit through ivle"), getTagSet("Completed")),
+            new Task (new Name("Task 4"), new DateTime("04/04/2018 23:59"),
+                    new Remark("Submit through ivle"), getTagSet("Uncompleted")),
+            new Task (new Name("Task 5"), new DateTime("05/05/2018 23:59"),
+                    new Remark("Submit through ivle"), getTagSet("Unompleted")),
+            new Task (new Name("Task 6"), new DateTime("06/06/2018 23:59"),
+                    new Remark("Submit through ivle"), getTagSet("Completed")),
+            new Event(new Name("Event 1"), new DateTime("01/01/2018 07:00"),
+                    new DateTime("01/01/2018 08:00"), new Location("TBC"), new Remark("Remark"),
+                    getTagSet("Finished")),
+            new Event (new Name("Event 2"), new DateTime("02/02/2018 07:00"),
+                    new DateTime("02/02/2018 08:00"), new Location("TBC"), new Remark("Remark"),
+                    getTagSet("Finished")),
+            new Event (new Name("Event 3"), new DateTime("03/03/2018 07:00"),
+                    new DateTime("03/03/2018 08:00"), new Location("TBC"), new Remark("Remark"),
+                    getTagSet("Cancelled")),
+            new Event (new Name("Event 4"), new DateTime("04/04/2018 07:00"),
+                    new DateTime("04/04/2018 08:00"), new Location("TBC"), new Remark("Remark"),
+                    getTagSet("Important")),
+            new Event (new Name("Event 5"), new DateTime("05/05/2018 07:00"),
+                    new DateTime("05/05/2018 08:00"), new Location("TBC"), new Remark("Remark"),
+                    getTagSet("Important")),
+            new Event (new Name("Event 6"), new DateTime("06/06/2018 07:00"),
+                    new DateTime("06/06/2018 08:00"), new Location("TBC"), new Remark("Remark"),
+                    getTagSet("Compulsory"))
         };
     }
 
-    public static ReadOnlyCalendar getSampleAddressBook() {
+    public static ReadOnlyDeskBoard getSampleDeskBoard() {
         try {
-            Calendar sampleAb = new Calendar();
+            DeskBoard sampleAb = new DeskBoard();
             for (Activity sampleActivity : getSamplePersons()) {
                 sampleAb.addActivity(sampleActivity);
             }
             return sampleAb;
         } catch (DuplicateActivityException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+            throw new AssertionError("sample data cannot contain duplicate activities", e);
         }
     }
 

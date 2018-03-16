@@ -18,9 +18,11 @@ import seedu.address.model.activity.Activity;
 /**
  * The Browser Panel of the App.
  */
+//TODO: Replace this panel in the future.
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    //TODO: URL may need to be  change
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 

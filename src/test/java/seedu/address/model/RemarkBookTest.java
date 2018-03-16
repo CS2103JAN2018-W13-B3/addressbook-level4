@@ -24,11 +24,11 @@ public class RemarkBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final Calendar addressBook = new Calendar();
+    private final DeskBoard addressBook = new DeskBoard();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getActivityList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
@@ -40,7 +40,7 @@ public class RemarkBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Calendar newData = getTypicalAddressBook();
+        DeskBoard newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -50,7 +50,7 @@ public class RemarkBookTest {
         // Repeat ALICE twice
         List<Activity> newActivities = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
-        CalendarStub newData = new CalendarStub(newActivities, newTags);
+        DeskBoardStub newData = new DeskBoardStub(newActivities, newTags);
 
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
@@ -59,7 +59,7 @@ public class RemarkBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        addressBook.getActivityList().remove(0);
     }
 
     @Test
@@ -69,19 +69,19 @@ public class RemarkBookTest {
     }
 
     /**
-     * A stub ReadOnlyCalendar whose activities and tags lists can violate interface constraints.
+     * A stub ReadOnlyDeskBoard whose activities and tags lists can violate interface constraints.
      */
-    private static class CalendarStub implements ReadOnlyCalendar {
+    private static class DeskBoardStub implements ReadOnlyDeskBoard {
         private final ObservableList<Activity> activities = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        CalendarStub(Collection<Activity> activities, Collection<? extends Tag> tags) {
+        DeskBoardStub(Collection<Activity> activities, Collection<? extends Tag> tags) {
             this.activities.setAll(activities);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<Activity> getPersonList() {
+        public ObservableList<Activity> getActivityList() {
             return activities;
         }
 

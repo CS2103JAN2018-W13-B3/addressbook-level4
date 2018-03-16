@@ -25,7 +25,7 @@ public class ActivityListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ActivityListPanel.class);
 
     @FXML
-    private ListView<ActivityCard> personListView;
+    private ListView<ActivityCard> activityListView;
 
     public ActivityListPanel(ObservableList<Activity> activityList) {
         super(FXML);
@@ -36,13 +36,13 @@ public class ActivityListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<Activity> activityList) {
         ObservableList<ActivityCard> mappedList = EasyBind.map(
                 activityList, (activity) -> new ActivityCard(activity, activityList.indexOf(activity) + 1));
-        personListView.setItems(mappedList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        activityListView.setItems(mappedList);
+        activityListView.setCellFactory(listView -> new ActivityListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        activityListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in activity list panel changed to : '" + newValue + "'");
@@ -56,8 +56,8 @@ public class ActivityListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            activityListView.scrollTo(index);
+            activityListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -70,17 +70,17 @@ public class ActivityListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code ActivityCard}.
      */
-    class PersonListViewCell extends ListCell<ActivityCard> {
+    class ActivityListViewCell extends ListCell<ActivityCard> {
 
         @Override
-        protected void updateItem(ActivityCard person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(ActivityCard activity, boolean empty) {
+            super.updateItem(activity, empty);
 
-            if (empty || person == null) {
+            if (empty || activity == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(person.getRoot());
+                setGraphic(activity.getRoot());
             }
         }
     }

@@ -68,7 +68,7 @@ public class SelectCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getDeskBoard().getActivityList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
     }
@@ -104,7 +104,7 @@ public class SelectCommandTest {
 
         try {
             CommandResult commandResult = selectCommand.execute();
-            assertEquals(String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased()),
+            assertEquals(String.format(SelectCommand.MESSAGE_SELECT_ACTIVITY_SUCCESS, index.getOneBased()),
                     commandResult.feedbackToUser);
         } catch (CommandException ce) {
             throw new IllegalArgumentException("Execution of command should not fail.", ce);

@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= CLIndar - User Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -62,7 +62,7 @@ Format: `help`
 
 === Adding a activity: `add`
 
-Adds a activity to the remark book +
+Adds a activity to the desk board +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
@@ -75,12 +75,12 @@ Examples:
 
 === Listing all activities : `list`
 
-Shows a list of all activities in the remark book. +
+Shows a list of all activities in the desk board. +
 Format: `list`
 
 === Editing a activity : `edit`
 
-Edits an existing activity in the remark book. +
+Edits an existing activity in the desk board. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
@@ -120,7 +120,7 @@ Returns any activity having names `Betsy`, `Tim`, or `John`
 
 === Deleting a activity : `delete`
 
-Deletes the specified activity from the remark book. +
+Deletes the specified activity from the desk board. +
 Format: `delete INDEX`
 
 ****
@@ -133,7 +133,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd activity in the remark book.
+Deletes the 2nd activity in the desk board.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st activity in the results of the `find` command.
@@ -153,7 +153,7 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd activity in the remark book.
+Selects the 2nd activity in the desk board.
 * `find Betsy` +
 `select 1` +
 Selects the 1st activity in the results of the `find` command.
@@ -171,12 +171,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the remark book to the state before the previous _undoable_ command was executed. +
+Restores the desk board to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the remark book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the desk board's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -220,7 +220,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear` or `c`
 
-Clears all entries from the remark book. +
+Clears all entries from the desk board. +
 Format: `clear` or `c`
 
 === Exiting the program : `exit`

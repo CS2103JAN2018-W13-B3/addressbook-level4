@@ -24,7 +24,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -47,7 +47,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedActivity);
 
-        Model expectedModel = new ModelManager(new Calendar(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new DeskBoard(model.getDeskBoard()), new UserPrefs());
         expectedModel.updateActivity(model.getFilteredActivityList().get(0), editedActivity);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -68,7 +68,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedActivity);
 
-        Model expectedModel = new ModelManager(new Calendar(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new DeskBoard(model.getDeskBoard()), new UserPrefs());
         expectedModel.updateActivity(lastActivity, editedActivity);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -81,7 +81,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedActivity);
 
-        Model expectedModel = new ModelManager(new Calendar(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new DeskBoard(model.getDeskBoard()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -97,7 +97,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedActivity);
 
-        Model expectedModel = new ModelManager(new Calendar(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new DeskBoard(model.getDeskBoard()), new UserPrefs());
         expectedModel.updateActivity(model.getFilteredActivityList().get(0), editedActivity);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -117,7 +117,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit activity in filtered list into a duplicate in address book
-        Activity activityInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Activity activityInList = model.getDeskBoard().getActivityList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = prepareCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(activityInList).build());
 
@@ -142,7 +142,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getDeskBoard().getActivityList().size());
 
         EditCommand editCommand = prepareCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -159,7 +159,7 @@ public class EditCommandTest {
         Activity activityToEdit = model.getFilteredActivityList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedActivity).build();
         EditCommand editCommand = prepareCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new Calendar(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new DeskBoard(model.getDeskBoard()), new UserPrefs());
 
         // edit -> first activity edited
         editCommand.execute();
@@ -205,7 +205,7 @@ public class EditCommandTest {
         Activity editedActivity = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedActivity).build();
         EditCommand editCommand = prepareCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new Calendar(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new DeskBoard(model.getDeskBoard()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Activity activityToEdit = model.getFilteredActivityList().get(INDEX_FIRST_PERSON.getZeroBased());

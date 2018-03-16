@@ -12,9 +12,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.*;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlSerializableCalendar;
+import seedu.address.storage.XmlSerializableDeskBoard;
 import seedu.address.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -30,20 +30,20 @@ public class TestApp extends MainApp {
     protected static final String DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     protected static final String ADDRESS_BOOK_NAME = "Test";
-    protected Supplier<ReadOnlyCalendar> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyDeskBoard> initialDataSupplier = () -> null;
     protected String saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyCalendar> initialDataSupplier, String saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyDeskBoard> initialDataSupplier, String saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            createDataFileWithData(new XmlSerializableCalendar(this.initialDataSupplier.get()),
+            createDataFileWithData(new XmlSerializableDeskBoard(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
@@ -62,19 +62,19 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setCalendarFilePath(saveFileLocation);
-        userPrefs.setCalendarName(ADDRESS_BOOK_NAME);
+        userPrefs.setDeskBoardFilePath(saveFileLocation);
+        userPrefs.setDeskBoardName(ADDRESS_BOOK_NAME);
         return userPrefs;
     }
 
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public Calendar readStorageAddressBook() {
+    public DeskBoard readStorageAddressBook() {
         try {
-            return new Calendar(storage.readCalendar().get());
+            return new DeskBoard(storage.readDeskBoard().get());
         } catch (DataConversionException dce) {
-            throw new AssertionError("Data is not in the Calendar format.");
+            throw new AssertionError("Data is not in the DeskBoard format.");
         } catch (IOException ioe) {
             throw new AssertionError("Storage file cannot be found.");
         }
@@ -84,14 +84,14 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public String getStorageSaveLocation() {
-        return storage.getCalendarFilePath();
+        return storage.getDeskBoardFilePath();
     }
 
     /**
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        Model copy = new ModelManager((model.getDeskBoard()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredActivityList());
         return copy;
     }

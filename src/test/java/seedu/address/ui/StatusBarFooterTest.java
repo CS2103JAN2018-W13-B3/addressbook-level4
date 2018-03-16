@@ -16,15 +16,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.commons.events.model.CalendarChangedEvent;
-import seedu.address.model.Calendar;
+import seedu.address.commons.events.model.DeskBoardChangedEvent;
+import seedu.address.model.DeskBoard;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 
     private static final String STUB_SAVE_LOCATION = "Stub";
     private static final String RELATIVE_PATH = "./";
 
-    private static final CalendarChangedEvent EVENT_STUB = new CalendarChangedEvent(new Calendar());
+    private static final DeskBoardChangedEvent EVENT_STUB = new DeskBoardChangedEvent(new DeskBoard());
 
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());

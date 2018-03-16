@@ -19,14 +19,18 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.activity.*;
-import seedu.address.model.activity.exceptions.DuplicateActivityException;
+import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.DateTime;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.Remark;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
+import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing activity in the remark book.
  */
+//TODO: This command need a lot of rework
 public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
@@ -46,7 +50,7 @@ public class EditCommand extends UndoableCommand {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Activity: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This activity already exists in the remark book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This activity already exists in the desk board.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

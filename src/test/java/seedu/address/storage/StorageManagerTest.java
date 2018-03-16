@@ -12,10 +12,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.CalendarChangedEvent;
+import seedu.address.commons.events.model.DeskBoardChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.Calendar;
-import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.DeskBoard;
+import seedu.address.model.ReadOnlyDeskBoard;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -30,7 +30,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlCalendarStorage addressBookStorage = new XmlCalendarStorage(getTempFilePath("ab"));
+        XmlDeskBoardStorage addressBookStorage = new XmlDeskBoardStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -58,26 +58,26 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlCalendarStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlCalendarStorageTest} class.
+         * {@link XmlDeskBoardStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlDeskBoardStorageTest} class.
          */
-        Calendar original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyCalendar retrieved = storageManager.readCalendar().get();
-        assertEquals(original, new Calendar(retrieved));
+        DeskBoard original = getTypicalAddressBook();
+        storageManager.saveDeskBoard(original);
+        ReadOnlyDeskBoard retrieved = storageManager.readDeskBoard().get();
+        assertEquals(original, new DeskBoard(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getCalendarFilePath());
+        assertNotNull(storageManager.getDeskBoardFilePath());
     }
 
     @Test
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlCalendarStorageExceptionThrowingStub("dummy"),
+        Storage storage = new StorageManager(new XmlDeskBoardStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
-        storage.handleAddressBookChangedEvent(new CalendarChangedEvent(new Calendar()));
+        storage.handleDeskBoardChangedEvent(new DeskBoardChangedEvent(new DeskBoard()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -85,14 +85,14 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlCalendarStorageExceptionThrowingStub extends XmlCalendarStorage {
+    class XmlDeskBoardStorageExceptionThrowingStub extends XmlDeskBoardStorage {
 
-        public XmlCalendarStorageExceptionThrowingStub(String filePath) {
+        public XmlDeskBoardStorageExceptionThrowingStub(String filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyCalendar addressBook, String filePath) throws IOException {
+        public void saveDeskBoard(ReadOnlyDeskBoard deskBoard, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

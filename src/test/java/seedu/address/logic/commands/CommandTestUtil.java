@@ -17,7 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.model.Model;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.NameContainsKeywordsPredicate;
@@ -97,7 +97,7 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        Calendar expectedAddressBook = new Calendar(actualModel.getAddressBook());
+        DeskBoard expectedAddressBook = new DeskBoard(actualModel.getDeskBoard());
         List<Activity> expectedFilteredList = new ArrayList<>(actualModel.getFilteredActivityList());
 
         try {
@@ -105,7 +105,7 @@ public class CommandTestUtil {
             fail("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedAddressBook, actualModel.getDeskBoard());
             assertEquals(expectedFilteredList, actualModel.getFilteredActivityList());
         }
     }

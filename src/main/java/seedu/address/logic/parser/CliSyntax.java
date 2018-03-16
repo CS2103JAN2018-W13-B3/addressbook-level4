@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
+//TODO: NEED TO CHANGE TO MATCH THE MODEL
 public class CliSyntax {
 
     /* Prefix definitions */

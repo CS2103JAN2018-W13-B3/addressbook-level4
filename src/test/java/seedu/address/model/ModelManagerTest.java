@@ -28,8 +28,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Calendar addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        Calendar differentAddressBook = new Calendar();
+        DeskBoard addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        DeskBoard differentAddressBook = new DeskBoard();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -59,7 +59,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setCalendarName("differentName");
+        differentUserPrefs.setDeskBoardName("differentName");
         assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

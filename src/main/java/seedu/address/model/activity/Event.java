@@ -1,31 +1,42 @@
 package seedu.address.model.activity;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+
 // @@YuanQLLer
 /**
  * Represents a Task in the desk board.
- * The field contains 3 field, name, due date and (Optional)remark.
+ * The field contains 3 field, name, start date/time, end date/time and
+ *      (Optional)location (Optional)remark.
  * The following example would illustrate one example
  * ******** Example ******************************* *
- * NAME : CS2103 Project
- * DUE DATE/TIME: 21/03/2018 23:59
+ * NAME : CS2103 Exam
+ * START DATE/TIME: 21/03/2018 23:59
+ * END DATE/TIME:
+ * LOCATION: TBC
  * REMARK: Submit through a pull request in git hub.
  * ************************************************ *
  */
-public class Task extends Activity {
+public class Event extends Activity {
 
-    private static final String  ACTIVITY_TYPE = "TASK";
+    private static final String  ACTIVITY_TYPE = "EVENT";
+
+    private final DateTime endDateTime;
+    private final Location location;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, DateTime dueDateTime, Remark remark, Set<Tag> tags) {
-        super(name, dueDateTime, remark, tags);
-
-
+    public Event(
+            Name name, DateTime startDateTime, DateTime endDateTime, Location location, Remark remark, Set<Tag> tags) {
+        super(name, startDateTime, remark, tags);
+        requireAllNonNull(endDateTime);
+        this.endDateTime = endDateTime;
+        this.location = location;
     }
 
     @Override
@@ -33,10 +44,17 @@ public class Task extends Activity {
         return super.getName();
     }
 
-    public DateTime getDueDateTime() {
+    public DateTime getStartDateTime() {
         return super.getDateTime();
     }
 
+    public DateTime getEndDateTime() {
+        return this.endDateTime;
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
     @Override
     public Remark getRemark() {
         return super.getRemark();
@@ -62,14 +80,16 @@ public class Task extends Activity {
             return true;
         }
 
-        if (!(other instanceof Task)) {
+        if (!(other instanceof Event)) {
             return false;
         }
 
-        Task otherTask = (Task) other;
-        return otherTask.getName().equals(this.getName())
-                && otherTask.getDueDateTime().equals(this.getDueDateTime())
-                && otherTask.getRemark().equals(this.getRemark());
+        Event otherEvent = (Event) other;
+        return otherEvent.getName().equals(this.getName())
+                && otherEvent.getStartDateTime().equals(this.getStartDateTime())
+                && otherEvent.getEndDateTime().equals(this.getEndDateTime())
+                && otherEvent.getLocation().equals(this.getLocation())
+                && otherEvent.getRemark().equals(this.getRemark());
     }
 
     @Override
@@ -81,10 +101,14 @@ public class Task extends Activity {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Task Name")
+        builder.append("Event Name")
                 .append(getName())
-                .append(" Due Date/Time: ")
+                .append("Start Date/Time: ")
                 .append(getDateTime())
+                .append("End Date/Time")
+                .append(getEndDateTime())
+                .append("Venue")
+                .append(getLocation())
                 .append(" Remark: ")
                 .append(getRemark())
                 .append(" Tags: ");
@@ -93,3 +117,4 @@ public class Task extends Activity {
     }
 
 }
+

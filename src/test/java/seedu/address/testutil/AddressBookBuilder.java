@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.tag.Tag;
@@ -9,22 +9,22 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code Calendar ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code DeskBoard ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class AddressBookBuilder {
 
-    private Calendar addressBook;
+    private DeskBoard addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new Calendar();
+        addressBook = new DeskBoard();
     }
 
-    public AddressBookBuilder(Calendar addressBook) {
+    public AddressBookBuilder(DeskBoard addressBook) {
         this.addressBook = addressBook;
     }
 
     /**
-     * Adds a new {@code Activity} to the {@code Calendar} that we are building.
+     * Adds a new {@code Activity} to the {@code DeskBoard} that we are building.
      */
     public AddressBookBuilder withPerson(Activity activity) {
         try {
@@ -36,7 +36,7 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Parses {@code tagName} into a {@code Tag} and adds it to the {@code Calendar} that we are building.
+     * Parses {@code tagName} into a {@code Tag} and adds it to the {@code DeskBoard} that we are building.
      */
     public AddressBookBuilder withTag(String tagName) {
         try {
@@ -47,7 +47,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public Calendar build() {
+    public DeskBoard build() {
         return addressBook;
     }
 }

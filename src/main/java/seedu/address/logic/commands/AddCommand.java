@@ -14,11 +14,12 @@ import seedu.address.model.activity.exceptions.DuplicateActivityException;
 /**
  * Adds a activity to the address book.
  */
+//TODO: This command neet to change a a lot
 public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a activity to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a activity to the desk board. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

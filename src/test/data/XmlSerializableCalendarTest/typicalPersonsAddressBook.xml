@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Calendar save file which contains the same Activity values as in
+<!-- DeskBoard save file which contains the same Activity values as in
 {@code TypicalPersons#getTypicalAddressBook()}-->
 <addressbook>
     <activities>

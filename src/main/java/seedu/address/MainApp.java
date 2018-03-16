@@ -20,11 +20,18 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
-import seedu.address.model.Calendar;
+import seedu.address.model.DeskBoard;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyDeskBoard;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
-import seedu.address.storage.CalendarStorage;
+import seedu.address.storage.DeskBoardStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlDeskBoardStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -47,15 +54,15 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Calendar ]===========================");
+        logger.info("=============================[ Initializing DeskBoard ]===========================");
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        CalendarStorage calendarStorage = new XmlCalendarStorage(userPrefs.getCalendarFilePath());
-        storage = new StorageManager(calendarStorage, userPrefsStorage);
+        DeskBoardStorage deskBoardStorage = new XmlDeskBoardStorage(userPrefs.getDeskBoardFilePath());
+        storage = new StorageManager(deskBoardStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -79,20 +86,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyCalendar> addressBookOptional;
-        ReadOnlyCalendar initialData;
+        Optional<ReadOnlyDeskBoard> addressBookOptional;
+        ReadOnlyDeskBoard initialData;
         try {
-            addressBookOptional = storage.readCalendar();
+            addressBookOptional = storage.readDeskBoard();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Calendar");
+                logger.info("Data file not found. Will be starting with a sample DeskBoard");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleDeskBoard);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Calendar");
-            initialData = new Calendar();
+            logger.warning("Data file not in the correct format. Will be starting with an empty DeskBoard");
+            initialData = new DeskBoard();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Calendar");
-            initialData = new Calendar();
+            logger.warning("Problem while reading from the file. Will be starting with an empty DeskBoard");
+            initialData = new DeskBoard();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -156,7 +163,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Calendar");
+            logger.warning("Problem while reading from the file. Will be starting with an empty DeskBoard");
             initializedPrefs = new UserPrefs();
         }
 
@@ -176,13 +183,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting Calendar " + MainApp.VERSION);
+        logger.info("Starting DeskBoard " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Remark Book ] =============================");
+        logger.info("============================ [ Stopping DeskBoard ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

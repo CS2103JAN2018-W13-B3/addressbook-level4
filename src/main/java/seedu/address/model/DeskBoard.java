@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.UniqueActivityList;
-import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
+import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -22,7 +22,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class Calendar implements ReadOnlyCalendar {
+public class DeskBoard implements ReadOnlyDeskBoard {
 
     private final UniqueActivityList activities;
     private final UniqueTagList tags;
@@ -39,12 +39,12 @@ public class Calendar implements ReadOnlyCalendar {
         tags = new UniqueTagList();
     }
 
-    public Calendar() {}
+    public DeskBoard() {}
 
     /**
-     * Creates an Calendar using the Persons and Tags in the {@code toBeCopied}
+     * Creates an DeskBoard using the Persons and Tags in the {@code toBeCopied}
      */
-    public Calendar(ReadOnlyCalendar toBeCopied) {
+    public DeskBoard(ReadOnlyDeskBoard toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,19 +60,19 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
-     * Resets the existing data of this {@code Calendar} with {@code newData}.
+     * Resets the existing data of this {@code DeskBoard} with {@code newData}.
      */
-    public void resetData(ReadOnlyCalendar newData) {
+    public void resetData(ReadOnlyDeskBoard newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
-        List<Activity> syncedActivityList = newData.getPersonList().stream()
+        List<Activity> syncedActivityList = newData.getActivityList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
 
         try {
             setActivities(syncedActivityList);
         } catch (DuplicateActivityException e) {
-            throw new AssertionError("AddressBooks should not have duplicate persons");
+            throw new AssertionError("DeskBoard should not have duplicate activities");
         }
     }
 
@@ -95,7 +95,7 @@ public class Calendar implements ReadOnlyCalendar {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code Calendar}'s tag list will be updated with the tags of {@code editedPerson}.
+     * {@code DeskBoard}'s tag list will be updated with the tags of {@code editedPerson}.
      *
      * @throws DuplicateActivityException if updating the activity's details causes the activity to be equivalent to
      *      another existing person in the list.
@@ -116,8 +116,8 @@ public class Calendar implements ReadOnlyCalendar {
 
     /**
      *  Updates the master tag list to include tags in {@code activity} that are not in the list.
-     *  @return a copy of this {@code activity} such that every tag in this activity points to a Tag object in the master
-     *  list.
+     *  @return a copy of this {@code activity} such that every tag in this activity points to
+     *      a Tag object in the master list.
      */
     private Activity syncWithMasterTagList(Activity activity) {
         final UniqueTagList personTags = new UniqueTagList(activity.getTags());
@@ -136,8 +136,8 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
-     * Removes {@code key} from this {@code Calendar}.
-     * @throws ActivityNotFoundException if the {@code key} is not in this {@code Calendar}.
+     * Removes {@code key} from this {@code DeskBoard}.
+     * @throws ActivityNotFoundException if the {@code key} is not in this {@code DeskBoard}.
      */
     public boolean removePerson(Activity key) throws ActivityNotFoundException {
         if (activities.remove(key)) {
@@ -162,7 +162,7 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     @Override
-    public ObservableList<Activity> getPersonList() {
+    public ObservableList<Activity> getActivityList() {
         return activities.asObservableList();
     }
 
@@ -174,9 +174,9 @@ public class Calendar implements ReadOnlyCalendar {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Calendar // instanceof handles nulls
-                && this.activities.equals(((Calendar) other).activities)
-                && this.tags.equalsOrderInsensitive(((Calendar) other).tags));
+                || (other instanceof DeskBoard // instanceof handles nulls
+                && this.activities.equals(((DeskBoard) other).activities)
+                && this.tags.equalsOrderInsensitive(((DeskBoard) other).tags));
     }
 
     @Override
