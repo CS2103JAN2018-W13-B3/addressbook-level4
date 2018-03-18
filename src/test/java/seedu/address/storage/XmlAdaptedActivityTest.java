@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedActivity.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalActivities.ASSIGNMENT2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +23,17 @@ public class XmlAdaptedActivityTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getDateTime().toString();
-    private static final String VALID_ADDRESS = BENSON.getRemark().toString();
-    private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = ASSIGNMENT2.getName().toString();
+    private static final String VALID_PHONE = ASSIGNMENT2.getDateTime().toString();
+    private static final String VALID_ADDRESS = ASSIGNMENT2.getRemark().toString();
+    private static final List<XmlAdaptedTag> VALID_TAGS = ASSIGNMENT2.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        XmlAdaptedActivity person = new XmlAdaptedActivity(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        XmlAdaptedActivity person = new XmlAdaptedActivity(ASSIGNMENT2);
+        assertEquals(ASSIGNMENT2, person.toModelType());
     }
 
     @Test

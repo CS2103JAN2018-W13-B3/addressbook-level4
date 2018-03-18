@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,19 +11,20 @@ import seedu.address.model.activity.Activity;
 /**
  * A utility class for Activity.
  */
-public class PersonUtil {
+//TODO : Add in comment to add in
+public class ActivityUtil {
 
     /**
      * Returns an add command string for adding the {@code activity}.
      */
     public static String getAddCommand(Activity activity) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(activity);
+        return AddCommand.COMMAND_WORD + " " + getActivityDetails(activity);
     }
 
     /**
      * Returns the part of command string for the given {@code activity}'s details.
      */
-    public static String getPersonDetails(Activity activity) {
+    public static String getActivityDetails(Activity activity) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + activity.getName().fullName + " ");
         sb.append(PREFIX_PHONE + activity.getDateTime().toString() + " ");

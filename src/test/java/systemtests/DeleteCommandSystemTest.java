@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_S
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ACTIVITY;
+import static seedu.address.testutil.TypicalActivities.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -32,8 +32,8 @@ public class DeleteCommandSystemTest extends RemarkBookSystemTest {
 
         /* Case: delete the first activity in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Activity deletedActivity = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_ACTIVITY.getOneBased() + "       ";
+        Activity deletedActivity = removePerson(expectedModel, INDEX_FIRST_ACTIVITY);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedActivity);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -61,7 +61,7 @@ public class DeleteCommandSystemTest extends RemarkBookSystemTest {
 
         /* Case: filtered activity list, delete index within bounds of address book and activity list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_ACTIVITY;
         assertTrue(index.getZeroBased() < getModel().getFilteredActivityList().size());
         assertCommandSuccess(index);
 

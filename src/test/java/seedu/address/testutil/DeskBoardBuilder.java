@@ -9,26 +9,26 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code DeskBoard ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code DeskBoard ab = new DeskBoardBuilder().withActivity("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class DeskBoardBuilder {
 
-    private DeskBoard addressBook;
+    private DeskBoard deskBoard;
 
-    public AddressBookBuilder() {
-        addressBook = new DeskBoard();
+    public DeskBoardBuilder() {
+        deskBoard = new DeskBoard();
     }
 
-    public AddressBookBuilder(DeskBoard addressBook) {
-        this.addressBook = addressBook;
+    public DeskBoardBuilder(DeskBoard deskBoard) {
+        this.deskBoard = deskBoard;
     }
 
     /**
      * Adds a new {@code Activity} to the {@code DeskBoard} that we are building.
      */
-    public AddressBookBuilder withPerson(Activity activity) {
+    public DeskBoardBuilder withActivity(Activity activity) {
         try {
-            addressBook.addActivity(activity);
+            deskBoard.addActivity(activity);
         } catch (DuplicateActivityException dpe) {
             throw new IllegalArgumentException("activity is expected to be unique.");
         }
@@ -38,9 +38,9 @@ public class AddressBookBuilder {
     /**
      * Parses {@code tagName} into a {@code Tag} and adds it to the {@code DeskBoard} that we are building.
      */
-    public AddressBookBuilder withTag(String tagName) {
+    public DeskBoardBuilder withTag(String tagName) {
         try {
-            addressBook.addTag(new Tag(tagName));
+            deskBoard.addTag(new Tag(tagName));
         } catch (IllegalValueException ive) {
             throw new IllegalArgumentException("tagName is expected to be valid.");
         }
@@ -48,6 +48,6 @@ public class AddressBookBuilder {
     }
 
     public DeskBoard build() {
-        return addressBook;
+        return deskBoard;
     }
 }

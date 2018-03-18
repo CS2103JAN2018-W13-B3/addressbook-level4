@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.DeskBoard;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalActivities;
 
 public class XmlSerializableDeskBoardTest {
 
@@ -29,7 +29,7 @@ public class XmlSerializableDeskBoardTest {
         XmlSerializableDeskBoard dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableDeskBoard.class);
         DeskBoard addressBookFromFile = dataFromFile.toModelType();
-        DeskBoard typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        DeskBoard typicalPersonsAddressBook = TypicalActivities.getTypicalDeskBoard();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

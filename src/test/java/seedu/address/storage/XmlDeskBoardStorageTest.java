@@ -2,10 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalActivities.ASSIGNMENT1;
+import static seedu.address.testutil.TypicalActivities.ASSIGNMENT3;
+import static seedu.address.testutil.TypicalActivities.DEMO1;
+import static seedu.address.testutil.TypicalActivities.getTypicalDeskBoard;
 
 import java.io.IOException;
 
@@ -75,7 +75,7 @@ public class XmlDeskBoardStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        DeskBoard original = getTypicalAddressBook();
+        DeskBoard original = getTypicalDeskBoard();
         XmlDeskBoardStorage xmlAddressBookStorage = new XmlDeskBoardStorage(filePath);
 
         //Save in new file and read back
@@ -84,14 +84,14 @@ public class XmlDeskBoardStorageTest {
         assertEquals(original, new DeskBoard(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addActivity(HOON);
-        original.removeActivity(ALICE);
+        original.addActivity(ASSIGNMENT3);
+        original.removeActivity(ASSIGNMENT1);
         xmlAddressBookStorage.saveDeskBoard(original, filePath);
         readBack = xmlAddressBookStorage.readDeskBoard(filePath).get();
         assertEquals(original, new DeskBoard(readBack));
 
         //Save and read without specifying file path
-        original.addActivity(IDA);
+        original.addActivity(DEMO1);
         xmlAddressBookStorage.saveDeskBoard(original); //file path not specified
         readBack = xmlAddressBookStorage.readDeskBoard().get(); //file path not specified
         assertEquals(original, new DeskBoard(readBack));
