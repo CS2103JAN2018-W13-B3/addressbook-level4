@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import seedu.address.model.DeskBoard;
 import seedu.address.model.activity.Activity;
@@ -43,7 +43,10 @@ public class SampleDataTest extends RemarkBookSystemTest {
         }
     }
 
-    @Test
+    //TODO: TEST
+    /**
+     * Test
+     */
     public void addressBook_dataFileDoesNotExist_loadSampleData() {
         Activity[] expectedList = SampleDataUtil.getSamplePersons();
         assertListMatching(getPersonListPanel(), expectedList);

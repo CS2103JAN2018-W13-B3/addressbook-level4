@@ -53,21 +53,21 @@ public class EditCommand extends UndoableCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This activity already exists in the desk board.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditActivityDescriptor editActivityDescriptor;
 
     private Activity activityToEdit;
     private Activity editedActivity;
 
     /**
      * @param index of the activity in the filtered activity list to edit
-     * @param editPersonDescriptor details to edit the activity with
+     * @param editActivityDescriptor details to edit the activity with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditActivityDescriptor editActivityDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editActivityDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editActivityDescriptor = new EditActivityDescriptor(editActivityDescriptor);
     }
 
     @Override
@@ -92,20 +92,20 @@ public class EditCommand extends UndoableCommand {
         }
 
         activityToEdit = lastShownList.get(index.getZeroBased());
-        editedActivity = createEditedPerson(activityToEdit, editPersonDescriptor);
+        editedActivity = createEditedPerson(activityToEdit, editActivityDescriptor);
     }
 
     /**
      * Creates and returns a {@code Activity} with the details of {@code activityToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editActivityDescriptor}.
      */
-    private static Activity createEditedPerson(Activity activityToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Activity createEditedPerson(Activity activityToEdit, EditActivityDescriptor editActivityDescriptor) {
         assert activityToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(activityToEdit.getName());
-        DateTime updatedDateTime = editPersonDescriptor.getDateTime().orElse(activityToEdit.getDateTime());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(activityToEdit.getRemark());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(activityToEdit.getTags());
+        Name updatedName = editActivityDescriptor.getName().orElse(activityToEdit.getName());
+        DateTime updatedDateTime = editActivityDescriptor.getDateTime().orElse(activityToEdit.getDateTime());
+        Remark updatedRemark = editActivityDescriptor.getRemark().orElse(activityToEdit.getRemark());
+        Set<Tag> updatedTags = editActivityDescriptor.getTags().orElse(activityToEdit.getTags());
 
         return new Activity(updatedName, updatedDateTime, updatedRemark, updatedTags);
     }
@@ -125,7 +125,7 @@ public class EditCommand extends UndoableCommand {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor)
+                && editActivityDescriptor.equals(e.editActivityDescriptor)
                 && Objects.equals(activityToEdit, e.activityToEdit);
     }
 
@@ -133,19 +133,19 @@ public class EditCommand extends UndoableCommand {
      * Stores the details to edit the activity with. Each non-empty field value will replace the
      * corresponding field value of the activity.
      */
-    public static class EditPersonDescriptor {
+    public static class EditActivityDescriptor {
         private Name name;
         private DateTime dateTime;
         private Remark remark;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditActivityDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditActivityDescriptor(EditActivityDescriptor toCopy) {
             setName(toCopy.name);
             setDateTime(toCopy.dateTime);
             setRemark(toCopy.remark);
@@ -208,12 +208,12 @@ public class EditCommand extends UndoableCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditActivityDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditActivityDescriptor e = (EditActivityDescriptor) other;
 
             return getName().equals(e.getName())
                     && getDateTime().equals(e.getDateTime())

@@ -14,7 +14,7 @@ import seedu.address.model.activity.exceptions.DuplicateActivityException;
 
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of activities that enforces uniqueness between its elements and does not allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -46,13 +46,28 @@ public class UniqueActivityList implements Iterable<Activity> {
         internalList.add(toAdd);
     }
 
+
+    /**
+     * Removes the equivalent activity from the list.
+     *
+     * @throws ActivityNotFoundException if no such activity could be found in the list.
+     */
+    public boolean remove(Activity toRemove) throws ActivityNotFoundException {
+        requireNonNull(toRemove);
+        final boolean activityFoundAndDeleted = internalList.remove(toRemove);
+        if (!activityFoundAndDeleted) {
+            throw new ActivityNotFoundException();
+        }
+        return activityFoundAndDeleted;
+    }
+
     /**
      * Replaces the activity {@code target} in the list with {@code editedActivity}.
      *
      * @throws DuplicateActivityException if the replacement is equivalent to another existing activity in the list.
      * @throws ActivityNotFoundException if {@code target} could not be found in the list.
      */
-    public void setPerson(Activity target, Activity editedActivity)
+    public void setActivity(Activity target, Activity editedActivity)
             throws DuplicateActivityException, ActivityNotFoundException {
         requireNonNull(editedActivity);
 
@@ -68,32 +83,19 @@ public class UniqueActivityList implements Iterable<Activity> {
         internalList.set(index, editedActivity);
     }
 
-    /**
-     * Removes the equivalent activity from the list.
-     *
-     * @throws ActivityNotFoundException if no such activity could be found in the list.
-     */
-    public boolean remove(Activity toRemove) throws ActivityNotFoundException {
-        requireNonNull(toRemove);
-        final boolean personFoundAndDeleted = internalList.remove(toRemove);
-        if (!personFoundAndDeleted) {
-            throw new ActivityNotFoundException();
-        }
-        return personFoundAndDeleted;
-    }
-
-    public void setPersons(UniqueActivityList replacement) {
+    public void setActivity(UniqueActivityList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setPersons(List<Activity> activities) throws DuplicateActivityException {
+    public void setActivity(List<Activity> activities) throws DuplicateActivityException {
         requireAllNonNull(activities);
         final UniqueActivityList replacement = new UniqueActivityList();
         for (final Activity activity : activities) {
             replacement.add(activity);
         }
-        setPersons(replacement);
+        setActivity(replacement);
     }
+
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

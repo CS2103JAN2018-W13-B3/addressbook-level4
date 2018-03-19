@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//@@author YuanQQLer
 /**
  * Represents a Activity's date and time in the desk board.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateAndTime(String)}
@@ -53,6 +54,15 @@ public class DateTime {
         }
         //return test.matches(DATETIME_VALIDATION_REGEX);
     }
+
+    /**
+     * Get the date time as java.util.Date
+     * @return date and time infor.
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
 
     @Override
     public String toString() {

@@ -4,7 +4,7 @@ import guitests.GuiRobot;
 import javafx.application.Platform;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
-
+//This is class is for the Event Handling  not for the Activity.Event
 /**
  * Helper methods related to events.
  */

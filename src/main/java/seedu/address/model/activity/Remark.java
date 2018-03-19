@@ -3,6 +3,7 @@ package seedu.address.model.activity;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author YuanQQLer
 /**
  * Represents an Activity's remark in the desk board.
  * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}

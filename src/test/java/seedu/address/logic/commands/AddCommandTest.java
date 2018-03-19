@@ -19,12 +19,12 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.DeskBoard;
-import seedu.address.model.ReadOnlyDeskBoard;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyDeskBoard;
 import seedu.address.model.activity.Activity;
-import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.activity.exceptions.DuplicateActivityException;
+import seedu.address.testutil.TaskBuilder;
 
 public class AddCommandTest {
 
@@ -40,7 +40,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Activity validActivity = new PersonBuilder().build();
+        Activity validActivity = new TaskBuilder().build();
 
         CommandResult commandResult = getAddCommandForPerson(validActivity, modelStub).execute();
 
@@ -51,7 +51,7 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
         ModelStub modelStub = new ModelStubThrowingDuplicatePersonException();
-        Activity validActivity = new PersonBuilder().build();
+        Activity validActivity = new TaskBuilder().build();
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
@@ -61,8 +61,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Activity alice = new PersonBuilder().withName("Alice").build();
-        Activity bob = new PersonBuilder().withName("Bob").build();
+        Activity alice = new TaskBuilder().withName("Alice").build();
+        Activity bob = new TaskBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

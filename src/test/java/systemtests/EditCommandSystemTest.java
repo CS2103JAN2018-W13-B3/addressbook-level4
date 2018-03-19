@@ -23,12 +23,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACTIVITY;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalActivities.AMY;
+import static seedu.address.testutil.TypicalActivities.BOB;
+import static seedu.address.testutil.TypicalActivities.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ACTIVITY;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -36,19 +36,22 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.activity.Remark;
-import seedu.address.model.activity.Name;
 import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.DateTime;
-import seedu.address.model.activity.exceptions.DuplicateActivityException;
+import seedu.address.model.activity.Name;
+import seedu.address.model.activity.Remark;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
+import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ActivityUtil;
+import seedu.address.testutil.TaskBuilder;
 
 public class EditCommandSystemTest extends RemarkBookSystemTest {
 
-    @Test
+    //TODO: TEST
+    /**
+     * Test
+     */
     public void edit() throws Exception {
         Model model = getModel();
 
@@ -57,11 +60,12 @@ public class EditCommandSystemTest extends RemarkBookSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_ACTIVITY;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
-                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Activity editedActivity = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB
+                + " " + TAG_DESC_HUSBAND + " ";
+        Activity editedActivity = new TaskBuilder().withName(VALID_NAME_BOB).withDateTime(VALID_PHONE_BOB)
+                .withRemark(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedActivity);
 
         /* Case: undo editing the last activity in the list -> last activity restored */
@@ -73,36 +77,37 @@ public class EditCommandSystemTest extends RemarkBookSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateActivity(
-                getModel().getFilteredActivityList().get(INDEX_FIRST_PERSON.getZeroBased()), editedActivity);
+                getModel().getFilteredActivityList().get(INDEX_FIRST_ACTIVITY.getZeroBased()), editedActivity);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a activity with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit some fields -> edited */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ACTIVITY;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + TAG_DESC_FRIEND;
         Activity activityToEdit = getModel().getFilteredActivityList().get(index.getZeroBased());
-        editedActivity = new PersonBuilder(activityToEdit).withTags(VALID_TAG_FRIEND).build();
+        editedActivity = new TaskBuilder(activityToEdit).withTags(VALID_TAG_FRIEND).build();
         assertCommandSuccess(command, index, editedActivity);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ACTIVITY;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        editedActivity = new PersonBuilder(activityToEdit).withTags().build();
+        editedActivity = new TaskBuilder(activityToEdit).withTags().build();
         assertCommandSuccess(command, index, editedActivity);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
         /* Case: filtered activity list, edit index within bounds of address book and activity list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ACTIVITY;
         assertTrue(index.getZeroBased() < getModel().getFilteredActivityList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         activityToEdit = getModel().getFilteredActivityList().get(index.getZeroBased());
-        editedActivity = new PersonBuilder(activityToEdit).withName(VALID_NAME_BOB).build();
+        editedActivity = new TaskBuilder(activityToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedActivity);
 
         /* Case: filtered activity list, edit index within bounds of address book but out of bounds of activity list
@@ -113,15 +118,17 @@ public class EditCommandSystemTest extends RemarkBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a activity card is selected -------------------------- */
+        /* --------------------- Performing edit operation while a activity card is selected ------------------------ */
 
-        /* Case: selects first card in the activity list, edit a activity -> edited, card selection remains unchanged but
+        /* Case: selects first card in the activity list, edit a activity -> edited,
+         * card selection remains unchanged but
          * browser url changes
          */
         showAllPersons();
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ACTIVITY;
         selectPerson(index);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new activity's name
@@ -147,36 +154,44 @@ public class EditCommandSystemTest extends RemarkBookSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ACTIVITY.getOneBased(),
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_ACTIVITY.getOneBased() + INVALID_NAME_DESC,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_ACTIVITY.getOneBased() + INVALID_PHONE_DESC,
                 DateTime.MESSAGE_DATETIME_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_ACTIVITY.getOneBased() + INVALID_ADDRESS_DESC,
                 Remark.MESSAGE_REMARK_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_ACTIVITY.getOneBased() + INVALID_TAG_DESC,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a activity with new values same as another activity's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
+        executeCommand(ActivityUtil.getAddCommand(BOB));
         assertTrue(getModel().getDeskBoard().getActivityList().contains(BOB));
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_ACTIVITY;
         assertFalse(getModel().getFilteredActivityList().get(index.getZeroBased()).equals(BOB));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: edit a activity with new values same as another activity's values but with different tags -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        /* Case: edit a activity with new values same as another activity's
+         * values but with different tags -> rejected
+         */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
@@ -192,7 +207,8 @@ public class EditCommandSystemTest extends RemarkBookSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)}
+     * and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the activity at index {@code toEdit} being
      * updated to values specified {@code editedActivity}.<br>

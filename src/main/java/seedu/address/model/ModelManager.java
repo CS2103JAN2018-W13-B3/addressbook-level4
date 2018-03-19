@@ -16,8 +16,9 @@ import seedu.address.model.activity.Activity;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
 import seedu.address.model.activity.exceptions.DuplicateActivityException;
 
+//@@author YuanQQLer
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the desk board data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -61,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteActivity(Activity target) throws ActivityNotFoundException {
-        deskBoard.removePerson(target);
+        deskBoard.removeActivity(target);
         indicateAddressBookChanged();
     }
 

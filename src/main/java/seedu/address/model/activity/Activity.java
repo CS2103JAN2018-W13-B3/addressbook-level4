@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author YuanQQLer
 /**
  * Represents a Activity in the desk board.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -23,6 +24,7 @@ public class Activity {
 
     private final UniqueTagList tags;
 
+    private boolean isCompleted;
     /**
      * Every field must be present and not null.
      */
@@ -33,6 +35,7 @@ public class Activity {
         this.remark = remark;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
+        this.isCompleted = false;
     }
 
     public Name getName() {
@@ -59,6 +62,16 @@ public class Activity {
     public String getActivityType() {
         return ACTIVITY_TYPE;
     }
+
+    public Activity setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+        return this;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

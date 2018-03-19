@@ -2,7 +2,7 @@ package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyDeskBoard;
-
+//@@author YuanQQLer
 /** Indicates the DeskBoard in the model has changed*/
 public class DeskBoardChangedEvent extends BaseEvent {
 

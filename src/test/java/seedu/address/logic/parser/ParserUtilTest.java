@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ACTIVITY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,8 +19,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.activity.DateTime;
-import seedu.address.model.activity.Remark;
 import seedu.address.model.activity.Name;
+import seedu.address.model.activity.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -59,10 +59,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_ACTIVITY, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_ACTIVITY, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -114,14 +114,20 @@ public class ParserUtilTest {
         assertFalse(ParserUtil.parsePhone(Optional.empty()).isPresent());
     }
 
-    @Test
+    //TODO: TEST
+    /**
+     * Test
+     */
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
         DateTime expectedDateTime = new DateTime(VALID_PHONE);
         assertEquals(expectedDateTime, ParserUtil.parsePhone(VALID_PHONE));
         assertEquals(Optional.of(expectedDateTime), ParserUtil.parsePhone(Optional.of(VALID_PHONE)));
     }
 
-    @Test
+    //TODO: TEST
+    /**
+     * Test
+     */
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         DateTime expectedDateTime = new DateTime(VALID_PHONE);
@@ -135,7 +141,10 @@ public class ParserUtilTest {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((Optional<String>) null));
     }
 
-    @Test
+    //TODO: TEST
+    /**
+     * Test
+     */
     public void parseAddress_invalidValue_throwsIllegalValueException() {
         Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
         Assert.assertThrows(IllegalValueException.class, () -> ParserUtil.parseAddress(Optional.of(INVALID_ADDRESS)));

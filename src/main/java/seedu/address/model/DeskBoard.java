@@ -18,6 +18,7 @@ import seedu.address.model.activity.exceptions.DuplicateActivityException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author YuanQQLer
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
@@ -42,7 +43,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
     public DeskBoard() {}
 
     /**
-     * Creates an DeskBoard using the Persons and Tags in the {@code toBeCopied}
+     * Creates an DeskBoard using the Activities and Tags in the {@code toBeCopied}
      */
     public DeskBoard(ReadOnlyDeskBoard toBeCopied) {
         this();
@@ -52,7 +53,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
     //// list overwrite operations
 
     public void setActivities(List<Activity> activities) throws DuplicateActivityException {
-        this.activities.setPersons(activities);
+        this.activities.setActivity(activities);
     }
 
     public void setTags(Set<Tag> tags) {
@@ -79,7 +80,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
     //// activity-level operations
 
     /**
-     * Adds a activity to the address book.
+     * Adds an activity to the desk board.
      * Also checks the new activity's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the activity to point to those in {@link #tags}.
      *
@@ -94,11 +95,11 @@ public class DeskBoard implements ReadOnlyDeskBoard {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code DeskBoard}'s tag list will be updated with the tags of {@code editedPerson}.
+     * Replaces the given activity {@code target} in the list with {@code editedActivity}.
+     * {@code DeskBoard}'s tag list will be updated with the tags of {@code editedActivity}.
      *
      * @throws DuplicateActivityException if updating the activity's details causes the activity to be equivalent to
-     *      another existing person in the list.
+     *      another existing activity in the list.
      * @throws ActivityNotFoundException if {@code target} could not be found in the list.
      *
      * @see #syncWithMasterTagList(Activity)
@@ -111,7 +112,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any activity
         // in the activity list.
-        activities.setPerson(target, syncedEditedActivity);
+        activities.setActivity(target, syncedEditedActivity);
     }
 
     /**
@@ -120,8 +121,8 @@ public class DeskBoard implements ReadOnlyDeskBoard {
      *      a Tag object in the master list.
      */
     private Activity syncWithMasterTagList(Activity activity) {
-        final UniqueTagList personTags = new UniqueTagList(activity.getTags());
-        tags.mergeFrom(personTags);
+        final UniqueTagList activityTags = new UniqueTagList(activity.getTags());
+        tags.mergeFrom(activityTags);
 
         // Create map with values = tag object references in the master list
         // used for checking activity tag references
@@ -130,7 +131,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
 
         // Rebuild the list of activity tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        activityTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Activity(
                 activity.getName(), activity.getDateTime(), activity.getRemark(), correctTagReferences);
     }
@@ -139,7 +140,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
      * Removes {@code key} from this {@code DeskBoard}.
      * @throws ActivityNotFoundException if the {@code key} is not in this {@code DeskBoard}.
      */
-    public boolean removePerson(Activity key) throws ActivityNotFoundException {
+    public boolean removeActivity(Activity key) throws ActivityNotFoundException {
         if (activities.remove(key)) {
             return true;
         } else {
@@ -157,7 +158,7 @@ public class DeskBoard implements ReadOnlyDeskBoard {
 
     @Override
     public String toString() {
-        return activities.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return activities.asObservableList().size() + " activities, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
     }
 

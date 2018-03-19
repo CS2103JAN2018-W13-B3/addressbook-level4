@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalActivities.getTypicalDeskBoard;
 
 import java.io.IOException;
 
@@ -54,14 +54,17 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-    @Test
+    //TODO: TEST
+    /**
+     * Test
+     */
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlDeskBoardStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlDeskBoardStorageTest} class.
          */
-        DeskBoard original = getTypicalAddressBook();
+        DeskBoard original = getTypicalDeskBoard();
         storageManager.saveDeskBoard(original);
         ReadOnlyDeskBoard retrieved = storageManager.readDeskBoard().get();
         assertEquals(original, new DeskBoard(retrieved));

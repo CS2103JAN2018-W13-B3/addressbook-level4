@@ -38,7 +38,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.DeskBoard;
 import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalActivities;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
@@ -83,7 +83,7 @@ public abstract class RemarkBookSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected DeskBoard getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+        return TypicalActivities.getTypicalDeskBoard();
     }
 
     /**

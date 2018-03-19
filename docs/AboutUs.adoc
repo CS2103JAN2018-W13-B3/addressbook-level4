@@ -19,7 +19,7 @@ Responsibilities: Logic
 
 '''
 
-=== Jasmond Toh
+=== Jasmund Toh
 
 {empty}[http://github.com/jasmoon[github]]
 

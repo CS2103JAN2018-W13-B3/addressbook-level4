@@ -35,8 +35,8 @@ public class DateTimeTest {
         assertFalse(DateTime.isValidDateAndTime("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(DateTime.isValidDateAndTime("911")); // exactly 3 numbers
-        assertTrue(DateTime.isValidDateAndTime("93121534"));
-        assertTrue(DateTime.isValidDateAndTime("124293842033123")); // long phone numbers
+        assertTrue(DateTime.isValidDateAndTime("01/08/1995 12:00")); // exactly 3 numbers
+        assertTrue(DateTime.isValidDateAndTime("02/04/2018 10:00"));
+        assertTrue(DateTime.isValidDateAndTime("03/03/2019 12:00")); // long phone numbers
     }
 }
