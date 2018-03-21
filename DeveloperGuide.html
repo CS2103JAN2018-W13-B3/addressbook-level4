@@ -47,8 +47,9 @@
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
-<li><a href="#storage">3.5. Storage</a></li>
+<li><a href="#overdue-command">3.4. Overdue command</a></li>
+<li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
+<li><a href="#storage">3.6. Storage</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -893,7 +894,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.5, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -924,13 +925,62 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="overdue-command"><a class="link" href="#overdue-command">3.4. Overdue command</a></h3>
+<div class="paragraph">
+<p>The user is able to list down overdue tasks by using the overdue command. Note that overdue only lists down overdue tasks; overdue events are marked as
+completed automatically.</p>
+</div>
+<div class="paragraph">
+<p>We will be making use of the LocalDateTime class in Java. The class has a <code>now</code> method, which allows us to obtain the current system clock.</p>
+</div>
+<div class="paragraph">
+<p>There will be a class in the Model component, which has access to the UniqueActivityList class in that component. The class will go through the UniqueActivityList and obtain
+the DateTime of Task, and the end DateTime of Event. It will then perform a check of the DateTime with LocalDateTime.now() and if it is overdue (for tasks), it will mark the task
+as overdue, while if it is overdue (for Event), it will mark it as completed.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.1. Design Considerations</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Put the checking method together with UniqueActivityList class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less one class and it is easier for the developer to understand</p>
+</li>
+<li>
+<p>Cons: Violates Single Responsibility Principle (SRP). The UniqueAcitivtyList class should not perform the checking.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Using Google Maps API to obtain current time</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: LocalDateTime.now() is reliant on system clock, thus if the system clock is in error, tasks that are overdue will not be marked as
+overdue correctly.</p>
+</li>
+<li>
+<p>Cons: Reliant on Google Maps API, and might be difficult for the developer to understand.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="storage"><a class="link" href="#storage">3.5. Storage</a></h3>
+<h3 id="storage"><a class="link" href="#storage">3.6. Storage</a></h3>
 <div class="paragraph">
 <p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:</p>
 </div>
@@ -2666,7 +2716,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-21 03:45:30 UTC
+Last updated 2018-03-21 05:35:55 UTC
 </div>
 </div>
 </body>
