@@ -48,6 +48,7 @@
 <li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#storage">3.5. Storage</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -926,6 +927,45 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="storage"><a class="link" href="#storage">3.5. Storage</a></h3>
+<div class="paragraph">
+<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use 1 list to store objects of both classes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: There is no need to create 2 separate lists to store the 2 different class objects.</p>
+</li>
+<li>
+<p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be treated equally as they are from the same class.</p>
+</li>
+<li>
+<p>Cons: More effort is required to create 2 separate lists.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of objects, whereby each list contains objects of the same class, especially as we make the 2 classes more specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in the long run.</p>
 </div>
 </div>
 </div>
@@ -2626,7 +2666,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-20 22:26:02 UTC
+Last updated 2018-03-21 03:45:30 UTC
 </div>
 </div>
 </body>
