@@ -49,7 +49,7 @@
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#overdue-command">3.4. Overdue command</a></li>
 <li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
-<li><a href="#storage">3.6. Storage</a></li>
+<li><a href="#major-improvement-modify-code-model-code-component">3.6. [Major Improvement] Modify <code>Model</code> Component</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -541,6 +541,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores the Desk Board data.</p>
 </li>
 <li>
+<p>use two class to store information about 'Event' and 'Task' separately</p>
+</li>
+<li>
 <p>exposes an unmodifiable <code>ObservableList&lt;Activity&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
@@ -980,7 +983,69 @@ overdue correctly.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="storage"><a class="link" href="#storage">3.6. Storage</a></h3>
+<h3 id="major-improvement-modify-code-model-code-component"><a class="link" href="#major-improvement-modify-code-model-code-component">3.6. [Major Improvement] Modify <code>Model</code> Component</a></h3>
+<div class="paragraph">
+<p>The <code>Model</code> component was originally implemented to store personal contact details.
+As we modified the application to <code>CLInder</code> we need to store information of activities instead.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The original application <code>Address Book</code> store information in the <code>Person</code> Class.</p>
+</div>
+<div class="paragraph">
+<p>Since we need now to store information of event and task in the memory now.
+The <code>Person</code> Class need to change to <code>Activity</code> Class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UniquePersonList</code> is now modified to <code>UniqueActivityList</code> Class to store a list of <code>Activity</code> instead of a list of <code>Person</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.6.2. Design Consideration</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-data-structure"><a class="link" href="#aspect-data-structure">3.6.3. Aspect: Data Structure</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong> Alternative 1 (Current Choice):</strong>
+Use the <code>Activity</code> Class as a place holder for events and tasks to be stored.
+Hence we created two new Class <code>Task</code> and <code>Event</code> to store the information.
+Both classes were iherited  from the <code>Activity</code> Class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+No need to make major change to the current interface (except some renaming).</p>
+</li>
+<li>
+<p>Cons:
+It would be a hassle to retrieve information about information stored in other class
+Since <code>Task</code> and <code>Event</code> contains extra information and hence have extra excess method.
+Need to cast the object to retrieve the information.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong>
+Replace the <code>Person</code> Class with two different class completely: <code>Task</code> and <code>Event</code>.
+Instead of only <code>UniquePersonList</code> Class, we create two different class <code>UniqueTaskList</code> and <code>UniqueEventList</code>.
+Relevant interface and access method will also be modified to cope with the change.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>**Pros:
+Other component can easily distinguish two types of record.</p>
+</div>
+<div class="paragraph">
+<p>**Cons:
+Since the interface is now completely changed, other component would now required to change a lot of coding to coped with the change.
+====== Storage</p>
+</div>
 <div class="paragraph">
 <p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:</p>
 </div>
@@ -1016,6 +1081,7 @@ overdue correctly.</p>
 </div>
 <div class="paragraph">
 <p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of objects, whereby each list contains objects of the same class, especially as we make the 2 classes more specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in the long run.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2247,8 +2313,7 @@ faster than a typical mouse/GUI-driven app</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">procrastinating student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add estimated time needed to complete a task</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">estimate when to start on a task to complete it on time</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">estimate when to start on a task to complete it on time</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -2261,8 +2326,7 @@ faster than a typical mouse/GUI-driven app</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">procrastinating student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view contact details of person in-charge for a deadline extension</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have enough time to complete my task despite my tight schedule
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; bcc4a6f9a77ed80f400940d3605ee3a8f559251b</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have enough time to complete my task despite my tight schedule</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -2716,7 +2780,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-21 05:35:55 UTC
+Last updated 2018-03-24 19:00:22 UTC
 </div>
 </div>
 </body>
