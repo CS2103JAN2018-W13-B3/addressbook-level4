@@ -49,7 +49,9 @@
 <li><a href="#logging">3.3. Logging</a></li>
 <li><a href="#overdue-command">3.4. Overdue command</a></li>
 <li><a href="#Implementation-Configuration">3.5. Configuration</a></li>
-<li><a href="#major-improvement-modify-code-model-code-component">3.6. [Major Improvement] Modify <code>Model</code> Component</a></li>
+<li><a href="#model">3.6. Model</a></li>
+<li><a href="#ui">3.7. UI</a></li>
+<li><a href="#storage">3.8. Storage</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -93,6 +95,7 @@
 <li><a href="#use-case-add-events">D.1. Use case: Add events</a></li>
 <li><a href="#use-case-complete-task">D.2. Use case: Complete task</a></li>
 <li><a href="#use-case-show-urgent-task">D.3. Use case: Show urgent task</a></li>
+<li><a href="#use-case-show-help-for-command">D.4. Use case: Show help for command</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
@@ -111,6 +114,9 @@
 <div class="sect1">
 <h2 id="setting-up"><a class="link" href="#setting-up">1. Setting up</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Follow the instructions below set up the project in your computer.</p>
+</div>
 <div class="sect2">
 <h3 id="prerequisites"><a class="link" href="#prerequisites">1.1. Prerequisites</a></h3>
 <div class="olist arabic">
@@ -303,8 +309,14 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect1">
 <h2 id="design"><a class="link" href="#design">2. Design</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section describes the way the application is designed.</p>
+</div>
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.1. Architecture</a></h3>
+<div class="paragraph">
+<p>The architecture diagram of the whole application:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
@@ -442,6 +454,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="sect2">
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.2. UI component</a></h3>
+<div class="paragraph">
+<p>The architecture diagram of the UI component:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
@@ -939,7 +954,9 @@ completed automatically.</p>
 <div class="paragraph">
 <p>There will be a class in the Model component, which has access to the UniqueActivityList class in that component. The class will go through the UniqueActivityList and obtain
 the DateTime of Task, and the end DateTime of Event. It will then perform a check of the DateTime with LocalDateTime.now() and if it is overdue (for tasks), it will mark the task
-as overdue, while if it is overdue (for Event), it will mark it as completed.</p>
+as overdue, while if it is overdue (for Event), it will mark it as completed.
+<br>
+<br></p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.1. Design Considerations</a></h4>
@@ -967,7 +984,9 @@ as overdue, while if it is overdue (for Event), it will mark it as completed.</p
 overdue correctly.</p>
 </li>
 <li>
-<p>Cons: Reliant on Google Maps API, and might be difficult for the developer to understand.</p>
+<p>Cons: Reliant on Google Maps API, and might be difficult for the developer to understand.
+<br>
+<br></p>
 </li>
 </ul>
 </div>
@@ -979,11 +998,13 @@ overdue correctly.</p>
 <div class="sect2">
 <h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.5. Configuration</a></h3>
 <div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
+<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="major-improvement-modify-code-model-code-component"><a class="link" href="#major-improvement-modify-code-model-code-component">3.6. [Major Improvement] Modify <code>Model</code> Component</a></h3>
+<h3 id="model"><a class="link" href="#model">3.6. Model</a></h3>
 <div class="paragraph">
 <p>The <code>Model</code> component was originally implemented to store personal contact details.
 As we modified the application to <code>CLInder</code> we need to store information of activities instead.</p>
@@ -998,15 +1019,13 @@ As we modified the application to <code>CLInder</code> we need to store informat
 The <code>Person</code> Class need to change to <code>Activity</code> Class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UniquePersonList</code> is now modified to <code>UniqueActivityList</code> Class to store a list of <code>Activity</code> instead of a list of <code>Person</code>.</p>
+<p>The <code>UniquePersonList</code> is now modified to <code>UniqueActivityList</code> Class to store a list of <code>Activity</code> instead of a list of <code>Person</code>.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-consideration"><a class="link" href="#design-consideration">3.6.2. Design Consideration</a></h4>
-
-</div>
-<div class="sect3">
-<h4 id="aspect-data-structure"><a class="link" href="#aspect-data-structure">3.6.3. Aspect: Data Structure</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1034,21 +1053,82 @@ Need to cast the object to retrieve the information.</p>
 Replace the <code>Person</code> Class with two different class completely: <code>Task</code> and <code>Event</code>.
 Instead of only <code>UniquePersonList</code> Class, we create two different class <code>UniqueTaskList</code> and <code>UniqueEventList</code>.
 Relevant interface and access method will also be modified to cope with the change.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Other component can easily distinguish two types of record.</p>
+</li>
+<li>
+<p>Cons:
+Since the interface is now completely changed, other component would now required to change a lot of coding to coped with the change.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ui"><a class="link" href="#ui">3.7. UI</a></h3>
+<div class="paragraph">
+<p>Our application deals with 2 main classes: Task and Event. These 2 classes needs to be
+displayed in the UI and our team came up with 2 possible implementations to do it:
+<br>
+<br></p>
+</div>
+<div class="sect3">
+<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">3.7.1. Design Consideration</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Have 1 panel which will display the 2 classes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The coding required for this approach is much lesser.</p>
+</li>
+<li>
+<p>Cons: The UI will be messier and less appealing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong> Alternative 2 (current choice):</strong> Have 2 panels which will display the 2 classes separately.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The backend coding will be neater as the 2 classes do not have the same number of compulsory information
+tags. The design of the UI will be much more intuitive too.</p>
+</li>
+<li>
+<p>Cons: More effort is required to create 2 seperate lists.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>**Pros:
-Other component can easily distinguish two types of record.</p>
+<p>While both alternatives have advantages and disadvantages, we feel that the second alternative adheres more closely with fundamental design principles. We feel that it is the responsibility of UI designers to make the
+UI as intuitive as possible to bring convenience and comfort to the user. As such, the second alternative is
+definitely the preferred approach here.
+<br>
+<br></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="storage"><a class="link" href="#storage">3.8. Storage</a></h3>
 <div class="paragraph">
-<p>**Cons:
-Since the interface is now completely changed, other component would now required to change a lot of coding to coped with the change.
-====== Storage</p>
+<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:
+<br>
+<br></p>
 </div>
-<div class="paragraph">
-<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:</p>
-</div>
+<div class="sect3">
+<h4 id="design-consideration-3"><a class="link" href="#design-consideration-3">3.8.1. Design Consideration</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1153,6 +1233,9 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="sect1">
 <h2 id="Testing"><a class="link" href="#Testing">5. Testing</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This sections describes the different ways to do testing on the application.</p>
+</div>
 <div class="sect2">
 <h3 id="running-tests"><a class="link" href="#running-tests">5.1. Running Tests</a></h3>
 <div class="paragraph">
@@ -1278,6 +1361,9 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 <div class="sect1">
 <h2 id="dev-ops"><a class="link" href="#dev-ops">6. Dev Ops</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This sections features softwares which can be used to track the progress of the application development.</p>
+</div>
 <div class="sect2">
 <h3 id="build-automation"><a class="link" href="#build-automation">6.1. Build Automation</a></h3>
 <div class="paragraph">
@@ -2512,12 +2598,12 @@ faster than a typical mouse/GUI-driven app</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><strong>Extensions</strong>
-* 1a. The given date is invalid</p>
+<p><strong>Extensions</strong></p>
 </div>
-<div class="paragraph">
-<p>+</p>
-</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The given date is invalid</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -2525,8 +2611,10 @@ faster than a typical mouse/GUI-driven app</p>
 <div class="paragraph">
 <p>Use case resumes at step 1.</p>
 </div>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>2a. The list is empty.</p>
 <div class="paragraph">
@@ -2535,8 +2623,47 @@ faster than a typical mouse/GUI-driven app</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="use-case-show-help-for-command"><a class="link" href="#use-case-show-help-for-command">D.4. Use case: Show help for command</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to show help for command requested</p>
+</li>
+<li>
+<p>CLIndar shows the help message for the requested command</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The command requested is invalid</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. CLIndar shows an error message</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Use case ends.</p>
 </div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
@@ -2780,7 +2907,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-24 19:25:42 UTC
+Last updated 2018-03-24 19:26:57 UTC
 </div>
 </div>
 </body>
