@@ -150,8 +150,10 @@
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code-or-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-or-code-u-code">Undoing previous command : <code>undo</code> or <code>u</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code> or <code>u</code></p>
+<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>undo</code> or <code>u</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -161,39 +163,41 @@ Format: <code>undo</code> or <code>u</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the board&#8217;s content (<code>task</code>, <code>rm task</code>).</p>
+<p>Undoable commands are commands that modify the desk board&#8217;s content (e.g. <code>task</code>, <code>rm task</code>).</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>rm task 1</code><br>
 <code>ls task</code><br>
-<code>undo</code> (reverses the <code>delete task 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>rm task 1</code> command)<br></p>
 </li>
 <li>
 <p><code>rm event 1</code><br>
 <code>clear</code><br>
-<code>u</code> (reverses the <code>clear</code> command)
+<code>u</code> (reverses the <code>clear</code> command)<br>
 <code>u</code> (reverses the <code>rm event 1</code> command)</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code-or-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-or-code-r-code">Redoing the previously undone command : <code>redo</code> or <code>r</code></a></h3>
+<h3 id="redoing-previously-undone-command-code-redo-code-or-code-r-code"><a class="link" href="#redoing-previously-undone-command-code-redo-code-or-code-r-code">Redoing previously undone command : <code>redo</code> or <code>r</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code> or <code>r</code></p>
+<p>Reverses the most recent <code>undo</code> command.<br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Format:</strong> <code>redo</code> or <code>r</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -545,7 +549,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-24 19:26:57 UTC
+Last updated 2018-03-24 19:32:43 UTC
 </div>
 </div>
 </body>

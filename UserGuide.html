@@ -31,23 +31,20 @@
 <li><a href="#viewing-help-code-help-code-or-code-man-code">3.1. Viewing help : <code>help</code> or <code>man</code></a></li>
 <li><a href="#adding-a-task-code-task-code">3.2. Adding a task: <code>task</code></a></li>
 <li><a href="#adding-an-event-code-event-code">3.3. Adding an event: <code>event</code></a></li>
-<li><a href="#listing-all-uncompleted-tasks-and-upcoming-events-code-ls-code">3.4. Listing all uncompleted tasks and upcoming events: <code>ls</code></a></li>
-<li><a href="#listing-all-uncompleted-tasks-code-ls-task-code">3.5. Listing all uncompleted tasks: <code>ls task</code></a></li>
-<li><a href="#listing-all-upcoming-events-code-ls-event-code">3.6. Listing all upcoming events: <code>ls event</code></a></li>
-<li><a href="#removing-a-task-code-rm-task-code">3.7. Removing a task: <code>rm task</code></a></li>
-<li><a href="#removing-an-event-code-rm-event-code">3.8. Removing an event: <code>rm event</code></a></li>
-<li><a href="#completing-a-task-code-complete-task-code-or-code-com-task-code">3.9. Completing a task: <code>complete task</code> or <code>com task</code></a></li>
-<li><a href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code">3.10. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code></a></li>
-<li><a href="#shows-overdue-tasks-code-overdue-code">3.11. Shows overdue tasks: <code>overdue</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code-or-code-u-code">3.13. Undoing previous command : <code>undo</code> or <code>u</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code-or-code-r-code">3.14. Redoing the previously undone command : <code>redo</code> or <code>r</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code-or-code-c-code">3.15. Clearing all entries : <code>clear</code> or <code>c</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></li>
-<li><a href="#editing-a-person-code-edit-task-code">3.17. Editing a person : <code>edit task</code></a></li>
-<li><a href="#locating-task-by-name-code-find-task-code">3.18. Locating task by name: <code>find task</code></a></li>
-<li><a href="#listing-all-completed-events-code-ls-complete-event-code-or-code-ls-com-event-code">3.19. Listing all completed events: <code>ls complete event</code> or <code>ls com event</code></a></li>
-<li><a href="#saving-the-data">3.20. Saving the data</a></li>
+<li><a href="#listing-uncompleted-tasks-and-upcoming-events-code-ls-code">3.4. Listing uncompleted tasks and upcoming events: <code>ls</code></a></li>
+<li><a href="#removing-a-task-or-event-code-rm-code">3.5. Removing a task or event: <code>rm</code></a></li>
+<li><a href="#completing-a-task-code-complete-task-code-or-code-com-task-code">3.6. Completing a task: <code>complete task</code> or <code>com task</code></a></li>
+<li><a href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code">3.7. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code></a></li>
+<li><a href="#shows-overdue-tasks-code-overdue-code">3.8. Shows overdue tasks: <code>overdue</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code-or-code-u-code">3.10. Undoing previous command : <code>undo</code> or <code>u</code></a></li>
+<li><a href="#redoing-previously-undone-command-code-redo-code-or-code-r-code">3.11. Redoing previously undone command : <code>redo</code> or <code>r</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code-or-code-c-code">3.12. Clearing all entries : <code>clear</code> or <code>c</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></li>
+<li><a href="#editing-a-person-code-edit-task-code">3.14. Editing a person : <code>edit task</code></a></li>
+<li><a href="#locating-task-by-name-code-find-task-code">3.15. Locating task by name: <code>find task</code></a></li>
+<li><a href="#listing-all-past-events-code-ls-past-event-code">3.16. Listing all past events: <code>ls past event</code></a></li>
+<li><a href="#saving-the-data">3.17. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -59,8 +56,8 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>CLIndar is a desktop application that helps university computing students to manage their tasks and events.
-CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are familiar with.
-Thus, compared to traditional Graphical User Interface (GUI) applications, CLIndar is faster and provides much convenience for computing students.</p>
+CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are expected to be familiar with.
+Thus, compared to traditional Graphical User Interface (GUI) applications, CLIndar is faster and provides more convenience for its target audience.</p>
 </div>
 </div>
 </div>
@@ -68,7 +65,7 @@ Thus, compared to traditional Graphical User Interface (GUI) applications, CLInd
 <h2 id="get-started"><a class="link" href="#get-started">2. Get Started</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To start using CLIndar, follow the instructions below:</p>
+<p>To start using CLIndar, follow the instructions below.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -89,7 +86,7 @@ This app will not work with earlier versions of Java 8.
 </div>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/CS2103JAN2018-W13-B3/main/releases">here</a>.</p>
+<p>Download the latest <code>deskboard.jar</code> <a href="https://github.com/CS2103JAN2018-W13-B3/main/releases">here</a>.</p>
 </li>
 <li>
 <p>Copy the file to the folder you want to use as the home folder for CLIndar.</p>
@@ -111,10 +108,10 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>task</code></strong> <code>n/Software Engineering Milestone 1 d/16/03/2018 17:00 r/Enhance major component</code>: Adds Software Engineering task to the board in CLIndar</p>
+<p><strong><code>task</code></strong> <code>n/Software Engineering Milestone 1 d/16/03/2018 17:00 r/Enhance major component</code>: Adds Software Engineering task to the desk board in CLIndar</p>
 </li>
 <li>
-<p><strong>*<code>event</code></strong> <code>n/Software Project s/01/05/2018 8:00 e/01/08/2018 8:00 l/School of Computing</code>: Adds Software Project event to the board</p>
+<p><strong><code>event</code></strong> <code>n/Software Project s/01/05/2018 8:00 e/01/08/2018 8:00 l/School of Computing</code>: Adds Software Project event to the desk board</p>
 </li>
 <li>
 <p><strong><code>list task</code></strong> : list all uncompleted tasks</p>
@@ -136,46 +133,53 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following are the commands of CLIndar:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Command Format</strong></p>
+<p>The following describes the command format in CLIndar.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>task n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>task n/Software Engineering Milestone 1</code>.</p>
+<p><strong>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.</strong><br>
+For example, in the following format <code>task n/NAME</code>,
+  <code>NAME</code> must be supplied by the user as the task name. The following is an example of the command to be keyed in by user:
+  <code>task n/Software Engineering Milestone 1</code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>n/NAME [r/REMARK]</code> can be used as <code>n/Software Engineering Milestone 1 r/urgent</code> or as <code>n/Software Engineering Milestone 1</code>.</p>
+<p><strong>Items in square brackets are optional.</strong><br>
+For example,  <code>n/NAME [r/REMARK]</code> can be used as <code>n/Software Engineering Milestone 1 r/urgent</code> or as <code>n/Software Engineering Milestone 1</code>.</p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DATETIME n/NAME</code> is also acceptable.</p>
+<p><strong>Parameters can be in any order.</strong><br>
+For example, if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DATETIME n/NAME</code> is also acceptable.</p>
 </li>
 </ul>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="viewing-help-code-help-code-or-code-man-code"><a class="link" href="#viewing-help-code-help-code-or-code-man-code">3.1. Viewing help : <code>help</code> or <code>man</code></a></h3>
 <div class="paragraph">
-<p>Shows the help menu or help for the <code>COMMAND_WORD</code> requested.</p>
+<p><strong><code>As of  v1.1</code></strong></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>help</code>, <code>help COMMAND_WORD</code>, <code>man</code> or <code>man COMMAND_WORD</code></p>
+<p>Shows the help menu for all of the commands or only the <code>COMMAND_WORD</code> requested.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Format:</strong> <code>help</code>, <code>help COMMAND_WORD</code>, <code>man</code> or <code>man COMMAND_WORD</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p><code>help</code></p>
+</li>
 <li>
 <p><code>help task</code></p>
 </li>
 <li>
 <p><code>man</code></p>
+</li>
+<li>
+<p><code>man task</code></p>
 </li>
 </ul>
 </div>
@@ -183,11 +187,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="adding-a-task-code-task-code"><a class="link" href="#adding-a-task-code-task-code">3.2. Adding a task: <code>task</code></a></h3>
 <div class="paragraph">
-<p>Adds a task to the board<br>
-Format: <code>task n/NAME d/DATETIME [r/REMARK]</code></p>
+<p><strong><code>As of  v1.2</code></strong></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Adds a task to the desk board.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>task n/NAME d/DUE_DATE_TIME [r/REMARK] [t/TAGS]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -203,11 +212,16 @@ Format: <code>task n/NAME d/DATETIME [r/REMARK]</code></p>
 <div class="sect2">
 <h3 id="adding-an-event-code-event-code"><a class="link" href="#adding-an-event-code-event-code">3.3. Adding an event: <code>event</code></a></h3>
 <div class="paragraph">
-<p>Adds an event to the board<br>
-Format: <code>event n/NAME s/STARTTIME e/ENDTTIME [l/LOCATION] [r/REMARK]</code></p>
+<p><strong><code>As of  v1.5</code></strong></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Adds an event to the desk board.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>event n/NAME s/START_TIME e/END_TIME [l/LOCATION] [r/REMARK]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -221,172 +235,140 @@ Format: <code>event n/NAME s/STARTTIME e/ENDTTIME [l/LOCATION] [r/REMARK]</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-uncompleted-tasks-and-upcoming-events-code-ls-code"><a class="link" href="#listing-all-uncompleted-tasks-and-upcoming-events-code-ls-code">3.4. Listing all uncompleted tasks and upcoming events: <code>ls</code></a></h3>
+<h3 id="listing-uncompleted-tasks-and-upcoming-events-code-ls-code"><a class="link" href="#listing-uncompleted-tasks-and-upcoming-events-code-ls-code">3.4. Listing uncompleted tasks and upcoming events: <code>ls</code></a></h3>
 <div class="paragraph">
-<p>Shows two lists in the board - the first list shows all uncompleted tasks, and the other list shows all upcoming events.<br>
-Format: <code>ls</code></p>
+<p><strong><code>As of  v1.5</code></strong></p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="listing-all-uncompleted-tasks-code-ls-task-code"><a class="link" href="#listing-all-uncompleted-tasks-code-ls-task-code">3.5. Listing all uncompleted tasks: <code>ls task</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all uncompleted tasks in the board.<br>
-Format: <code>ls task</code></p>
+<p>Shows one or two lists of tasks and events in the desk board as described below.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="listing-all-upcoming-events-code-ls-event-code"><a class="link" href="#listing-all-upcoming-events-code-ls-event-code">3.6. Listing all upcoming events: <code>ls event</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all upcoming events in the board.<br>
-Format: <code>ls event</code></p>
+<p><strong>Format:</strong></p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="removing-a-task-code-rm-task-code"><a class="link" href="#removing-a-task-code-rm-task-code">3.7. Removing a task: <code>rm task</code></a></h3>
-<div class="paragraph">
-<p>Removes the specified task from the board.<br>
-Format: <code>rm task INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Removes the task at the specified <code>INDEX</code>.</p>
+<p><code>ls task</code>: shows only uncompleted tasks.</p>
+</li>
+<li>
+<p><code>ls event</code>: shows only upcoming events.</p>
+</li>
+<li>
+<p><code>ls</code>: shows both uncompleted tasks upcoming events in 2 separate lists.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removing-a-task-or-event-code-rm-code"><a class="link" href="#removing-a-task-or-event-code-rm-code">3.5. Removing a task or event: <code>rm</code></a></h3>
+<div class="paragraph">
+<p><strong><code>As of  v1.5</code></strong></p>
+</div>
+<div class="paragraph">
+<p>Removes a task or event from the desk board according to the following conditions.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Removes the task or event at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+<p>The index <strong>must be a positive integer</strong> e.g. 1, 2, 3.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Format:</strong></p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>rm task INDEX</code>: removes a task.</p>
+</li>
+<li>
+<p><code>rm event INDEX</code>: removes an event.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>ls task</code><br>
 <code>rm task 2</code><br>
-Removes the 2nd task in the board.</p>
+Removes the 2nd task in the desk board.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="removing-an-event-code-rm-event-code"><a class="link" href="#removing-an-event-code-rm-event-code">3.8. Removing an event: <code>rm event</code></a></h3>
+<h3 id="completing-a-task-code-complete-task-code-or-code-com-task-code"><a class="link" href="#completing-a-task-code-complete-task-code-or-code-com-task-code">3.6. Completing a task: <code>complete task</code> or <code>com task</code></a></h3>
 <div class="paragraph">
-<p>Removes the specified event from the board.<br>
-Format: <code>rm event INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Removes the event at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
+<p><strong><code>As of  v1.5</code></strong></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>ls event</code><br>
-<code>rm event 2</code><br>
-Removes the 2nd event in the board.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="completing-a-task-code-complete-task-code-or-code-com-task-code"><a class="link" href="#completing-a-task-code-complete-task-code-or-code-com-task-code">3.9. Completing a task: <code>complete task</code> or <code>com task</code></a></h3>
-<div class="paragraph">
-<p>Completes the specified task in the board.<br>
-Format: <code>complete task INDEX</code> or <code>com task INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Completes the task at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
+<p>Completes the task at the specified <code>INDEX</code> based on the most recent listing.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Format:</strong> <code>complete task INDEX</code> or <code>com task INDEX</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>ls task</code><br>
 <code>complete task 3</code><br>
-Completes the 3rd task in the board.</p>
+Completes the 3rd task in the desk board.</p>
 </li>
 <li>
 <p><code>ls task</code><br>
 <code>com task 2</code><br>
-Completes the 2nd task in the board.</p>
+Completes the 2nd task in the desk board.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code"><a class="link" href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code">3.10. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code></a></h3>
+<h3 id="listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code"><a class="link" href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code">3.7. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all completed tasks in the board.<br>
-Format: <code>ls complete task</code> or <code>ls com task</code></p>
+<p><strong><code>As of  v1.5</code></strong></p>
+</div>
+<div class="paragraph">
+<p>Shows a list of all completed tasks in the desk board.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>ls complete task</code> or <code>ls com task</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="shows-overdue-tasks-code-overdue-code"><a class="link" href="#shows-overdue-tasks-code-overdue-code">3.11. Shows overdue tasks: <code>overdue</code></a></h3>
+<h3 id="shows-overdue-tasks-code-overdue-code"><a class="link" href="#shows-overdue-tasks-code-overdue-code">3.8. Shows overdue tasks: <code>overdue</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of tasks that are overdue.<br>
-Format: <code>overdue</code></p>
+<p><strong><code>As of  v1.5</code></strong></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
 <div class="paragraph">
-<p>Events that are overdue are automatically marked as 'complete'</p>
+<p>Shows a list of tasks that remain uncompleted after their respective due dates.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>overdue</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.12. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+<p><strong><code>As of  v1.5</code></strong></p>
+</div>
+<div class="paragraph">
+<p>Lists all the commands that you have entered in reverse chronological order.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>history</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -404,10 +386,12 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code-or-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-or-code-u-code">3.13. Undoing previous command : <code>undo</code> or <code>u</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code-or-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-or-code-u-code">3.10. Undoing previous command : <code>undo</code> or <code>u</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code> or <code>u</code></p>
+<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>undo</code> or <code>u</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -417,39 +401,41 @@ Format: <code>undo</code> or <code>u</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the board&#8217;s content (<code>task</code>, <code>rm task</code>).</p>
+<p>Undoable commands are commands that modify the desk board&#8217;s content (e.g. <code>task</code>, <code>rm task</code>).</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>rm task 1</code><br>
 <code>ls task</code><br>
-<code>undo</code> (reverses the <code>delete task 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>rm task 1</code> command)<br></p>
 </li>
 <li>
 <p><code>rm event 1</code><br>
 <code>clear</code><br>
-<code>u</code> (reverses the <code>clear</code> command)
+<code>u</code> (reverses the <code>clear</code> command)<br>
 <code>u</code> (reverses the <code>rm event 1</code> command)</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code-or-code-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code-or-code-r-code">3.14. Redoing the previously undone command : <code>redo</code> or <code>r</code></a></h3>
+<h3 id="redoing-previously-undone-command-code-redo-code-or-code-r-code"><a class="link" href="#redoing-previously-undone-command-code-redo-code-or-code-r-code">3.11. Redoing previously undone command : <code>redo</code> or <code>r</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code> or <code>r</code></p>
+<p>Reverses the most recent <code>undo</code> command.<br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Format:</strong> <code>redo</code> or <code>r</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -475,39 +461,43 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code-or-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-or-code-c-code">3.15. Clearing all entries : <code>clear</code> or <code>c</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code-or-code-c-code"><a class="link" href="#clearing-all-entries-code-clear-code-or-code-c-code">3.12. Clearing all entries : <code>clear</code> or <code>c</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the desk board.<br>
-Format: <code>clear</code> or <code>c</code></p>
+<p>Clears all entries from the desk board.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>clear</code> or <code>c</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.13. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
+<p>Exits the program.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-task-code"><a class="link" href="#editing-a-person-code-edit-task-code">3.17. Editing a person : <code>edit task</code></a></h3>
-<div class="paragraph">
-<p><strong><code>Coming Soon in v2.0</code></strong></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="locating-task-by-name-code-find-task-code"><a class="link" href="#locating-task-by-name-code-find-task-code">3.18. Locating task by name: <code>find task</code></a></h3>
+<h3 id="editing-a-person-code-edit-task-code"><a class="link" href="#editing-a-person-code-edit-task-code">3.14. Editing a person : <code>edit task</code></a></h3>
 <div class="paragraph">
 <p><strong><code>Coming Soon in v2.0</code></strong></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-completed-events-code-ls-complete-event-code-or-code-ls-com-event-code"><a class="link" href="#listing-all-completed-events-code-ls-complete-event-code-or-code-ls-com-event-code">3.19. Listing all completed events: <code>ls complete event</code> or <code>ls com event</code></a></h3>
+<h3 id="locating-task-by-name-code-find-task-code"><a class="link" href="#locating-task-by-name-code-find-task-code">3.15. Locating task by name: <code>find task</code></a></h3>
 <div class="paragraph">
 <p><strong><code>Coming Soon in v2.0</code></strong></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
+<h3 id="listing-all-past-events-code-ls-past-event-code"><a class="link" href="#listing-all-past-events-code-ls-past-event-code">3.16. Listing all past events: <code>ls past event</code></a></h3>
+<div class="paragraph">
+<p><strong><code>Coming Soon in v2.0</code></strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.17. Saving the data</a></h3>
 <div class="paragraph">
 <p>The data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -527,7 +517,7 @@ There is no need to save manually.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-24 19:26:57 UTC
+Last updated 2018-03-24 19:32:43 UTC
 </div>
 </div>
 </body>
