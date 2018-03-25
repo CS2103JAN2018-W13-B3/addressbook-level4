@@ -50,11 +50,9 @@
 <li><a href="#logging">4.3. Logging</a></li>
 <li><a href="#overdue">4.4. Overdue</a></li>
 <li><a href="#Implementation-Configuration">4.5. Configuration</a></li>
-<li><a href="#code-model-code-component">4.6. <code>Model</code> Component</a></li>
-<li><a href="#model">4.7. Model</a></li>
-<li><a href="#storage">4.8. Storage</a></li>
-<li><a href="#ui">4.9. UI</a></li>
-<li><a href="#storage-2">4.10. Storage</a></li>
+<li><a href="#model">4.6. Model</a></li>
+<li><a href="#storage">4.7. Storage</a></li>
+<li><a href="#ui">4.8. UI</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -158,15 +156,15 @@ get started customising and contributing to the application.</p>
 <div class="sect1">
 <h2 id="SettingUp"><a class="link" href="#SettingUp">2. Setting up</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Follow the instructions below to set up the project in your computer.</p>
-</div>
 <div class="sect2">
 <h3 id="prerequisites"><a class="link" href="#prerequisites">2.1. Prerequisites</a></h3>
+<div class="paragraph">
+<p>The following must be installed in your computer before you can begin using the application:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install <strong>JDK <code>1.8.0_60</code></strong> or later</p>
+<p><strong>JDK <code>1.8.0_60</code></strong> or later</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -182,7 +180,7 @@ This app will not work with earlier versions of Java 8.
 </div>
 </li>
 <li>
-<p>Install <strong>IntelliJ</strong> IDE</p>
+<p><strong>IntelliJ</strong> IDE</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -202,38 +200,63 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 <div class="sect2">
 <h3 id="setting-up-the-project-in-your-computer"><a class="link" href="#setting-up-the-project-in-your-computer">2.2. Setting up the project in your computer</a></h3>
+<div class="paragraph">
+<p>Follow the following steps to set up the project.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 1:</strong> Fork this repo, and clone the fork to your computer.</p>
+</div>
+<div class="paragraph">
+<p>To fork the repo, click the button circled below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Origin%20Repo.png" alt="Origin Repo" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Then open Git Bash. Change the current working directory to the location where you want the cloned directory to be made. And type the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git clone https://github.com/YOUR-USERNAME/main.git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 2:</strong> Open IntelliJ. If you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first, as shown in the picture below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Close%20Project.png" alt="Close Project" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 3:</strong> Set up the correct JDK version for Gradle.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3a:</strong> Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Configure.png" alt="Configure">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Step 3b:</strong> Click <code>New&#8230;&#8203;</code> and find the directory of the JDK.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Fork this repo, and clone the fork to your computer</p>
+<p>Click <code>Import Project</code>.</p>
 </li>
 <li>
-<p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first)</p>
+<p>Locate the <code>build.gradle</code> file and select it. Click <code>OK</code>.</p>
 </li>
 <li>
-<p>Set up the correct JDK version for Gradle</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code></p>
+<p>Click <code>Open as Project</code>.</p>
 </li>
 <li>
-<p>Click <code>New&#8230;&#8203;</code> and find the directory of the JDK</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Click <code>Import Project</code></p>
-</li>
-<li>
-<p>Locate the <code>build.gradle</code> file and select it. Click <code>OK</code></p>
-</li>
-<li>
-<p>Click <code>Open as Project</code></p>
-</li>
-<li>
-<p>Click <code>OK</code> to accept the default settings</p>
+<p>Click <code>OK</code> to accept the default settings.</p>
 </li>
 <li>
 <p>Open a console and run the command <code>gradlew processResources</code> (Mac/Linux: <code>./gradlew processResources</code>). It should finish with the <code>BUILD SUCCESSFUL</code> message.<br>
@@ -247,7 +270,7 @@ This will generate all resources required by the application and tests.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Run the <code>seedu.address.MainApp</code> and try a few commands</p>
+<p>Run the <code>seedu.address.MainApp</code> and try a few commands.</p>
 </li>
 <li>
 <p><a href="#Testing">Run the tests</a> to ensure they all pass.</p>
@@ -265,20 +288,20 @@ This will generate all resources required by the application and tests.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Go to <code>File</code> &gt; <code>Settings&#8230;&#8203;</code> (Windows/Linux), or <code>IntelliJ IDEA</code> &gt; <code>Preferences&#8230;&#8203;</code> (macOS)</p>
+<p>Go to <code>File</code> &gt; <code>Settings&#8230;&#8203;</code> (Windows/Linux), or <code>IntelliJ IDEA</code> &gt; <code>Preferences&#8230;&#8203;</code> (macOS).</p>
 </li>
 <li>
-<p>Select <code>Editor</code> &gt; <code>Code Style</code> &gt; <code>Java</code></p>
+<p>Select <code>Editor</code> &gt; <code>Code Style</code> &gt; <code>Java</code>.</p>
 </li>
 <li>
-<p>Click on the <code>Imports</code> tab to set the order</p>
+<p>Click on the <code>Imports</code> tab to set the order.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>For <code>Class count to use import with '*'</code> and <code>Names count to use static import with '*'</code>: Set to <code>999</code> to prevent IntelliJ from contracting the import statements</p>
+<p>For <code>Class count to use import with '*'</code> and <code>Names count to use static import with '*'</code>: Set to <code>999</code> to prevent IntelliJ from contracting the import statements.</p>
 </li>
 <li>
-<p>For <code>Import Layout</code>: The order is <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code></p>
+<p>For <code>Import Layout</code>: The order is <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code>.</p>
 </li>
 </ul>
 </div>
@@ -325,7 +348,7 @@ Coverage reporting could be useful for a team repository that hosts the final ve
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
+Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based).
 </td>
 </tr>
 </table>
@@ -334,7 +357,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect3">
 <h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">2.4.4. Getting started with coding</a></h4>
 <div class="paragraph">
-<p>When you are ready to start coding,</p>
+<p>Follow the steps below when you are ready to start coding.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -359,7 +382,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
 <div class="paragraph">
-<p>The architecture diagram of the application:</p>
+<p><strong><em>Figure 1</em></strong> below explains the high-level design of the App.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -368,7 +391,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="title">Figure 1. Architecture Diagram</div>
 </div>
 <div class="paragraph">
-<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
+<p>Given below is a quick overview of each component.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -388,10 +411,10 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
+<p>At app launch: initializing the components in the correct sequence and connecting them up with each other.</p>
 </li>
 <li>
-<p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+<p>At shut down: shutting down the components and invoking cleanup method where necessary.</p>
 </li>
 </ul>
 </div>
@@ -401,43 +424,42 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p><code>EventsCenter</code> : Used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design,
-written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>)</p>
+<p><code>EventsCenter</code> : This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design).</p>
 </li>
 <li>
-<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The rest of the App consists of four components.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: The UI of the App.</p>
-</li>
-<li>
-<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: The Command Executor of the App.</p>
-</li>
-<li>
-<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: Data Holder of the App in-memory.</p>
-</li>
-<li>
-<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: Data Reader and Writer to hard disk.</p>
+<p><code>LogsCenter</code> : This class is used by many classes to write log messages to the App&#8217;s log file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of the four components</p>
+<p>The rest of the App consists of four components:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
+<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: the UI of the App</p>
 </li>
 <li>
-<p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
+<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: the command executor</p>
+</li>
+<li>
+<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: holds the data of the App in-memory</p>
+</li>
+<li>
+<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: reads data from, and writes data to, the hard disk</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each of the four components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>defines its <em>API</em> in an <code>interface</code> with the same name as the Component, and</p>
+</li>
+<li>
+<p>exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
 </li>
 </ul>
 </div>
@@ -450,9 +472,10 @@ written using <a href="https://github.com/google/guava/wiki/EventBusExplained">G
 </div>
 <div class="title">Figure 2. The API of the Logic Component</div>
 </div>
-<h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven nature of the design</h4>
+<div class="sect3">
+<h4 id="events-driven-nature-of-the-design"><a class="link" href="#events-driven-nature-of-the-design">3.1.1. Events-Driven nature of the design</a></h4>
 <div class="paragraph">
-<p>The <em>Sequence Diagram</em> below shows how the components interact for the scenario where the user issues the command <code>delete 1</code>.</p>
+<p><strong><em>Figure 3</em></strong> below shows how the components interact for the scenario where the user issues the command <code>delete 1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -473,7 +496,7 @@ Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</c
 </table>
 </div>
 <div class="paragraph">
-<p>The diagram below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
+<p><strong><em>Figure 4</em></strong> below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -497,10 +520,11 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>The sections below give more details of each component.</p>
 </div>
 </div>
+</div>
 <div class="sect2">
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI component</a></h3>
 <div class="paragraph">
-<p>The architecture diagram of the UI component:</p>
+<p><strong><em>Figure 5</em></strong> below shows the architecture diagram of the UI component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -515,21 +539,21 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component,</p>
+<p>The <code>UI</code> component</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Executes user commands using the <code>Logic</code> component.</p>
+<p>executes user commands using the <code>Logic</code> component,</p>
 </li>
 <li>
-<p>Binds itself to some data in the <code>Model</code> so that the UI can auto-update when data in the <code>Model</code> change.</p>
+<p>binds itself to some data in the <code>Model</code> so that the UI can auto-update when data in the <code>Model</code> change, and</p>
 </li>
 <li>
-<p>Responds to events raised from various parts of the App and updates the UI accordingly.</p>
+<p>responds to events raised from various parts of the App and updates the UI accordingly.</p>
 </li>
 </ul>
 </div>
@@ -590,21 +614,21 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>Model</code>,</p>
+<p>The <code>Model</code></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences,</p>
 </li>
 <li>
-<p>stores the Desk Board data.</p>
+<p>stores the Desk Board data,</p>
 </li>
 <li>
-<p>use two class to store information about 'Event' and 'Task' separately</p>
+<p>use two class to store information about 'Event' and 'Task' separately,</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Activity&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes an unmodifiable <code>ObservableList&lt;Activity&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change, and</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -614,6 +638,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="sect2">
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">3.5. Storage component</a></h3>
+<div class="paragraph">
+<p><strong><em>Figure 10</em></strong> below shows the structure of the Storage Component.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
@@ -624,15 +651,15 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>Storage</code> component,</p>
+<p>The <code>Storage</code> component can save the following and read them back:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+<p><code>UserPref</code> objects in json format, and</p>
 </li>
 <li>
-<p>can save the Desk Board data in xml format and read it back.</p>
+<p>Desk Board data in xml format.</p>
 </li>
 </ul>
 </div>
@@ -1049,29 +1076,24 @@ overdue correctly.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="code-model-code-component"><a class="link" href="#code-model-code-component">4.6. <code>Model</code> Component</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="model"><a class="link" href="#model">4.7. Model</a></h3>
+<h3 id="model"><a class="link" href="#model">4.6. Model</a></h3>
 <div class="paragraph">
 <p>The <code>Model</code> component was originally implemented to store personal contact details.
-As we modified the application to <code>CLInder</code> we need to store information of activities instead.</p>
+As we modified the application to <code>CLIndar</code> we need to store information of activities instead.</p>
 </div>
 <div class="paragraph">
-<p>The original application <code>Address Book</code> store information in the <code>Person</code> Class.</p>
+<p>The original application <code>Address Book</code> store information in the <code>Person</code> class.</p>
 </div>
 <div class="paragraph">
-<p>Since we need now to store information of event and task in the memory now.
-The <code>Person</code> Class need to modified to store the record..</p>
+<p>Since we now need to store information of events and tasks in the memory, the <code>Person</code> class needs to modified to store the record.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UniquePersonList</code> need to be modified to store list of <code>Task</code> and <code>Activity</code>.
+<p>The <code>UniquePersonList</code> needs to be modified to store list of <code>Task</code> and <code>Activity</code>.
 <br>
 <br></p>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">4.7.1. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">4.6.1. Design Consideration</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1125,14 +1147,55 @@ This would allow us to have a working release every week.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="storage"><a class="link" href="#storage">4.8. Storage</a></h3>
+<h3 id="storage"><a class="link" href="#storage">4.7. Storage</a></h3>
 <div class="paragraph">
-<p><br>
+<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:
+<br>
+<br></p>
+</div>
+<div class="sect3">
+<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">4.7.1. Design Consideration</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use 1 list to store objects of both classes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: There is no need to create 2 separate lists to store the 2 different class objects.</p>
+</li>
+<li>
+<p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be treated equally as they are from the same class.</p>
+</li>
+<li>
+<p>Cons: More effort is required to create 2 separate lists.
+<br>
+<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of objects, whereby each list contains objects of the same class, especially as we make the 2 classes more specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in the long run.
+<br>
 <br></p>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="ui"><a class="link" href="#ui">4.9. UI</a></h3>
+<h3 id="ui"><a class="link" href="#ui">4.8. UI</a></h3>
 <div class="paragraph">
 <p>Our application deals with 2 main classes: Task and Event. These 2 classes needs to be
 displayed in the UI and our team came up with 2 possible implementations to do it:
@@ -1140,7 +1203,7 @@ displayed in the UI and our team came up with 2 possible implementations to do i
 <br></p>
 </div>
 <div class="sect3">
-<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">4.9.1. Design Consideration</a></h4>
+<h4 id="design-consideration-3"><a class="link" href="#design-consideration-3">4.8.1. Design Consideration</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1180,52 +1243,6 @@ UI as intuitive as possible to bring convenience and comfort to the user. As suc
 definitely the preferred approach here.
 <br>
 <br></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="storage-2"><a class="link" href="#storage-2">4.10. Storage</a></h3>
-<div class="paragraph">
-<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:
-<br>
-<br></p>
-</div>
-<div class="sect3">
-<h4 id="design-consideration-3"><a class="link" href="#design-consideration-3">4.10.1. Design Consideration</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1:</strong> Use 1 list to store objects of both classes</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: There is no need to create 2 separate lists to store the 2 different class objects.</p>
-</li>
-<li>
-<p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be treated equally as they are from the same class.</p>
-</li>
-<li>
-<p>Cons: More effort is required to create 2 separate lists.
-<br>
-<br></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of objects, whereby each list contains objects of the same class, especially as we make the 2 classes more specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in the long run.</p>
 </div>
 </div>
 </div>
@@ -1569,7 +1586,7 @@ Do take a look at <a href="#Design-Logic">Section 3.3, &#8220;Logic component&#8
 </li>
 </ol>
 </div>
-<h4 id="code-model-code-component-2" class="discrete"><code>Model</code> component</h4>
+<h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
 <div class="paragraph">
 <p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the desk board, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
 </div>
@@ -2972,7 +2989,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-25 16:20:49 UTC
+Last updated 2018-03-25 16:24:41 UTC
 </div>
 </div>
 </body>
