@@ -156,6 +156,11 @@ get started customising and contributing to the application.</p>
 <div class="sect1">
 <h2 id="SettingUp"><a class="link" href="#SettingUp">2. Setting up</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Follow the section below to set up the application on your computer.
+<br>
+<br></p>
+</div>
 <div class="sect2">
 <h3 id="prerequisites"><a class="link" href="#prerequisites">2.1. Prerequisites</a></h3>
 <div class="paragraph">
@@ -190,6 +195,8 @@ This app will not work with earlier versions of Java 8.
 <td class="content">
 IntelliJ by default has Gradle and JavaFx plugins installed.<br>
 Do not disable them. If you have disabled them, go to <code>File</code> &gt; <code>Settings</code> &gt; <code>Plugins</code> to re-enable them.
+<br>
+<br>
 </td>
 </tr>
 </table>
@@ -215,20 +222,43 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="paragraph">
-<p>Then open Git Bash. Change the current working directory to the location where you want the cloned directory to be made. And type the following:</p>
+<p>Then open Git Bash. Change the current working directory to the location where you want the cloned directory to be made. And type the following:
+=</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>git clone https://github.com/YOUR-USERNAME/main.git</pre>
+<pre>git clone https://github.com/YOUR-USERNAME/REPOSITORY.git</pre>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Step 2:</strong> Open IntelliJ. If you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first, as shown in the picture below.</p>
+<p>If the clone was successful, a new sub-directory appears on your local drive. This directory has the same name as the repository that you have cloned. The clone contains the files and metadata that Git requires to maintain the changes you make to the source files.
+<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The following should appear if <code>git clone <a href="https://github.com/YOUR-USERNAME/addressbook-level4.git" class="bare">https://github.com/YOUR-USERNAME/addressbook-level4.git</a></code> at C:/Users/temp folder is executed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/git%20clone.jpg" alt="git clone" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 2:</strong> Open IntelliJ. If you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first, as shown in the picture below.
+<br>
+<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Close%20Project.png" alt="Close Project" width="600">
 </div>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Step 3:</strong> Set up the correct JDK version for Gradle.</p>
@@ -242,25 +272,37 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Step 3b:</strong> Click <code>New&#8230;&#8203;</code> and find the directory of the JDK.</p>
+<p><strong>Step 3b:</strong> Click <code>New&#8230;&#8203;</code> and find the directory of the JDK.
+<br>
+<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 4:</strong> Click <code>Import Project</code>.</p>
+<p><strong>Step 4:</strong> Click <code>Import Project</code>.
+<br>
+<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 5:</strong> Locate the <code>build.gradle</code> file and select it. Click <code>OK</code>.</p>
+<p><strong>Step 5:</strong> Locate the <code>build.gradle</code> file and select it. Click <code>OK</code>.
+<br>
+<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 6:</strong> Click <code>Open as Project</code>.</p>
+<p><strong>Step 6:</strong> Click <code>Open as Project</code>.
+<br>
+<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 7:</strong> Click <code>OK</code> to accept the default settings.</p>
+<p><strong>Step 7:</strong> Click <code>OK</code> to accept the default settings.
+<br>
+<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Step 8:</strong> Open a console and run the command <code>gradlew processResources</code> (Mac/Linux: <code>./gradlew processResources</code>). It should finish with the <code>BUILD SUCCESSFUL</code> message.<br></p>
 </div>
 <div class="paragraph">
-<p>This will generate all resources required by the application and tests.</p>
+<p>This will generate all resources required by the application and tests.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect2">
@@ -271,7 +313,9 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <p>Run the <code>seedu.address.MainApp</code> and try a few commands.</p>
 </li>
 <li>
-<p><a href="#Testing">Run the tests</a> to ensure they all pass.</p>
+<p><a href="#Testing">Run the tests</a> to ensure they all pass.
+<br>
+<br></p>
 </li>
 </ol>
 </div>
@@ -363,7 +407,9 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 3.1, &#8220;Architecture&#8221;</a>.</p>
 </li>
 <li>
-<p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
+<p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.
+<br>
+<br></p>
 </li>
 </ol>
 </div>
@@ -375,7 +421,9 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <h2 id="Design"><a class="link" href="#Design">3. Design</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes the way the application is designed.</p>
+<p>This section describes the way the application is designed.
+<br>
+<br></p>
 </div>
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
@@ -2987,7 +3035,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-25 16:29:35 UTC
+Last updated 2018-03-26 10:29:56 UTC
 </div>
 </div>
 </body>
