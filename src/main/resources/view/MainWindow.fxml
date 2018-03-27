@@ -10,6 +10,8 @@
 
 <?import javafx.scene.Scene?>
 <?import java.net.URL?>
+
+<!-- @@author jasmoon -->
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="600" minHeight="350">
     <scene>
@@ -42,7 +44,7 @@
                         <items>
                             <VBox fx:id="personList" prefWidth="100.0" styleClass="VBox" VBox.vgrow="ALWAYS">
                                 <children>
-                                    <StackPane id="taskListPlaceholder" fx:id="activityListPanelPlaceholder"
+                                    <StackPane id="taskListPanelPlaceholder" fx:id="activityListPanelPlaceholder"
                                                prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                         <VBox.margin>
                                             <Insets bottom="8.0" left="30.0" right="30.0" top="10.0"/>
@@ -53,7 +55,7 @@
 
                             <VBox fx:id="eventList" prefWidth="100.0" styleClass="VBox" VBox.vgrow="ALWAYS">
                                 <children>
-                                    <StackPane id="eventListPlaceholder" fx:id="eventListPlaceholder" prefHeight="150.0"
+                                    <StackPane id="eventListPanelPlaceholder" fx:id="eventListPanelPlaceholder" prefHeight="150.0"
                                                prefWidth="200.0" VBox.vgrow="ALWAYS">
                                         <padding>
                                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

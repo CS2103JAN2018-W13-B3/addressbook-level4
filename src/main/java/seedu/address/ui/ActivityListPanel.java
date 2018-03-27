@@ -18,7 +18,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.activity.Activity;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of activities.
  */
 public class ActivityListPanel extends UiPart<Region> {
     private static final String FXML = "ActivityListPanel.fxml";

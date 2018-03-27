@@ -1,3 +1,4 @@
+/*@@author jasmoon*/
 @font-face  {
     font-family: 'Open Sans Bold Italic';
     src: url('../fonts/open-sans/OpenSans-BoldItalic.ttf');
@@ -35,7 +36,7 @@
 
 /* taskList and eventList */
 
-#taskListPlaceholder    {
+#taskListPanelPlaceholder    {
     -fx-background-color: white;
     -fx-background-radius: 5px 5px 5px 5px;
 }
@@ -84,7 +85,7 @@
     -fx-vgap: 3;
 }
 
-#eventListPlaceholder   {
+#eventListPanelPlaceholder   {
     -fx-background-color: white;
     -fx-background-radius: 5px 5px 5px 5px;
 }

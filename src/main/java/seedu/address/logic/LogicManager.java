@@ -12,6 +12,8 @@ import seedu.address.logic.parser.DeskBoardParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.Event;
+import seedu.address.model.activity.Task;
 
 /**
  * The main LogicManager of the app.
@@ -46,9 +48,14 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<Activity> getFilteredPersonList() {
+    public ObservableList<Activity> getFilteredActivitiesList() {
         return model.getFilteredActivityList();
     }
+
+    //@@author jasmoon
+    public ObservableList<Task> getFilteredTaskList()   { return model.getFilteredTaskList(); }
+
+    public ObservableList<Event> getFilteredEventList() { return model.getFilteredEventList(); }
 
     @Override
     public ListElementPointer getHistorySnapshot() {

@@ -11,9 +11,9 @@ public class UniqueActivityListTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void internalListAsObservable_modifyList_throwsUnsupportedOperationException() {
         UniqueActivityList uniqueActivityList = new UniqueActivityList();
         thrown.expect(UnsupportedOperationException.class);
-        uniqueActivityList.asObservableList().remove(0);
+        uniqueActivityList.internalListAsObservable().remove(0);
     }
 }

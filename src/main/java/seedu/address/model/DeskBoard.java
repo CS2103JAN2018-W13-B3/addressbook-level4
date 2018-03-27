@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.activity.Activity;
+import seedu.address.model.activity.Event;
+import seedu.address.model.activity.Task;
 import seedu.address.model.activity.UniqueActivityList;
 import seedu.address.model.activity.exceptions.ActivityNotFoundException;
 import seedu.address.model.activity.exceptions.DuplicateActivityException;
@@ -157,18 +159,27 @@ public class DeskBoard implements ReadOnlyDeskBoard {
 
     @Override
     public String toString() {
-        return activities.asObservableList().size() + " activities, " + tags.asObservableList().size() +  " tags";
+        return activities.internalListAsObservable().size() + " activities, " + tags.internalListAsObservable().size() +  " tags";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Activity> getActivityList() {
-        return activities.asObservableList();
+        return activities.internalListAsObservable();
+    }
+
+    //@@author jasmoon
+    public ObservableList<Task> getTaskList()   {
+        return activities.taskListAsObservable();
+    }
+
+    public ObservableList<Event> getEventList() {
+        return activities.EventListAsObservable();
     }
 
     @Override
     public ObservableList<Tag> getTagList() {
-        return tags.asObservableList();
+        return tags.internalListAsObservable();
     }
 
     @Override

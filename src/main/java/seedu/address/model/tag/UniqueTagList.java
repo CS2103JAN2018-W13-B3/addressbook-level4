@@ -101,10 +101,11 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Tag> asObservableList() {
+    public ObservableList<Tag> internalListAsObservable() {
         assert CollectionUtil.elementsAreUnique(internalList);
         return FXCollections.unmodifiableObservableList(internalList);
     }
+
 
     @Override
     public boolean equals(Object other) {

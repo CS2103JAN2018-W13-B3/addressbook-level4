@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ActivityListPanel activityListPanel;
     private Config config;
+    private EventListPanel eventListPanel;
     private UserPrefs prefs;
 
     @FXML
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane activityListPanelPlaceholder;
+
+    @FXML
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -115,8 +119,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        activityListPanel = new ActivityListPanel(logic.getFilteredPersonList());
+        activityListPanel = new ActivityListPanel(logic.getFilteredActivitiesList());
         activityListPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
+
+        //@@author jasmoon
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

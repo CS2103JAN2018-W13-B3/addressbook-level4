@@ -69,7 +69,4 @@ public abstract class Activity {
     public boolean isCompleted() {
         return isCompleted;
     }
-
-
-
 }

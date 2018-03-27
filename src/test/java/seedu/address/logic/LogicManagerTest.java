@@ -47,9 +47,9 @@
 //    }
 //
 //    @Test
-//    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+//    public void getFilteredActivitiesList_modifyList_throwsUnsupportedOperationException() {
 //        thrown.expect(UnsupportedOperationException.class);
-//        logic.getFilteredPersonList().remove(0);
+//        logic.getFilteredActivitiesList().remove(0);
 //    }
 //
 //    /**

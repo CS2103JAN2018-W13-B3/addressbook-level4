@@ -11,9 +11,9 @@ public class UniqueTagListTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void internalListAsObservable_modifyList_throwsUnsupportedOperationException() {
         UniqueTagList uniqueTagList = new UniqueTagList();
         thrown.expect(UnsupportedOperationException.class);
-        uniqueTagList.asObservableList().remove(0);
+        uniqueTagList.internalListAsObservable().remove(0);
     }
 }
