@@ -48,7 +48,7 @@
 <li><a href="#undo-redo-feature">4.1. Undo/Redo feature</a></li>
 <li><a href="#proposed-data-encryption">4.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">4.3. Logging</a></li>
-<li><a href="#overdue">4.4. Overdue</a></li>
+<li><a href="#task">4.4. Task</a></li>
 <li><a href="#Implementation-Configuration">4.5. Configuration</a></li>
 <li><a href="#model">4.6. Model</a></li>
 <li><a href="#storage">4.7. Storage</a></li>
@@ -582,7 +582,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>TaskListPanel</code>, <code>EventListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
@@ -606,11 +606,21 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic component</a></h3>
+<div class="paragraph">
+<p><strong><em>Figure 6</em></strong> below shows the UML of the Logic component.</p>
+</div>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
 <div class="title">Figure 6. Structure of the Logic Component</div>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
+<div class="paragraph">
+<p><strong><em>Figure 7</em></strong> below shows finer details of the Logic component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -738,6 +748,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
+<div class="title">Figure 11. Class Diagram of a Logic Command</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -818,6 +829,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
+<div class="title">Figure 12. 'Undo' stack pops into the 'Redo' Stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -838,6 +850,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 13. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
@@ -861,6 +874,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
+<div class="title">Figure 14. Adding 'ClearCommand' to the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -869,6 +883,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
+<div class="title">Figure 15. 'ListCommand' does not affect the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -877,6 +892,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
+<div class="title">Figure 16. Activity Diagram for 'Undo' and 'Redo'</div>
 </div>
 </div>
 <div class="sect3">
@@ -1061,7 +1077,67 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="overdue"><a class="link" href="#overdue">4.4. Overdue</a></h3>
+<h3 id="task"><a class="link" href="#task">4.4. Task</a></h3>
+<div class="paragraph">
+<p>Task refer to a piece of work to be done that can be added by a student user using the application. After being added, tasks can be edited and deleted. When a task is not completed within the deadline
+, it will be automatically be marked as overdue.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p><strong><em>Figure17</em></strong> below shows how <code>Task</code> is represented in the application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UML%20diagram%20for%20task.png" alt="UML diagram for task" width="450">
+</div>
+<div class="title">Figure 17. UML Diagram for Task</div>
+</div>
+<div class="paragraph">
+<p>A brief description of each of the attributes of `Task`is given below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Name: Represents the name of the task</p>
+</li>
+<li>
+<p>DateTime: Represents the due date and time of the task.</p>
+</li>
+<li>
+<p>Remark: Represents a short description or reminder pertaining to the task.</p>
+</li>
+<li>
+<p>Tags: Groupings or representation for the task</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Operation that manipulates the <code>task</code> object can been done using <code>task</code>, <code>complete</code>, <code>delete</code>, <code>edit</code> commands.
+These commands are described in more detail below.</p>
+</div>
+<div class="sect4">
+<h5 id="task-2"><a class="link" href="#task-2">Task</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="complete"><a class="link" href="#complete">Complete</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="delete"><a class="link" href="#delete">Delete</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="edit"><a class="link" href="#edit">Edit</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="find"><a class="link" href="#find">Find</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="overdue"><a class="link" href="#overdue">Overdue</a></h5>
 <div class="paragraph">
 <p>The user is able to list down overdue tasks by using the <code>overdue</code> command. Note that overdue only lists down overdue tasks; overdue events are marked as
 completed automatically.</p>
@@ -1076,8 +1152,10 @@ as overdue, while if it is overdue (for Event), it will mark it as completed.
 <br>
 <br></p>
 </div>
+</div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.2. Design Considerations</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1353,7 +1431,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 11. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 18. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -2233,7 +2311,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysPerson(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
+<p>Modify <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysTask(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
 </li>
 </ol>
 </div>
@@ -3035,7 +3113,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-04 03:14:15 UTC
+Last updated 2018-04-04 03:16:10 UTC
 </div>
 </div>
 </body>

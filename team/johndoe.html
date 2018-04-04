@@ -251,6 +251,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="content">
 <img src="../images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
+<div class="title">Figure 1. Class Diagram of a Logic Command</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -331,6 +332,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="../images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
+<div class="title">Figure 2. 'Undo' stack pops into the 'Redo' Stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -351,6 +353,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
+<div class="title">Figure 3. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
@@ -374,6 +377,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="../images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
+<div class="title">Figure 4. Adding 'ClearCommand' to the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -382,6 +386,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="../images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
+<div class="title">Figure 5. 'ListCommand' does not affect the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -390,6 +395,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
+<div class="title">Figure 6. Activity Diagram for 'Undo' and 'Redo'</div>
 </div>
 </div>
 <div class="sect3">
@@ -549,7 +555,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-04 03:14:15 UTC
+Last updated 2018-04-04 03:16:10 UTC
 </div>
 </div>
 </body>
