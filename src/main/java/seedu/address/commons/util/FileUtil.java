@@ -23,7 +23,7 @@ public class FileUtil {
      */
     public static void createIfMissing(File file) throws IOException {
         if (!isFileExists(file)) {
-            createFile(file);
+            Files.createDirectories(file.toPath());
         }
     }
 
