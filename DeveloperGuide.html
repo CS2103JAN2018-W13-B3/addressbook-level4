@@ -48,11 +48,10 @@
 <li><a href="#undo-redo-feature">4.1. Undo/Redo feature</a></li>
 <li><a href="#proposed-data-encryption">4.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">4.3. Logging</a></li>
-<li><a href="#task">4.4. Task</a></li>
-<li><a href="#Implementation-Configuration">4.5. Configuration</a></li>
-<li><a href="#model">4.6. Model</a></li>
-<li><a href="#storage">4.7. Storage</a></li>
-<li><a href="#ui">4.8. UI</a></li>
+<li><a href="#uniqueactivitylist">4.4. UniqueActivityList</a></li>
+<li><a href="#task">4.5. Task</a></li>
+<li><a href="#event">4.6. Event</a></li>
+<li><a href="#Implementation-Configuration">4.7. Storage for Task and Event</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1046,7 +1045,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.5, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.7, &#8220;Storage for Task and Event&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1077,24 +1076,122 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="task"><a class="link" href="#task">4.4. Task</a></h3>
+<h3 id="uniqueactivitylist"><a class="link" href="#uniqueactivitylist">4.4. UniqueActivityList</a></h3>
 <div class="paragraph">
-<p>Task refer to a piece of work to be done that can be added by a student user using the application. After being added, tasks can be edited and deleted. When a task is not completed within the deadline
-, it will be automatically be marked as overdue.</p>
+<p><code>UniqueActivityList</code> resides in the <code>model</code> component of the application.</p>
 </div>
-<div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.4.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p><strong><em>Figure17</em></strong> below shows how <code>Task</code> is represented in the application.</p>
+<p><strong><em>Figure 17</em></strong> below shows the relationship between <code>UniqueActivityList</code> and its relevant components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/UML%20diagram%20for%20task.png" alt="UML diagram for task" width="450">
+<img src="images/UniqueActivityListClassDiagram.png" alt="UniqueActivityListClassDiagram" width="550">
 </div>
-<div class="title">Figure 17. UML Diagram for Task</div>
+<div class="title">Figure 17. Class Diagram for UniqueActivityList</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration"><a class="link" href="#design-consideration">4.4.1. Design Consideration</a></h4>
+<div class="paragraph">
+<p>There are two ways to store information of events and tasks in UniqueActivityList:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong> Alternative 1 (Current Choice):</strong>
+Use the <code>Activity</code> Class as a place holder for events and tasks to be stored. Hence, we create two new
+Class <code>Task</code> and <code>Event</code> to store the information and Both classes inherit from the <code>Activity</code> Class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Minor changes to the original structure of the application (except some renaming).</p>
+</li>
+<li>
+<p>Cons:
+It would be a harder to retrieve information as the parameters <code>Task</code> and <code>Event</code> contain are different.
+Extra accessor methods will also be required for <code>Event</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong>
+Have two different class completely: <code>Task</code> and <code>Event</code>. As such, we will also have two different class
+<code>UniqueTaskList</code> and <code>UniqueEventList</code>. Relevant interface and access method will also be modified to
+cope with the change.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+Clear distinction between the two classes.</p>
+</li>
+<li>
+<p>Cons:
+Since the interface is now completely changed, a lot more coding will be required to cope with the change.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>A brief description of each of the attributes of `Task`is given below:</p>
+<p>Since there are overlaps between the two classes in terms of parameters, we decided that the first approach
+would be the more efficient and preferred way of implementing the structure of the application. Also, taking
+the first approach allows us to practice incremental programming which allows us to have a working release
+every week.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="autosorting-feature"><a class="link" href="#autosorting-feature">4.4.2. Autosorting feature</a></h4>
+<div class="paragraph">
+<p>Following is a snippet which illustrates the function of <code>UniqueActivityList</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">final</span> ObservableList&lt;Activity&gt; internalList = FXCollections.observableArrayList();
+
+    /...some irrelavant code.../
+
+    <span class="directive">public</span> <span class="type">void</span> add(Activity toAdd) <span class="directive">throws</span> DuplicateActivityException {
+        requireNonNull(toAdd);
+        <span class="keyword">if</span> (contains(toAdd)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> DuplicateActivityException();
+        }
+        internalList.add(toAdd);
+        <span class="predefined-type">Collections</span>.sort(internalList, dateTimeComparator);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>UniqueActivityList</code> contains a list of unique activities which is either a <code>Task</code> or an <code>Event</code> and they
+ is stored in <code>internalList</code>. Each time an <code>Activity</code> is added to or edited in <code>UniqueActivityList</code>,
+ <code>internalList</code> will be sorted according to its <code>DateTime</code>. Note that for events, its <code>DateTime</code> refers
+ to the event&#8217;s starting time.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task"><a class="link" href="#task">4.5. Task</a></h3>
+<div class="paragraph">
+<p>Task refer to a piece of work to be done that can be added by a user of the application. After being added,
+tasks can be edited, completed or removed. When a task is not completed within the deadline, it will be
+automatically be marked as overdue.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p><strong><em>Figure 18</em></strong> below shows how <code>Task</code> is represented in the application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TaskUMLDiagram.png" alt="TaskUMLDiagram" width="550">
+</div>
+<div class="title">Figure 18. UML Class Diagram for Task</div>
+</div>
+<div class="paragraph">
+<p>A brief description of each of the attributes of <code>Task</code> is given below:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1102,10 +1199,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <p>Name: Represents the name of the task</p>
 </li>
 <li>
-<p>DateTime: Represents the due date and time of the task.</p>
+<p>dueDateTime: Represents the due date and time of the task</p>
 </li>
 <li>
-<p>Remark: Represents a short description or reminder pertaining to the task.</p>
+<p>Remark: Represents a short description or reminder pertaining to the task</p>
 </li>
 <li>
 <p>Tags: Groupings or representation for the task</p>
@@ -1113,49 +1210,125 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </ul>
 </div>
 <div class="paragraph">
-<p>Operation that manipulates the <code>task</code> object can been done using <code>task</code>, <code>complete</code>, <code>delete</code>, <code>edit</code> commands.
-These commands are described in more detail below.</p>
+<p>Operations that manipulate a <code>task</code> class object can been done using <code>TaskCommand</code>, <code>CompleteCommand</code>,
+<code>RemoveCommand</code>, <code>EditCommand</code> commands. These commands are described in more detail below.</p>
+</div>
+<div class="paragraph">
+<p>Operations that manipulate the GUI with respect to <code>Task</code> class includes <code>ListCommand</code>, <code>OverdueCommand</code>.</p>
 </div>
 <div class="sect4">
-<h5 id="task-2"><a class="link" href="#task-2">Task</a></h5>
+<h5 id="adding-tasks"><a class="link" href="#adding-tasks">Adding tasks</a></h5>
+<div class="paragraph">
+<p>Tasks can be added through the use of the <code>TaskCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following is a snippet shows how the <code>executeUndoableCommand()</code> of <code>TaskCommand</code> updates <code>UniqueActivityList</code>
+residing in model of CLIndar by adding <code>toAdd</code>. Note that <code>toAdd</code> will not be added if a duplicate task
+has been found or the <code>Name</code> or <code>DateTime</code> field is left empty.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+        requireNonNull(model);
+        <span class="keyword">try</span> {
+            model.addActivity(toAdd);
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_SUCCESS, toAdd));
+        } <span class="keyword">catch</span> (DuplicateActivityException e) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the task is successfully added, it will be reflected in the CLIndar GUI itself.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="completing-tasks"><a class="link" href="#completing-tasks">Completing Tasks</a></h5>
+<div class="paragraph">
+<p>Tasks can be completed through the use of the <code>CompleteCommand</code> by specifying the task&#8217;s index reflected
+in the GUI. Note that <code>CompleteCommand</code> can only be applied to <code>Task</code>.</p>
+</div>
+<div class="paragraph">
+<p>Below is a snippet of how the <code>executeUndoableCommand()</code> of <code>CompleteCommand</code> updates the respective task
+to completed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult executeUndoableCommand() {
+        requireNonNull(activityToComplete);
+        <span class="keyword">try</span> {
+            Activity completedActivity = activityToComplete.getCompletedCopy();
+            model.updateActivity(activityToComplete, completedActivity);
+        } <span class="keyword">catch</span> (ActivityNotFoundException pnfe) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target activity cannot be missing</span><span class="delimiter">&quot;</span></span>);
+        } <span class="keyword">catch</span> (DuplicateActivityException dae) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The completed activity cannot be duplicated</span><span class="delimiter">&quot;</span></span>);
+        }
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_COMPLETE_TASK_SUCCESS, activityToComplete));
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>CompleteCommand</code> is successful, 'Uncompleted' will be updated to 'Completed', which will be reflected in the GUI.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="removing-tasks"><a class="link" href="#removing-tasks">Removing Tasks</a></h5>
+<div class="paragraph">
+<p>Tasks can be removed through the use of the <code>RemoveCommand</code> by specifying the index of the task reflected
+ in the GUI.</p>
+</div>
+<div class="paragraph">
+<p>The following snippet shows the <code>executeUndoableCommand()</code> of the <code>RemoveCommand</code> class.
+<code>UniqueActivityList</code> resides in the <code>model</code> will be updated by having <code>activityToDelete</code> deleted from it.
+If the index of an activity is not found, an <code>ActivityNotFoundException</code> will be thrown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult executeUndoableCommand() {
+        requireNonNull(activityToDelete);
+        <span class="keyword">try</span> {
+            model.deleteActivity(activityToDelete);
+        } <span class="keyword">catch</span> (ActivityNotFoundException pnfe) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target activity cannot be missing</span><span class="delimiter">&quot;</span></span>);
+        }
 
+        /...some code.../
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>RemoveCommand</code> is successful, the relavant <code>Task</code>  with the specified index will be removed which
+will be reflected in the GUI.</p>
+</div>
 </div>
 <div class="sect4">
-<h5 id="complete"><a class="link" href="#complete">Complete</a></h5>
-
-</div>
-<div class="sect4">
-<h5 id="delete"><a class="link" href="#delete">Delete</a></h5>
-
-</div>
-<div class="sect4">
-<h5 id="edit"><a class="link" href="#edit">Edit</a></h5>
-
-</div>
-<div class="sect4">
-<h5 id="find"><a class="link" href="#find">Find</a></h5>
+<h5 id="edit-tasks"><a class="link" href="#edit-tasks">Edit Tasks</a></h5>
 
 </div>
 <div class="sect4">
 <h5 id="overdue"><a class="link" href="#overdue">Overdue</a></h5>
 <div class="paragraph">
-<p>The user is able to list down overdue tasks by using the <code>overdue</code> command. Note that overdue only lists down overdue tasks; overdue events are marked as
-completed automatically.</p>
+<p>Overdue tasks can be viewed through the use of the <code>OverdueCommand</code>. Note that the <code>OverdueCommand</code> only
+lists down overdue tasks; overdue events are marked as completed automatically.</p>
 </div>
 <div class="paragraph">
-<p>We will be making use of the LocalDateTime class in Java. The class has a <code>now</code> method, which allows us to obtain the current system clock.</p>
+<p><code>OverdueCommand</code> makes use of the LocalDateTime class in Java to check if an ongoing task becomes overdue
+or not.</p>
 </div>
 <div class="paragraph">
-<p>There will be a class in the Model component, which has access to the UniqueActivityList class in that component. The class will go through the UniqueActivityList and obtain
-the DateTime of Task, and the end DateTime of Event. It will then perform a check of the DateTime with <code>LocalDateTime.now()</code> and if it is overdue (for tasks), it will mark the task
-as overdue, while if it is overdue (for Event), it will mark it as completed.
+<p>There will be a class in the Model component, which has access to the UniqueActivityList class in that
+component. The class will go through the UniqueActivityList and obtain the DateTime of Task, and the end
+DateTime of Event. It will then perform a check of the DateTime with <code>LocalDateTime.now()</code> and if it is
+overdue (for tasks), it will mark the task as overdue, while if it is overdue (for Event), it will mark
+it as completed.
 <br>
 <br></p>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1190,90 +1363,208 @@ overdue correctly.</p>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.5. Configuration</a></h3>
+<div class="sect4">
+<h5 id="list-task"><a class="link" href="#list-task">List Task</a></h5>
 <div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).
+<p><code>ListCommand</code> allows the user to only view <code>Task</code> only in the GUI.
 <br>
 <br></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="model"><a class="link" href="#model">4.6. Model</a></h3>
+<div class="sect4">
+<h5 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h5>
 <div class="paragraph">
-<p>The <code>Model</code> component was originally implemented to store personal contact details.
-As we modified the application to <code>CLIndar</code> we need to store information of activities instead.</p>
+<p><code>Task</code> and <code>Event</code> needs to be displayed in the GUI and there are 2 possible implementations to do so:</p>
 </div>
-<div class="paragraph">
-<p>The original application <code>Address Book</code> store information in the <code>Person</code> class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Have 1 panel which will display the 2 classes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The coding required for this approach is much lesser.</p>
+</li>
+<li>
+<p>Cons: The UI will be messier and less appealing.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Since we now need to store information of events and tasks in the memory, the <code>Person</code> class needs to modified to store the record.</p>
-</div>
-<div class="paragraph">
-<p>The <code>UniquePersonList</code> needs to be modified to store list of <code>Task</code> and <code>Activity</code>.
+</li>
+<li>
+<p><strong> Alternative 2 (current choice):</strong> Have 2 panels which will display the 2 classes separately.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The backend coding will be neater as the 2 classes do not have the same number of compulsory
+information tags. The design of the UI will be much more intuitive too.</p>
+</li>
+<li>
+<p>Cons: A lot more coding is required to create the 2 separate panel.
 <br>
 <br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We preferred the second alternative as it adheres more closely with fundamental design principles. The GUI
+has to be made as intuitive as possible to bring convenience and comfort to the user. As such, the second alternative is
+definitely the preferred approach here.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="implementation"><a class="link" href="#implementation">Implementation</a></h5>
+<div class="paragraph">
+<p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> on the GUI. If an invalid
+request for <code>ListCommand</code> happens, a <code>CommandException</code> will be thrown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+
+        <span class="keyword">switch</span>(commandRequest)  {
+        <span class="keyword">case</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">task</span><span class="delimiter">&quot;</span></span>:
+            EventsCenter.getInstance().post(<span class="keyword">new</span> ShowTaskOnlyRequestEvent());
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(MESSAGE_SUCCESS_TASK);
+
+        /..some code../
+
+        <span class="keyword">default</span>:
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(Messages.MESSAGE_INVALID_LIST_REQUEST, commandRequest));
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>ListCommand</code> is successful, only <code>Task</code> will be shown on the GUI.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="event"><a class="link" href="#event">4.6. Event</a></h3>
+<div class="paragraph">
+<p>Event refer to a thing that is about to happen, especially one of importance that can be added by a user
+of the application. After being added, events can be edited and deleted. Events past the end date of the
+event is automatically completed.</p>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">4.6.1. Design Consideration</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong> Alternative 1 (Current Choice):</strong>
-Use the <code>Activity</code> Class as a place holder for events and tasks to be stored.
-Hence we created two new Class <code>Task</code> and <code>Event</code> to store the information.
-Both classes were iherited  from the <code>Activity</code> Class.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros:
-No need to make major change to the current interface (except some renaming).</p>
-</li>
-<li>
-<p>Cons:
-It would be a hassle to retrieve information about information stored in other class
-Since <code>Task</code> and <code>Event</code> contains extra information and hence have extra excess method.
-Need to cast the object to retrieve the information.</p>
-</li>
-</ul>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p><strong><em>Figure 19</em></strong> below shows how <code>Event</code> is represented in the application.</p>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2 :</strong>
-Replace the <code>Person</code> Class with two different class completely: <code>Task</code> and <code>Event</code>.
-Instead of only <code>UniquePersonList</code> Class, we create two different class <code>UniqueTaskList</code> and <code>UniqueEventList</code>.
-Relevant interface and access method will also be modified to cope with the change.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/EventUMLDiagram.png" alt="EventUMLDiagram" width="550">
+</div>
+<div class="title">Figure 19. UML Class Diagram for Event</div>
+</div>
+<div class="paragraph">
+<p>A brief description of each of the attributes of <code>Event</code> is given below:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros:
-Other component can easily distinguish two types of record.</p>
+<p>Name: Represents the name of the event</p>
 </li>
 <li>
-<p>Cons:
-Since the interface is now completely changed, other component would now required to change a lot of coding to coped with the change.
-<br>
-<br></p>
+<p>startDateTime: Represents the start date and time of the event</p>
 </li>
-</ul>
-</div>
+<li>
+<p>endDateTime: Represents the end date and time of the event</p>
+</li>
+<li>
+<p>Location: Represents the location of the event that is going to happen</p>
+</li>
+<li>
+<p>Remark: Represents a short description or reminder pertaining to the event</p>
+</li>
+<li>
+<p>Tags: Groupings or representation for the event</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>While either implementations has its pros and cons.
-For the purpose of having incremental modification. We choose Alternative 1.
-As such we can modified the implementation without modification to Interface, hence other component would be unaffected.
-This would allow us to have a working release every week.</p>
+<p>Operations that manipulate a <code>task</code> class object can been done using
+<code>EventCommand</code>, <code>RemoveCommand</code>, <code>EditCommand</code> commands.
+These commands are described in more detail below.</p>
+</div>
+<div class="paragraph">
+<p>Operations that manipulate the GUI with respect to <code>Task</code> class includes
+<code>ListCommand</code>.</p>
+</div>
+<div class="sect4">
+<h5 id="add-event"><a class="link" href="#add-event">Add Event</a></h5>
+<div class="paragraph">
+<p>Events can be added through the use of the <code>EventCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>The way events are added to <code>UniqueActivityList</code> is the same as tasks. Note that for events, an exception
+will tbe thrown if the <code>Name</code>, <code>DateTime</code> or, <code>Location</code> field is left empty.</p>
+</div>
+<div class="paragraph">
+<p>If the event is successfully added, it will be reflected in the CLIndar GUI itself.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="remove-event"><a class="link" href="#remove-event">Remove Event</a></h5>
+<div class="paragraph">
+<p>Events can be removed through the use of the <code>RemoveCommand</code> by specifying the index of the event reflected
+in the GUI. <code>UniqueActivityList</code> residing in the <code>model</code> will be updated by having <code>activityToDelete</code> deleted from it.</p>
+</div>
+<div class="paragraph">
+<p>The way events are deleted from <code>UniqueActivityList</code> is the same as task.</p>
+</div>
+<div class="paragraph">
+<p>If the <code>RemoveCommand</code> is successful, the relavant <code>Event</code> with the specified index will be removed which
+will be reflected in the GUI.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="list-event"><a class="link" href="#list-event">List Event</a></h5>
+<div class="paragraph">
+<p><code>ListCommand</code> allows the user to only view <code>Event</code> only in the GUI.</p>
+</div>
+<div class="paragraph">
+<p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Event</code> on the GUI. If an invalid
+request for <code>ListCommand</code> happens, a <code>CommandException</code> will be thrown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+
+        <span class="keyword">switch</span>(commandRequest)  {
+
+        /...some code.../
+
+        <span class="keyword">case</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">event</span><span class="delimiter">&quot;</span></span>:
+            EventsCenter.getInstance().post(<span class="keyword">new</span> ShowEventOnlyRequestEvent());
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(MESSAGE_SUCCESS_EVENT);
+
+        /...some code.../
+
+        <span class="keyword">default</span>:
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_LIST_REQUEST, commandRequest));
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>ListCommand</code> is successful, only <code>Event</code> will be shown on the GUI.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="storage"><a class="link" href="#storage">4.7. Storage</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.7. Storage for Task and Event</a></h3>
 <div class="paragraph">
-<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:
+<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to
+differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:
 <br>
 <br></p>
 </div>
@@ -1299,7 +1590,8 @@ This would allow us to have a working release every week.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be treated equally as they are from the same class.</p>
+<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be
+treated the same as they are from the same class.</p>
 </li>
 <li>
 <p>Cons: More effort is required to create 2 separate lists.
@@ -1312,59 +1604,11 @@ This would allow us to have a working release every week.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of objects, whereby each list contains objects of the same class, especially as we make the 2 classes more specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in the long run.
-<br>
-<br></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="ui"><a class="link" href="#ui">4.8. UI</a></h3>
-<div class="paragraph">
-<p>Our application deals with 2 main classes: Task and Event. These 2 classes needs to be
-displayed in the UI and our team came up with 2 possible implementations to do it:
-<br>
-<br></p>
-</div>
-<div class="sect3">
-<h4 id="design-consideration-3"><a class="link" href="#design-consideration-3">4.8.1. Design Consideration</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1:</strong> Have 1 panel which will display the 2 classes.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: The coding required for this approach is much lesser.</p>
-</li>
-<li>
-<p>Cons: The UI will be messier and less appealing.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong> Alternative 2 (current choice):</strong> Have 2 panels which will display the 2 classes separately.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: The backend coding will be neater as the 2 classes do not have the same number of compulsory information
-tags. The design of the UI will be much more intuitive too.</p>
-</li>
-<li>
-<p>Cons: More effort is required to create 2 seperate lists.
-<br>
-<br></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>While both alternatives have advantages and disadvantages, we feel that the second alternative adheres more closely with fundamental design principles. We feel that it is the responsibility of UI designers to make the
-UI as intuitive as possible to bring convenience and comfort to the user. As such, the second alternative is
-definitely the preferred approach here.
+<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s
+advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of
+objects, whereby each list contains objects of the same class, especially as we make the 2 classes more
+specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in
+the long run.
 <br>
 <br></p>
 </div>
@@ -1431,7 +1675,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 18. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 20. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -3113,7 +3357,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-06 03:44:27 UTC
+Last updated 2018-04-06 14:33:16 UTC
 </div>
 </div>
 </body>
