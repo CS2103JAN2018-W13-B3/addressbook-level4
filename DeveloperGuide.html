@@ -48,10 +48,11 @@
 <li><a href="#undo-redo-feature">4.1. Undo/Redo feature</a></li>
 <li><a href="#proposed-data-encryption">4.2. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">4.3. Logging</a></li>
-<li><a href="#uniqueactivitylist">4.4. UniqueActivityList</a></li>
-<li><a href="#task">4.5. Task</a></li>
-<li><a href="#event">4.6. Event</a></li>
-<li><a href="#Implementation-Configuration">4.7. Storage for Task and Event</a></li>
+<li><a href="#Implementation-Configuration">4.4. Configuration</a></li>
+<li><a href="#uniqueactivitylist">4.5. UniqueActivityList</a></li>
+<li><a href="#task">4.6. Task</a></li>
+<li><a href="#event">4.7. Event</a></li>
+<li><a href="#storage-for-task-and-event">4.8. Storage for Task and Event</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1045,7 +1046,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.7, &#8220;Storage for Task and Event&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.4, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1076,7 +1077,13 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="uniqueactivitylist"><a class="link" href="#uniqueactivitylist">4.4. UniqueActivityList</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.4. Configuration</a></h3>
+<div class="paragraph">
+<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="uniqueactivitylist"><a class="link" href="#uniqueactivitylist">4.5. UniqueActivityList</a></h3>
 <div class="paragraph">
 <p><code>UniqueActivityList</code> resides in the <code>model</code> component of the application.</p>
 </div>
@@ -1089,8 +1096,12 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div class="title">Figure 17. Class Diagram for UniqueActivityList</div>
 </div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">4.4.1. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">4.5.1. Design Consideration</a></h4>
 <div class="paragraph">
 <p>There are two ways to store information of events and tasks in UniqueActivityList:</p>
 </div>
@@ -1144,7 +1155,7 @@ every week.
 </div>
 </div>
 <div class="sect3">
-<h4 id="autosorting-feature"><a class="link" href="#autosorting-feature">4.4.2. Autosorting feature</a></h4>
+<h4 id="autosorting-feature"><a class="link" href="#autosorting-feature">4.5.2. Autosorting feature</a></h4>
 <div class="paragraph">
 <p>Following is a snippet which illustrates the function of <code>UniqueActivityList</code>:</p>
 </div>
@@ -1152,7 +1163,7 @@ every week.
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">final</span> ObservableList&lt;Activity&gt; internalList = FXCollections.observableArrayList();
 
-    /...some irrelavant code.../
+    /...some code.../
 
     <span class="directive">public</span> <span class="type">void</span> add(Activity toAdd) <span class="directive">throws</span> DuplicateActivityException {
         requireNonNull(toAdd);
@@ -1168,19 +1179,23 @@ every week.
 <p><code>UniqueActivityList</code> contains a list of unique activities which is either a <code>Task</code> or an <code>Event</code> and they
  is stored in <code>internalList</code>. Each time an <code>Activity</code> is added to or edited in <code>UniqueActivityList</code>,
  <code>internalList</code> will be sorted according to its <code>DateTime</code>. Note that for events, its <code>DateTime</code> refers
- to the event&#8217;s starting time.</p>
+ to the event&#8217;s starting time.
+<br>
+<br></p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="task"><a class="link" href="#task">4.5. Task</a></h3>
+<h3 id="task"><a class="link" href="#task">4.6. Task</a></h3>
 <div class="paragraph">
 <p>Task refer to a piece of work to be done that can be added by a user of the application. After being added,
 tasks can be edited, completed or removed. When a task is not completed within the deadline, it will be
-automatically be marked as overdue.</p>
+automatically be marked as overdue.
+<br>
+<br></p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><strong><em>Figure 18</em></strong> below shows how <code>Task</code> is represented in the application.</p>
 </div>
@@ -1211,10 +1226,9 @@ automatically be marked as overdue.</p>
 </div>
 <div class="paragraph">
 <p>Operations that manipulate a <code>task</code> class object can been done using <code>TaskCommand</code>, <code>CompleteCommand</code>,
-<code>RemoveCommand</code>, <code>EditCommand</code> commands. These commands are described in more detail below.</p>
-</div>
-<div class="paragraph">
-<p>Operations that manipulate the GUI with respect to <code>Task</code> class includes <code>ListCommand</code>, <code>OverdueCommand</code>.</p>
+<code>RemoveCommand</code>, <code>EditCommand</code> commands. These commands are described in more detail below.
+<br>
+<br></p>
 </div>
 <div class="sect4">
 <h5 id="adding-tasks"><a class="link" href="#adding-tasks">Adding tasks</a></h5>
@@ -1240,7 +1254,9 @@ has been found or the <code>Name</code> or <code>DateTime</code> field is left e
 </div>
 </div>
 <div class="paragraph">
-<p>If the task is successfully added, it will be reflected in the CLIndar GUI itself.</p>
+<p>If the task is successfully added, it will be reflected in the CLIndar GUI itself.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect4">
@@ -1270,7 +1286,9 @@ to completed.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If <code>CompleteCommand</code> is successful, 'Uncompleted' will be updated to 'Completed', which will be reflected in the GUI.</p>
+<p>If <code>CompleteCommand</code> is successful, 'Uncompleted' will be updated to 'Completed', which will be reflected in the GUI.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect4">
@@ -1300,12 +1318,28 @@ If the index of an activity is not found, an <code>ActivityNotFoundException</co
 </div>
 <div class="paragraph">
 <p>If <code>RemoveCommand</code> is successful, the relavant <code>Task</code>  with the specified index will be removed which
-will be reflected in the GUI.</p>
+will be reflected in the GUI.
+<br>
+<br></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="edit-tasks"><a class="link" href="#edit-tasks">Edit Tasks</a></h5>
-
+</div>
+<div class="sect3">
+<h4 id="displaying-task"><a class="link" href="#displaying-task">4.6.2. Displaying Task</a></h4>
+<div class="paragraph">
+<p>A single <code>Task</code> is displayed using a <code>TaskListCard</code>. The list of all the <code>Task</code> added by the user
+is then displayed using the <code>TaskListPanel</code>. Below is an example of a <code>TaskListCard</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TaskCard.png" alt="TaskCard" width="550">
+</div>
+<div class="title">Figure 19. TaskListCard example</div>
+</div>
+<div class="paragraph">
+<p>Operations that manipulate the GUI with respect to <code>Task</code> class includes <code>ListCommand</code>, <code>OverdueCommand</code>.
+<br>
+<br></p>
 </div>
 <div class="sect4">
 <h5 id="overdue"><a class="link" href="#overdue">Overdue</a></h5>
@@ -1370,9 +1404,8 @@ overdue correctly.</p>
 <br>
 <br></p>
 </div>
-</div>
-<div class="sect4">
-<h5 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h6>
 <div class="paragraph">
 <p><code>Task</code> and <code>Event</code> needs to be displayed in the GUI and there are 2 possible implementations to do so:</p>
 </div>
@@ -1417,8 +1450,8 @@ definitely the preferred approach here.
 <br></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="implementation"><a class="link" href="#implementation">Implementation</a></h5>
+<div class="sect5">
+<h6 id="implementation"><a class="link" href="#implementation">Implementation</a></h6>
 <div class="paragraph">
 <p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> on the GUI. If an invalid
 request for <code>ListCommand</code> happens, a <code>CommandException</code> will be thrown.</p>
@@ -1446,15 +1479,18 @@ request for <code>ListCommand</code> happens, a <code>CommandException</code> wi
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="event"><a class="link" href="#event">4.6. Event</a></h3>
+<h3 id="event"><a class="link" href="#event">4.7. Event</a></h3>
 <div class="paragraph">
 <p>Event refer to a thing that is about to happen, especially one of importance that can be added by a user
 of the application. After being added, events can be edited and deleted. Events past the end date of the
-event is automatically completed.</p>
+event is automatically completed.
+<br>
+<br></p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p><strong><em>Figure 19</em></strong> below shows how <code>Event</code> is represented in the application.</p>
 </div>
@@ -1462,7 +1498,7 @@ event is automatically completed.</p>
 <div class="content">
 <img src="images/EventUMLDiagram.png" alt="EventUMLDiagram" width="550">
 </div>
-<div class="title">Figure 19. UML Class Diagram for Event</div>
+<div class="title">Figure 20. UML Class Diagram for Event</div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Event</code> is given below:</p>
@@ -1492,11 +1528,9 @@ event is automatically completed.</p>
 <div class="paragraph">
 <p>Operations that manipulate a <code>task</code> class object can been done using
 <code>EventCommand</code>, <code>RemoveCommand</code>, <code>EditCommand</code> commands.
-These commands are described in more detail below.</p>
-</div>
-<div class="paragraph">
-<p>Operations that manipulate the GUI with respect to <code>Task</code> class includes
-<code>ListCommand</code>.</p>
+These commands are described in more detail below.
+<br>
+<br></p>
 </div>
 <div class="sect4">
 <h5 id="add-event"><a class="link" href="#add-event">Add Event</a></h5>
@@ -1508,7 +1542,9 @@ These commands are described in more detail below.</p>
 will tbe thrown if the <code>Name</code>, <code>DateTime</code> or, <code>Location</code> field is left empty.</p>
 </div>
 <div class="paragraph">
-<p>If the event is successfully added, it will be reflected in the CLIndar GUI itself.</p>
+<p>If the event is successfully added, it will be reflected in the CLIndar GUI itself.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect4">
@@ -1522,8 +1558,28 @@ in the GUI. <code>UniqueActivityList</code> residing in the <code>model</code> w
 </div>
 <div class="paragraph">
 <p>If the <code>RemoveCommand</code> is successful, the relavant <code>Event</code> with the specified index will be removed which
-will be reflected in the GUI.</p>
+will be reflected in the GUI.
+<br>
+<br></p>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="displaying-event"><a class="link" href="#displaying-event">4.7.2. Displaying Event</a></h4>
+<div class="paragraph">
+<p>A single <code>Event</code> is displayed using a <code>EventListCard</code> . The list of all the <code>Event</code> added by the user
+is then displayed using the <code>EventListPanel</code>. Below is an example of a <code>EventListCard</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EventCard.png" alt="EventCard" width="550">
+</div>
+<div class="title">Figure 21. EventListCard example</div>
+</div>
+<div class="paragraph">
+<p>Operations that manipulate the GUI with respect to <code>Task</code> class includes <code>ListCommand</code>.
+<br>
+<br></p>
 </div>
 <div class="sect4">
 <h5 id="list-event"><a class="link" href="#list-event">List Event</a></h5>
@@ -1555,21 +1611,27 @@ request for <code>ListCommand</code> happens, a <code>CommandException</code> wi
 </div>
 </div>
 <div class="paragraph">
-<p>If <code>ListCommand</code> is successful, only <code>Event</code> will be shown on the GUI.</p>
+<p>If <code>ListCommand</code> is successful, only <code>Event</code> will be shown on the GUI.
+<br>
+<br></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.7. Storage for Task and Event</a></h3>
+<h3 id="storage-for-task-and-event"><a class="link" href="#storage-for-task-and-event">4.8. Storage for Task and Event</a></h3>
 <div class="paragraph">
-<p>Our application deals with 2 main classes: Task and Event. Hence, when we store the data, we need to
-differentiate between these 2 classes. Our team came up with 2 possible implementations to store the data:
+<p>Storing of <code>Task</code> and <code>Event</code> data is managed by <code>StorageManager</code> within the <code>Storage</code> component. <code>Task</code>
+and <code>Event</code> is converted to <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> respectively to be stored in a .xml file.
 <br>
 <br></p>
 </div>
 <div class="sect3">
-<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">4.7.1. Design Consideration</a></h4>
+<h4 id="design-consideration-2"><a class="link" href="#design-consideration-2">4.8.1. Design Consideration</a></h4>
+<div class="paragraph">
+<p>The application deals with 2 main classes: Task and Event. Hence, the data is stored, there is a need for
+differentiation between these 2 classes. There are 2 possible implementations to do this:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -1577,7 +1639,7 @@ differentiate between these 2 classes. Our team came up with 2 possible implemen
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: There is no need to create 2 separate lists to store the 2 different class objects.</p>
+<p>Pros: Minimal coding is required as only 1 list is required to store the 2 different class objects.</p>
 </li>
 <li>
 <p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
@@ -1594,9 +1656,7 @@ differentiate between these 2 classes. Our team came up with 2 possible implemen
 treated the same as they are from the same class.</p>
 </li>
 <li>
-<p>Cons: More effort is required to create 2 separate lists.
-<br>
-<br></p>
+<p>Cons: More coding is required to create 2 separate lists.</p>
 </li>
 </ul>
 </div>
@@ -1675,7 +1735,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 20. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 22. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 </div>
@@ -3357,7 +3417,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-06 14:33:16 UTC
+Last updated 2018-04-07 12:47:13 UTC
 </div>
 </div>
 </body>
