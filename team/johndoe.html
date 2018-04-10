@@ -243,7 +243,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the desk board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -359,7 +359,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="title">Figure 3. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
-<p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
+<p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -402,7 +402,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -557,7 +557,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-07 20:32:30 UTC
+Last updated 2018-04-10 07:16:01 UTC
 </div>
 </div>
 </body>

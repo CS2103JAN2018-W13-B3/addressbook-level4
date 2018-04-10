@@ -28,7 +28,7 @@
 <li><a href="#ComputerSetup">2. Computer Setup</a>
 <ul class="sectlevel2">
 <li><a href="#prerequisites">2.1. Prerequisites</a></li>
-<li><a href="#setup-procedures">2.2. Setup Procedures</a></li>
+<li><a href="#setup-procedure">2.2. Setup Procedure</a></li>
 <li><a href="#setup-verification">2.3. Setup Verification</a></li>
 <li><a href="#configurations-to-do-before-writing-code">2.4. Configurations to Do Before Writing Code</a></li>
 </ul>
@@ -36,11 +36,11 @@
 <li><a href="#Design">3. Design</a>
 <ul class="sectlevel2">
 <li><a href="#Design-Architecture">3.1. Architecture</a></li>
-<li><a href="#Design-Ui">3.2. UI component</a></li>
-<li><a href="#Design-Logic">3.3. Logic component</a></li>
-<li><a href="#Design-Model">3.4. Model component</a></li>
-<li><a href="#Design-Storage">3.5. Storage component</a></li>
-<li><a href="#Design-Commons">3.6. Common classes</a></li>
+<li><a href="#Design-Ui">3.2. UI Component</a></li>
+<li><a href="#Design-Logic">3.3. Logic Component</a></li>
+<li><a href="#Design-Model">3.4. Model Component</a></li>
+<li><a href="#Design-Storage">3.5. Storage Component</a></li>
+<li><a href="#Design-Commons">3.6. Commons Classes</a></li>
 </ul>
 </li>
 <li><a href="#Implementation">4. Implementation</a>
@@ -204,7 +204,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 </div>
 <div class="sect2">
-<h3 id="setup-procedures"><a class="link" href="#setup-procedures">2.2. Setup Procedures</a></h3>
+<h3 id="setup-procedure"><a class="link" href="#setup-procedure">2.2. Setup Procedure</a></h3>
 <div class="paragraph">
 <p>Do the following steps to set up the project in your computer.</p>
 </div>
@@ -375,7 +375,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </ol>
 </div>
 <div class="paragraph">
-<p>After you do the steps above, the Settings window should appear as shown in the picure below.</p>
+<p>After you do the steps above, the Settings window should appear as shown in the picture below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -604,7 +604,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI component</a></h3>
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI Component</a></h3>
 <div class="paragraph">
 <p><em>Figure 13</em> below shows the architecture diagram of the <code>UI</code> component.</p>
 </div>
@@ -647,7 +647,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic component</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic Component</a></h3>
 <div class="paragraph">
 <p><em>Figure 14</em> below shows the architecture diagram of the <code>Logic</code> component.</p>
 </div>
@@ -706,7 +706,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model component</a></h3>
+<h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model Component</a></h3>
 <div class="paragraph">
 <p><em>Figure 17</em> below shows the architecture diagram of the <code>Model</code> component.</p>
 </div>
@@ -749,7 +749,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Storage"><a class="link" href="#Design-Storage">3.5. Storage component</a></h3>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">3.5. Storage Component</a></h3>
 <div class="paragraph">
 <p><em>Figure 18</em> below shows the structure of the <code>Storage</code> component.</p>
 </div>
@@ -783,7 +783,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">3.6. Common classes</a></h3>
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">3.6. Commons Classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.address.commons</code> package.</p>
 </div>
@@ -805,11 +805,11 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="Implementation-Activity"><a class="link" href="#Implementation-Activity">4.1. Activity</a></h3>
 <div class="paragraph">
 <p><code>Activity</code> resides in the <code>Model</code> component of the application.
-It is an important class in this application as it represent each entry in the desk board.
+It is an important class in this application as it represents each entry in the desk board.
 In CLIndar, an entry in the desk board can be either a <code>Task</code> or an <code>Event</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current implementation</a></h4>
 <div class="paragraph">
 <p><em>Figure 19</em> below shows the relationship between <code>Activity</code> and its relevant components.</p>
 </div>
@@ -1042,7 +1042,7 @@ to completed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design considerations</a></h4>
 <div class="paragraph">
 <p>There are two ways to represent tasks and events in the application. The following shows the pros and cons for each alternative:</p>
 </div>
@@ -1050,7 +1050,7 @@ to completed.</p>
 <ul>
 <li>
 <p><strong> Alternative 1 (Current Choice):</strong>
-Use a single class <code>Activity</code> as a superclass for <code>Task</code> and <code>Event</code><br></p>
+Use a single class <code>Activity</code> as a superclass for <code>Task</code> and <code>Event</code>.<br></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1067,7 +1067,7 @@ Extra accessor methods will also be required for <code>Event</code>.</p>
 </li>
 <li>
 <p><strong>Alternative 2 :</strong>
-Simply have two different class <code>Task</code> and <code>Event</code></p>
+Simply have two different class <code>Task</code> and <code>Event</code>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1093,7 +1093,7 @@ We will need to write codes for classes and methods related to <code>Task</code>
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe the implementation for each comman.</p>
 </div>
@@ -1181,7 +1181,7 @@ If the current date and time is past an <code>Event</code> <code>s `endDateTime<
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the GUI features. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1271,7 +1271,7 @@ definitely the preferred approach here.
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the desk board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -1387,7 +1387,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="title">Figure 26. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
-<p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
+<p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1430,7 +1430,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1580,14 +1580,14 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <p>This section describes the implementation and design considerations for the storage of Task and Event.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>Storing of <code>Task</code> and <code>Event</code> data is managed by <code>StorageManager</code> within the <code>Storage</code> component.
 <code>Task</code> and <code>Event</code> is converted to <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> respectively to be stored in a .xml file.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design considerations</a></h4>
 <div class="paragraph">
 <p>The application deals with 2 main classes: Task and Event. Hence, when the data is stored, there is a need for
 differentiation between these 2 classes. There are 2 possible implementations to do this:</p>
@@ -1780,7 +1780,7 @@ The most reliable way to run tests is the 3rd one. The first two methods might f
 <p><strong>Method 1: Using IntelliJ JUnit test runner</strong></p>
 </div>
 <div class="paragraph">
-<p>You can choose to run all tests or only a subset of tests.</p>
+<p>You can choose to run all tests or only a subset of tests:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1788,7 +1788,7 @@ The most reliable way to run tests is the 3rd one. The first two methods might f
 <p>To run all tests, right-click on the <code>src/test/java</code> folder and choose <code>Run 'All Tests'</code>.</p>
 </li>
 <li>
-<p>To run a subset of tests, you can right-click on a test package, test class, or a test and choose <code>Run 'ABC'</code>.</p>
+<p>To run a subset of tests, right-click on a test package, test class, or a test and choose <code>Run 'ABC'</code>.</p>
 </li>
 </ul>
 </div>
@@ -1841,7 +1841,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>System Tests</em><br>
+<p><em>System tests</em><br>
 These test the entire App by simulating user actions on the GUI. System tests are in the <code>systemtests</code> package.</p>
 </li>
 <li>
@@ -1861,7 +1861,7 @@ These target the lowest level methods/classes.<br>
 Example: <code>seedu.adress.commons.StringUtilTest</code>.</p>
 </li>
 <li>
-<p><em>Integration tests</em>
+<p><em>Integration tests</em><br>
 These check the integration of multiple code units which are assumed to be working.<br>
 Example: <code>seedu.address.storage.StorageManagerTest</code>.</p>
 </li>
@@ -1908,7 +1908,7 @@ Example: <code>seedu.address.logic.LogicManagerTest</code>.</p>
 <h2 id="DevOps"><a class="link" href="#DevOps">7. Dev Ops</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This sections features softwares which can be used to track the progress of the application development.</p>
+<p>This section features softwares which can be used to track the progress of the application development.</p>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -2019,7 +2019,7 @@ b. requiring developers to download those libraries manually (this creates extra
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Do take a look at <a href="#Design-Logic">Section 3.3, &#8220;Logic component&#8221;</a> before attempting to modify the <code>Logic</code> component.
+Do take a look at <a href="#Design-Logic">Section 3.3, &#8220;Logic Component&#8221;</a> before attempting to modify the <code>Logic</code> component.
 </td>
 </tr>
 </table>
@@ -2082,7 +2082,7 @@ Do take a look at <a href="#Design-Logic">Section 3.3, &#8220;Logic component&#8
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Do take a look at <a href="#Design-Model">Section 3.4, &#8220;Model component&#8221;</a> before attempting to modify the <code>Model</code> component.
+Do take a look at <a href="#Design-Model">Section 3.4, &#8220;Model Component&#8221;</a> before attempting to modify the <code>Model</code> component.
 </td>
 </tr>
 </table>
@@ -2158,7 +2158,7 @@ Do take a look at <a href="#Design-Model">Section 3.4, &#8220;Model component&#8
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Do take a look at <a href="#Design-Ui">Section 3.2, &#8220;UI component&#8221;</a> before attempting to modify the <code>UI</code> component.
+Do take a look at <a href="#Design-Ui">Section 3.2, &#8220;UI Component&#8221;</a> before attempting to modify the <code>UI</code> component.
 </td>
 </tr>
 </table>
@@ -2379,7 +2379,7 @@ Do take a look at <a href="#Design-Ui">Section 3.2, &#8220;UI component&#8221;</
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Do take a look at <a href="#Design-Storage">Section 3.5, &#8220;Storage component&#8221;</a> before attempting to modify the <code>Storage</code> component.
+Do take a look at <a href="#Design-Storage">Section 3.5, &#8220;Storage Component&#8221;</a> before attempting to modify the <code>Storage</code> component.
 </td>
 </tr>
 </table>
@@ -3474,7 +3474,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-07 20:32:30 UTC
+Last updated 2018-04-10 07:16:01 UTC
 </div>
 </div>
 </body>
