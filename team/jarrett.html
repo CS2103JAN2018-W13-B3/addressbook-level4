@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Jarrett Choo - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Jarrett Choo - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-clindar"><a class="link" href="#project-clindar">PROJECT: CLIndar</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CLIndar is a desktop application that helps university computing students to manage their tasks and events. The user interacts with it using a CLI. It has a GUI created with JavaFX, and is written in Java.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Added <strong>overdue feature</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Tags task as "overdue" once it has passed its due date and tags event as "finished" once it has passed its end date automatically.</p>
+</li>
+<li>
+<p>Justification: This feature helps users of CLIndar to keep track of their overdue tasks. It also alerts them on the events that have passed.</p>
+</li>
+<li>
+<p>Highlights: The "overdue" and "finished" tags are added automatically by the system, thus knowledge on the Java Concurrency API is needed. There is also a need to remove the "overdue" tag when the user completes the task, and this requires integration
+with the rest of the system.</p>
+</li>
+<li>
+<p>Credits: One problem faced is that the UI cannot be updated by a thread other than the JavaFX application thread. To solve this issue, I refer to Stack Overflow <a href="https://stackoverflow.com/questions/21083945/how-to-avoid-not-on-fx-application-thread-currentthread-javafx-application-th">here</a>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement #1</strong>: Added <strong>the ability to add and remove tasks or events</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Adds and removes task or event into CLIndar. Event which end date is before its start date is not allowed.</p>
+</li>
+<li>
+<p>Highlights: This feature is a modification to the add and delete commands. It takes into account the new model of CLIndar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement #2</strong>: Used <strong>Java 8 Date Time API</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Parses the datetimes of tasks and events provided by the user and stores them as LocalDateTime objects. Formats the datetimes for display in the UI.</p>
+</li>
+<li>
+<p>Justification: The datetimes are stored as LocalDateTime objects, so that they can be used more easily by other features in CLIndar, such as overdue, which requires comparing between datetimes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Set up the team repo and added Travis GI, AppVeyor and Coveralls to manage incoming Pull Requests.</p>
+</li>
+<li>
+<p>Set up a new Project in team repo to manage and classify user stories according to their importance.</p>
+</li>
+<li>
+<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>To be continued.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote the AboutUs: <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/62/files">Pull Request #62</a></p>
+</li>
+<li>
+<p>Wrote the basic outline of User Guide: <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/52">Pull Request #52</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-11 04:18:43 UTC
+</div>
+</div>
+</body>
+</html>

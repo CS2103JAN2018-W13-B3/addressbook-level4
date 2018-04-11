@@ -31,7 +31,7 @@
 <li><a href="#viewing-help-code-help-code-or-code-man-code-code-as-of-v1-1-code">3.1. Viewing help : <code>help</code> or <code>man</code> <code>[As of  v1.1]</code></a></li>
 <li><a href="#adding-a-task-code-task-code-code-as-of-v1-2-code">3.2. Adding a task: <code>task</code> <code>[As of  v1.2]</code></a></li>
 <li><a href="#adding-an-event-code-event-code-code-as-of-v1-3-code">3.3. Adding an event: <code>event</code> <code>[As of  v1.3]</code></a></li>
-<li><a href="#listing-uncompleted-tasks-and-upcoming-events-code-list-code-or-code-ls-code-code-as-of-v1-4-code">3.4. Listing uncompleted tasks and upcoming events: <code>list</code> or <code>ls</code> <code>[As of  v1.4]</code></a></li>
+<li><a href="#listing-uncompleted-tasks-and-upcoming-events-code-ls-code-code-as-of-v1-4-code">3.4. Listing uncompleted tasks and upcoming events: <code>ls</code> <code>[As of  v1.4]</code></a></li>
 <li><a href="#removing-a-task-or-event-code-rm-code-code-as-of-v1-4-code">3.5. Removing a task or event: <code>rm</code> <code>[As of  v1.4]</code></a></li>
 <li><a href="#completing-a-task-code-complete-task-code-or-code-com-task-code-code-coming-soon-in-v1-5-code">3.6. Completing a task: <code>complete task</code> or <code>com task</code> <code>[Coming Soon in  v1.5]</code></a></li>
 <li><a href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code">3.7. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code> <code>[Coming Soon in  v1.5]</code></a></li>
@@ -67,15 +67,15 @@ Thus, compared to traditional Graphical User Interface (GUI) applications, CLInd
 <div class="ulist">
 <ul>
 <li>
-<p>Keep track of your tasks and events and be reminded of their due dates</p>
+<p>Keep track of your tasks and events and be reminded of their due dates.</p>
 </li>
 <li>
-<p>Record all completed tasks and events, so that you know what you have done</p>
+<p>Record all completed tasks and events, so that you know what you have done.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The current version of CLIndar is 1.4 and is available on Windows and Linux Operating Systems.</p>
+<p>The current version of CLIndar is 1.5 and is available on Windows and Linux Operating Systems.</p>
 </div>
 </div>
 </div>
@@ -110,7 +110,7 @@ This app will not work with earlier versions of Java 8.
 <p>Copy the file to the folder you want to use as the home folder for CLIndar.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the file to start the app. The GUI should appear in a few seconds, as seen below.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
@@ -121,8 +121,11 @@ This app will not work with earlier versions of Java 8.
 <p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
 </li>
-<li>
+</ol>
+</div>
+<div class="paragraph">
 <p>Some example commands you can try:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -139,11 +142,8 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 </ul>
 </div>
-</li>
-<li>
+<div class="paragraph">
 <p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -210,6 +210,18 @@ For example, if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DA
 <div class="paragraph">
 <p><strong>Format:</strong> <code>task n/NAME d/DUE_DATE_TIME [r/REMARK] [t/TAGS]</code></p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+DUE_DATE_TIME parameter can be in d/m/y h:m or dd/mm/yy hh:mm
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
 </div>
@@ -219,7 +231,7 @@ For example, if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DA
 <p><code>task n/Software Engineering Milestone 1 d/16/03/2018 17:00 r/urgent</code></p>
 </li>
 <li>
-<p><code>task n/Programming Methodology Assignment 2 d/16/03/2018 23:59</code></p>
+<p><code>task n/Programming Methodology Assignment 2 d/16/3/2018 23:59</code></p>
 </li>
 </ul>
 </div>
@@ -231,6 +243,19 @@ For example, if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DA
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>event n/NAME s/START_TIME e/END_TIME [l/LOCATION] [r/REMARK]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Both START_TIME and END_TIME parameters can be in d/m/y h:m
+or dd/mm/yy hh:mm
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
@@ -247,7 +272,7 @@ For example, if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DA
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-uncompleted-tasks-and-upcoming-events-code-list-code-or-code-ls-code-code-as-of-v1-4-code"><a class="link" href="#listing-uncompleted-tasks-and-upcoming-events-code-list-code-or-code-ls-code-code-as-of-v1-4-code">3.4. Listing uncompleted tasks and upcoming events: <code>list</code> or <code>ls</code> <code>[As of  v1.4]</code></a></h3>
+<h3 id="listing-uncompleted-tasks-and-upcoming-events-code-ls-code-code-as-of-v1-4-code"><a class="link" href="#listing-uncompleted-tasks-and-upcoming-events-code-ls-code-code-as-of-v1-4-code">3.4. Listing uncompleted tasks and upcoming events: <code>ls</code> <code>[As of  v1.4]</code></a></h3>
 <div class="paragraph">
 <p>Shows one or two lists of tasks and events in the desk board as described below.</p>
 </div>
@@ -257,13 +282,13 @@ For example, if the command specifies <code>n/NAME d/DATETIME</code>, <code>d/DA
 <div class="ulist">
 <ul>
 <li>
-<p><code>list task</code> or <code>ls task</code>: shows only uncompleted tasks.</p>
+<p><code>ls task</code>: shows only uncompleted tasks.</p>
 </li>
 <li>
-<p><code>list event</code> or <code>ls event</code>: shows only upcoming events.</p>
+<p><code>ls event</code>: shows only upcoming events.</p>
 </li>
 <li>
-<p><code>list</code> or <code>ls</code>: shows both uncompleted tasks and upcoming events in 2 separate lists.</p>
+<p><code>ls</code>: shows both uncompleted tasks and upcoming events in 2 separate lists.</p>
 </li>
 </ul>
 </div>
@@ -558,8 +583,8 @@ eg. <code>task n/Software Engineering Milestone 1 d/16/03/2018 17:00 r/urgent</c
 eg. <code>event n/Software Project s/1/5/2018 8:00 e/01/08/2018 8:00 l/School of Computing r/remember to bring laptop charger</code></p>
 </li>
 <li>
-<p><strong>List uncompleted tasks and upcoming events</strong>: <code>list</code> or <code>ls</code><br>
-eg. <code>list</code> or <code>ls</code> or <code>list task</code> or <code>ls event</code></p>
+<p><strong>List uncompleted tasks and upcoming events</strong>: <code>ls</code><br>
+eg. <code>ls</code> or <code>ls task</code> or <code>ls event</code></p>
 </li>
 <li>
 <p><strong>Remove task or event</strong>: <code>rm</code><br>
@@ -620,7 +645,7 @@ eg. <code>ls past event</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 03:50:56 UTC
+Last updated 2018-04-11 04:18:43 UTC
 </div>
 </div>
 </body>
