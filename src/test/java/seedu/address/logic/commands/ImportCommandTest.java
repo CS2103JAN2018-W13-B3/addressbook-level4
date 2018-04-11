@@ -43,6 +43,7 @@ public class ImportCommandTest {
     /**
      * Test
      */
+    @Test
     public void execute_validFilePathValidModel_success() throws CommandException {
         TaskCommand taskCommand = new TaskCommandTest().getTaskCommandForGivenTask(ASSIGNMENT3, validModel);
         taskCommand.executeUndoableCommand();
@@ -66,6 +67,7 @@ public class ImportCommandTest {
     /**
      * Test
      */
+    @Test
     public void execute_illegalValuesInFile_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(MESSAGE_ILLEGAL_VALUES_IN_FILE, "javax.xml.bind.UnmarshalException\n"
@@ -77,6 +79,7 @@ public class ImportCommandTest {
     /**
      * Test
      */
+    @Test
     // The file to import contains one existing activity and a few new activities.
     // The existing activity should be ignored while the rest added into existing desk board.
     public void execute_fileContainsExistingActivity_ignoresDuplicateActivity() throws CommandException {

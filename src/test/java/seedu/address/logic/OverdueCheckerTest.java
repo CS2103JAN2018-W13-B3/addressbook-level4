@@ -66,6 +66,11 @@ public class OverdueCheckerTest {
         }
 
         @Override
+        public void addActivities(ReadOnlyDeskBoard deskBoard) {
+
+        }
+
+        @Override
         public void updateActivity(Activity target, Activity editedActivity)
                 throws DuplicateActivityException, ActivityNotFoundException {
 
