@@ -367,7 +367,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <p>For <code>Class count to use import with '*'</code> and <code>Names count to use static import with '*'</code>: Set to <code>999</code> to prevent IntelliJ from contracting the import statements.</p>
 </li>
 <li>
-<p>For <code>Import Layout</code>: The order is <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code>.</p>
+<p>For <code>Import Layout</code>: Set the order to be <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code>.</p>
 </li>
 </ul>
 </div>
@@ -490,10 +490,10 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p>at app launch: initializing the components in the correct sequence and connecting them up with each other; and</p>
+<p>at app launch: initializing other components in the correct sequence and connecting them up with each other; and</p>
 </li>
 <li>
-<p>at shut down: shutting down the components and invoking cleanup method where necessary.</p>
+<p>at shut down: shutting down other components and invoking cleanup method where necessary.</p>
 </li>
 </ul>
 </div>
@@ -551,8 +551,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </div>
 <div class="title">Figure 10. The API of the <code>Logic</code> component</div>
 </div>
-<div class="sect3">
-<h4 id="events-driven-nature-of-the-design"><a class="link" href="#events-driven-nature-of-the-design">3.1.1. Events-Driven Nature of the Design</a></h4>
+<h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven Nature of the Design</h4>
 <div class="paragraph">
 <p><em>Figure 11</em> below shows how the components interact in a scenario where the user issues the command <code>delete 1</code>.</p>
 </div>
@@ -600,7 +599,6 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="paragraph">
 <p><br></p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -676,8 +674,8 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="paragraph">
 <p>The following describes the sequence of events executed by the Logic component:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p><code>Logic</code> uses the <code>DeskBoardParser</code> class to parse the user command.</p>
 </li>
@@ -690,7 +688,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <li>
 <p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="paragraph">
 <p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("rm task 1")</code> API call.</p>
@@ -1147,7 +1145,7 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
 <div class="ulist">
 <ul>
 <li>
-<p><code>list task</code> will show only <code>Task</code> objects;</p>
+<p><code>list</code> will show only <code>Task</code> objects;</p>
 </li>
 <li>
 <p><code>list event</code> will show only <code>Event</code> objects; and</p>
@@ -3474,7 +3472,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-10 07:16:01 UTC
+Last updated 2018-04-11 03:50:56 UTC
 </div>
 </div>
 </body>

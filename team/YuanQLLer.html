@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Yuan Quan - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Yuan Quan - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CLIndar is a desktop application that helps university computing students to manage their tasks and events. The user interacts with it using a CLI. It has a GUI created with JavaFX, and is written in Java.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Major enhancement</strong>: Modifying the Model component. This includes creation of Event and Task classes, as well as their superclass, Activity. Other classes relevant to tasks and events are also created, such as DateTime.</p>
+</div>
+<div class="paragraph">
+<p><strong>Minor enhancement</strong>: Creating 'complete' command. This command marks a Task object as completed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/functional/YuanQLLer.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/test/YuanQLLer.md">Test code</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code"><a class="link" href="#locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code">Locating task by name: <code>find task</code> <code>[Coming Soon in v2.0]</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all tasks and/or event which contains given keyword in its name.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> find task KEYWORD or find event KEYWORK or find KEYWORD</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find task CS2101</code><br>
+Find all tasks with name contains CS2101</p>
+</li>
+<li>
+<p><code>find event exam</code><br>
+Find all events wiih name contains exam</p>
+</li>
+<li>
+<p>'find CS2101`<br>
+Find all tasks and event with name contains CS2101</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Use <code>list</code> command to retrieve the full list of event and task after this command</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="Design-Model"><a class="link" href="#Design-Model">Model Component</a></h3>
+<div class="paragraph">
+<p><em>Figure 17</em> below shows the architecture diagram of the <code>Model</code> component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+</div>
+<div class="title">Figure 1. Structure of the <code>Model</code> component</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code> component:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences,</p>
+</li>
+<li>
+<p>stores the Desk Board data;</p>
+</li>
+<li>
+<p>uses two classes to store information about <code>Event</code> and <code>Task</code> separately;</p>
+</li>
+<li>
+<p>exposes an unmodifiable <code>ObservableList&lt;Activity&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change; and</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
+<div class="paragraph">
+<p>There are two ways to represent tasks and events in the application. The following shows the pros and cons for each alternative:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong> Alternative 1 (Current Choice):</strong>
+Use a single class <code>Activity</code> as a superclass for <code>Task</code> and <code>Event</code>.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+As both <code>Task</code> and <code>Event</code> can be treated equally in most contexts other than their creation, this can simplify the code significantly.</p>
+</li>
+<li>
+<p>Cons:
+It might be a harder to retrieve information as <code>Event</code> contains extra attributes that <code>Task</code> does not have.
+Extra accessor methods will also be required for <code>Event</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 :</strong>
+Simply have two different class <code>Task</code> and <code>Event</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:
+There is a clear distinction between the two classes.</p>
+</li>
+<li>
+<p>Cons:
+We will need to write codes for classes and methods related to <code>Task</code> and <code>Event</code> separately, when these could have been simplified by having classes and methods related to the superclass only.
+<br>
+<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-04-11 03:50:56 UTC
+</div>
+</div>
+</body>
+</html>
