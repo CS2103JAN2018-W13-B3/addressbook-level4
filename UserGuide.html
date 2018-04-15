@@ -639,6 +639,19 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="paragraph">
 <p>Exports Desk Board data into an xml file in the specified directory.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This command does not allow overwriting of existing file.
+If a file with the same name exists in the same directory as <code>FILE_PATH</code>, then this command will not be executed.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>export f/FILE_PATH</code></p>
 </div>
@@ -900,7 +913,7 @@ There is no need to save manually.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 07:57:09 UTC
+Last updated 2018-04-15 11:21:37 UTC
 </div>
 </div>
 </body>

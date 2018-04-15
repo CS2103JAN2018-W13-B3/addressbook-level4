@@ -44,10 +44,10 @@
 </li>
 <li><a href="#Implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#Implementation-Activity">4.1. Activity</a></li>
-<li><a href="#gui">4.2. GUI</a></li>
-<li><a href="#undo-redo-feature">4.3. Undo/Redo feature</a></li>
-<li><a href="#storage-for-task-and-event">4.4. Storage for Task and Event</a></li>
+<li><a href="#Implementation-Activity">4.1. Managing Activities</a></li>
+<li><a href="#managing-gui">4.2. Managing GUI</a></li>
+<li><a href="#managing-desk-board-storage">4.3. Managing Desk Board Storage</a></li>
+<li><a href="#undoing-redoing-commands">4.4. Undoing/Redoing Commands</a></li>
 <li><a href="#logging">4.5. Logging</a></li>
 <li><a href="#Implementation-Configuration">4.6. Configuration</a></li>
 </ul>
@@ -813,11 +813,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><code>UserPref</code> objects in json format, and</p>
 </li>
 <li>
-<p>desk board data in xml format.
-<br>
-<br></p>
+<p>desk board data in xml format.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
 </div>
 </div>
 </div>
@@ -831,7 +833,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <br></p>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Activity"><a class="link" href="#Implementation-Activity">4.1. Activity</a></h3>
+<h3 id="Implementation-Activity"><a class="link" href="#Implementation-Activity">4.1. Managing Activities</a></h3>
 <div class="paragraph">
 <p><code>Activity</code> resides in the <code>Model</code> component of the application.
 It is an important class in this application as it represents each entry in the desk board.
@@ -856,7 +858,7 @@ This is because an entry in the desk board must be either a <code>Task</code> or
 <br></p>
 </div>
 <div class="sect4">
-<h5 id="adding-a-task"><a class="link" href="#adding-a-task">Adding a task</a></h5>
+<h5 id="adding-a-task"><a class="link" href="#adding-a-task">4.1.1.1. Adding a task</a></h5>
 <div class="paragraph">
 <p><code>Task</code> is one of the two types of entries in the desk board in CLIndar.
 <code>Task</code> represents a piece of work to be done by a certain deadline.
@@ -867,7 +869,7 @@ Once the <code>Task</code> has been done by user, it can be mark as completed in
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/TaskUMLDiagram.png" alt="TaskUMLDiagram" width="550">
+<img src="images/TaskClassDiagram.png" alt="TaskClassDiagram" width="550">
 </div>
 <div class="title">Figure 19. UML class diagram for <code>Task</code></div>
 </div>
@@ -921,7 +923,7 @@ is found in the desk board or the <code>name</code> or <code>dueDateTime</code> 
 </div>
 </div>
 <div class="sect4">
-<h5 id="adding-an-event"><a class="link" href="#adding-an-event">Adding an event</a></h5>
+<h5 id="adding-an-event"><a class="link" href="#adding-an-event">4.1.1.2. Adding an event</a></h5>
 <div class="paragraph">
 <p><code>Event</code> is the second and last type of entries in the desk board in CLIndar.
 <code>Event</code> represents an activity with fixed start and end times, such as a test, doctor appointment etc.</p>
@@ -931,7 +933,7 @@ is found in the desk board or the <code>name</code> or <code>dueDateTime</code> 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EventUMLDiagram.png" alt="EventUMLDiagram" width="550">
+<img src="images/EventClassDiagram.png" alt="EventClassDiagram" width="550">
 </div>
 <div class="title">Figure 20. UML Class Diagram for Event</div>
 </div>
@@ -973,14 +975,14 @@ is found in the desk board or the <code>name</code>, <code>startDateTime</code> 
 </div>
 </div>
 <div class="sect4">
-<h5 id="autosorting-feature"><a class="link" href="#autosorting-feature">Autosorting feature</a></h5>
+<h5 id="sorting-task-and-event-lists-automatically"><a class="link" href="#sorting-task-and-event-lists-automatically">4.1.1.3. Sorting task and event lists automatically</a></h5>
 <div class="paragraph">
-<p>In the GUI, the <code>Task</code> and <code>Event</code> objects will always be shown sorted in terms of their <code>dueDateTime</code> and <code>startDateTime</code> respectively.
-This is achieved through the <code>UniqueActivityList</code> which contains a list of unique activities which is either a <code>Task</code> or an <code>Event</code>
+<p>When a <code>Task</code> or <code>Event</code> is added, it is inserted into the respective list such that the list is sorted in terms of their <code>dueDateTime</code> or <code>startDateTime</code> respectively.
+The sorting is done in the <code>UniqueActivityList</code> which contains a list of unique activities which is either a <code>Task</code> or an <code>Event</code>
 stored in an <code>internalList</code>.
 Each time an <code>Activity</code> is added to or edited in the <code>UniqueActivityList</code>,
 <code>internalList</code> will be sorted according to its <code>dateTime</code> attribute.
-Note <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Task</code> and <code>startDateTime</code> for <code>Event</code>.</p>
+Note that <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Task</code> and <code>startDateTime</code> for <code>Event</code>.</p>
 </div>
 <div class="paragraph">
 <p>Following is a snippet which illustrates the function of <code>UniqueActivityList</code>:</p>
@@ -989,7 +991,7 @@ Note <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Task</co
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">final</span> ObservableList&lt;Activity&gt; internalList = FXCollections.observableArrayList();
 
-    /...some code.../
+    <span class="comment">// ... some code ...</span>
 
     <span class="directive">public</span> <span class="type">void</span> add(Activity toAdd) <span class="directive">throws</span> DuplicateActivityException {
         requireNonNull(toAdd);
@@ -1023,7 +1025,7 @@ The following snippet shows the <code>executeUndoableCommand()</code> of the <co
 </div>
 </div>
 <div class="sect4">
-<h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">Editing a task or an event</a></h5>
+<h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">4.1.1.4. Editing a task or an event</a></h5>
 <div class="paragraph">
 <p><code>Task</code> and <code>Event</code> objects are editable through the use of <code>EditCommand</code>.
 In this application, if a commmand requires a target to operate on,
@@ -1078,7 +1080,7 @@ The api is given as below:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="removing-a-task-or-an-event"><a class="link" href="#removing-a-task-or-an-event">Removing a task or an event</a></h5>
+<h5 id="removing-a-task-or-an-event"><a class="link" href="#removing-a-task-or-an-event">4.1.1.5. Removing a task or an event</a></h5>
 <div class="paragraph">
 <p><code>Task</code> and <code>Event</code> objects can be removed through the use of the <code>RemoveCommand</code>
 by specifying the <code>Task</code> or <code>Event</code> and the index of the task/event reflected in the GUI.</p>
@@ -1098,7 +1100,7 @@ If the index of an activity is not found, an <code>ActivityNotFoundException</co
             <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target activity cannot be missing</span><span class="delimiter">&quot;</span></span>);
         }
 
-        /...some code.../
+        <span class="comment">// ... some code ...</span>
     }</code></pre>
 </div>
 </div>
@@ -1110,7 +1112,7 @@ will be reflected in the GUI.
 </div>
 </div>
 <div class="sect4">
-<h5 id="completing-a-task"><a class="link" href="#completing-a-task">Completing a task</a></h5>
+<h5 id="completing-a-task"><a class="link" href="#completing-a-task">4.1.1.6. Completing a task</a></h5>
 <div class="paragraph">
 <p><code>Task</code> objects can be completed through the use of the <code>CompleteCommand</code> by specifying the <code>Task&#8217;s index reflected
 in the GUI. Note that `CompleteCommand</code> can only be applied to <code>Task</code> objects.</p>
@@ -1189,7 +1191,7 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="gui"><a class="link" href="#gui">4.2. GUI</a></h3>
+<h3 id="managing-gui"><a class="link" href="#managing-gui">4.2. Managing GUI</a></h3>
 <div class="paragraph">
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
@@ -1199,7 +1201,7 @@ We will need to write codes for classes and methods related to <code>Task</code>
 <p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe the implementation for each comman.</p>
 </div>
 <div class="sect4">
-<h5 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">Listing of tasks and events</a></h5>
+<h5 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">4.2.1.1. Listing of tasks and events</a></h5>
 <div class="paragraph">
 <p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all the <code>Task</code> objects added by the user
 is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by user are displayed using <code>EventListPanel</code>. Below are examples of a <code>TaskListCard</code> and an <code>EventListCard</code>.</p>
@@ -1234,7 +1236,7 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
         <span class="keyword">case</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">event</span><span class="delimiter">&quot;</span></span>:
             EventsCenter.getInstance().post(<span class="keyword">new</span> ShowEventOnlyRequestEvent());
             <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(MESSAGE_SUCCESS_EVENT);
-        /..some code../
+        <span class="comment">// ... some code ...</span>
 
         <span class="keyword">default</span>:
             <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(Messages.MESSAGE_INVALID_LIST_REQUEST, commandRequest));
@@ -1262,7 +1264,7 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
 </div>
 </div>
 <div class="sect4">
-<h5 id="overdue"><a class="link" href="#overdue">Overdue</a></h5>
+<h5 id="overdue"><a class="link" href="#overdue">4.2.1.2. Overdue</a></h5>
 <div class="paragraph">
 <p>Overdue tasks can be viewed through the use of the <code>OverdueCommand</code>. Note that the <code>OverdueCommand</code> only
 lists down overdue tasks; overdue events are marked as completed automatically.</p>
@@ -1286,8 +1288,7 @@ If the current date and time is past an <code>Event</code> <code>s `endDateTime<
 <div class="paragraph">
 <p>This section describes various design considerations related to the GUI features. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
-<div class="sect4">
-<h5 id="aspect-implementation-of-code-listcommand-code"><a class="link" href="#aspect-implementation-of-code-listcommand-code">Aspect: Implementation of <code>ListCommand</code></a></h5>
+<h5 id="aspect-implementation-of-code-listcommand-code" class="discrete">Aspect: Implementation of <code>ListCommand</code></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1328,9 +1329,7 @@ definitely the preferred approach here.
 <br>
 <br></p>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-implementation-of-code-overduecommand-code"><a class="link" href="#aspect-implementation-of-code-overduecommand-code">Aspect: Implementation of <code>OverdueCommand</code></a></h5>
+<h5 id="aspect-implementation-of-code-overduecommand-code" class="discrete">Aspect: Implementation of <code>OverdueCommand</code></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1365,14 +1364,256 @@ definitely the preferred approach here.
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="managing-desk-board-storage"><a class="link" href="#managing-desk-board-storage">4.3. Managing Desk Board Storage</a></h3>
+<div class="paragraph">
+<p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The management of Desk Board storage in CLIndar includes automatic saving and loading of data, as well as export and import operations.
+The following describes how each feature is implemented.</p>
+</div>
+<div class="sect4">
+<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">4.3.1.1. Storing <code>Task</code> and <code>Event</code> objects</a></h5>
+<div class="paragraph">
+<p>In CLIndar, Desk Board data are stored using an xml file. For this purpose, <code>DeskBoard</code>, which is composed of <code>Task</code> and <code>Event</code> objects,
+is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
+These xml-adapted objects have the same attributes as the objects they represent.
+However, the attributes are converted into <code>String</code> which can then be stored into xml format.
+Similar to how <code>Task</code> and <code>Event</code> objects inherit from <code>Activity</code> class (as discussed in <a href="#Implementation - Activity">Managing Activities</a>),
+their xml-adapted equivalents inherit from <code>XmlAdaptedActivity</code> class.
+The constructor method of <code>XmlAdaptedActivity</code> below illustrates how a <code>Task</code> object can be converted into
+an <code>XmlAdaptedTask</code> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> XmlAdaptedActivity(Activity source) {
+        name = source.getName().fullName;
+        dateTime = source.getDateTime().toString();
+        <span class="keyword">if</span> (source.getRemark() != <span class="predefined-constant">null</span>) {
+            remark = source.getRemark().value;
+        }
+        tagged = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        <span class="keyword">for</span> (Tag tag : source.getTags()) {
+            tagged.add(<span class="keyword">new</span> XmlAdaptedTag(tag));
+        }
+        isCompleted = source.isCompleted();
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The constructor method of <code>XmlAdaptedTask</code> calls the constructor method of its superclass.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> can be transformed back into <code>Task</code> and <code>Event</code> objects respectively using the method <code>toModelType()</code>.
+The following snippet of code shows how the method is implemented in <code>XmlAdaptedTask</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> Task toModelType() <span class="directive">throws</span> IllegalValueException {
+        <span class="directive">final</span> <span class="predefined-type">List</span>&lt;Tag&gt; activityTags = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        <span class="keyword">for</span> (XmlAdaptedTag tag : tagged) {
+            activityTags.add(tag.toModelType());
+        }
+
+        <span class="keyword">if</span> (<span class="local-variable">this</span>.name == <span class="predefined-constant">null</span>) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(<span class="predefined-type">String</span>.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    getActivityType(), <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
+        }
+        <span class="keyword">if</span> (!<span class="predefined-type">Name</span>.isValidName(<span class="local-variable">this</span>.name)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(<span class="predefined-type">Name</span>.MESSAGE_NAME_CONSTRAINTS);
+        }
+        <span class="directive">final</span> <span class="predefined-type">Name</span> name = <span class="keyword">new</span> <span class="predefined-type">Name</span>(<span class="local-variable">this</span>.name);
+
+        <span class="comment">// ... convert other attributes into respective classes ...</span>
+
+        <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;Tag&gt; tags = <span class="keyword">new</span> <span class="predefined-type">HashSet</span>&lt;&gt;(activityTags);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> Task(name, dateTime, remark, tags, <span class="local-variable">this</span>.isCompleted);
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>XmlAdaptedActivity</code> does not have <code>toModelType()</code> method because it cannot create a new <code>Activity</code> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><code>XmlSerializableDeskBoard</code> too has a <code>toModelType()</code> method which returns a <code>DeskBoard</code> object.
+This method iterates through each <code>Task</code> or <code>Event</code> object that composes it, and calls the object&#8217;s own <code>toModelType()</code> method.
+Unlike <code>DeskBoard</code> which has a single <code>UniqueActivityList</code> containing both <code>Task</code> and <code>Event</code> objects, <code>XmlSerializableDeskBoard</code> stores <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> in
+two separate lists.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="exporting-data"><a class="link" href="#exporting-data">4.3.1.2. Exporting data</a></h5>
+<div class="paragraph">
+<p><em>Figure ##</em> below shows the UML sequence diagram for export operation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 23. Export sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>As seen above, this operation requires the <code>Logic</code> component to access the <code>Storage</code> component.
+In particular, there needs to be an association between <code>ExecuteCommand</code> and <code>Storage</code>.
+The way such association can be created is similar to how an association between any subclass of <code>Command</code>
+and <code>Model</code> is formed.
+The modifications made to classes in the <code>Logic</code> component are shown in red in <em>Figure ##</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogicCommandClassDiagramModified.png" alt="LogicCommandClassDiagramModified" width="800">
+</div>
+<div class="title">Figure 24. Modification to <code>Logic</code> component</div>
+</div>
+<div class="paragraph">
+<p>After <code>ExportCommand</code> gains access to the application&#8217;s <code>Storage</code> object, it can then call
+the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Desk Board data to be saved into an xml file in the specified <code>filePath</code>.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="importing-data"><a class="link" href="#importing-data">4.3.1.3. Importing data</a></h5>
+<div class="paragraph">
+<p><em>Figure ##</em> below shows the sequence diagram for import operation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 25. Import sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>Just like <code>ExportCommand</code>, <code>ImportCommand</code> also needs to have access to the application&#8217;s <code>Storage</code> object.
+This object reads the xml file at the given <code>filePath</code> and returns a <code>ReadOnlyDeskBoard</code> object based on the data saved in the file.
+Each <code>Activity</code> in the <code>ReadOnlyDeskBoard</code> is then added into the application&#8217;s <code>DeskBoard</code>.
+This operation is abstracted to follow Single Level of Abstraction Principle (SLAP).
+<em>Figure ##</em> below shows how <code>addActivities</code> is implemented in <code>Model</code> component which results in new entries from
+another <code>DeskBoard</code> object being added into the application&#8217;s <code>Model</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddActivitiesSequenceDiagram.png" alt="AddActivitiesSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 26. <code>addActivities()</code> sequence diagram</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design considerations</a></h4>
+<div class="paragraph">
+<p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
+</div>
+<h5 id="aspect-storage-of-code-xmladaptedtask-code-and-code-xmladaptedevent-code-in-code-xmlserializabledeskboard-code" class="discrete">Aspect: Storage of <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> in <code>XmlSerializableDeskBoard</code></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: When the xml file is opened using another application (e.g. Microsoft Excel), details about tasks and events are shown separately.</p>
+</li>
+<li>
+<p>Cons: Slightly more coding is required to create 2 separate lists.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use 1 list to store both <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This way mirrors the way <code>DeskBoard</code> stores <code>Task</code> and <code>Event</code> objects.</p>
+</li>
+<li>
+<p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<h5 id="aspect-association-between-code-exportcommand-code-code-importcommand-code-and-code-storage-code-objects" class="discrete">Aspect: Association between <code>ExportCommand</code>/<code>ImportCommand</code> and <code>Storage</code> objects</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Store the reference to the application&#8217;s <code>Storage</code> in <code>LogicManager</code> which then passes it to the respective <code>Command</code> object.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This is consistent with the application&#8217;s overall architecture.</p>
+</li>
+<li>
+<p>Cons: We need to modify <code>LogicManager</code> and <code>Command</code> which can cause errors in other commands if the code is not written correctly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a new <code>StorageManager</code> object in <code>ExportCommand</code> and <code>ImportCommand</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This is easier to code.</p>
+</li>
+<li>
+<p>Cons: This application should not have multiple <code>Storage</code> objects.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">4.3. Undo/Redo feature</a></h3>
+<h3 id="undoing-redoing-commands"><a class="link" href="#undoing-redoing-commands">4.4. Undoing/Redoing Commands</a></h3>
 <div class="paragraph">
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the desk board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -1383,7 +1624,7 @@ definitely the preferred approach here.
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 23. Class Diagram of a Logic Command</div>
+<div class="title">Figure 27. Class Diagram of a Logic Command</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -1464,7 +1705,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
-<div class="title">Figure 24. 'Undo' stack pops into the 'Redo' Stack</div>
+<div class="title">Figure 28. 'Undo' stack pops into the 'Redo' Stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1485,7 +1726,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 25. 'Undo' and 'Redo' Stack Sequence Diagram</div>
+<div class="title">Figure 29. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
@@ -1509,7 +1750,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
-<div class="title">Figure 26. Adding 'ClearCommand' to the 'Undo' Stack</div>
+<div class="title">Figure 30. Adding 'ClearCommand' to the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -1518,7 +1759,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
-<div class="title">Figure 27. 'ListCommand' does not affect the 'Undo' Stack</div>
+<div class="title">Figure 31. 'ListCommand' does not affect the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -1527,16 +1768,15 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
-<div class="title">Figure 28. Activity Diagram for 'Undo' and 'Redo'</div>
+<div class="title">Figure 32. Activity Diagram for 'Undo' and 'Redo'</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
-<div class="sect4">
-<h5 id="aspect-implementation-of-code-undoablecommand-code"><a class="link" href="#aspect-implementation-of-code-undoablecommand-code">Aspect: Implementation of <code>UndoableCommand</code></a></h5>
+<h5 id="aspect-implementation-of-code-undoablecommand-code" class="discrete">Aspect: Implementation of <code>UndoableCommand</code></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1567,9 +1807,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-execution-of-undo-and-redo"><a class="link" href="#aspect-execution-of-undo-and-redo">Aspect: Execution of undo and redo</a></h5>
+<h5 id="aspect-execution-of-undo-and-redo" class="discrete">Aspect: Execution of undo and redo</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1600,9 +1838,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-type-of-commands-that-can-be-undone-redone"><a class="link" href="#aspect-type-of-commands-that-can-be-undone-redone">Aspect: Type of commands that can be undone/redone</a></h5>
+<h5 id="aspect-type-of-commands-that-can-be-undone-redone" class="discrete">Aspect: Type of commands that can be undone/redone</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1636,9 +1872,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<h5 id="aspect-data-structure-to-support-the-undo-redo-commands" class="discrete">Aspect: Data structure to support the undo/redo commands</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1671,67 +1905,6 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div class="paragraph">
 <p><br></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="storage-for-task-and-event"><a class="link" href="#storage-for-task-and-event">4.4. Storage for Task and Event</a></h3>
-<div class="paragraph">
-<p>This section describes the implementation and design considerations for the storage of Task and Event.</p>
-</div>
-<div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current implementation</a></h4>
-<div class="paragraph">
-<p>Storing of <code>Task</code> and <code>Event</code> data is managed by <code>StorageManager</code> within the <code>Storage</code> component.
-<code>Task</code> and <code>Event</code> is converted to <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> respectively to be stored in a .xml file.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design considerations</a></h4>
-<div class="paragraph">
-<p>The application deals with 2 main classes: Task and Event. Hence, when the data is stored, there is a need for
-differentiation between these 2 classes. There are 2 possible implementations to do this:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1:</strong> Use 1 list to store objects of both classes.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Minimal coding is required as only 1 list is required to store the 2 different class objects.</p>
-</li>
-<li>
-<p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be
-treated the same as they are from the same class.</p>
-</li>
-<li>
-<p>Cons: More coding is required to create 2 separate lists.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s
-advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of
-objects, whereby each list contains objects of the same class, especially as we make the 2 classes more
-specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in
-the long run.
-<br>
-<br></p>
 </div>
 </div>
 </div>
@@ -1846,7 +2019,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 29. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 33. Saving documentation as PDF files in Chrome</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -2557,7 +2730,7 @@ Removes the remark for the first activity.</p>
 <div class="sect3">
 <h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
 <div class="sect4">
-<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
+<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">A.2.2.1. [Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
 <div class="paragraph">
 <p>Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
 </div>
@@ -2589,7 +2762,7 @@ Removes the remark for the first activity.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-2-logic-teach-the-app-to-accept-remark-arguments"><a class="link" href="#step-2-logic-teach-the-app-to-accept-remark-arguments">[Step 2] Logic: Teach the app to accept 'remark' arguments</a></h5>
+<h5 id="step-2-logic-teach-the-app-to-accept-remark-arguments"><a class="link" href="#step-2-logic-teach-the-app-to-accept-remark-arguments">A.2.2.2. [Step 2] Logic: Teach the app to accept 'remark' arguments</a></h5>
 <div class="paragraph">
 <p>Let&#8217;s teach the application to parse arguments that our <code>remark</code> command will accept. E.g. <code>1 r/Likes to drink coffee.</code></p>
 </div>
@@ -2628,7 +2801,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code">[Step 3] Ui: Add a placeholder for remark in <code>PersonCard</code></a></h5>
+<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code">A.2.2.3. [Step 3] Ui: Add a placeholder for remark in <code>PersonCard</code></a></h5>
 <div class="paragraph">
 <p>Let&#8217;s add a placeholder on all our <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> s to display a remark for each activity later.</p>
 </div>
@@ -2657,7 +2830,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">[Step 4] Model: Add <code>Remark</code> class</a></h5>
+<h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">A.2.2.4. [Step 4] Model: Add <code>Remark</code> class</a></h5>
 <div class="paragraph">
 <p>We have to properly encapsulate the remark in our <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/model/activity/Person.java"><code>Person</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
 </div>
@@ -2686,7 +2859,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-5-model-modify-code-person-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-person-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>Person</code> to support a <code>Remark</code> field</a></h5>
+<h5 id="step-5-model-modify-code-person-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-person-code-to-support-a-code-remark-code-field">A.2.2.5. [Step 5] Model: Modify <code>Person</code> to support a <code>Remark</code> field</a></h5>
 <div class="paragraph">
 <p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/model/activity/Person.java"><code>Person</code></a>.</p>
 </div>
@@ -2708,7 +2881,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</a></h5>
+<h5 id="step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class">A.2.2.6. [Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</a></h5>
 <div class="paragraph">
 <p>We now have <code>Remark</code> s for <code>Person</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/storage/XmlAdaptedPerson.java"><code>XmlAdaptedPerson</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
 </div>
@@ -2734,7 +2907,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-6b-test-add-withremark-for-code-personbuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-personbuilder-code">[Step 6b] Test: Add withRemark() for <code>PersonBuilder</code></a></h5>
+<h5 id="step-6b-test-add-withremark-for-code-personbuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-personbuilder-code">A.2.2.7. [Step 6b] Test: Add withRemark() for <code>PersonBuilder</code></a></h5>
 <div class="paragraph">
 <p>Since <code>Person</code> can now have a <code>Remark</code>, we should add a helper method to <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/test/java/seedu/address/testutil/PersonBuilder.java"><code>PersonBuilder</code></a>, so that users are able to create remarks when building a <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/model/activity/Person.java"><code>Person</code></a>.</p>
 </div>
@@ -2753,7 +2926,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-7-ui-connect-code-remark-code-field-to-code-personcard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-personcard-code">[Step 7] Ui: Connect <code>Remark</code> field to <code>PersonCard</code></a></h5>
+<h5 id="step-7-ui-connect-code-remark-code-field-to-code-personcard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-personcard-code">A.2.2.8. [Step 7] Ui: Connect <code>Remark</code> field to <code>PersonCard</code></a></h5>
 <div class="paragraph">
 <p>Our remark label in <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
 </div>
@@ -2779,7 +2952,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-8-logic-implement-code-remarkcommand-execute-code-logic"><a class="link" href="#step-8-logic-implement-code-remarkcommand-execute-code-logic">[Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic</a></h5>
+<h5 id="step-8-logic-implement-code-remarkcommand-execute-code-logic"><a class="link" href="#step-8-logic-implement-code-remarkcommand-execute-code-logic">A.2.2.9. [Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic</a></h5>
 <div class="paragraph">
 <p>We now have everything set up&#8230;&#8203; but we still can&#8217;t modify the remarks. Let&#8217;s finish it up by adding in actual logic for our <code>remark</code> command.</p>
 </div>
@@ -2855,37 +3028,63 @@ faster than a typical mouse/GUI-driven app</p>
 <div class="sect3">
 <h4 id="jarrett"><a class="link" href="#jarrett">B.1.1. Jarrett</a></h4>
 <div class="paragraph">
-<p><strong>Major enhancement</strong>: Creating 'overdue' command. This command shows a list of overdue tasks.</p>
+<p><strong>Major enhancement:</strong> Creating 'overdue' command. This command shows a list of overdue tasks.</p>
 </div>
 <div class="paragraph">
-<p><strong>Minor enhancement</strong>: Creating 'task' and 'event' commands which add Task and Event objects respectively.</p>
+<p><strong>Minor enhancement:</strong> Creating 'task' and 'event' commands which add Task and Event objects respectively.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="jasmund"><a class="link" href="#jasmund">B.1.2. Jasmund</a></h4>
 <div class="paragraph">
-<p><strong>Major enhancement</strong>: Modifying the GUI to fit our task/event manager application. This includes but is not limited to allowing the UI to display 2 panes for showing the Task and Event lists separately.</p>
+<p><strong>Major enhancement:</strong> Modifying the GUI to fit our task/event manager application. This includes but is not limited to allowing the UI to display 2 panes for showing the Task and Event lists separately.</p>
 </div>
 <div class="paragraph">
-<p><strong>Minor enhancement</strong>: Modifying the 'help' command. In our application, 'help' can be followed by a command word (e.g. 'help task') so that instructions for only the command desired are shown. Moreover, 'man' command&#8201;&#8212;&#8201;an alias for 'help'&#8201;&#8212;&#8201;is also added for users who are familiar with Linux commands.</p>
+<p><strong>Minor enhancement:</strong> Modifying the 'help' command. In our application, 'help' can be followed by a command word (e.g. 'help task') so that instructions for only the command desired are shown. Moreover, 'man' command&#8201;&#8212;&#8201;an alias for 'help'&#8201;&#8212;&#8201;is also added for users who are familiar with Linux commands.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="karen"><a class="link" href="#karen">B.1.3. Karen</a></h4>
 <div class="paragraph">
-<p><strong>Major enhancement</strong>: Modifying the Storage component to allow storage of Tasks and Events in an xml file.</p>
+<p><strong>Major enhancement:</strong> Management of the storage of task and event data, which includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>automatic saving</strong> of task and event data after each change;</p>
+</li>
+<li>
+<p><strong>automatic loading</strong> of latest task and event data upon launching of application;</p>
+</li>
+<li>
+<p><strong>exporting</strong> of task and event data into an xml file (when <code>export</code> command is called); and</p>
+</li>
+<li>
+<p><strong>importing</strong> of task and event data from an xml file (when <code>import</code> command is called).</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p><strong>Minor enhancement</strong>: Creating 'ls' command. This command shows the Event and Task objects added to the Desk Board in 2 separate lists.</p>
+<p>The automatic save and load features <strong>allow users to view their latest tasks and events</strong>. The export and import features allow users to <strong>move their data from one computer to another</strong> (e.g. through e-mail or thumb drive).<br>
+<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Minor enhancement:</strong> Automatic sorting of tasks and events by date and time. This allows users to prioritize their earliest tasks and events first.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="yuan-quan"><a class="link" href="#yuan-quan">B.1.4. Yuan Quan</a></h4>
 <div class="paragraph">
-<p><strong>Major enhancement</strong>: Modifying the Model component. This includes creation of Event and Task classes, as well as their superclass, Activity. Other classes relevant to tasks and events are also created, such as DateTime.</p>
+<p><strong>Major enhancement:</strong> Modifying the Model component. This includes creation of Event and Task classes, as well as their superclass, Activity. Other classes relevant to tasks and events are also created, such as DateTime.</p>
 </div>
 <div class="paragraph">
-<p><strong>Minor enhancement</strong>: Creating 'complete' command. This command marks a Task object as completed.</p>
+<p><strong>Minor enhancement:</strong> Creating 'complete' command. This command marks a Task object as completed.</p>
 </div>
 </div>
 </div>
@@ -2934,19 +3133,19 @@ faster than a typical mouse/GUI-driven app</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add the location of an event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">record the location of an event</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be in the right location</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add items to bring for an event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">record items to bring for an event</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attend an event with all the required items</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view upcoming tasks (in order of earliest to latest)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view uncompleted tasks (in order of earliest to latest)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">manage my time and finish my tasks on time</p></td>
 </tr>
 <tr>
@@ -2954,12 +3153,6 @@ faster than a typical mouse/GUI-driven app</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view upcoming events (in order of earliest to latest)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attend my events</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view free time slots</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">arrange for other events</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -3018,8 +3211,32 @@ faster than a typical mouse/GUI-driven app</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">import entries from another file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">easily add entries previously saved in another file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">automatically save data after each update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have my most updated schedule to view in the future without having to save every time I make a change</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">load my most updated data when I open the application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view my most updated schedule</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export data into a file in specified directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">send the data into another computer via e-mail or thumb drive</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">import data from another file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily add entries previously saved in another file (possible from another computer)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view entries in order of date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">finish task with nearest deadline first and know the nearest event that is coming up</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -3028,13 +3245,13 @@ faster than a typical mouse/GUI-driven app</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be assured I did not miss any deadline</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">get notification for upcoming tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">never forget to complete my tasks</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">forgetful student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">get notification for upcoming events</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">never forget to attend my events</p></td>
@@ -3071,6 +3288,12 @@ faster than a typical mouse/GUI-driven app</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">busy student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view free time slots before a deadline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know how much time I have when I&#8217;m actually free to finish my tasks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">procrastinating student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add estimated time needed to complete a task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">estimate when to start on a task to complete it on time</p></td>
@@ -3083,19 +3306,7 @@ faster than a typical mouse/GUI-driven app</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">busy student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view free time slots before a deadline</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know how much time I have when I&#8217;m actually free to finish my tasks</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">view common free time slots among my group mates</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">arrange a group meeting</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">organised student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">organized student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add multiple deadlines for a task</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keep track of project progress</p></td>
 </tr>
@@ -3104,6 +3315,18 @@ faster than a typical mouse/GUI-driven app</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NUS student</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">import timetable from NUSMods</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">avoid the trouble of keying in my lecture and tutorial schedules manually</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view free time slots</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrange for other events</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">student</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view common free time slots among my group mates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrange a group meeting</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -3125,7 +3348,7 @@ faster than a typical mouse/GUI-driven app</p>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>CLIndar</code> and the <strong>Actor</strong> is the <code>User</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is <code>CLIndar</code> and the <strong>Actor</strong> is the <code>User</code>, unless specified otherwise)</p>
 </div>
 <h3 id="use-case-add-task" class="discrete">Use case: Add task</h3>
 <div class="paragraph">
@@ -3574,7 +3797,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 07:57:09 UTC
+Last updated 2018-04-15 11:21:37 UTC
 </div>
 </div>
 </body>

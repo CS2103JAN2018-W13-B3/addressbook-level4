@@ -242,7 +242,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="undoing-redoing-commands"><a class="link" href="#undoing-redoing-commands">Undoing/Redoing Commands</a></h3>
 <div class="paragraph">
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
@@ -410,8 +410,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
-<div class="sect4">
-<h5 id="aspect-implementation-of-code-undoablecommand-code"><a class="link" href="#aspect-implementation-of-code-undoablecommand-code">Aspect: Implementation of <code>UndoableCommand</code></a></h5>
+<h5 id="aspect-implementation-of-code-undoablecommand-code" class="discrete">Aspect: Implementation of <code>UndoableCommand</code></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -442,9 +441,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-execution-of-undo-and-redo"><a class="link" href="#aspect-execution-of-undo-and-redo">Aspect: Execution of undo and redo</a></h5>
+<h5 id="aspect-execution-of-undo-and-redo" class="discrete">Aspect: Execution of undo and redo</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -475,9 +472,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-type-of-commands-that-can-be-undone-redone"><a class="link" href="#aspect-type-of-commands-that-can-be-undone-redone">Aspect: Type of commands that can be undone/redone</a></h5>
+<h5 id="aspect-type-of-commands-that-can-be-undone-redone" class="discrete">Aspect: Type of commands that can be undone/redone</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -511,9 +506,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
+<h5 id="aspect-data-structure-to-support-the-undo-redo-commands" class="discrete">Aspect: Data structure to support the undo/redo commands</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -548,7 +541,6 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
 <div class="sectionbody">
@@ -561,7 +553,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 07:57:09 UTC
+Last updated 2018-04-15 11:21:37 UTC
 </div>
 </div>
 </body>

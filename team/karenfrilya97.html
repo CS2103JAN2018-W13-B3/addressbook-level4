@@ -146,31 +146,200 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="storage-for-task-and-event"><a class="link" href="#storage-for-task-and-event">Storage for Task and Event</a></h3>
+<h3 id="managing-desk-board-storage"><a class="link" href="#managing-desk-board-storage">Managing Desk Board Storage</a></h3>
 <div class="paragraph">
-<p>This section describes the implementation and design considerations for the storage of Task and Event.</p>
+<p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
 <div class="paragraph">
-<p>Storing of <code>Task</code> and <code>Event</code> data is managed by <code>StorageManager</code> within the <code>Storage</code> component.
-<code>Task</code> and <code>Event</code> is converted to <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> respectively to be stored in a .xml file.</p>
+<p>The management of Desk Board storage in CLIndar includes automatic saving and loading of data, as well as export and import operations.
+The following describes how each feature is implemented.</p>
+</div>
+<div class="sect4">
+<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">Storing <code>Task</code> and <code>Event</code> objects</a></h5>
+<div class="paragraph">
+<p>In CLIndar, Desk Board data are stored using an xml file. For this purpose, <code>DeskBoard</code>, which is composed of <code>Task</code> and <code>Event</code> objects,
+is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
+These xml-adapted objects have the same attributes as the objects they represent.
+However, the attributes are converted into <code>String</code> which can then be stored into xml format.
+Similar to how <code>Task</code> and <code>Event</code> objects inherit from <code>Activity</code> class (as discussed in <a href="#Implementation - Activity">Managing Activities</a>),
+their xml-adapted equivalents inherit from <code>XmlAdaptedActivity</code> class.
+The constructor method of <code>XmlAdaptedActivity</code> below illustrates how a <code>Task</code> object can be converted into
+an <code>XmlAdaptedTask</code> object.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> XmlAdaptedActivity(Activity source) {
+        name = source.getName().fullName;
+        dateTime = source.getDateTime().toString();
+        <span class="keyword">if</span> (source.getRemark() != <span class="predefined-constant">null</span>) {
+            remark = source.getRemark().value;
+        }
+        tagged = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        <span class="keyword">for</span> (Tag tag : source.getTags()) {
+            tagged.add(<span class="keyword">new</span> XmlAdaptedTag(tag));
+        }
+        isCompleted = source.isCompleted();
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The constructor method of <code>XmlAdaptedTask</code> calls the constructor method of its superclass.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> can be transformed back into <code>Task</code> and <code>Event</code> objects respectively using the method <code>toModelType()</code>.
+The following snippet of code shows how the method is implemented in <code>XmlAdaptedTask</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> Task toModelType() <span class="directive">throws</span> IllegalValueException {
+        <span class="directive">final</span> <span class="predefined-type">List</span>&lt;Tag&gt; activityTags = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+        <span class="keyword">for</span> (XmlAdaptedTag tag : tagged) {
+            activityTags.add(tag.toModelType());
+        }
+
+        <span class="keyword">if</span> (<span class="local-variable">this</span>.name == <span class="predefined-constant">null</span>) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(<span class="predefined-type">String</span>.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    getActivityType(), <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>));
+        }
+        <span class="keyword">if</span> (!<span class="predefined-type">Name</span>.isValidName(<span class="local-variable">this</span>.name)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(<span class="predefined-type">Name</span>.MESSAGE_NAME_CONSTRAINTS);
+        }
+        <span class="directive">final</span> <span class="predefined-type">Name</span> name = <span class="keyword">new</span> <span class="predefined-type">Name</span>(<span class="local-variable">this</span>.name);
+
+        <span class="comment">// ... convert other attributes into respective classes ...</span>
+
+        <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;Tag&gt; tags = <span class="keyword">new</span> <span class="predefined-type">HashSet</span>&lt;&gt;(activityTags);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> Task(name, dateTime, remark, tags, <span class="local-variable">this</span>.isCompleted);
+    }</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>XmlAdaptedActivity</code> does not have <code>toModelType()</code> method because it cannot create a new <code>Activity</code> object.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><code>XmlSerializableDeskBoard</code> too has a <code>toModelType()</code> method which returns a <code>DeskBoard</code> object.
+This method iterates through each <code>Task</code> or <code>Event</code> object that composes it, and calls the object&#8217;s own <code>toModelType()</code> method.
+Unlike <code>DeskBoard</code> which has a single <code>UniqueActivityList</code> containing both <code>Task</code> and <code>Event</code> objects, <code>XmlSerializableDeskBoard</code> stores <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> in
+two separate lists.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="exporting-data"><a class="link" href="#exporting-data">Exporting data</a></h5>
+<div class="paragraph">
+<p><em>Figure ##</em> below shows the UML sequence diagram for export operation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 1. Export sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>As seen above, this operation requires the <code>Logic</code> component to access the <code>Storage</code> component.
+In particular, there needs to be an association between <code>ExecuteCommand</code> and <code>Storage</code>.
+The way such association can be created is similar to how an association between any subclass of <code>Command</code>
+and <code>Model</code> is formed.
+The modifications made to classes in the <code>Logic</code> component are shown in red in <em>Figure ##</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LogicCommandClassDiagramModified.png" alt="LogicCommandClassDiagramModified" width="800">
+</div>
+<div class="title">Figure 2. Modification to <code>Logic</code> component</div>
+</div>
+<div class="paragraph">
+<p>After <code>ExportCommand</code> gains access to the application&#8217;s <code>Storage</code> object, it can then call
+the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Desk Board data to be saved into an xml file in the specified <code>filePath</code>.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="importing-data"><a class="link" href="#importing-data">Importing data</a></h5>
+<div class="paragraph">
+<p><em>Figure ##</em> below shows the sequence diagram for import operation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 3. Import sequence diagram</div>
+</div>
+<div class="paragraph">
+<p>Just like <code>ExportCommand</code>, <code>ImportCommand</code> also needs to have access to the application&#8217;s <code>Storage</code> object.
+This object reads the xml file at the given <code>filePath</code> and returns a <code>ReadOnlyDeskBoard</code> object based on the data saved in the file.
+Each <code>Activity</code> in the <code>ReadOnlyDeskBoard</code> is then added into the application&#8217;s <code>DeskBoard</code>.
+This operation is abstracted to follow Single Level of Abstraction Principle (SLAP).
+<em>Figure ##</em> below shows how <code>addActivities</code> is implemented in <code>Model</code> component which results in new entries from
+another <code>DeskBoard</code> object being added into the application&#8217;s <code>Model</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddActivitiesSequenceDiagram.png" alt="AddActivitiesSequenceDiagram" width="800">
+</div>
+<div class="title">Figure 4. <code>addActivities()</code> sequence diagram</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
 <div class="paragraph">
-<p>The application deals with 2 main classes: Task and Event. Hence, when the data is stored, there is a need for
-differentiation between these 2 classes. There are 2 possible implementations to do this:</p>
+<p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
+<h5 id="aspect-storage-of-code-xmladaptedtask-code-and-code-xmladaptedevent-code-in-code-xmlserializabledeskboard-code" class="discrete">Aspect: Storage of <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> in <code>XmlSerializableDeskBoard</code></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1:</strong> Use 1 list to store objects of both classes.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Minimal coding is required as only 1 list is required to store the 2 different class objects.</p>
+<p>Pros: When the xml file is opened using another application (e.g. Microsoft Excel), details about tasks and events are shown separately.</p>
+</li>
+<li>
+<p>Cons: Slightly more coding is required to create 2 separate lists.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use 1 list to store both <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This way mirrors the way <code>DeskBoard</code> stores <code>Task</code> and <code>Event</code> objects.</p>
 </li>
 <li>
 <p>Cons: Whenever we want to perform an operation on an object stored, we need to check its class.</p>
@@ -178,16 +347,36 @@ differentiation between these 2 classes. There are 2 possible implementations to
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Alternative 2 (current choice):</strong> Use 2 lists to store objects of the 2 classes separately.</p>
+</ul>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<h5 id="aspect-association-between-code-exportcommand-code-code-importcommand-code-and-code-storage-code-objects" class="discrete">Aspect: Association between <code>ExportCommand</code>/<code>ImportCommand</code> and <code>Storage</code> objects</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: When we want to perform an operation on all the objects stored in a list, each object can be
-treated the same as they are from the same class.</p>
+<p><strong>Alternative 1 (current choice):</strong> Store the reference to the application&#8217;s <code>Storage</code> in <code>LogicManager</code> which then passes it to the respective <code>Command</code> object.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This is consistent with the application&#8217;s overall architecture.</p>
 </li>
 <li>
-<p>Cons: More coding is required to create 2 separate lists.</p>
+<p>Cons: We need to modify <code>LogicManager</code> and <code>Command</code> which can cause errors in other commands if the code is not written correctly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a new <code>StorageManager</code> object in <code>ExportCommand</code> and <code>ImportCommand</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This is easier to code.</p>
+</li>
+<li>
+<p>Cons: This application should not have multiple <code>Storage</code> objects.</p>
 </li>
 </ul>
 </div>
@@ -195,13 +384,7 @@ treated the same as they are from the same class.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>While both alternatives have advantages and disadvantages, we feel that the second alternative&#8217;s
-advantages outweigh its disadvantages in the long run. It is easier to maintain the 2 separate lists of
-objects, whereby each list contains objects of the same class, especially as we make the 2 classes more
-specialized. The inconvenience of creating 2 separate lists will be counterbalanced by the convenience in
-the long run.
-<br>
-<br></p>
+<p><br></p>
 </div>
 </div>
 </div>
@@ -210,7 +393,7 @@ the long run.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 07:57:09 UTC
+Last updated 2018-04-15 11:21:37 UTC
 </div>
 </div>
 </body>
