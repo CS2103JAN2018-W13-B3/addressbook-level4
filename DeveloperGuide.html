@@ -206,7 +206,8 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <div class="sect2">
 <h3 id="setup-procedure"><a class="link" href="#setup-procedure">2.2. Setup Procedure</a></h3>
 <div class="paragraph">
-<p>Do the following steps to set up the project in your computer.</p>
+<p>This section provides a step by step guide to facilidate developer who are unfamiliar with Github to setup this project on their own computers.
+You may skip this section if you are an advanced developer.</p>
 </div>
 <div class="paragraph">
 <p><strong>Step 1:</strong> Fork this repo, and clone the fork to your computer.</p>
@@ -469,9 +470,6 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 <div class="title">Figure 9. Architecture diagram</div>
 </div>
-<div class="paragraph">
-<p>Given below is a quick overview of each component.</p>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -485,12 +483,15 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </table>
 </div>
 <div class="paragraph">
+<p>Given below is a quick overview of each component.</p>
+</div>
+<div class="paragraph">
 <p><code>Main</code> has only one class called <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>at app launch: initializing other components in the correct sequence and connecting them up with each other; and</p>
+<p>at app launch: initializing other components in the correct sequence and connecting them up with each other.</p>
 </li>
 <li>
 <p>at shut down: shutting down other components and invoking cleanup method where necessary.</p>
@@ -967,6 +968,78 @@ Note <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Task</co
         }
         internalList.add(toAdd);
         <span class="predefined-type">Collections</span>.sort(internalList, dateTimeComparator);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br>
+===== Find a task or event
+<code>FindEvent</code> class is added to locate <code>Task</code> and <code>Event</code> objects which contains any keywords in their name.
+<br>
+The list showned in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt;`Predicate` set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
+which is a subclass of <code>Predicate</code> class in Java library.
+<br>
+<br>
+The following snippet shows the <code>executeUndoableCommand()</code> of the <code>FindCommand</code> class.
+<code>UniqueActivityList</code> resides in the <code>Model</code> will be filtered by setting <code>predicate</code> object to be the <code>Predicate</code> of the filterlist.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult execute() {
+        model.updateFilteredActivityList(predicate);
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(getMessageForActivityListShownSummary(model.getFilteredActivityList().size()));
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">Editing a task or an event</a></h5>
+<div class="paragraph">
+<p><code>Task</code> and <code>Event</code> objects are editable through the use of <code>EditCommand</code>.
+In this application, if a commmand requires a target to operate on,
+it will determine which <code>Task</code> or <code>Event</code> to modify by using the keywords <code>task</code> or <code>list</code> and index of the target in the displayed list,
+The <code>task</code> and <code>event</code> keyword would tell the program which list to select from. The index will indicate which <code>Task</code> or <code>Event</code> is the target.
+<br>
+<br>
+The edit command can modify every attribute decribed in the <a href="#adding-a-task">adding a task</a> and <a href="#adding-an-event">adding an event</a> section above.
+These fields is identified using the same prefix as the adding command.
+<br>
+<br>
+The following snippet shows the <code>executeUndoableCommand()</code> of the <code>EditCommand</code> class.
+<code>UniqueActivityList</code> resides in the <code>Model</code> will be updated by having <code>editedActivity</code> replacing <code>activityToEdit</code>..
+If <code>editedActitity</code> is identical to any <code>Activity</code> in <code>UniqueActivityList</code>, the edit operation will be aborted and a <code>DuplicateActivityException</code> will be throun.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        <span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+            <span class="keyword">try</span> {
+                model.updateActivity(activityToEdit, editedActivity);
+            } <span class="keyword">catch</span> (DuplicateActivityException dpe) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_DUPLICATE_ACTIVITY);
+            } <span class="keyword">catch</span> (ActivityNotFoundException pnfe) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target activity cannot be missing</span><span class="delimiter">&quot;</span></span>);
+            }
+            model.updateFilteredActivityList(PREDICATE_SHOW_ALL_ACTIVITY);
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedActivity));
+        }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>EditCommand</code> relies on two internal classes <code>EditEventDescriptor</code> and <code>EditTaskDescriptor</code> to store the information of modified attributes.
+The two classes shares many common behaviour, hence an interface <code>EditActivityDescriptor</code> is used for generic purpose.
+<br>
+<br>
+The api is given as below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="type">interface</span> <span class="class">EditActivityDescriptor</span> {
+
+        <span class="directive">public</span> <span class="type">boolean</span> isAnyFieldEdited();
+
+        <span class="directive">public</span> EditActivityDescriptor getCopy();
+
+        <span class="directive">public</span> Activity createEditedActivity(Activity activityToEdit);
     }</code></pre>
 </div>
 </div>
@@ -3471,7 +3544,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 05:19:45 UTC
+Last updated 2018-04-15 07:18:05 UTC
 </div>
 </div>
 </body>

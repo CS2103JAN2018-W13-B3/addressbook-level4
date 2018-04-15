@@ -48,12 +48,12 @@
 <h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code"><a class="link" href="#locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code">Locating task by name: <code>find task</code> <code>[Coming Soon in v2.0]</code></a></h3>
+<h3 id="finding-task-by-name-code-find-task-code-code-as-of-v1-5-code"><a class="link" href="#finding-task-by-name-code-find-task-code-code-as-of-v1-5-code">Finding task by name: <code>find task</code> <code>[As of v1.5]</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all tasks and/or event which contains given keyword in its name.</p>
+<p>Shows a list of all tasks and/or event which contains any given keyword in its name.</p>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> find task KEYWORD or find event KEYWORK or find KEYWORD</p>
+<p><strong>Format:</strong> find task LIST_OF_KEYWORDS or find event LIST_OF_KEYWORDS or find LIST_OF_KEYWORDS</p>
 </div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
@@ -62,15 +62,71 @@
 <ul>
 <li>
 <p><code>find task CS2101</code><br>
-Finds all tasks with name containing "CS2101".</p>
+Finds all tasks with name containing <code>CS2101</code>.</p>
 </li>
 <li>
 <p><code>find event exam</code><br>
-Finds all events with name containing "exam".</p>
+Finds all events with name containing <code>exam</code>.</p>
 </li>
 <li>
-<p>'find CS2101`<br>
-Finds all tasks and event with name containing "CS2101".</p>
+<p><code>find CS2101</code><br>
+Finds all tasks and event with name containing <code>CS2101</code>.</p>
+</li>
+<li>
+<p><code>find CS2101 exam</code><br>
+Finds all tasks and event with name containing either <code>CS2101</code> or <code>exam</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>find</code> command is case sensitive and will returns result that even part of the name matches the keywords.</p>
+</li>
+<li>
+<p><code>list</code> command can be used to retrieve the full list of event and task after this command.</p>
+</li>
+<li>
+<p><code>find</code> command is not undoable or redoable,</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-a-task-code-edit-task-code-code-as-of-v1-5-code"><a class="link" href="#edit-a-task-code-edit-task-code-code-as-of-v1-5-code">Edit a task: <code>edit task</code> <code>[As of v1.5]</code></a></h3>
+<div class="paragraph">
+<p>Editing attributes of a task identified by its index in the task list.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>edit task INDEX [n/NAME] [d/DUE_DATE_TIME] [r/REMARK] [t/TAGS]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit task 1 n/Project 1</code><br>
+Rename the 1st task displayed to 'Project 1'</p>
+</li>
+<li>
+<p><code>edit task 2 n/edited name d/01/01/2018 23:59  r/new remark t/edited</code><br>
+Edit the 2nd task in the list.</p>
+</li>
+<li>
+<p><code>edit task 3 r/</code><br>
+Removes all the tags of task 3</p>
 </li>
 </ul>
 </div>
@@ -82,7 +138,51 @@ Finds all tasks and event with name containing "CS2101".</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Use <code>list</code> command to retrieve the full list of event and task after this command.</p>
+<p><code>edit command would simply replace the whole list of tags with the list of `tags</code> provided by the inputs rather than adding the <code>tags</code> to the tag list.
+As such <code>edit task INDEX r/</code> would remove all the <code>tags</code> of the identified task.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="edit-an-event-code-edit-event-code-code-as-of-v1-5-code"><a class="link" href="#edit-an-event-code-edit-event-code-code-as-of-v1-5-code">Edit an event: <code>edit event</code> <code>[As of v1.5]</code></a></h3>
+<div class="paragraph">
+<p>Editing attributes of a event identified by its index in the event list.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>edit event INDEX [n/NAME] [s/START_TIME] [e/END_TIME] [l/LOCATION] [r/REMARK]</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit event 1 n/Project 1</code><br>
+Rename the 1st event displayed to 'Project 1'</p>
+</li>
+<li>
+<p><code>edit event 2 n/edited name s/01/01/2018 23:59 e/02/01/2018 23:59 l/new location  r/new remark t/edited</code><br>
+Edit the 2nd event in the list.</p>
+</li>
+<li>
+<p><code>edit task 3 r/</code><br>
+Removes all the tags of event 3</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>edit</code> command would simply replace the whole list of tags with the list of <code>tags</code> provided by the inputs rather than adding the <code>tags</code> to the tag list.
+As such <code>edit event INDEX r/</code> would remove all the <code>tags</code> of the identified event.</p>
 </div>
 </td>
 </tr>
@@ -180,6 +280,82 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </li>
 </ul>
 </div>
+<div class="sect4">
+<h5 id="find-a-task-or-event"><a class="link" href="#find-a-task-or-event">Find a task or event</a></h5>
+<div class="paragraph">
+<p><code>FindEvent</code> class is added to locate <code>Task</code> and <code>Event</code> objects which contains any keywords in their name.
+<br>
+The list showned in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt;`Predicate` set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
+which is a subclass of <code>Predicate</code> class in Java library.
+<br>
+<br>
+The following snippet shows the <code>executeUndoableCommand()</code> of the <code>FindCommand</code> class.
+<code>UniqueActivityList</code> resides in the <code>Model</code> will be filtered by setting <code>predicate</code> object to be the <code>Predicate</code> of the filterlist.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult execute() {
+        model.updateFilteredActivityList(predicate);
+        <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(getMessageForActivityListShownSummary(model.getFilteredActivityList().size()));
+    }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">Editing a task or an event</a></h5>
+<div class="paragraph">
+<p><code>Task</code> and <code>Event</code> objects are editable through the use of <code>EditCommand</code>.
+In this application, if a commmand requires a target to operate on,
+it will determine which <code>Task</code> or <code>Event</code> to modify by using the keywords <code>task</code> or <code>list</code> and index of the target in the displayed list,
+The <code>task</code> and <code>event</code> keyword would tell the program which list to select from. The index will indicate which <code>Task</code> or <code>Event</code> is the target.
+<br>
+<br>
+The edit command can modify every attribute decribed in the <a href="#Adding a task">adding a task</a> and <a href="#Adding an event">adding an event</a> section above.
+These fields is identified using the same prefix as the adding command.
+<br>
+<br>
+The following snippet shows the <code>executeUndoableCommand()</code> of the <code>EditCommand</code> class.
+<code>UniqueActivityList</code> resides in the <code>Model</code> will be updated by having <code>editedActivity</code> replacing <code>activityToEdit</code>..
+If <code>editedActitity</code> is identical to any <code>Activity</code> in <code>UniqueActivityList</code>, the edit operation will be aborted and a <code>DuplicateActivityException</code> will be throun.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">        <span class="directive">public</span> CommandResult executeUndoableCommand() <span class="directive">throws</span> CommandException {
+            <span class="keyword">try</span> {
+                model.updateActivity(activityToEdit, editedActivity);
+            } <span class="keyword">catch</span> (DuplicateActivityException dpe) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(MESSAGE_DUPLICATE_ACTIVITY);
+            } <span class="keyword">catch</span> (ActivityNotFoundException pnfe) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">AssertionError</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">The target activity cannot be missing</span><span class="delimiter">&quot;</span></span>);
+            }
+            model.updateFilteredActivityList(PREDICATE_SHOW_ALL_ACTIVITY);
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(<span class="predefined-type">String</span>.format(MESSAGE_EDIT_ACTIVITY_SUCCESS, editedActivity));
+        }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>EditCommand</code> relies on two internal classes <code>EditEventDescriptor</code> and <code>EditTaskDescriptor</code> to store the information of modified attributes.
+The two classes shares many common behaviour, hence an interface <code>EditActivityDescriptor</code> is used for generic purpose.
+<br>
+<br>
+The api is given as below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="directive">static</span> <span class="type">interface</span> <span class="class">EditActivityDescriptor</span> {
+
+        <span class="directive">public</span> <span class="type">boolean</span> isAnyFieldEdited();
+
+        <span class="directive">public</span> EditActivityDescriptor getCopy();
+
+        <span class="directive">public</span> Activity createEditedActivity(Activity activityToEdit);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -187,7 +363,7 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 05:19:45 UTC
+Last updated 2018-04-15 07:18:05 UTC
 </div>
 </div>
 </body>
