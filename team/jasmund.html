@@ -40,15 +40,15 @@
 <ul>
 <li>
 <p>What it does: As the cells do not display full details of the activity, selecting it will allow the full details
-of it being displayed in a separate panel which hides if no activity is selected. The user also can choose to
+of it being displayed in a separate panel which hides if no cell is selected. The user also can choose to
 display task or events only, or both.</p>
 </li>
 <li>
-<p>Justification: This feature improves the application significantly because it reduces the clutter in the GUI and
-allows the user to switch between different views of the GUI according to his needs.</p>
+<p>Justification: This feature improves the application significantly because it reduces the clutter in the GUI,
+making it more appealing and allows the user to switch between different views of the GUI depending on his needs.</p>
 </li>
 <li>
-<p>Highlights: This enhancement required in-depth analysis of JavaFX. The implementation too was challenging as
+<p>Highlights: This enhancement required in-depth analysis of JavaFx. The implementation too was challenging as
 building upon the application to include these enhancement required deep understanding of how the existing
 application worked.</p>
 </li>
@@ -77,7 +77,7 @@ application worked.</p>
 <p>Open, tag, assign and close issues.</p>
 </li>
 <li>
-<p>Coming most of the user stories for the team&#8217;s major enhancements.</p>
+<p>Coming out with most of the user stories for the team&#8217;s major enhancements.</p>
 </li>
 </ul>
 </div>
@@ -97,7 +97,10 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Reviewed language and grammar for first half of the developer guide. Included pictures in the developer guide as well.</p>
+<p>Reviewed the language and grammar of the developer guide.</p>
+</li>
+<li>
+<p>Included and updated pictures and diagrams in the developer guide.</p>
 </li>
 </ul>
 </div>
@@ -107,10 +110,10 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Reviewing teammate&#8217;s code before merging pull request.</p>
+<p>Reviewed teammate&#8217;s code before merging pull request.</p>
 </li>
 <li>
-<p>Resolving merge conflicts as a result of a few consecutive pull request.</p>
+<p>Resolved merge conflicts as a result of a few consecutive pull request.</p>
 </li>
 </ul>
 </div>
@@ -152,26 +155,12 @@ application worked.</p>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code-or-code-u-code"><a class="link" href="#undoing-previous-command-code-undo-code-or-code-u-code">Undoing previous command : <code>undo</code> or <code>u</code></a></h3>
+<h3 id="viewing-help-code-help-code-or-code-man-code-code-as-of-v1-1-code"><a class="link" href="#viewing-help-code-help-code-or-code-man-code-code-as-of-v1-1-code">Viewing help : <code>help</code> or <code>man</code> <code>[As of  v1.1]</code></a></h3>
 <div class="paragraph">
-<p>Restores Desk Board to the state before the previous <em>undoable</em> command was executed.<br></p>
+<p>Shows the help menu for all of the commands or only the <code>COMMAND_WORD</code> requested.</p>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> <code>undo</code> or <code>u</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands are commands that modify Desk Board&#8217;s content (e.g. <code>task</code>, <code>rm task</code>).</p>
-</div>
-</td>
-</tr>
-</table>
+<p><strong>Format:</strong> <code>help</code>, <code>help COMMAND_WORD</code>, <code>man</code> or <code>man COMMAND_WORD</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
@@ -179,49 +168,41 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>rm task 1</code><br>
-<code>ls task</code><br>
-<code>undo</code> (reverses the <code>rm task 1</code> command)<br></p>
+<p><code>help</code></p>
 </li>
 <li>
-<p><code>rm event 1</code><br>
-<code>clear</code><br>
-<code>u</code> (reverses the <code>clear</code> command)<br>
-<code>u</code> (reverses the <code>rm event 1</code> command)</p>
+<p><code>man</code></p>
+</li>
+<li>
+<p><code>help task</code></p>
+</li>
+<li>
+<p><code>man task</code></p>
+</li>
+<li>
+<p><code>help man</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-previously-undone-command-code-redo-code-or-code-r-code"><a class="link" href="#redoing-previously-undone-command-code-redo-code-or-code-r-code">Redoing previously undone command : <code>redo</code> or <code>r</code></a></h3>
+<h3 id="listing-tasks-and-events-code-ls-code-code-as-of-v1-4-code"><a class="link" href="#listing-tasks-and-events-code-ls-code-code-as-of-v1-4-code">Listing tasks and events: <code>ls</code> <code>[As of  v1.4]</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br></p>
+<p>Shows one or two lists of tasks and events in Desk Board as described below.</p>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> <code>redo</code> or <code>r</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Examples:</strong></p>
+<p><strong>Format:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>rm task 1</code><br>
-<code>undo</code> (reverses the <code>rm task 1</code> command)<br>
-<code>redo</code> (reapplies the <code>rm task 1</code> command)<br></p>
+<p><code>ls task</code>: shows only uncompleted tasks.</p>
 </li>
 <li>
-<p><code>rm task 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+<p><code>ls event</code>: shows only upcoming events.</p>
 </li>
 <li>
-<p><code>rm task 1</code><br>
-<code>clear</code><br>
-<code>u</code> (reverses the <code>clear</code> command)<br>
-<code>u</code> (reverses the <code>rm task 1</code> command)<br>
-<code>r</code> (reapplies the <code>rm task 1</code> command)<br>
-<code>r</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>ls</code>: shows both uncompleted tasks and upcoming events in 2 separate lists.</p>
 </li>
 </ul>
 </div>
@@ -481,7 +462,7 @@ definitely the preferred approach here.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 16:05:45 UTC
+Last updated 2018-04-15 16:09:18 UTC
 </div>
 </div>
 </body>
