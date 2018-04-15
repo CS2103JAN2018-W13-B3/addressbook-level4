@@ -46,8 +46,8 @@
 <ul class="sectlevel2">
 <li><a href="#Implementation-Activity">4.1. Activity Management</a></li>
 <li><a href="#managing-the-gui">4.2. Managing the GUI</a></li>
-<li><a href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></li>
-<li><a href="#undo-redo-commands">4.4. Undo/Redo Commands</a></li>
+<li><a href="#undo-redo-commands">4.3. Undo/Redo Commands</a></li>
+<li><a href="#auto-overdue">4.4. Auto overdue</a></li>
 <li><a href="#logging">4.5. Logging</a></li>
 <li><a href="#Implementation-Configuration">4.6. Configuration</a></li>
 </ul>
@@ -1479,26 +1479,7 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
 </div>
 </div>
 <div class="sect3">
-<h4 id="overdue"><a class="link" href="#overdue">4.2.3. Overdue</a></h4>
-<div class="paragraph">
-<p>Overdue tasks can be viewed through the use of the <code>OverdueCommand</code>. Note that the <code>OverdueCommand</code> only
-lists down overdue tasks; overdue events are marked as completed automatically.</p>
-</div>
-<div class="paragraph">
-<p><code>OverdueCommand</code> makes use of the <code>LocalDateTime</code> class in Java to check if an ongoing task becomes overdue
-or not.</p>
-</div>
-<div class="paragraph">
-<p>There will be a class in the <code>Model</code> component, which has access to the <code>UniqueActivityList</code> class in that
-component. The class will go through the <code>UniqueActivityList</code> and obtain the <code>dueDateTime</code> of <code>Task</code>, and the <code>end
-DateTime</code> of <code>Event</code>. It will then perform a check of the <code>DateTime</code> with <code>LocalDateTime.now()</code>. If a <code>Task</code> is overdue, it will be marked so in the GUI.
-If the current date and time is past an <code>Event</code> <code>s `endDateTime</code>, the <code>Event</code> will be marked as completed.
-<br>
-<br></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.4. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.3. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the GUI features. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1543,54 +1524,19 @@ definitely the preferred approach here.
 <br>
 <br></p>
 </div>
-<h5 id="aspect-implementation-of-code-overduecommand-code" class="discrete">Aspect: Implementation of <code>OverdueCommand</code></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1</strong>: Put the checking method in the <code>UniqueActivityList</code> class.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: There will be one fewer classes and it will be easier for the developer to understand the code.</p>
-</li>
-<li>
-<p>Cons: This violates Single Responsibility Principle (SRP). The <code>UniqueAcitivtyList</code> class should not perform the checking.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2</strong>: Use Google Maps API to obtain current time.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: <code>LocalDateTime.now()</code> is reliant on system clock. Thus, if the system clock is in error, tasks that are overdue will not be marked correctly.</p>
-</li>
-<li>
-<p>Cons: Reliant on Google Maps API, and might be difficult for the developer to understand.
-<br>
-<br></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="desk-board-storage-management"><a class="link" href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></h3>
+<h3 id="desk-board-storage-management" class="discrete">Desk Board Storage Management</h3>
 <div class="paragraph">
 <p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.2.4. Current implementation</a></h4>
 <div class="paragraph">
 <p>The management of Desk Board storage in CLIndar includes automatic saving and loading of data, as well as export and import operations.
 The following describes how each feature is implemented.</p>
 </div>
 <div class="sect4">
-<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">4.3.1.1. Storing <code>Task</code> and <code>Event</code> objects</a></h5>
+<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">4.2.4.1. Storing <code>Task</code> and <code>Event</code> objects</a></h5>
 <div class="paragraph">
 <p>In CLIndar, Desk Board data are stored using an xml file. For this purpose, <code>DeskBoard</code>, which is composed of <code>Task</code> and <code>Event</code> objects,
 is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
@@ -1686,7 +1632,7 @@ two separate lists.
 </div>
 </div>
 <div class="sect4">
-<h5 id="exporting-data"><a class="link" href="#exporting-data">4.3.1.2. Exporting data</a></h5>
+<h5 id="exporting-data"><a class="link" href="#exporting-data">4.2.4.2. Exporting data</a></h5>
 <div class="paragraph">
 <p><em>Figure ##</em> below shows the UML sequence diagram for export operation.</p>
 </div>
@@ -1717,7 +1663,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 </div>
 </div>
 <div class="sect4">
-<h5 id="importing-data"><a class="link" href="#importing-data">4.3.1.3. Importing data</a></h5>
+<h5 id="importing-data"><a class="link" href="#importing-data">4.2.4.3. Importing data</a></h5>
 <div class="paragraph">
 <p><em>Figure ##</em> below shows the sequence diagram for import operation.</p>
 </div>
@@ -1747,7 +1693,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.2.5. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1822,12 +1768,12 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-commands"><a class="link" href="#undo-redo-commands">4.4. Undo/Redo Commands</a></h3>
+<h3 id="undo-redo-commands"><a class="link" href="#undo-redo-commands">4.3. Undo/Redo Commands</a></h3>
 <div class="paragraph">
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.3.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of Desk Board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -1993,7 +1939,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.3.2. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -2124,8 +2070,99 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="auto-overdue"><a class="link" href="#auto-overdue">4.4. Auto overdue</a></h3>
 <div class="paragraph">
-<p><br></p>
+<p>The auto overdue feature will automatically tag tasks as "overdue" once their due date times have passed and tag events as "finished" once their end date times have passed.
+The current implementation and design considerations for this feature are explained in this section.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The auto overdue feature is implemented using the <code>ScheduledExecutorService</code> class, provided by the <code>java.util.concurrent</code> package. This class creates another thread in the system and that thread is scheduled to run a checker every 30 seconds.</p>
+</div>
+<div class="paragraph">
+<p>It is implemented in <code>DateTimeScheduler</code> as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">DateTimeScheduler</span> {
+
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">ScheduledExecutorService</span> executor = <span class="predefined-type">Executors</span>.newScheduledThreadPool(<span class="integer">1</span>);
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">void</span> initialise(Model model) {
+        /... some code .../
+        executor.scheduleWithFixedDelay(checker, <span class="integer">0</span>, <span class="integer">30</span>, <span class="predefined-type">TimeUnit</span>.SECONDS);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>checker</code> in the method <code>scheduleWithFixedDelay()</code> is implemented using the <code>Runnable</code> interface. The <code>checker</code>
+checks if a task has passed its due date time and if an event has passed its end date time. If so, the checker will tag an "Overdue" tag to the task and a "Finished" tag to the event.</p>
+</div>
+<div class="paragraph">
+<p>The <code>checker</code> is implemented as shown:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">void</span> run() {
+        /... some code .../
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        Platform.runLater(() -&gt; {
+            <span class="keyword">try</span> {
+                markingAsOverdue(taskList, currentDateTime);
+                markingAsFinished(eventList, currentDateTime);
+            } <span class="keyword">catch</span> () {
+                /... some code .../
+            }
+        });
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>checker</code> traverses the list of tasks and compares the due date time of each task to the <code>currentDateTime</code>, which is obtained from system time. Likewise,
+it traverses the list of events and compares the end date time of each event to the <code>currentDateTime</code>.
+Note that <code>Platform.runLater()</code> must wrap around the codes as <a href="https://stackoverflow.com/questions/21083945/how-to-avoid-not-on-fx-application-thread-currentthread-javafx-application-th">you cannot update the GUI from a thread other than the JavaFx Application thread.</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.4.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>This section describes various design considerations related to the auto overdue feature.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1 (current choice): Using <code>ScheduledExecutorService</code> to check for overdue tasks and finished events every 30 seconds.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: As 30 seconds are short, tasks and events can be checked whether they are overdue or finished respectively in <strong>real time</strong>.</p>
+</li>
+<li>
+<p>Cons: As there is a thread created in the system, CLIndar would be more memory-intensive.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Using <code>ScheduledExecutorService</code> to check for overdue tasks and finished events every 1 hour.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: CLIndar would be less memory-intensive as the checker is conducted at a longer interval.</p>
+</li>
+<li>
+<p>Cons: Overdue tasks and finished events will not be identified promptly.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -3249,10 +3286,26 @@ faster than a typical mouse/GUI-driven app</p>
 <div class="sect3">
 <h4 id="jarrett"><a class="link" href="#jarrett">B.1.1. Jarrett</a></h4>
 <div class="paragraph">
-<p><strong>Major enhancement:</strong> Creating 'overdue' command. This command shows a list of overdue tasks.</p>
+<p><strong>Major enhancement:</strong> Managing tasks and events in Desk Board, which includes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>adding</strong> of tasks and events into Desk Board;</p>
+</li>
+<li>
+<p><strong>removing</strong> tasks and events from Desk Board;</p>
+</li>
+<li>
+<p><strong>clearing</strong> tasks and events from Desk Board; and</p>
+</li>
+<li>
+<p><strong>keeping track</strong> of overdue tasks and finished events with the auto overdue feature and <code>overdue</code> command.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p><strong>Minor enhancement:</strong> Creating 'task' and 'event' commands which add Task and Event objects respectively.
+<p><strong>Minor enhancement:</strong> Implementing Java 8 <code>LocalDateTime</code> API. This API is used to parse the date times of tasks and events provided by the user and formats the date times for display in the UI.
 <br>
 <br></p>
 </div>
@@ -4018,7 +4071,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:13:26 UTC
+Last updated 2018-04-15 14:23:51 UTC
 </div>
 </div>
 </body>
