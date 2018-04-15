@@ -242,7 +242,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="gui-managing"><a class="link" href="#gui-managing">GUI Managing</a></h3>
+<h3 id="managing-the-gui"><a class="link" href="#managing-the-gui">Managing the GUI</a></h3>
 <div class="paragraph">
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
@@ -262,7 +262,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 <p><code>EventView</code> displays <code>Event</code> only on the GUI and comprises of <code>CalendarPanel</code>, <code>EventListPanel</code> and <code>BrowserPanel</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>centerStagePlaceholder</code> refers to the center stage of the GUI marked out by the red rectangle shown in <em>Figure 10</em> below.</p>
+<p><code>centerStagePlaceholder</code> resides in the <code>MainWindow</code> of the UI component. It refers to the center stage of the GUI marked out by the red rectangle shown in <em>Figure 27</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -278,7 +278,12 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    @Subscribe
+<pre>    @FXML
+    private StackPane centerStagePlaceholder;
+
+    /...some code.../
+
+    @Subscribe
     private void handleShowActivityRequestEvent(ShowActivityRequestEvent event)    {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         centerStagePlaceholder.getChildren().clear();
@@ -290,8 +295,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-<br></p>
+<p><br></p>
 </div>
 <div class="paragraph">
 <p>The calendar feature of the application makes use of the open source project - CalendarFX.</p>
@@ -312,8 +316,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-<br></p>
+<p><br></p>
 </div>
 <div class="paragraph">
 <p>Next, <code>BrowserPanel</code> is hidden in the GUI when the application is first initialised. Selecting a cell in either of the
@@ -350,8 +353,7 @@ cells in <code>TaskListPanel</code> or <code>EventListPanel</code> causes the <c
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-<br></p>
+<p><br></p>
 </div>
 <div class="paragraph">
 <p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe
@@ -359,11 +361,11 @@ the implementation for each command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">Listing of tasks and events</a></h4>
+<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">Listing of Tasks and Events</a></h4>
 <div class="paragraph">
 <p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all
 the <code>Task</code> objects added by the user is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by
-user are displayed using <code>EventListPanel</code>. Below are examples of a <code>TaskListCard</code> and an <code>EventListCard</code>.</p>
+user are displayed using <code>EventListPanel</code>. <em>Figure 28</em> and <em>Figure 29</em> are examples of a <code>TaskListCard</code> and an <code>EventListCard</code> respectively.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -381,7 +383,7 @@ user are displayed using <code>EventListPanel</code>. Below are examples of a <c
 <p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
 </div>
 <div class="paragraph">
-<p><em>Figure 10</em> below shows how the relevant primary and secondary components interact
+<p><em>Figure 30</em> below shows how the relevant primary and secondary components interact
 in a scenario where the user issues the command <code>list task</code>.</p>
 </div>
 <div class="imageblock">
@@ -485,7 +487,7 @@ definitely the preferred approach here.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:02:57 UTC
+Last updated 2018-04-15 14:13:26 UTC
 </div>
 </div>
 </body>

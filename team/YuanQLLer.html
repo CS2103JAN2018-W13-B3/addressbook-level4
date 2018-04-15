@@ -197,7 +197,7 @@ As such <code>edit event INDEX r/</code> would remove all the <code>tags</code> 
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">Model Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 16</em> below shows the architecture diagram of the <code>Model</code> component.</p>
+<p><em>Figure 20</em> below shows the architecture diagram of the <code>Model</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -237,7 +237,12 @@ As such <code>edit event INDEX r/</code> would remove all the <code>tags</code> 
 <p><br></p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p>This section describes various design considerations related to the backend design of the application.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-code-activity-code-code-task-code-and-code-event-code-class"><a class="link" href="#aspect-implementation-of-code-activity-code-code-task-code-and-code-event-code-class">Aspect: Implementation of <code>Activity</code>, <code>Task</code> and <code>Event</code> class</a></h5>
 <div class="paragraph">
 <p>There are two ways to represent tasks and events in the application. The following shows the pros and cons for each alternative:</p>
 </div>
@@ -280,12 +285,13 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </li>
 </ul>
 </div>
+</div>
 <div class="sect4">
 <h5 id="find-a-task-or-event"><a class="link" href="#find-a-task-or-event">Find a task or event</a></h5>
 <div class="paragraph">
-<p><code>FindEvent</code> class is added to locate <code>Task</code> and <code>Event</code> objects which contains any keywords in their name.
+<p><code>FindEvent</code> locates <code>Task</code> and <code>Event</code> objects which contain any keywords in their name.
 <br>
-The list showned in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt;`Predicate` set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
+The list shown in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt; <code>Predicate</code> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
 which is a subclass of <code>Predicate</code> class in Java library.
 <br>
 <br>
@@ -300,23 +306,26 @@ The following snippet shows the <code>executeUndoableCommand()</code> of the <co
     }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><br></p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">Editing a task or an event</a></h5>
 <div class="paragraph">
-<p><code>Task</code> and <code>Event</code> objects are editable through the use of <code>EditCommand</code>.
-In this application, if a commmand requires a target to operate on,
-it will determine which <code>Task</code> or <code>Event</code> to modify by using the keywords <code>task</code> or <code>list</code> and index of the target in the displayed list,
-The <code>task</code> and <code>event</code> keyword would tell the program which list to select from. The index will indicate which <code>Task</code> or <code>Event</code> is the target.
+<p><code>Task</code> and <code>Event</code> objects can be edited using <code>EditCommand</code>.
+In the application, if a command requires a target to operate on,
+it will determine which <code>Task</code> or <code>Event</code> to modify by using the keywords <code>task</code> or <code>list</code> and index of the target in the displayed list.
+The <code>Task</code> and <code>Event</code> keyword would tell the program which list to select from. The index will indicate which <code>Task</code> or <code>Event</code> is the target.
 <br>
 <br>
-The edit command can modify every attribute decribed in the <a href="#Adding a task">adding a task</a> and <a href="#Adding an event">adding an event</a> section above.
+The edit command can modify every attribute described in the <a href="#Adding a task">adding a task</a> and <a href="#Adding an event">adding an event</a> section above.
 These fields is identified using the same prefix as the adding command.
 <br>
 <br>
 The following snippet shows the <code>executeUndoableCommand()</code> of the <code>EditCommand</code> class.
-<code>UniqueActivityList</code> resides in the <code>Model</code> will be updated by having <code>editedActivity</code> replacing <code>activityToEdit</code>..
-If <code>editedActitity</code> is identical to any <code>Activity</code> in <code>UniqueActivityList</code>, the edit operation will be aborted and a <code>DuplicateActivityException</code> will be throun.</p>
+<code>UniqueActivityList</code> resides in the <code>Model</code> will be updated by having <code>editedActivity</code> replacing <code>activityToEdit</code>.
+If <code>editedActitity</code> is identical to any <code>Activity</code> in <code>UniqueActivityList</code>, the edit operation will be aborted and a <code>DuplicateActivityException</code> will be thrown.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -363,7 +372,7 @@ The api is given as below:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:02:57 UTC
+Last updated 2018-04-15 14:13:26 UTC
 </div>
 </div>
 </body>

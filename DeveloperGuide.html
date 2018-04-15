@@ -45,7 +45,7 @@
 <li><a href="#Implementation">4. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#Implementation-Activity">4.1. Activity Management</a></li>
-<li><a href="#gui-managing">4.2. GUI Managing</a></li>
+<li><a href="#managing-the-gui">4.2. Managing the GUI</a></li>
 <li><a href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></li>
 <li><a href="#undo-redo-commands">4.4. Undo/Redo Commands</a></li>
 <li><a href="#logging">4.5. Logging</a></li>
@@ -113,8 +113,9 @@
 <h2 id="Introduction"><a class="link" href="#Introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CLIndar is a desktop application that helps university computing students to manage their schedules.
-CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are familiar with.</p>
+<p>CLIndar is a desktop application that helps university computing students to manage their tasks and events.
+CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are familiar with.
+Thus, compared to traditional Graphical User Interface (GUI) applications, CLIndar is faster and provides more convenience for computing students.</p>
 </div>
 <div class="paragraph">
 <p>With CLIndar, you can:</p>
@@ -128,6 +129,10 @@ CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style comman
 <p>record all completed tasks and events, so that you know what you have done.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>We are looking for developers who are savvy, keen to learn about developing Java applications using JavaFx UI
+framework and most importantly keen on developing CLIndar further. If you are interested, send us an email at <a href="mailto:CLIndar@gmail.com">CLIndar@gmail.com</a>.</p>
 </div>
 <div class="paragraph">
 <p>This guide provides information on the core functionality of CLIndar and their implementation, so that a developer can
@@ -151,7 +156,7 @@ get started customizing and contributing to the application.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>JDK <code>1.8.0_60</code></strong> or later</p>
+<p><strong>JDK <code>1.8.0_144</code></strong> or later</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -208,7 +213,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <p>Open Git Bash. Change the current working directory to the location where you want the cloned directory to be made.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 3:</strong> Type the following:</p>
+<p><strong>Step 3:</strong> Type the following in the terminal:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -217,16 +222,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 </div>
 <div class="paragraph">
 <p>The sub-directory titled 'main' should appear if <code>git clone <a href="https://github.com/YOUR-USERNAME/main.git" class="bare">https://github.com/YOUR-USERNAME/main.git</a></code> at
-C:/Users/temp folder is executed. Figure 2 below describes this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/git%20clone.png" alt="git clone" width="600">
-</div>
-<div class="title">Figure 2. Finding cloned directory</div>
-</div>
-<div class="paragraph">
-<p><br></p>
+C:/Users/temp folder is executed.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -241,6 +237,9 @@ The sub-directory titled 'main' contains the files and metadata that Git require
 </table>
 </div>
 <div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
 <p><strong>Step 4:</strong> Open IntelliJ and configure the correct JKD version for Gradle.</p>
 </div>
 <div class="admonitionblock note">
@@ -251,57 +250,58 @@ The sub-directory titled 'main' contains the files and metadata that Git require
 </td>
 <td class="content">
 If you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project
-dialog first, as shown in the picture below. Closing current project in IntelliJ
-image::Close Project.png[width="600"]
+dialog first.
 <br>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><strong>Step 4a:</strong> Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt;
-<code>Project Structure</code>. Refer to Figure 3 below:</p>
+<p><strong>Step 4a:</strong> Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code>. Refer to <em>Figure 2</em> below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Configure.png" alt="Configure" width="600">
 </div>
-<div class="title">Figure 3. Configuring IntelliJ settings</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 4c:</strong> Go to the <code>Project</code> tab and under <code>Project SDK</code> section, click <code>New&#8230;&#8203;</code>. Find the directory
-of the JDK, and then click OK. Refer to Figure 4 below:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Setup%20JDK.png" alt="Setup JDK" width="600">
-</div>
-<div class="title">Figure 4. Setting up JDK</div>
+<div class="title">Figure 2. Configuring IntelliJ settings</div>
 </div>
 <div class="paragraph">
 <p><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 5:</strong> To import the project, click <code>Import Project</code>. Refer to Figure 5 below,</p>
+<p><strong>Step 4b:</strong> Go to the <code>Project</code> tab and under <code>Project SDK</code> section, click <code>New&#8230;&#8203;</code>. Find the directory
+of the JDK, and then click OK. Refer to <em>Figure 3</em> below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Setup%20JDK.png" alt="Setup JDK" width="600">
+</div>
+<div class="title">Figure 3. Setting up JDK</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 5:</strong> To import the project, click <code>Import Project</code>. Refer to <em>Figure 4</em> below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Import%20Project.png" alt="Import Project" width="600">
 </div>
-<div class="title">Figure 5. Importing project to IntelliJ</div>
+<div class="title">Figure 4. Importing project to IntelliJ</div>
 </div>
 <div class="paragraph">
 <p><br></p>
 </div>
 <div class="paragraph">
 <p><strong>Step 5a:</strong> Locate the <code>build.gradle</code> file in the <code>main</code> folder that you have cloned earlier and select it.
-Click <code>OK</code>. Refer to Figure 6 below:</p>
+Click <code>OK</code>. Refer to <em>Figure 5</em> below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/build.gradle.png" alt="build.gradle" width="400">
 </div>
-<div class="title">Figure 6. Locating <code>build.gradle</code> file</div>
+<div class="title">Figure 5. Locating <code>build.gradle</code> file</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -309,22 +309,69 @@ Click <code>OK</code>. Refer to Figure 6 below:</p>
 <div class="paragraph">
 <p><strong>Step 6b:</strong> In the <code>Import Project from Gradle</code> that appears, click <code>OK</code> again.<br></p>
 </div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7:</strong> To add dependency for CalendarFX, go to <a href="http://dlsc.com/products/calendarfx/" class="bare">http://dlsc.com/products/calendarfx/</a> and click 'Download'. Refer
+to <em>Figure 6</em> below:</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Import%20Project%20from%20Gradle.png" alt="Import Project from Gradle" width="600">
+<img src="images/CalendarFXDownload.png" alt="CalendarFXDownload" width="600">
 </div>
+<div class="title">Figure 6. Download CalendarFX</div>
 </div>
 <div class="paragraph">
 <p><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 7:</strong> Open the <code>Terminal</code> (refer to Figure 7) and run the command <code>gradlew processResources</code>
+<p><strong>Step 7a:</strong> Return to the project, go to <code>File</code> &gt; <code>Project Structure&#8230;&#8203;</code>. Refer to <em>Figure 7</em> below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FileProjectStructure.png" alt="FileProjectStructure" width="600">
+</div>
+<div class="title">Figure 7. Locating <code>Project Structure&#8230;&#8203;</code></div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7b:</strong> Click on <code>Modules</code> tab &gt; <code>addressbook-level4</code> module (lower) &gt; <code>Dependencies</code> tab &gt; '+' on the right side
+&gt; <code>1 JAR or directories&#8230;&#8203;</code>. Refer to <em>Figure 8</em> below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LocateAddDependency.png" alt="LocateAddDependency" width="600">
+</div>
+<div class="title">Figure 8. Adding dependency to project</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 7c:</strong> Locate the download location of CalendarFX. Select both <code>lib</code> and <code>ext</code> in the folder, click <code>OK</code>
+and click <code>OK</code> again. Refer to <em>Figure 9</em> below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/LibExtCalendarFX.png" alt="LibExtCalendarFX" width="600">
+</div>
+<div class="title">Figure 9. Adding <code>lib</code> and <code>ext</code> folder</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Step 8:</strong> Open the <code>Terminal</code> (refer to <em>Figure 10</em>) and run the command <code>gradlew processResources</code>
 (Mac/Linux: <code>./gradlew processResources</code>). It should finish with the 'BUILD SUCCESSFUL' message.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/intellij-terminal.png" alt="intellij terminal" width="600">
 </div>
+<div class="title">Figure 10. Opening Terminal on Intellij</div>
 </div>
 <div class="paragraph">
 <p>This will generate all resources required by the application and tests.
@@ -353,7 +400,9 @@ Click <code>OK</code>. Refer to Figure 6 below:</p>
 <div class="sect2">
 <h3 id="configurations-to-do-before-writing-code"><a class="link" href="#configurations-to-do-before-writing-code">2.4. Configurations to Do Before Writing Code</a></h3>
 <div class="paragraph">
-<p>After you set up the project in your own computer, you still need to do the the configurations described in the following sections before you can start developing this application further with your own code.</p>
+<p>After you set up the project in your own computer, you still need to do the the configurations described in the following sections before you can start developing this application further with your own code.
+<br>
+<br></p>
 </div>
 <div class="sect3">
 <h4 id="coding-style-configuration"><a class="link" href="#coding-style-configuration">2.4.1. Coding Style Configuration</a></h4>
@@ -384,22 +433,26 @@ Click <code>OK</code>. Refer to Figure 6 below:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>After you do the steps above, the Settings window should appear as shown in Figure 7 below.</p>
+<p>After you do the steps above, the Settings window should appear as shown in <em>Figure 11</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Import%20Setting.png" alt="Import Setting" width="600">
 </div>
-<div class="title">Figure 7. Configuring IntelliJ settings for import order</div>
+<div class="title">Figure 11. Configuring IntelliJ settings for import order</div>
 </div>
 <div class="paragraph">
-<p>Optionally, you can follow the <a href="UsingCheckstyle.html">UsingCheckstyle.adoc</a> document to configure Intellij to check style-compliance as you write the code.</p>
+<p>Optionally, you can follow the <a href="UsingCheckstyle.html">UsingCheckstyle.adoc</a> document to configure Intellij to check style-compliance as you write the code.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="documentation-updating"><a class="link" href="#documentation-updating">2.4.2. Documentation Updating</a></h4>
 <div class="paragraph">
-<p>After forking the repo, links in the documentation will still point to the <code>CS2103JAN2018-W13-B3/main</code> repo. If you plan to develop this as a separate product, you should replace the URL in the variable <code>repoURL</code> in <code>DeveloperGuide.adoc</code> and <code>UserGuide.adoc</code> with the URL of your fork.</p>
+<p>After forking the repo, links in the documentation will still point to the <code>CS2103JAN2018-W13-B3/main</code> repo. If you plan to develop this as a separate product, you should replace the URL in the variable <code>repoURL</code> in <code>DeveloperGuide.adoc</code> and <code>UserGuide.adoc</code> with the URL of your fork.
+<br>
+<br></p>
 </div>
 </div>
 <div class="sect3">
@@ -437,6 +490,10 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="steps-to-get-started-with-coding"><a class="link" href="#steps-to-get-started-with-coding">2.4.4. Steps to Get Started with Coding</a></h4>
@@ -470,13 +527,13 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
 <div class="paragraph">
-<p>The high-level design of this application is illustrated by <em>Figure 8</em> below.</p>
+<p>The high-level design of this application is illustrated by <em>Figure 12</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
 </div>
-<div class="title">Figure 8. Architecture diagram</div>
+<div class="title">Figure 12. Architecture diagram</div>
 </div>
 <div class="paragraph">
 <p>Given below is a quick overview of the components, separated into 'Main' and 'Secondary' components.</p>
@@ -492,6 +549,10 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
 </div>
 <div class="sect3">
 <h4 id="primary-component"><a class="link" href="#primary-component">3.1.1. Primary Component</a></h4>
@@ -529,7 +590,7 @@ is stored in the <code>seedu.address.commons</code> package.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="secondary-component"><a class="link" href="#secondary-component">3.1.2. Secondary component</a></h4>
+<h4 id="secondary-component"><a class="link" href="#secondary-component">3.1.2. Secondary Component</a></h4>
 <div class="paragraph">
 <p>The secondary component of the application consist of four components:</p>
 </div>
@@ -564,27 +625,30 @@ is stored in the <code>seedu.address.commons</code> package.</p>
 </div>
 <div class="paragraph">
 <p>For example, the <code>Logic</code> component defines its API in the <code>Logic.java</code> interface and exposes its functionality using the
-<code>LogicManager.java</code> class. <em>Figure 9</em> below is an overview of the <code>Logic</code> component.</p>
+<code>LogicManager.java</code> class. <em>Figure 13</em> below is an overview of the <code>Logic</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicAPI.png" alt="LogicAPI" width="800">
 </div>
-<div class="title">Figure 9. The API of the <code>Logic</code> component</div>
+<div class="title">Figure 13. The API of the <code>Logic</code> component</div>
 </div>
 <div class="paragraph">
-<p><br></p>
+<p><br>
+<br></p>
 </div>
-<h5 id="events-driven-nature-of-the-design" class="discrete">Events-Driven Nature of the Design</h5>
+</div>
+<div class="sect3">
+<h4 id="events-driven-design-nature"><a class="link" href="#events-driven-design-nature">3.1.3. Events-driven Design Nature</a></h4>
 <div class="paragraph">
-<p><em>Figure 10</em> below shows how the primary and secondary components interact in a scenario
-where the user issues the command <code>delete 1</code>.</p>
+<p><em>Figure 14</em> below shows how the primary and secondary components interact in a scenario
+where the user issues the command <code>rm task 1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeleteActivity.png" alt="SDforDeleteActivity" width="800">
 </div>
-<div class="title">Figure 10. Component interactions for <code>delete 1</code> command (part 1)</div>
+<div class="title">Figure 14. Components interactions for <code>rm task 1</code> command (part 1)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -600,13 +664,13 @@ are changed, instead of asking the <code>Storage</code> to save the updates into
 </table>
 </div>
 <div class="paragraph">
-<p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
+<p><em>Figure 15</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeleteActivityEventHandling.png" alt="SDforDeleteActivityEventHandling" width="800">
 </div>
-<div class="title">Figure 11. Component interactions for <code>delete 1</code> command (part 2)</div>
+<div class="title">Figure 15. Components interactions for <code>rm task 1</code> command (part 2)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -621,10 +685,8 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </table>
 </div>
 <div class="paragraph">
-<p>The section below gives more details of each of the secondary component.</p>
-</div>
-<div class="paragraph">
-<p><br>
+<p>The section below gives more details of each of the secondary component.
+<br>
 <br></p>
 </div>
 </div>
@@ -632,13 +694,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="sect2">
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 12</em> below shows the architecture diagram of the <code>UI</code> component.</p>
+<p><em>Figure 16</em> below shows the architecture diagram of the <code>UI</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
 </div>
-<div class="title">Figure 12. Structure of the <code>UI</code> component</div>
+<div class="title">Figure 16. Structure of the <code>UI</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -678,22 +740,25 @@ from the abstract <code>UiPart</code> class.</p>
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 13</em> below shows the architecture diagram of the <code>Logic</code> component.</p>
+<p><em>Figure 17</em> below shows the architecture diagram of the <code>Logic</code> component.</p>
 </div>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
-<div class="title">Figure 13. Structure of the <code>Logic</code> Component</div>
+<div class="title">Figure 17. Structure of the <code>Logic</code> Component</div>
 </div>
 <div class="paragraph">
-<p>Finer details concerning <code>XYZCommand</code> and <code>Command</code> in <a href="#fig-LogicClassDiagram">Figure 13, &#8220;Structure of the <code>Logic</code> Component&#8221;</a> in <em>Figure 14</em> below.</p>
+<p><br></p>
+</div>
+<div class="paragraph">
+<p>Finer details concerning <code>XYZCommand</code> and <code>Command</code> in <a href="#fig-LogicClassDiagram">Figure 17, &#8220;Structure of the <code>Logic</code> Component&#8221;</a> in <em>Figure 18</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 14. Structure of commands in the <code>Logic</code> component</div>
+<div class="title">Figure 18. Structure of commands in the <code>Logic</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -722,13 +787,13 @@ from the abstract <code>UiPart</code> class.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Figure 15 below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("rm task 1")</code> API call.</p>
+<p><em>Figure 19</em> below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("rm task 1")</code> API call.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
 </div>
-<div class="title">Figure 15. Interactions inside the <code>Logic</code> component for the <code>rm task 1</code> command</div>
+<div class="title">Figure 19. Interactions inside the <code>Logic</code> component for the <code>rm task 1</code> command</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -737,13 +802,13 @@ from the abstract <code>UiPart</code> class.</p>
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 16</em> below shows the architecture diagram of the <code>Model</code> component.</p>
+<p><em>Figure 20</em> below shows the architecture diagram of the <code>Model</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 16. Structure of the <code>Model</code> component</div>
+<div class="title">Figure 20. Structure of the <code>Model</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -780,13 +845,13 @@ from the abstract <code>UiPart</code> class.</p>
 <div class="sect2">
 <h3 id="Design-Storage"><a class="link" href="#Design-Storage">3.5. Storage Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 18</em> below shows the structure of the <code>Storage</code> component.</p>
+<p><em>Figure 21</em> below shows the structure of the <code>Storage</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
-<div class="title">Figure 17. Structure of the <code>Storage</code> component</div>
+<div class="title">Figure 21. Structure of the <code>Storage</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -830,15 +895,15 @@ It is an important class in this application as it represents each entry in Desk
 In CLIndar, an entry in Desk Board can be either a <code>Task</code> or an <code>Event</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p><em>Figure 19</em> below shows the relationship between <code>Activity</code> and its relevant components.</p>
+<p><em>Figure 22</em> below shows the relationship between <code>Activity</code> and its relevant components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UniqueActivityListClassDiagram.png" alt="UniqueActivityListClassDiagram" width="550">
 </div>
-<div class="title">Figure 18. Class diagram for <code>Activity</code></div>
+<div class="title">Figure 22. Class diagram for <code>Activity</code></div>
 </div>
 <div class="paragraph">
 <p>As shown above, <code>Activity</code> is a superclass for <code>Task</code> and <code>Event</code>.
@@ -850,18 +915,20 @@ This is because an entry in Desk Board must be either a <code>Task</code> or an 
 <div class="sect4">
 <h5 id="adding-a-task"><a class="link" href="#adding-a-task">4.1.1.1. Adding a task</a></h5>
 <div class="paragraph">
-<p><code>Task</code> is one of the two types of entries in Desk Board in CLIndar.
-<code>Task</code> represents a piece of work to be done by a certain deadline.
+<p><code>Task</code> is one of the two types of entries in Desk Board in CLIndar.</p>
+</div>
+<div class="paragraph">
+<p>It represents a piece of work to be done by a certain deadline.
 Once the <code>Task</code> has been done by user, it can be mark as completed in the application.</p>
 </div>
 <div class="paragraph">
-<p><em>Figure 20</em> below shows how <code>Task</code> is represented in the application.</p>
+<p><em>Figure 23</em> below shows how <code>Task</code> is represented in the application.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/TaskClassDiagram.png" alt="TaskClassDiagram" width="550">
 </div>
-<div class="title">Figure 19. Class diagram for <code>Task</code></div>
+<div class="title">Figure 23. Class diagram for <code>Task</code></div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Task</code> is given below:</p>
@@ -889,6 +956,25 @@ When a <code>TaskCommand</code> object calls the method <code>executeUndoableCom
 the <code>Task</code> object is added into <code>UniqueActivityList</code> in the <code>DeskBoard</code>.
 Note that the <code>Task</code> object will not be added if an equivalent <code>Task</code>
 is found in Desk Board or the <code>name</code> or <code>dueDateTime</code> field is left empty.</p>
+</div>
+<div class="paragraph">
+<p><em>Figure 24</em> below shows how the relevant primary and secondary components interact
+in a scenario where the user issues the command <code>task n/NAME..</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SDforTask.png" alt="SDforTask" width="650">
+</div>
+<div class="title">Figure 24. Relevant components interaction for <code>task n/NAME..</code> command (part 1)</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 25</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SDHandlingTaskEvent.png" alt="SDHandlingTaskEvent" width="650">
+</div>
+<div class="title">Figure 25. Relevant components interaction for <code>task n/NAME..</code> command (part 2)</div>
 </div>
 <div class="paragraph">
 <p>The following is a snippet of code for <code>TaskCommand</code> 's  <code>executeUndoableCommand()</code> method.</p>
@@ -919,13 +1005,13 @@ is found in Desk Board or the <code>name</code> or <code>dueDateTime</code> fiel
 <code>Event</code> represents an activity with fixed start and end times, such as a test, doctor appointment etc.</p>
 </div>
 <div class="paragraph">
-<p><em>Figure 19</em> below shows how <code>Event</code> is implemented in the application.</p>
+<p><em>Figure 26</em> below shows how <code>Event</code> is implemented in the application.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/EventClassDiagram.png" alt="EventClassDiagram" width="550">
 </div>
-<div class="title">Figure 20. Class diagram for <code>Event</code></div>
+<div class="title">Figure 26. Class diagram for <code>Event</code></div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Event</code> is given below:</p>
@@ -996,9 +1082,9 @@ Note that <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Tas
 <div class="sect4">
 <h5 id="find-a-task-or-event"><a class="link" href="#find-a-task-or-event">4.1.1.4. Find a task or event</a></h5>
 <div class="paragraph">
-<p><code>FindEvent</code> class is added to locate <code>Task</code> and <code>Event</code> objects which contains any keywords in their name.
+<p><code>FindEvent</code> locates <code>Task</code> and <code>Event</code> objects which contain any keywords in their name.
 <br>
-The list showned in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt;`Predicate` set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
+The list shown in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt; <code>Predicate</code> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
 which is a subclass of <code>Predicate</code> class in Java library.
 <br>
 <br>
@@ -1013,23 +1099,26 @@ The following snippet shows the <code>executeUndoableCommand()</code> of the <co
     }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p><br></p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">4.1.1.5. Editing a task or an event</a></h5>
 <div class="paragraph">
-<p><code>Task</code> and <code>Event</code> objects are editable through the use of <code>EditCommand</code>.
-In this application, if a commmand requires a target to operate on,
-it will determine which <code>Task</code> or <code>Event</code> to modify by using the keywords <code>task</code> or <code>list</code> and index of the target in the displayed list,
-The <code>task</code> and <code>event</code> keyword would tell the program which list to select from. The index will indicate which <code>Task</code> or <code>Event</code> is the target.
+<p><code>Task</code> and <code>Event</code> objects can be edited using <code>EditCommand</code>.
+In the application, if a command requires a target to operate on,
+it will determine which <code>Task</code> or <code>Event</code> to modify by using the keywords <code>task</code> or <code>list</code> and index of the target in the displayed list.
+The <code>Task</code> and <code>Event</code> keyword would tell the program which list to select from. The index will indicate which <code>Task</code> or <code>Event</code> is the target.
 <br>
 <br>
-The edit command can modify every attribute decribed in the <a href="#adding-a-task">adding a task</a> and <a href="#adding-an-event">adding an event</a> section above.
+The edit command can modify every attribute described in the <a href="#adding-a-task">adding a task</a> and <a href="#adding-an-event">adding an event</a> section above.
 These fields is identified using the same prefix as the adding command.
 <br>
 <br>
 The following snippet shows the <code>executeUndoableCommand()</code> of the <code>EditCommand</code> class.
-<code>UniqueActivityList</code> resides in the <code>Model</code> will be updated by having <code>editedActivity</code> replacing <code>activityToEdit</code>..
-If <code>editedActitity</code> is identical to any <code>Activity</code> in <code>UniqueActivityList</code>, the edit operation will be aborted and a <code>DuplicateActivityException</code> will be throun.</p>
+<code>UniqueActivityList</code> resides in the <code>Model</code> will be updated by having <code>editedActivity</code> replacing <code>activityToEdit</code>.
+If <code>editedActitity</code> is identical to any <code>Activity</code> in <code>UniqueActivityList</code>, the edit operation will be aborted and a <code>DuplicateActivityException</code> will be thrown.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1135,7 +1224,12 @@ to completed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>This section describes various design considerations related to the backend design of the application.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-code-activity-code-code-task-code-and-code-event-code-class"><a class="link" href="#aspect-implementation-of-code-activity-code-code-task-code-and-code-event-code-class">4.1.2.1. Aspect: Implementation of <code>Activity</code>, <code>Task</code> and <code>Event</code> class</a></h5>
 <div class="paragraph">
 <p>There are two ways to represent tasks and events in the application. The following shows the pros and cons for each alternative:</p>
 </div>
@@ -1180,8 +1274,9 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="gui-managing"><a class="link" href="#gui-managing">4.2. GUI Managing</a></h3>
+<h3 id="managing-the-gui"><a class="link" href="#managing-the-gui">4.2. Managing the GUI</a></h3>
 <div class="paragraph">
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
@@ -1201,13 +1296,13 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 <p><code>EventView</code> displays <code>Event</code> only on the GUI and comprises of <code>CalendarPanel</code>, <code>EventListPanel</code> and <code>BrowserPanel</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>centerStagePlaceholder</code> refers to the center stage of the GUI marked out by the red rectangle shown in <em>Figure 10</em> below.</p>
+<p><code>centerStagePlaceholder</code> resides in the <code>MainWindow</code> of the UI component. It refers to the center stage of the GUI marked out by the red rectangle shown in <em>Figure 27</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/centerStagePlaceholder.png" alt="centerStagePlaceholder" width="650">
 </div>
-<div class="title">Figure 21. <code>centerStagePlaceholder</code></div>
+<div class="title">Figure 27. <code>centerStagePlaceholder</code></div>
 </div>
 <div class="paragraph">
 <p>To facilitate switching of views, the .xfml file of relevant view will be added to <code>centerStagePlaceholder</code>.</p>
@@ -1217,7 +1312,12 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    @Subscribe
+<pre>    @FXML
+    private StackPane centerStagePlaceholder;
+
+    /...some code.../
+
+    @Subscribe
     private void handleShowActivityRequestEvent(ShowActivityRequestEvent event)    {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         centerStagePlaceholder.getChildren().clear();
@@ -1229,8 +1329,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-<br></p>
+<p><br></p>
 </div>
 <div class="paragraph">
 <p>The calendar feature of the application makes use of the open source project - CalendarFX.</p>
@@ -1251,8 +1350,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-<br></p>
+<p><br></p>
 </div>
 <div class="paragraph">
 <p>Next, <code>BrowserPanel</code> is hidden in the GUI when the application is first initialised. Selecting a cell in either of the
@@ -1289,8 +1387,7 @@ cells in <code>TaskListPanel</code> or <code>EventListPanel</code> causes the <c
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-<br></p>
+<p><br></p>
 </div>
 <div class="paragraph">
 <p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe
@@ -1298,36 +1395,36 @@ the implementation for each command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">4.2.2. Listing of tasks and events</a></h4>
+<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">4.2.2. Listing of Tasks and Events</a></h4>
 <div class="paragraph">
 <p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all
 the <code>Task</code> objects added by the user is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by
-user are displayed using <code>EventListPanel</code>. Below are examples of a <code>TaskListCard</code> and an <code>EventListCard</code>.</p>
+user are displayed using <code>EventListPanel</code>. <em>Figure 28</em> and <em>Figure 29</em> are examples of a <code>TaskListCard</code> and an <code>EventListCard</code> respectively.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/TaskCard.png" alt="TaskCard" width="300">
 </div>
-<div class="title">Figure 22. <code>TaskListCard</code> example</div>
+<div class="title">Figure 28. <code>TaskListCard</code> example</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/EventCard.png" alt="EventCard" width="300">
 </div>
-<div class="title">Figure 23. <code>EventListCard</code> example</div>
+<div class="title">Figure 29. <code>EventListCard</code> example</div>
 </div>
 <div class="paragraph">
 <p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
 </div>
 <div class="paragraph">
-<p><em>Figure 10</em> below shows how the relevant primary and secondary components interact
+<p><em>Figure 30</em> below shows how the relevant primary and secondary components interact
 in a scenario where the user issues the command <code>list task</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDListCommand.png" alt="SDListCommand" width="650">
 </div>
-<div class="title">Figure 24. Component interactions for <code>list task</code> command (part 1)</div>
+<div class="title">Figure 30. Component interactions for <code>list task</code> command (part 1)</div>
 </div>
 <div class="paragraph">
 <p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
@@ -1337,7 +1434,7 @@ results in 'centerStagePlaceholder` of the UI being updated to display <code>Tas
 <div class="content">
 <img src="images/SDListCommandEventHandling.png" alt="SDListCommandEventHandling" width="650">
 </div>
-<div class="title">Figure 25. Component interactions for <code>list task</code> command (part 2)</div>
+<div class="title">Figure 31. Component interactions for <code>list task</code> command (part 2)</div>
 </div>
 <div class="paragraph">
 <p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> and/or <code>Event</code> objects in the GUI.
@@ -1597,7 +1694,7 @@ two separate lists.
 <div class="content">
 <img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 26. Export sequence diagram</div>
+<div class="title">Figure 32. Export sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>As seen above, this operation requires the <code>Logic</code> component to access the <code>Storage</code> component.
@@ -1610,7 +1707,7 @@ The modifications made to classes in the <code>Logic</code> component are shown 
 <div class="content">
 <img src="images/LogicCommandClassDiagramModified.png" alt="LogicCommandClassDiagramModified" width="800">
 </div>
-<div class="title">Figure 27. Modification to <code>Logic</code> component</div>
+<div class="title">Figure 33. Modification to <code>Logic</code> component</div>
 </div>
 <div class="paragraph">
 <p>After <code>ExportCommand</code> gains access to the application&#8217;s <code>Storage</code> object, it can then call
@@ -1628,7 +1725,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 <div class="content">
 <img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 28. Import sequence diagram</div>
+<div class="title">Figure 34. Import sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>Just like <code>ExportCommand</code>, <code>ImportCommand</code> also needs to have access to the application&#8217;s <code>Storage</code> object.
@@ -1642,7 +1739,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="content">
 <img src="images/AddActivitiesSequenceDiagram.png" alt="AddActivitiesSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 29. <code>addActivities()</code> sequence diagram</div>
+<div class="title">Figure 35. <code>addActivities()</code> sequence diagram</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -1741,7 +1838,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 30. Class diagram of a Logic command</div>
+<div class="title">Figure 36. Class diagram of a Logic command</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of Desk Board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -1793,7 +1890,7 @@ The <code>delete 5</code> command will then be pushed onto the <code>undoStack</
 <div class="content">
 <img src="images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
 </div>
-<div class="title">Figure 31. Undo and redo starting stack diagram</div>
+<div class="title">Figure 37. Undo and redo starting stack diagram</div>
 </div>
 <div class="paragraph">
 <p>As the user continues to use the program, more commands are added into the <code>undoStack</code>.
@@ -1804,7 +1901,7 @@ For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add
 <div class="content">
 <img src="images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
 </div>
-<div class="title">Figure 32. Undo and redo stack diagram after more command is added</div>
+<div class="title">Figure 38. Undo and redo stack diagram after more command is added</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1829,7 +1926,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
-<div class="title">Figure 33. Undo stack pops into the redo stack</div>
+<div class="title">Figure 39. Undo stack pops into the redo stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1850,7 +1947,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 34. Undo and redo stack sequence diagram</div>
+<div class="title">Figure 40. Undo and redo stack sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores Desk Board to the state after the command is executed).</p>
@@ -1874,7 +1971,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
-<div class="title">Figure 35. Adding 'ClearCommand' to the undo stack</div>
+<div class="title">Figure 41. Adding 'ClearCommand' to the undo stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -1883,7 +1980,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
-<div class="title">Figure 36. 'ListCommand' does not affect the undo stack</div>
+<div class="title">Figure 42. 'ListCommand' does not affect the undo stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -1892,7 +1989,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
-<div class="title">Figure 37. Activity diagram for undo and redo</div>
+<div class="title">Figure 43. Activity diagram for undo and redo</div>
 </div>
 </div>
 <div class="sect3">
@@ -2143,7 +2240,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 38. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 44. Saving documentation as PDF files in Chrome</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -2230,12 +2327,12 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <div class="sect2">
 <h3 id="test-types"><a class="link" href="#test-types">6.2. Test Types</a></h3>
 <div class="paragraph">
-<p>We have two types of tests, based on whether the tests involve the GUI:</p>
+<p>There is two types of tests, based on whether the tests involve the GUI:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>GUI tests</strong> which include:</p>
+<p><strong>GUI tests</strong> which include :</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3921,7 +4018,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:02:57 UTC
+Last updated 2018-04-15 14:13:26 UTC
 </div>
 </div>
 </body>
