@@ -25,7 +25,23 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CLIndar is a desktop application for managing schedules catered specially to university computing students. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>CLIndar is a desktop application that helps university computing students to manage their schedules.
+The application deals with 2 types of entries:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>tasks: things that need to be done by a certain deadline; and</p>
+</li>
+<li>
+<p>events: things that occur at a specific time and place.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>CLIndar is <strong>Common-Line Interface (CLI)-based and uses Linux-style commands</strong>, which computing students are familiar with.
+It also has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -35,26 +51,53 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to import data from an xml file.</strong></p>
+<p><strong>Major enhancement</strong>: Added <strong>the ability to manage storage of tasks and events.</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to add all entries from application data previously saved in an xml file.</p>
+<p>What it does:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>automatically saves</strong> data after each update;</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because it spares users the trouble of adding each entry one by one from data previously saved in a different file. This file could have been transferred from another computer.</p>
+<p><strong>automatically loads</strong> latest data upon launching of application;</p>
 </li>
 <li>
-<p>Highlights: This enhancement requires new classes to be created that are different from existing classes. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing classes.</p>
+<p>allows the user to <strong>export</strong> data into an xml file; and</p>
 </li>
 <li>
-<p>Credits: This enhancement makes uses and enhances existing code for reading data from an xml file written by previous developers.</p>
+<p>allows the user to <strong>import</strong> data from an xml file.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added an autosorting feature that allows the entries to be sorted by date/time every time a new entry is added.</p>
+<p>Justification: This enhancement improves the product significantly because:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the automatic saving and loading allow the user to <strong>view his/her latest tasks and events</strong>; and</p>
+</li>
+<li>
+<p>the export and import features allow the user to <strong>move their data (in the form of an xml file) from one computer to another</strong> (e.g. through e-mail or thumb drive).<br></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Highlights: This enhancement requires new association between 2 major components (Logic and Storage) that were previously only indirectly related.
+It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes at different levels of abstraction.</p>
+</li>
+<li>
+<p>Credits: This enhancement makes use of and enhances existing code written by previous developers, that deals with reading data from and saving data to an xml file.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Added an automatic sorting feature that allows the entries to be sorted by date/time every time a new entry is added.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/functional/karenfrilya97.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/test/karenfrilya97.md">Test code</a>]</p>
@@ -78,7 +121,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Refactored the Storage component for the purpose of morphing Address Book - Level 4 into CLIndar (Pull requests <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/40">#40</a>, <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/53">#53</a>,
+<p>Refactored the Storage component in order to morph Address Book - Level 4 into CLIndar (Pull requests <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/40">#40</a>, <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/53">#53</a>,
 <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/64">#64</a>, <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/93">#93</a>)</p>
 </li>
 </ul>
@@ -130,6 +173,57 @@
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="exporting-data-code-export-code-code-as-of-v1-5-code"><a class="link" href="#exporting-data-code-export-code-code-as-of-v1-5-code">Exporting data : <code>export</code> <code>[As of v1.5]</code></a></h3>
+<div class="paragraph">
+<p>Exports Desk Board data into an xml file in the specified directory.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This command does not allow overwriting of existing file.
+If a file with the same name exists in the same directory as <code>FILE_PATH</code>, then this command will not be executed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>export f/FILE_PATH</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>export f/C:\data\deskBoard.xml</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-data-code-import-code-code-as-of-v1-5rc-code"><a class="link" href="#importing-data-code-import-code-code-as-of-v1-5rc-code">Importing data : <code>import</code> <code>[As of v1.5rc]</code></a></h3>
+<div class="paragraph">
+<p>Imports all entries from another Desk Board file in the specified file path.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>import f/FILE_PATH</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>import f/C:\data\deskBoard.xml</code></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -151,13 +245,13 @@
 <p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
 <p>The management of Desk Board storage in CLIndar includes automatic saving and loading of data, as well as export and import operations.
 The following describes how each feature is implemented.</p>
 </div>
 <div class="sect4">
-<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">Storing <code>Task</code> and <code>Event</code> objects</a></h5>
+<h5 id="storing-tasks-and-events"><a class="link" href="#storing-tasks-and-events">Storing tasks and events</a></h5>
 <div class="paragraph">
 <p>In CLIndar, Desk Board data are stored using an xml file. For this purpose, <code>DeskBoard</code>, which is composed of <code>Task</code> and <code>Event</code> objects,
 is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
@@ -255,7 +349,7 @@ two separate lists.
 <div class="sect4">
 <h5 id="exporting-data"><a class="link" href="#exporting-data">Exporting data</a></h5>
 <div class="paragraph">
-<p><em>Figure ##</em> below shows the UML sequence diagram for export operation.</p>
+<p><em>Figure 32</em> below shows the sequence diagram for export operation.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -268,7 +362,7 @@ two separate lists.
 In particular, there needs to be an association between <code>ExecuteCommand</code> and <code>Storage</code>.
 The way such association can be created is similar to how an association between any subclass of <code>Command</code>
 and <code>Model</code> is formed.
-The modifications made to classes in the <code>Logic</code> component are shown in red in <em>Figure ##</em>.</p>
+The modifications made to classes in the <code>Logic</code> component are shown in red in <em>Figure 33</em>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -286,7 +380,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 <div class="sect4">
 <h5 id="importing-data"><a class="link" href="#importing-data">Importing data</a></h5>
 <div class="paragraph">
-<p><em>Figure ##</em> below shows the sequence diagram for import operation.</p>
+<p><em>Figure 34</em> below shows the sequence diagram for import operation.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -299,7 +393,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 This object reads the xml file at the given <code>filePath</code> and returns a <code>ReadOnlyDeskBoard</code> object based on the data saved in the file.
 Each <code>Activity</code> in the <code>ReadOnlyDeskBoard</code> is then added into the application&#8217;s <code>DeskBoard</code>.
 This operation is abstracted to follow Single Level of Abstraction Principle (SLAP).
-<em>Figure ##</em> below shows how <code>addActivities</code> is implemented in <code>Model</code> component which results in new entries from
+<em>Figure 35</em> below shows how <code>addActivities</code> is implemented in <code>Model</code> component which results in new entries from
 another <code>DeskBoard</code> object being added into the application&#8217;s <code>Model</code>.</p>
 </div>
 <div class="imageblock">
@@ -314,7 +408,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -386,6 +480,35 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="paragraph">
 <p><br></p>
 </div>
+<div class="sect4">
+<h5 id="sorting-task-and-event-lists-automatically"><a class="link" href="#sorting-task-and-event-lists-automatically">Sorting task and event lists automatically</a></h5>
+<div class="paragraph">
+<p>When a <code>Task</code> or <code>Event</code> is added, it is inserted into the respective list such that the list is sorted in terms of their <code>dueDateTime</code> or <code>startDateTime</code> respectively.
+The sorting is done in the <code>UniqueActivityList</code> which contains a list of unique activities which is either a <code>Task</code> or an <code>Event</code>
+stored in an <code>internalList</code>.
+Each time an <code>Activity</code> is added to or edited in the <code>UniqueActivityList</code>,
+<code>internalList</code> will be sorted according to its <code>dateTime</code> attribute.
+Note that <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Task</code> and <code>startDateTime</code> for <code>Event</code>.</p>
+</div>
+<div class="paragraph">
+<p>Following is a snippet which illustrates the function of <code>UniqueActivityList</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">void</span> add(Activity toAdd) <span class="directive">throws</span> DuplicateActivityException {
+        requireNonNull(toAdd);
+        <span class="keyword">if</span> (contains(toAdd)) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> DuplicateActivityException();
+        }
+        internalList.add(toAdd);
+        <span class="predefined-type">Collections</span>.sort(internalList, dateTimeComparator);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -393,7 +516,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:51:09 UTC
+Last updated 2018-04-15 15:53:02 UTC
 </div>
 </div>
 </body>

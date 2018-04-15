@@ -45,11 +45,12 @@
 <li><a href="#Implementation">4. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#Implementation-Activity">4.1. Activity Management</a></li>
-<li><a href="#managing-the-gui">4.2. Managing the GUI</a></li>
-<li><a href="#undo-redo-commands">4.3. Undo/Redo Commands</a></li>
-<li><a href="#auto-overdue">4.4. Auto overdue</a></li>
-<li><a href="#logging">4.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.6. Configuration</a></li>
+<li><a href="#gui-management">4.2. GUI Management</a></li>
+<li><a href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></li>
+<li><a href="#undo-redo-commands">4.4. Undo/Redo Commands</a></li>
+<li><a href="#overdue-feature">4.5. Overdue Feature</a></li>
+<li><a href="#logging">4.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -114,11 +115,7 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>CLIndar is a desktop application that helps university computing students to manage their tasks and events.
-CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are familiar with.
-Thus, compared to traditional Graphical User Interface (GUI) applications, CLIndar is faster and provides more convenience for computing students.</p>
-</div>
-<div class="paragraph">
-<p>With CLIndar, you can:</p>
+With CLIndar, you can:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -131,11 +128,16 @@ Thus, compared to traditional Graphical User Interface (GUI) applications, CLInd
 </ul>
 </div>
 <div class="paragraph">
-<p>We are looking for developers who are savvy, keen to learn about developing Java applications using JavaFx UI
-framework and most importantly keen on developing CLIndar further. If you are interested, send us an email at <a href="mailto:CLIndar@gmail.com">CLIndar@gmail.com</a>.</p>
+<p>CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are familiar with.
+Thus, compared to traditional Graphical User Interface (GUI) applications, this application is faster and provides more convenience for computing students.</p>
 </div>
 <div class="paragraph">
-<p>This guide provides information on the core functionality of CLIndar and their implementation, so that a developer can
+<p>We are looking for developers who are savvy, keen to learn about developing Java applications using JavaFx UI
+framework and most importantly keen on developing CLIndar further. If you are interested, send us an email at <a href="mailto:CLIndar@gmail.com">CLIndar@gmail.com</a>.
+CLIndar is <strong>Common-Line Interface (CLI)-based and uses Linux-style commands</strong>, which computing students are familiar with.</p>
+</div>
+<div class="paragraph">
+<p>This guide provides information on the core functionalities of CLIndar and their implementation, so that a developer can
 get started customizing and contributing to the application.</p>
 </div>
 </div>
@@ -1225,9 +1227,6 @@ to completed.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
-<div class="paragraph">
-<p>This section describes various design considerations related to the backend design of the application.</p>
-</div>
 <div class="sect4">
 <h5 id="aspect-implementation-of-code-activity-code-code-task-code-and-code-event-code-class"><a class="link" href="#aspect-implementation-of-code-activity-code-code-task-code-and-code-event-code-class">4.1.2.1. Aspect: Implementation of <code>Activity</code>, <code>Task</code> and <code>Event</code> class</a></h5>
 <div class="paragraph">
@@ -1276,12 +1275,12 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-the-gui"><a class="link" href="#managing-the-gui">4.2. Managing the GUI</a></h3>
+<h3 id="gui-management"><a class="link" href="#gui-management">4.2. GUI Management</a></h3>
 <div class="paragraph">
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current implementation</a></h4>
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>There are 3 views for the GUI of CLIndar - <code>MainView</code>, <code>TaskView</code> and <code>EventView</code>.</p>
 </div>
@@ -1389,13 +1388,7 @@ cells in <code>TaskListPanel</code> or <code>EventListPanel</code> causes the <c
 <div class="paragraph">
 <p><br></p>
 </div>
-<div class="paragraph">
-<p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe
-the implementation for each command.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">4.2.2. Listing of Tasks and Events</a></h4>
+<h5 id="listing-tasks-and-events" class="discrete">Listing tasks and events</h5>
 <div class="paragraph">
 <p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all
 the <code>Task</code> objects added by the user is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by
@@ -1427,7 +1420,7 @@ in a scenario where the user issues the command <code>list task</code>.</p>
 <div class="title">Figure 30. Component interactions for <code>list task</code> command (part 1)</div>
 </div>
 <div class="paragraph">
-<p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
+<p><em>Figure 31</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
 results in 'centerStagePlaceholder` of the UI being updated to display <code>TaskView</code>.</p>
 </div>
 <div class="imageblock">
@@ -1478,7 +1471,7 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
 </ul>
 </div>
 <div class="sect4">
-<h5 id="selecting-a-task-or-event"><a class="link" href="#selecting-a-task-or-event">4.2.2.1. Selecting a task or event</a></h5>
+<h5 id="selecting-a-task-or-event"><a class="link" href="#selecting-a-task-or-event">4.2.1.1. Selecting a task or event</a></h5>
 <div class="paragraph">
 <p><code>Task</code> objects can be selected through the use of the <code>SelectCommand</code> by specifying the `Task&#8217;s or `Event&#8217;s index reflected
 in the GUI.</p>
@@ -1525,26 +1518,7 @@ The code make use the <code>JumpToEventListRequestEvent</code> or <code>JumpToTa
 </div>
 </div>
 <div class="sect3">
-<h4 id="overdue"><a class="link" href="#overdue">4.2.3. Overdue</a></h4>
-<div class="paragraph">
-<p>Overdue tasks can be viewed through the use of the <code>OverdueCommand</code>. Note that the <code>OverdueCommand</code> only
-lists down overdue tasks; overdue events are marked as completed automatically.</p>
-</div>
-<div class="paragraph">
-<p><code>OverdueCommand</code> makes use of the <code>LocalDateTime</code> class in Java to check if an ongoing task becomes overdue
-or not.</p>
-</div>
-<div class="paragraph">
-<p>There will be a class in the <code>Model</code> component, which has access to the <code>UniqueActivityList</code> class in that
-component. The class will go through the <code>UniqueActivityList</code> and obtain the <code>dueDateTime</code> of <code>Task</code>, and the <code>end
-DateTime</code> of <code>Event</code>. It will then perform a check of the <code>DateTime</code> with <code>LocalDateTime.now()</code>. If a <code>Task</code> is overdue, it will be marked so in the GUI.
-If the current date and time is past an <code>Event</code> <code>s `endDateTime</code>, the <code>Event</code> will be marked as completed.
-<br>
-<br></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.4. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the GUI features. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1589,19 +1563,21 @@ definitely the preferred approach here.
 <br>
 <br></p>
 </div>
-<h3 id="desk-board-storage-management" class="discrete">Desk Board Storage Management</h3>
+</div>
+</div>
+<div class="sect2">
+<h3 id="desk-board-storage-management"><a class="link" href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></h3>
 <div class="paragraph">
 <p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.2.5. Current implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The management of Desk Board storage in CLIndar includes automatic saving and loading of data, as well as export and import operations.
 The following describes how each feature is implemented.</p>
 </div>
 <div class="sect4">
-<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">4.2.5.1. Storing <code>Task</code> and <code>Event</code> objects</a></h5>
+<h5 id="storing-tasks-and-events"><a class="link" href="#storing-tasks-and-events">4.3.1.1. Storing tasks and events</a></h5>
 <div class="paragraph">
 <p>In CLIndar, Desk Board data are stored using an xml file. For this purpose, <code>DeskBoard</code>, which is composed of <code>Task</code> and <code>Event</code> objects,
 is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
@@ -1697,9 +1673,9 @@ two separate lists.
 </div>
 </div>
 <div class="sect4">
-<h5 id="exporting-data"><a class="link" href="#exporting-data">4.2.5.2. Exporting data</a></h5>
+<h5 id="exporting-data"><a class="link" href="#exporting-data">4.3.1.2. Exporting data</a></h5>
 <div class="paragraph">
-<p><em>Figure ##</em> below shows the UML sequence diagram for export operation.</p>
+<p><em>Figure 32</em> below shows the sequence diagram for export operation.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1712,7 +1688,7 @@ two separate lists.
 In particular, there needs to be an association between <code>ExecuteCommand</code> and <code>Storage</code>.
 The way such association can be created is similar to how an association between any subclass of <code>Command</code>
 and <code>Model</code> is formed.
-The modifications made to classes in the <code>Logic</code> component are shown in red in <em>Figure ##</em>.</p>
+The modifications made to classes in the <code>Logic</code> component are shown in red in <em>Figure 33</em>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1728,9 +1704,9 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 </div>
 </div>
 <div class="sect4">
-<h5 id="importing-data"><a class="link" href="#importing-data">4.2.5.3. Importing data</a></h5>
+<h5 id="importing-data"><a class="link" href="#importing-data">4.3.1.3. Importing data</a></h5>
 <div class="paragraph">
-<p><em>Figure ##</em> below shows the sequence diagram for import operation.</p>
+<p><em>Figure 34</em> below shows the sequence diagram for import operation.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1743,7 +1719,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 This object reads the xml file at the given <code>filePath</code> and returns a <code>ReadOnlyDeskBoard</code> object based on the data saved in the file.
 Each <code>Activity</code> in the <code>ReadOnlyDeskBoard</code> is then added into the application&#8217;s <code>DeskBoard</code>.
 This operation is abstracted to follow Single Level of Abstraction Principle (SLAP).
-<em>Figure ##</em> below shows how <code>addActivities</code> is implemented in <code>Model</code> component which results in new entries from
+<em>Figure 35</em> below shows how <code>addActivities</code> is implemented in <code>Model</code> component which results in new entries from
 another <code>DeskBoard</code> object being added into the application&#8217;s <code>Model</code>.</p>
 </div>
 <div class="imageblock">
@@ -1758,7 +1734,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.2.6. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1833,17 +1809,17 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-commands"><a class="link" href="#undo-redo-commands">4.3. Undo/Redo Commands</a></h3>
+<h3 id="undo-redo-commands"><a class="link" href="#undo-redo-commands">4.4. Undo/Redo Commands</a></h3>
 <div class="paragraph">
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.3.1. Current implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of Desk Board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead. The following diagram shows the inheritance diagram for commands:</p>
+<p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead. <em>Figure 36</em> below shows the inheritance diagram for commands.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1895,7 +1871,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="paragraph">
 <p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th activity in Desk Board. The current state of Desk Board is saved before the <code>delete 5</code> command executes.
 The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code>
-(the current state is saved together with the command) as shown in <em>Figure 31</em> below.</p>
+(the current state is saved together with the command) as shown in <em>Figure 37</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1906,7 +1882,7 @@ The <code>delete 5</code> command will then be pushed onto the <code>undoStack</
 <div class="paragraph">
 <p>As the user continues to use the program, more commands are added into the <code>undoStack</code>.
 For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new activity.
-<em>Figure 32</em> shows the undo and redo stack diagram after the add command is executed.</p>
+<em>Figure 38</em> shows the undo and redo stack diagram after the add command is executed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1931,7 +1907,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 </div>
 <div class="paragraph">
 <p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore Desk Board to the state before the <code>add</code> command executed.
-<em>Figure 33</em> below shows the undo and redo stacks after the redo command is executed.</p>
+<em>Figure 39</em> below shows the undo and redo stacks after the redo command is executed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2004,7 +1980,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.3.2. Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -2138,18 +2114,18 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="auto-overdue"><a class="link" href="#auto-overdue">4.4. Auto overdue</a></h3>
+<h3 id="overdue-feature"><a class="link" href="#overdue-feature">4.5. Overdue Feature</a></h3>
 <div class="paragraph">
-<p>The auto overdue feature will automatically tag tasks as "overdue" once their due date times have passed and tag events as "finished" once their end date times have passed.
+<p>The overdue feature will automatically tag tasks as "overdue" once their due date times have passed and tag events as "finished" once their end date times have passed.
 The current implementation and design considerations for this feature are explained in this section.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The auto overdue feature is implemented using the <code>ScheduledExecutorService</code> class, provided by the <code>java.util.concurrent</code> package. This class creates another thread in the system and that thread is scheduled to run a checker every 30 seconds.</p>
+<p>The overdue feature is implemented using the <code>ScheduledExecutorService</code> class, provided by the <code>java.util.concurrent</code> package. This class creates another thread in the system and that thread is scheduled to run a checker every 30 seconds.</p>
 </div>
 <div class="paragraph">
-<p>It is implemented in <code>DateTimeScheduler</code> as shown:</p>
+<p>It is implemented in <code>DateTimeScheduler</code> as shown below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2169,7 +2145,7 @@ The current implementation and design considerations for this feature are explai
 checks if a task has passed its due date time and if an event has passed its end date time. If so, the checker will tag an "Overdue" tag to the task and a "Finished" tag to the event.</p>
 </div>
 <div class="paragraph">
-<p>The <code>checker</code> is implemented as shown:</p>
+<p>The <code>checker</code> is implemented as shown below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2195,14 +2171,15 @@ Note that <code>Platform.runLater()</code> must wrap around the codes as <a href
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p>This section describes various design considerations related to the auto overdue feature.</p>
+<p>This section describes various design considerations related to the overdue feature.</p>
 </div>
+<h5 id="aspect-overdue-check-time-interval" class="discrete">Aspect: Overdue check time interval</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Alternative 1 (current choice): Using <code>ScheduledExecutorService</code> to check for overdue tasks and finished events every 30 seconds.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use <code>ScheduledExecutorService</code> to check for overdue tasks and finished events every 30 seconds.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2215,7 +2192,7 @@ Note that <code>Platform.runLater()</code> must wrap around the codes as <a href
 </div>
 </li>
 <li>
-<p>Alternative 2: Using <code>ScheduledExecutorService</code> to check for overdue tasks and finished events every 1 hour.</p>
+<p><strong>Alternative 2:</strong> Use <code>ScheduledExecutorService</code> to check for overdue tasks and finished events every 1 hour.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2232,14 +2209,14 @@ Note that <code>Platform.runLater()</code> must wrap around the codes as <a href
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations as follows:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.6, &#8220;Configuration&#8221;</a>).</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.7, &#8220;Configuration&#8221;</a>).</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level.</p>
@@ -2273,7 +2250,7 @@ Note that <code>Platform.runLater()</code> must wrap around the codes as <a href
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application (e.g. App name, logging level) can be controlled through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2334,7 +2311,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <p>Within Chrome, click on the <code>Print</code> option in Chrome&#8217;s menu.</p>
 </li>
 <li>
-<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.</p>
+<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results, use the settings indicated in <em>Figure 44</em> below.</p>
 </li>
 </ol>
 </div>
@@ -2429,12 +2406,12 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <div class="sect2">
 <h3 id="test-types"><a class="link" href="#test-types">6.2. Test Types</a></h3>
 <div class="paragraph">
-<p>There is two types of tests, based on whether the tests involve the GUI:</p>
+<p>We have two types of tests, based on whether the tests involve the GUI:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>GUI tests</strong> which include :</p>
+<p><strong>GUI tests</strong> which include:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3365,7 +3342,7 @@ faster than a typical mouse/GUI-driven app</p>
 <p><strong>clearing</strong> tasks and events from Desk Board; and</p>
 </li>
 <li>
-<p><strong>keeping track</strong> of overdue tasks and finished events with the auto overdue feature and <code>overdue</code> command.</p>
+<p><strong>keeping track</strong> of overdue tasks and finished events with the overdue feature and <code>overdue</code> command.</p>
 </li>
 </ul>
 </div>
@@ -3394,7 +3371,7 @@ faster than a typical mouse/GUI-driven app</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>automatic saving</strong> of task and event data after each change;</p>
+<p><strong>automatic saving</strong> of task and event data after each update;</p>
 </li>
 <li>
 <p><strong>automatic loading</strong> of latest task and event data upon launching of application;</p>
@@ -4136,7 +4113,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:51:09 UTC
+Last updated 2018-04-15 15:53:02 UTC
 </div>
 </div>
 </body>
