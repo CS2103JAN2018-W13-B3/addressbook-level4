@@ -40,7 +40,6 @@
 <li><a href="#Design-Logic">3.3. Logic Component</a></li>
 <li><a href="#Design-Model">3.4. Model Component</a></li>
 <li><a href="#Design-Storage">3.5. Storage Component</a></li>
-<li><a href="#Design-Commons">3.6. Commons Classes</a></li>
 </ul>
 </li>
 <li><a href="#Implementation">4. Implementation</a>
@@ -206,14 +205,13 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <div class="sect2">
 <h3 id="setup-procedure"><a class="link" href="#setup-procedure">2.2. Setup Procedure</a></h3>
 <div class="paragraph">
-<p>This section provides a step by step guide to facilidate developer who are unfamiliar with Github to setup this project on their own computers.
-You may skip this section if you are an advanced developer.</p>
+<p>Do the following steps to set up the project in your computer.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 1:</strong> Fork this repo, and clone the fork to your computer.</p>
+<p><strong>Step 1:</strong> Fork this repo.</p>
 </div>
 <div class="paragraph">
-<p>To fork the repo, click the button circled below.</p>
+<p>To fork the repo, click the button circled below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -222,7 +220,13 @@ You may skip this section if you are an advanced developer.</p>
 <div class="title">Figure 1. Forking this repo</div>
 </div>
 <div class="paragraph">
-<p>Then, open Git Bash. Change the current working directory to the location where you want the cloned directory to be made. Type the following:</p>
+<p><strong>Step 2:</strong> Clone the fork.</p>
+</div>
+<div class="paragraph">
+<p>Open Git Bash. Change the current working directory to the location where you want the cloned directory to be made.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3:</strong> Type the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -230,10 +234,8 @@ You may skip this section if you are an advanced developer.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the clone was successful, a new sub-directory titled 'main' appears on your local drive. This directory contains the files and metadata that Git requires to maintain the changes you make to the source files.<br></p>
-</div>
-<div class="paragraph">
-<p>The following should appear if <code>git clone <a href="https://github.com/YOUR-USERNAME/main.git" class="bare">https://github.com/YOUR-USERNAME/main.git</a></code> at C:/Users/temp folder is executed.</p>
+<p>The sub-directory titled 'main' should appear if <code>git clone <a href="https://github.com/YOUR-USERNAME/main.git" class="bare">https://github.com/YOUR-USERNAME/main.git</a></code> at
+C:/Users/temp folder is executed. Figure 2 below describes this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -244,68 +246,86 @@ You may skip this section if you are an advanced developer.</p>
 <div class="paragraph">
 <p><br></p>
 </div>
-<div class="paragraph">
-<p><strong>Step 2:</strong> Open IntelliJ. If you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first, as shown in the picture below.<br></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Close%20Project.png" alt="Close Project" width="600">
-</div>
-<div class="title">Figure 3. Closing current project in IntelliJ</div>
-</div>
-<div class="paragraph">
-<p><br></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Set up the correct JDK version for Gradle using the following steps, as illustrated by the pictures.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The sub-directory titled 'main' contains the files and metadata that Git requires to maintain the changes you make to the source files.<br>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p><strong>Step 3a:</strong> Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code>.</p>
+<p><strong>Step 4:</strong> Open IntelliJ and configure the correct JKD version for Gradle.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project
+dialog first, as shown in the picture below. Closing current project in IntelliJ
+image::Close Project.png[width="600"]
+<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Step 4a:</strong> Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt;
+<code>Project Structure</code>. Refer to Figure 3 below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Configure.png" alt="Configure" width="600">
 </div>
-<div class="title">Figure 4. Configuring IntelliJ settings</div>
+<div class="title">Figure 3. Configuring IntelliJ settings</div>
 </div>
 <div class="paragraph">
-<p><strong>Step 3b:</strong> Go to the <code>Project</code> tab and under <code>Project SDK</code> section, click <code>New&#8230;&#8203;</code>. Find the directory of the JDK, and then click OK.<br></p>
+<p><strong>Step 4c:</strong> Go to the <code>Project</code> tab and under <code>Project SDK</code> section, click <code>New&#8230;&#8203;</code>. Find the directory
+of the JDK, and then click OK. Refer to Figure 4 below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Setup%20JDK.png" alt="Setup JDK" width="600">
 </div>
-<div class="title">Figure 5. Setting up JDK</div>
+<div class="title">Figure 4. Setting up JDK</div>
 </div>
 <div class="paragraph">
 <p><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 4:</strong> Click <code>Import Project</code>.<br></p>
+<p><strong>Step 5:</strong> To import the project, click <code>Import Project</code>. Refer to Figure 5 below,</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Import%20Project.png" alt="Import Project" width="600">
 </div>
-<div class="title">Figure 6. Importing project to IntelliJ</div>
+<div class="title">Figure 5. Importing project to IntelliJ</div>
 </div>
 <div class="paragraph">
 <p><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 5:</strong> Locate the <code>build.gradle</code> file in the <code>main</code> folder that you have cloned and select it. Click <code>OK</code>.<br></p>
+<p><strong>Step 5a:</strong> Locate the <code>build.gradle</code> file in the <code>main</code> folder that you have cloned earlier and select it.
+Click <code>OK</code>. Refer to Figure 6 below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/build.gradle.png" alt="build.gradle" width="400">
 </div>
-<div class="title">Figure 7. Locating <code>build.gradle</code> file</div>
+<div class="title">Figure 6. Locating <code>build.gradle</code> file</div>
 </div>
 <div class="paragraph">
 <p><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 6:</strong> In the <code>Import Project from Gradle</code> that appears, click <code>OK</code> again.<br></p>
+<p><strong>Step 6b:</strong> In the <code>Import Project from Gradle</code> that appears, click <code>OK</code> again.<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -316,7 +336,13 @@ You may skip this section if you are an advanced developer.</p>
 <p><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Step 7:</strong> Open the <code>Terminal</code> and run the command <code>gradlew processResources</code> (Mac/Linux: <code>./gradlew processResources</code>). It should finish with the <code>BUILD SUCCESSFUL</code> message.<br></p>
+<p><strong>Step 7:</strong> Open the <code>Terminal</code> (refer to Figure 7) and run the command <code>gradlew processResources</code>
+(Mac/Linux: <code>./gradlew processResources</code>). It should finish with the 'BUILD SUCCESSFUL' message.<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/intellij-terminal.png" alt="intellij terminal" width="600">
+</div>
 </div>
 <div class="paragraph">
 <p>This will generate all resources required by the application and tests.
@@ -376,13 +402,13 @@ You may skip this section if you are an advanced developer.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>After you do the steps above, the Settings window should appear as shown in the picture below.</p>
+<p>After you do the steps above, the Settings window should appear as shown in Figure 7 below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Import%20Setting.png" alt="Import Setting" width="600">
 </div>
-<div class="title">Figure 8. Configuring IntelliJ settings for import order</div>
+<div class="title">Figure 7. Configuring IntelliJ settings for import order</div>
 </div>
 <div class="paragraph">
 <p>Optionally, you can follow the <a href="UsingCheckstyle.html">UsingCheckstyle.adoc</a> document to configure Intellij to check style-compliance as you write the code.</p>
@@ -462,13 +488,16 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
 <div class="paragraph">
-<p>The high-level design of this application is illustrated in <em>Figure 9</em> below.</p>
+<p>The high-level design of this application is illustrated by <em>Figure 8</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/Architecture.png" alt="Architecture" width="600">
 </div>
-<div class="title">Figure 9. Architecture diagram</div>
+<div class="title">Figure 8. Architecture diagram</div>
+</div>
+<div class="paragraph">
+<p>Given below is a quick overview of the components, separated into 'Main' and 'Secondary' components.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -482,37 +511,45 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Given below is a quick overview of each component.</p>
-</div>
+<div class="sect3">
+<h4 id="primary-component"><a class="link" href="#primary-component">3.1.1. Primary Component</a></h4>
 <div class="paragraph">
 <p><code>Main</code> has only one class called <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>at app launch: initializing other components in the correct sequence and connecting them up with each other.</p>
+<p>at app launch: initializing all components in the correct sequence and connecting them up with each other.</p>
 </li>
 <li>
-<p>at shut down: shutting down other components and invoking cleanup method where necessary.</p>
+<p>at shut down: shutting down all components and invoking cleanup method where necessary.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level:</p>
+<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by components within the secondary component and
+is stored in the <code>seedu.address.commons</code> package.</p>
+</div>
+<div class="paragraph">
+<p>The two classes below play important roles at the architecture level:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>EventsCenter</code>: This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design).</p>
+<p><code>EventsCenter</code>: This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by the components within the secondary component to communicate with other components using events (i.e. a form of <em>Event Driven</em> design).</p>
 </li>
 <li>
-<p><code>LogsCenter</code>: This class is used by many classes to write log messages to the App&#8217;s log file.</p>
+<p><code>LogsCenter</code>: This class is used by many classes to write log messages to the App&#8217;s log file.
+<br>
+<br></p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect3">
+<h4 id="secondary-component"><a class="link" href="#secondary-component">3.1.2. Secondary component</a></h4>
 <div class="paragraph">
-<p>The rest of the application consists of four components:</p>
+<p>The secondary component of the application consist of four components:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -520,7 +557,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: This component controls the UI of the application.</p>
 </li>
 <li>
-<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: This is the command executor.</p>
+<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: This component is the command executor.</p>
 </li>
 <li>
 <p><a href="#Design-Model"><strong><code>Model</code></strong></a>: This component holds the data of the App in-memory.</p>
@@ -536,7 +573,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p>defines its <em>API</em> in an <code>interface</code> with the same name as the component; and</p>
+<p>defines its <em>API</em> in an <code>interface</code> with the same name as the sub-component; and</p>
 </li>
 <li>
 <p>exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
@@ -544,23 +581,24 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </ul>
 </div>
 <div class="paragraph">
-<p>For example, the <code>Logic</code> component defines its API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class. <em>Figure 10</em> below is an overview of the <code>Logic</code> component.</p>
+<p>For example, the <code>Logic</code> component defines its API in the <code>Logic.java</code> interface and exposes its functionality using the
+<code>LogicManager.java</code> class. <em>Figure 9</em> below is an overview of the <code>Logic</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicAPI.png" alt="LogicAPI" width="800">
 </div>
-<div class="title">Figure 10. The API of the <code>Logic</code> component</div>
+<div class="title">Figure 9. The API of the <code>Logic</code> component</div>
 </div>
-<h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven Nature of the Design</h4>
+<h5 id="events-driven-nature-of-the-design" class="discrete">Events-Driven Nature of the Design</h5>
 <div class="paragraph">
-<p><em>Figure 11</em> below shows how the components interact in a scenario where the user issues the command <code>delete 1</code>.</p>
+<p><em>Figure 9</em> below shows how the primary and secondary components interact in a scenario where the user issues the command <code>delete 1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeleteActivity.png" alt="SDforDeleteActivity" width="800">
 </div>
-<div class="title">Figure 11. Component interactions for <code>delete 1</code> command (part 1)</div>
+<div class="title">Figure 10. Component interactions for <code>delete 1</code> command (part 1)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -575,13 +613,13 @@ Note how the <code>Model</code> simply raises a <code>DeskBoardChangedEvent</cod
 </table>
 </div>
 <div class="paragraph">
-<p><em>Figure 12</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
+<p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeleteActivityEventHandling.png" alt="SDforDeleteActivityEventHandling" width="800">
 </div>
-<div class="title">Figure 12. Component interactions for <code>delete 1</code> command (part 2)</div>
+<div class="title">Figure 11. Component interactions for <code>delete 1</code> command (part 2)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -596,22 +634,24 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </table>
 </div>
 <div class="paragraph">
-<p>The sections below give more details of each component.</p>
+<p>The section below gives more details of each of the secondary component.</p>
 </div>
 <div class="paragraph">
-<p><br></p>
+<p><br>
+<br></p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="Design-Ui"><a class="link" href="#Design-Ui">3.2. UI Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 13</em> below shows the architecture diagram of the <code>UI</code> component.</p>
+<p><em>Figure 12</em> below shows the architecture diagram of the <code>UI</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
 </div>
-<div class="title">Figure 13. Structure of the <code>UI</code> component</div>
+<div class="title">Figure 12. Structure of the <code>UI</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -648,22 +688,22 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 14</em> below shows the architecture diagram of the <code>Logic</code> component.</p>
+<p><em>Figure 13</em> below shows the architecture diagram of the <code>Logic</code> component.</p>
 </div>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
 </div>
-<div class="title">Figure 14. Structure of the <code>Logic</code> Component</div>
+<div class="title">Figure 13. Structure of the <code>Logic</code> Component</div>
 </div>
 <div class="paragraph">
-<p>Finer details concerning <code>XYZCommand</code> and <code>Command</code> in <a href="#fig-LogicClassDiagram">Figure 14, &#8220;Structure of the <code>Logic</code> Component&#8221;</a> in <em>Figure 15</em> below.</p>
+<p>Finer details concerning <code>XYZCommand</code> and <code>Command</code> in <a href="#fig-LogicClassDiagram">Figure 13, &#8220;Structure of the <code>Logic</code> Component&#8221;</a> in <em>Figure 14</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 15. Structure of commands in the <code>Logic</code> component</div>
+<div class="title">Figure 14. Structure of commands in the <code>Logic</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -692,13 +732,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </ul>
 </div>
 <div class="paragraph">
-<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("rm task 1")</code> API call.</p>
+<p>Figure 15 below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("rm task 1")</code> API call.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
 </div>
-<div class="title">Figure 16. Interactions inside the <code>Logic</code> component for the <code>rm task 1</code> command</div>
+<div class="title">Figure 15. Interactions inside the <code>Logic</code> component for the <code>rm task 1</code> command</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -707,13 +747,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model Component</a></h3>
 <div class="paragraph">
-<p><em>Figure 17</em> below shows the architecture diagram of the <code>Model</code> component.</p>
+<p><em>Figure 16</em> below shows the architecture diagram of the <code>Model</code> component.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
 </div>
-<div class="title">Figure 17. Structure of the <code>Model</code> component</div>
+<div class="title">Figure 16. Structure of the <code>Model</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -756,7 +796,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
 </div>
-<div class="title">Figure 18. Structure of the <code>Storage</code> component</div>
+<div class="title">Figure 17. Structure of the <code>Storage</code> component</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -773,21 +813,11 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><code>UserPref</code> objects in json format, and</p>
 </li>
 <li>
-<p>desk board data in xml format.</p>
+<p>desk board data in xml format.
+<br>
+<br></p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><br></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">3.6. Commons Classes</a></h3>
-<div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.address.commons</code> package.</p>
-</div>
-<div class="paragraph">
-<p><br></p>
 </div>
 </div>
 </div>
@@ -816,7 +846,7 @@ In CLIndar, an entry in the desk board can be either a <code>Task</code> or an <
 <div class="content">
 <img src="images/UniqueActivityListClassDiagram.png" alt="UniqueActivityListClassDiagram" width="550">
 </div>
-<div class="title">Figure 19. Class diagram for <code>Activity</code></div>
+<div class="title">Figure 18. Class diagram for <code>Activity</code></div>
 </div>
 <div class="paragraph">
 <p>As shown above, <code>Activity</code> is a superclass for <code>Task</code> and <code>Event</code>.
@@ -839,7 +869,7 @@ Once the <code>Task</code> has been done by user, it can be mark as completed in
 <div class="content">
 <img src="images/TaskUMLDiagram.png" alt="TaskUMLDiagram" width="550">
 </div>
-<div class="title">Figure 20. UML class diagram for <code>Task</code></div>
+<div class="title">Figure 19. UML class diagram for <code>Task</code></div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Task</code> is given below:</p>
@@ -903,7 +933,7 @@ is found in the desk board or the <code>name</code> or <code>dueDateTime</code> 
 <div class="content">
 <img src="images/EventUMLDiagram.png" alt="EventUMLDiagram" width="550">
 </div>
-<div class="title">Figure 21. UML Class Diagram for Event</div>
+<div class="title">Figure 20. UML Class Diagram for Event</div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Event</code> is given below:</p>
@@ -1178,13 +1208,13 @@ is then displayed using the <code>TaskListPanel</code>, while <code>Event</code>
 <div class="content">
 <img src="images/TaskCard.png" alt="TaskCard" width="550">
 </div>
-<div class="title">Figure 22. TaskListCard example</div>
+<div class="title">Figure 21. TaskListCard example</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/EventCard.png" alt="EventCard" width="550">
 </div>
-<div class="title">Figure 23. EventListCard example</div>
+<div class="title">Figure 22. EventListCard example</div>
 </div>
 <div class="paragraph">
 <p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
@@ -1353,7 +1383,7 @@ definitely the preferred approach here.
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 24. Class Diagram of a Logic Command</div>
+<div class="title">Figure 23. Class Diagram of a Logic Command</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -1434,7 +1464,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
-<div class="title">Figure 25. 'Undo' stack pops into the 'Redo' Stack</div>
+<div class="title">Figure 24. 'Undo' stack pops into the 'Redo' Stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1455,7 +1485,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 26. 'Undo' and 'Redo' Stack Sequence Diagram</div>
+<div class="title">Figure 25. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
@@ -1479,7 +1509,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
-<div class="title">Figure 27. Adding 'ClearCommand' to the 'Undo' Stack</div>
+<div class="title">Figure 26. Adding 'ClearCommand' to the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -1488,7 +1518,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
-<div class="title">Figure 28. 'ListCommand' does not affect the 'Undo' Stack</div>
+<div class="title">Figure 27. 'ListCommand' does not affect the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -1497,7 +1527,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
-<div class="title">Figure 29. Activity Diagram for 'Undo' and 'Redo'</div>
+<div class="title">Figure 28. Activity Diagram for 'Undo' and 'Redo'</div>
 </div>
 </div>
 <div class="sect3">
@@ -1816,7 +1846,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 30. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 29. Saving documentation as PDF files in Chrome</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -3544,7 +3574,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 07:18:05 UTC
+Last updated 2018-04-15 07:57:09 UTC
 </div>
 </div>
 </body>
