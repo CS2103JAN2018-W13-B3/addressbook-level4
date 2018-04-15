@@ -242,7 +242,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="managing-gui"><a class="link" href="#managing-gui">Managing GUI</a></h3>
+<h3 id="gui-managing"><a class="link" href="#gui-managing">GUI Managing</a></h3>
 <div class="paragraph">
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
@@ -268,7 +268,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 <div class="content">
 <img src="../images/centerStagePlaceholder.png" alt="centerStagePlaceholder" width="650">
 </div>
-<div class="title">Figure 1. centerStagePlaceholder</div>
+<div class="title">Figure 1. <code>centerStagePlaceholder</code></div>
 </div>
 <div class="paragraph">
 <p>To facilitate switching of views, the .xfml file of relevant view will be added to <code>centerStagePlaceholder</code>.</p>
@@ -367,15 +367,15 @@ user are displayed using <code>EventListPanel</code>. Below are examples of a <c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/TaskCard.png" alt="TaskCard" width="650">
+<img src="../images/TaskCard.png" alt="TaskCard" width="300">
 </div>
-<div class="title">Figure 2. TaskListCard example</div>
+<div class="title">Figure 2. <code>TaskListCard</code> example</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/EventCard.png" alt="EventCard" width="650">
+<img src="../images/EventCard.png" alt="EventCard" width="300">
 </div>
-<div class="title">Figure 3. EventListCard example</div>
+<div class="title">Figure 3. <code>EventListCard</code> example</div>
 </div>
 <div class="paragraph">
 <p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
@@ -388,7 +388,7 @@ in a scenario where the user issues the command <code>list task</code>.</p>
 <div class="content">
 <img src="../images/SDListCommand.png" alt="SDListCommand" width="650">
 </div>
-<div class="title">Figure 4. Relevant components interaction for <code>list task</code> command (part 1)</div>
+<div class="title">Figure 4. Component interactions for <code>list task</code> command (part 1)</div>
 </div>
 <div class="paragraph">
 <p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
@@ -398,7 +398,7 @@ results in 'centerStagePlaceholder` of the UI being updated to display <code>Tas
 <div class="content">
 <img src="../images/SDListCommandEventHandling.png" alt="SDListCommandEventHandling" width="650">
 </div>
-<div class="title">Figure 5. Relevant components interaction for <code>list task</code> command (part 2)</div>
+<div class="title">Figure 5. Component interactions for <code>list task</code> command (part 2)</div>
 </div>
 <div class="paragraph">
 <p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> and/or <code>Event</code> objects in the GUI.
@@ -485,7 +485,7 @@ definitely the preferred approach here.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:29:24 UTC
+Last updated 2018-04-15 14:02:57 UTC
 </div>
 </div>
 </body>

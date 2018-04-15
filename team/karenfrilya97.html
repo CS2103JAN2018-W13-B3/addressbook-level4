@@ -146,7 +146,7 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="managing-desk-board-storage"><a class="link" href="#managing-desk-board-storage">Managing Desk Board Storage</a></h3>
+<h3 id="desk-board-storage-management"><a class="link" href="#desk-board-storage-management">Desk Board Storage Management</a></h3>
 <div class="paragraph">
 <p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
 </div>
@@ -163,7 +163,7 @@ The following describes how each feature is implemented.</p>
 is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
 These xml-adapted objects have the same attributes as the objects they represent.
 However, the attributes are converted into <code>String</code> which can then be stored into xml format.
-Similar to how <code>Task</code> and <code>Event</code> objects inherit from <code>Activity</code> class (as discussed in <a href="#Implementation - Activity">Managing Activities</a>),
+Similar to how <code>Task</code> and <code>Event</code> objects inherit from <code>Activity</code> class (as discussed in <a href="#Implementation - Activity">Activity Management</a>),
 their xml-adapted equivalents inherit from <code>XmlAdaptedActivity</code> class.
 The constructor method of <code>XmlAdaptedActivity</code> below illustrates how a <code>Task</code> object can be converted into
 an <code>XmlAdaptedTask</code> object.</p>
@@ -393,7 +393,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:29:24 UTC
+Last updated 2018-04-15 14:02:57 UTC
 </div>
 </div>
 </body>

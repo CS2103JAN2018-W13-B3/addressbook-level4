@@ -44,10 +44,10 @@
 </li>
 <li><a href="#Implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#Implementation-Activity">4.1. Managing Activities</a></li>
-<li><a href="#managing-gui">4.2. Managing GUI</a></li>
-<li><a href="#managing-desk-board-storage">4.3. Managing Desk Board Storage</a></li>
-<li><a href="#undoing-redoing-commands">4.4. Undoing/Redoing Commands</a></li>
+<li><a href="#Implementation-Activity">4.1. Activity Management</a></li>
+<li><a href="#gui-managing">4.2. GUI Managing</a></li>
+<li><a href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></li>
+<li><a href="#undo-redo-commands">4.4. Undo/Redo Commands</a></li>
 <li><a href="#logging">4.5. Logging</a></li>
 <li><a href="#Implementation-Configuration">4.6. Configuration</a></li>
 </ul>
@@ -117,36 +117,21 @@
 CLIndar is <strong>Common-Line Interface (CLI) based and uses Linux-style commands</strong>, which computing students are familiar with.</p>
 </div>
 <div class="paragraph">
-<p>This guide provides information on the core functionalities of CLIndar and their implementation, so that a developer can
-get started customising and contributing to the application.</p>
-</div>
-<div class="paragraph">
-<p>Below is an overview of this guide:</p>
+<p>With CLIndar, you can:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#ComputerSetup">Computer Setup</a></p>
+<p>keep track of your tasks and events and be reminded of their due dates; and</p>
 </li>
 <li>
-<p><a href="#Design">Design</a></p>
-</li>
-<li>
-<p><a href="#Implementation">Implementation</a></p>
-</li>
-<li>
-<p><a href="#documentation">Documentation</a></p>
-</li>
-<li>
-<p><a href="#Testing">Testing Procedures</a></p>
-</li>
-<li>
-<p><a href="#DevOps">Dev Ops</a></p>
-</li>
-<li>
-<p><a href="#GetStartedProgramming">Appendices</a></p>
+<p>record all completed tasks and events, so that you know what you have done.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>This guide provides information on the core functionality of CLIndar and their implementation, so that a developer can
+get started customizing and contributing to the application.</p>
 </div>
 </div>
 </div>
@@ -208,10 +193,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <p>Do the following steps to set up the project in your computer.</p>
 </div>
 <div class="paragraph">
-<p><strong>Step 1:</strong> Fork this repo.</p>
-</div>
-<div class="paragraph">
-<p>To fork the repo, click the button circled below:</p>
+<p><strong>Step 1:</strong> Fork this repo by clicking the button circled below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -519,7 +501,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p>at app launch: initializing all components in the correct sequence and connecting them up with each other.</p>
+<p>at app launch: initializing all components in the correct sequence and connecting them up with each other; and</p>
 </li>
 <li>
 <p>at shut down: shutting down all components and invoking cleanup method where necessary.</p>
@@ -590,6 +572,9 @@ is stored in the <code>seedu.address.commons</code> package.</p>
 </div>
 <div class="title">Figure 9. The API of the <code>Logic</code> component</div>
 </div>
+<div class="paragraph">
+<p><br></p>
+</div>
 <h5 id="events-driven-nature-of-the-design" class="discrete">Events-Driven Nature of the Design</h5>
 <div class="paragraph">
 <p><em>Figure 10</em> below shows how the primary and secondary components interact in a scenario
@@ -599,7 +584,7 @@ where the user issues the command <code>delete 1</code>.</p>
 <div class="content">
 <img src="images/SDforDeleteActivity.png" alt="SDforDeleteActivity" width="800">
 </div>
-<div class="title">Figure 10. Relevant Components interactions for <code>delete 1</code> command (part 1)</div>
+<div class="title">Figure 10. Component interactions for <code>delete 1</code> command (part 1)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -608,7 +593,7 @@ where the user issues the command <code>delete 1</code>.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>DeskBoardChangedEvent</code> when the Desk Board data
+Note how the <code>Model</code> simply raises a <code>DeskBoardChangedEvent</code> when Desk Board data
 are changed, instead of asking the <code>Storage</code> to save the updates into the hard disk.
 </td>
 </tr>
@@ -621,7 +606,7 @@ are changed, instead of asking the <code>Storage</code> to save the updates into
 <div class="content">
 <img src="images/SDforDeleteActivityEventHandling.png" alt="SDforDeleteActivityEventHandling" width="800">
 </div>
-<div class="title">Figure 11. Relevant Components interactions for <code>delete 1</code> command (part 2)</div>
+<div class="title">Figure 11. Component interactions for <code>delete 1</code> command (part 2)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -775,7 +760,7 @@ from the abstract <code>UiPart</code> class.</p>
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences,</p>
 </li>
 <li>
-<p>stores the Desk Board data;</p>
+<p>stores Desk Board data;</p>
 </li>
 <li>
 <p>uses two classes to store information about <code>Event</code> and <code>Task</code> separately;</p>
@@ -818,7 +803,7 @@ from the abstract <code>UiPart</code> class.</p>
 <p><code>UserPref</code> objects in json format, and</p>
 </li>
 <li>
-<p>desk board data in xml format.</p>
+<p>Desk Board data in xml format.</p>
 </li>
 </ul>
 </div>
@@ -838,11 +823,11 @@ from the abstract <code>UiPart</code> class.</p>
 <br></p>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Activity"><a class="link" href="#Implementation-Activity">4.1. Managing Activities</a></h3>
+<h3 id="Implementation-Activity"><a class="link" href="#Implementation-Activity">4.1. Activity Management</a></h3>
 <div class="paragraph">
 <p><code>Activity</code> resides in the <code>Model</code> component of the application.
-It is an important class in this application as it represents each entry in the desk board.
-In CLIndar, an entry in the desk board can be either a <code>Task</code> or an <code>Event</code>.</p>
+It is an important class in this application as it represents each entry in Desk Board.
+In CLIndar, an entry in Desk Board can be either a <code>Task</code> or an <code>Event</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">4.1.1. Current implementation</a></h4>
@@ -858,14 +843,14 @@ In CLIndar, an entry in the desk board can be either a <code>Task</code> or an <
 <div class="paragraph">
 <p>As shown above, <code>Activity</code> is a superclass for <code>Task</code> and <code>Event</code>.
 <code>Activity</code> is made abstract so that it cannot be instantiated.
-This is because an entry in the desk board must be either a <code>Task</code> or an <code>Event</code> and cannot simply be an <code>Activity</code>.
+This is because an entry in Desk Board must be either a <code>Task</code> or an <code>Event</code> and cannot simply be an <code>Activity</code>.
 <br>
 <br></p>
 </div>
 <div class="sect4">
 <h5 id="adding-a-task"><a class="link" href="#adding-a-task">4.1.1.1. Adding a task</a></h5>
 <div class="paragraph">
-<p><code>Task</code> is one of the two types of entries in the desk board in CLIndar.
+<p><code>Task</code> is one of the two types of entries in Desk Board in CLIndar.
 <code>Task</code> represents a piece of work to be done by a certain deadline.
 Once the <code>Task</code> has been done by user, it can be mark as completed in the application.</p>
 </div>
@@ -876,7 +861,7 @@ Once the <code>Task</code> has been done by user, it can be mark as completed in
 <div class="content">
 <img src="images/TaskClassDiagram.png" alt="TaskClassDiagram" width="550">
 </div>
-<div class="title">Figure 19. UML class diagram for <code>Task</code></div>
+<div class="title">Figure 19. Class diagram for <code>Task</code></div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Task</code> is given below:</p>
@@ -898,12 +883,12 @@ Once the <code>Task</code> has been done by user, it can be mark as completed in
 </ul>
 </div>
 <div class="paragraph">
-<p>A <code>Task</code> object can be added to the desk board through the use of the <code>TaskCommand</code>.
+<p>A <code>Task</code> object can be added to Desk Board through the use of the <code>TaskCommand</code>.
 A <code>TaskCommand</code> is associated with a <code>Task</code> object to be added.
 When a <code>TaskCommand</code> object calls the method <code>executeUndoableCommand()</code>,
 the <code>Task</code> object is added into <code>UniqueActivityList</code> in the <code>DeskBoard</code>.
 Note that the <code>Task</code> object will not be added if an equivalent <code>Task</code>
-is found in the desk board or the <code>name</code> or <code>dueDateTime</code> field is left empty.</p>
+is found in Desk Board or the <code>name</code> or <code>dueDateTime</code> field is left empty.</p>
 </div>
 <div class="paragraph">
 <p>The following is a snippet of code for <code>TaskCommand</code> 's  <code>executeUndoableCommand()</code> method.</p>
@@ -930,7 +915,7 @@ is found in the desk board or the <code>name</code> or <code>dueDateTime</code> 
 <div class="sect4">
 <h5 id="adding-an-event"><a class="link" href="#adding-an-event">4.1.1.2. Adding an event</a></h5>
 <div class="paragraph">
-<p><code>Event</code> is the second and last type of entries in the desk board in CLIndar.
+<p><code>Event</code> is the second and last type of entries in Desk Board in CLIndar.
 <code>Event</code> represents an activity with fixed start and end times, such as a test, doctor appointment etc.</p>
 </div>
 <div class="paragraph">
@@ -940,7 +925,7 @@ is found in the desk board or the <code>name</code> or <code>dueDateTime</code> 
 <div class="content">
 <img src="images/EventClassDiagram.png" alt="EventClassDiagram" width="550">
 </div>
-<div class="title">Figure 20. UML Class Diagram for Event</div>
+<div class="title">Figure 20. Class diagram for <code>Event</code></div>
 </div>
 <div class="paragraph">
 <p>A brief description of each of the attributes of <code>Event</code> is given below:</p>
@@ -968,10 +953,10 @@ is found in the desk board or the <code>name</code> or <code>dueDateTime</code> 
 </ul>
 </div>
 <div class="paragraph">
-<p>An <code>Event</code> object can be added to the desk board through the use of the <code>EventCommand</code>.
+<p>An <code>Event</code> object can be added to Desk Board through the use of the <code>EventCommand</code>.
 The way <code>Event</code> objects are added to <code>UniqueActivityList</code> is the same as <code>Task</code> objects.
 Note that the <code>Event</code> object will not be added if an equivalent <code>Event</code>
-is found in the desk board or the <code>name</code>, <code>startDateTime</code> or <code>endDateTime</code> field is left empty.</p>
+is found in Desk Board or the <code>name</code>, <code>startDateTime</code> or <code>endDateTime</code> field is left empty.</p>
 </div>
 <div class="paragraph">
 <p>Once the <code>Event</code> is successfully added, it will be reflected in the CLIndar GUI itself.
@@ -994,11 +979,7 @@ Note that <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Tas
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="directive">final</span> ObservableList&lt;Activity&gt; internalList = FXCollections.observableArrayList();
-
-    <span class="comment">// ... some code ...</span>
-
-    <span class="directive">public</span> <span class="type">void</span> add(Activity toAdd) <span class="directive">throws</span> DuplicateActivityException {
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> <span class="type">void</span> add(Activity toAdd) <span class="directive">throws</span> DuplicateActivityException {
         requireNonNull(toAdd);
         <span class="keyword">if</span> (contains(toAdd)) {
             <span class="keyword">throw</span> <span class="keyword">new</span> DuplicateActivityException();
@@ -1009,9 +990,13 @@ Note that <code>dateTime</code> refers to <code>dueDateTime</code> for <code>Tas
 </div>
 </div>
 <div class="paragraph">
-<p><br>
-===== Find a task or event
-<code>FindEvent</code> class is added to locate <code>Task</code> and <code>Event</code> objects which contains any keywords in their name.
+<p><br></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="find-a-task-or-event"><a class="link" href="#find-a-task-or-event">4.1.1.4. Find a task or event</a></h5>
+<div class="paragraph">
+<p><code>FindEvent</code> class is added to locate <code>Task</code> and <code>Event</code> objects which contains any keywords in their name.
 <br>
 The list showned in GUI is controlled by the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html"><code>Predicate</code></a> set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class[The list showned in GUI is controlled by the &lt;&lt;`Predicate` set to the <code>Model</code> component. As such this class uses <code>NameContainsKeywordPredicate</code> class][]
 which is a subclass of <code>Predicate</code> class in Java library.
@@ -1030,7 +1015,7 @@ The following snippet shows the <code>executeUndoableCommand()</code> of the <co
 </div>
 </div>
 <div class="sect4">
-<h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">4.1.1.4. Editing a task or an event</a></h5>
+<h5 id="editing-a-task-or-an-event"><a class="link" href="#editing-a-task-or-an-event">4.1.1.5. Editing a task or an event</a></h5>
 <div class="paragraph">
 <p><code>Task</code> and <code>Event</code> objects are editable through the use of <code>EditCommand</code>.
 In this application, if a commmand requires a target to operate on,
@@ -1085,7 +1070,7 @@ The api is given as below:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="removing-a-task-or-an-event"><a class="link" href="#removing-a-task-or-an-event">4.1.1.5. Removing a task or an event</a></h5>
+<h5 id="removing-a-task-or-an-event"><a class="link" href="#removing-a-task-or-an-event">4.1.1.6. Removing a task or an event</a></h5>
 <div class="paragraph">
 <p><code>Task</code> and <code>Event</code> objects can be removed through the use of the <code>RemoveCommand</code>
 by specifying the <code>Task</code> or <code>Event</code> and the index of the task/event reflected in the GUI.</p>
@@ -1117,7 +1102,7 @@ will be reflected in the GUI.
 </div>
 </div>
 <div class="sect4">
-<h5 id="completing-a-task"><a class="link" href="#completing-a-task">4.1.1.6. Completing a task</a></h5>
+<h5 id="completing-a-task"><a class="link" href="#completing-a-task">4.1.1.7. Completing a task</a></h5>
 <div class="paragraph">
 <p><code>Task</code> objects can be completed through the use of the <code>CompleteCommand</code> by specifying the <code>Task&#8217;s index reflected
 in the GUI. Note that `CompleteCommand</code> can only be applied to <code>Task</code> objects.</p>
@@ -1196,7 +1181,7 @@ We will need to write codes for classes and methods related to <code>Task</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-gui"><a class="link" href="#managing-gui">4.2. Managing GUI</a></h3>
+<h3 id="gui-managing"><a class="link" href="#gui-managing">4.2. GUI Managing</a></h3>
 <div class="paragraph">
 <p>This section describes implementation of features related to the GUI.</p>
 </div>
@@ -1222,7 +1207,7 @@ the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <cod
 <div class="content">
 <img src="images/centerStagePlaceholder.png" alt="centerStagePlaceholder" width="650">
 </div>
-<div class="title">Figure 21. centerStagePlaceholder</div>
+<div class="title">Figure 21. <code>centerStagePlaceholder</code></div>
 </div>
 <div class="paragraph">
 <p>To facilitate switching of views, the .xfml file of relevant view will be added to <code>centerStagePlaceholder</code>.</p>
@@ -1321,15 +1306,15 @@ user are displayed using <code>EventListPanel</code>. Below are examples of a <c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/TaskCard.png" alt="TaskCard" width="650">
+<img src="images/TaskCard.png" alt="TaskCard" width="300">
 </div>
-<div class="title">Figure 22. TaskListCard example</div>
+<div class="title">Figure 22. <code>TaskListCard</code> example</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EventCard.png" alt="EventCard" width="650">
+<img src="images/EventCard.png" alt="EventCard" width="300">
 </div>
-<div class="title">Figure 23. EventListCard example</div>
+<div class="title">Figure 23. <code>EventListCard</code> example</div>
 </div>
 <div class="paragraph">
 <p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
@@ -1342,7 +1327,7 @@ in a scenario where the user issues the command <code>list task</code>.</p>
 <div class="content">
 <img src="images/SDListCommand.png" alt="SDListCommand" width="650">
 </div>
-<div class="title">Figure 24. Relevant components interaction for <code>list task</code> command (part 1)</div>
+<div class="title">Figure 24. Component interactions for <code>list task</code> command (part 1)</div>
 </div>
 <div class="paragraph">
 <p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
@@ -1352,7 +1337,7 @@ results in 'centerStagePlaceholder` of the UI being updated to display <code>Tas
 <div class="content">
 <img src="images/SDListCommandEventHandling.png" alt="SDListCommandEventHandling" width="650">
 </div>
-<div class="title">Figure 25. Relevant components interaction for <code>list task</code> command (part 2)</div>
+<div class="title">Figure 25. Component interactions for <code>list task</code> command (part 2)</div>
 </div>
 <div class="paragraph">
 <p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> and/or <code>Event</code> objects in the GUI.
@@ -1497,7 +1482,7 @@ definitely the preferred approach here.
 </div>
 </div>
 <div class="sect2">
-<h3 id="managing-desk-board-storage"><a class="link" href="#managing-desk-board-storage">4.3. Managing Desk Board Storage</a></h3>
+<h3 id="desk-board-storage-management"><a class="link" href="#desk-board-storage-management">4.3. Desk Board Storage Management</a></h3>
 <div class="paragraph">
 <p>This section describes the implementation and design considerations for the storage of <code>Task</code> and <code>Event</code> objects.</p>
 </div>
@@ -1514,7 +1499,7 @@ The following describes how each feature is implemented.</p>
 is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
 These xml-adapted objects have the same attributes as the objects they represent.
 However, the attributes are converted into <code>String</code> which can then be stored into xml format.
-Similar to how <code>Task</code> and <code>Event</code> objects inherit from <code>Activity</code> class (as discussed in <a href="#Implementation - Activity">Managing Activities</a>),
+Similar to how <code>Task</code> and <code>Event</code> objects inherit from <code>Activity</code> class (as discussed in <a href="#Implementation - Activity">Activity Management</a>),
 their xml-adapted equivalents inherit from <code>XmlAdaptedActivity</code> class.
 The constructor method of <code>XmlAdaptedActivity</code> below illustrates how a <code>Task</code> object can be converted into
 an <code>XmlAdaptedTask</code> object.</p>
@@ -1740,14 +1725,14 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-redoing-commands"><a class="link" href="#undoing-redoing-commands">4.4. Undoing/Redoing Commands</a></h3>
+<h3 id="undo-redo-commands"><a class="link" href="#undo-redo-commands">4.4. Undo/Redo Commands</a></h3>
 <div class="paragraph">
 <p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the desk board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
+<p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of Desk Board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
 <div class="paragraph">
 <p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead. The following diagram shows the inheritance diagram for commands:</p>
@@ -1756,10 +1741,10 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 30. Class Diagram of a Logic Command</div>
+<div class="title">Figure 30. Class diagram of a Logic command</div>
 </div>
 <div class="paragraph">
-<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
+<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of Desk Board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are implemented this way:</p>
@@ -1800,20 +1785,26 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <p>Suppose that the user has just launched the application. The <code>UndoRedoStack</code> will be empty at the beginning.</p>
 </div>
 <div class="paragraph">
-<p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th activity in the desk board. The current state of the desk board is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code> (the current state is saved together with the command).</p>
+<p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th activity in Desk Board. The current state of Desk Board is saved before the <code>delete 5</code> command executes.
+The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code>
+(the current state is saved together with the command) as shown in <em>Figure 31</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
 </div>
+<div class="title">Figure 31. Undo and redo starting stack diagram</div>
 </div>
 <div class="paragraph">
-<p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new activity.</p>
+<p>As the user continues to use the program, more commands are added into the <code>undoStack</code>.
+For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new activity.
+<em>Figure 32</em> shows the undo and redo stack diagram after the add command is executed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
 </div>
+<div class="title">Figure 32. Undo and redo stack diagram after more command is added</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1831,13 +1822,14 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <p>The user now decides that adding the activity was a mistake, and decides to undo that action using <code>undo</code>.</p>
 </div>
 <div class="paragraph">
-<p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the desk board to the state before the <code>add</code> command executed.</p>
+<p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore Desk Board to the state before the <code>add</code> command executed.
+<em>Figure 33</em> below shows the undo and redo stacks after the redo command is executed.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
-<div class="title">Figure 31. 'Undo' stack pops into the 'Redo' Stack</div>
+<div class="title">Figure 33. Undo stack pops into the redo stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1858,10 +1850,10 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 32. 'Undo' and 'Redo' Stack Sequence Diagram</div>
+<div class="title">Figure 34. Undo and redo stack sequence diagram</div>
 </div>
 <div class="paragraph">
-<p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
+<p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores Desk Board to the state after the command is executed).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1882,7 +1874,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
-<div class="title">Figure 33. Adding 'ClearCommand' to the 'Undo' Stack</div>
+<div class="title">Figure 35. Adding 'ClearCommand' to the undo stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -1891,7 +1883,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
-<div class="title">Figure 34. 'ListCommand' does not affect the 'Undo' Stack</div>
+<div class="title">Figure 36. 'ListCommand' does not affect the undo stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -1900,7 +1892,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
-<div class="title">Figure 35. Activity Diagram for 'Undo' and 'Redo'</div>
+<div class="title">Figure 37. Activity diagram for undo and redo</div>
 </div>
 </div>
 <div class="sect3">
@@ -1943,7 +1935,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Save the entire desk board.</p>
+<p><strong>Alternative 1 (current choice):</strong> Save the entire Desk Board data.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1974,7 +1966,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Only include commands that modifies the desk board (<code>add</code>, <code>clear</code>, <code>edit</code>).</p>
+<p><strong>Alternative 1 (current choice):</strong> Only include commands that modifies Desk Board data (<code>add</code>, <code>clear</code>, <code>edit</code>).</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1994,7 +1986,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <p>Pros: This might be more intuitive to the user.</p>
 </li>
 <li>
-<p>Cons: User has no way of skipping such commands if he or she just want to reset the state of the desk board and not the view.</p>
+<p>Cons: User has no way of skipping such commands if he or she just want to reset the state of Desk Board and not the view.</p>
 </li>
 </ul>
 </div>
@@ -2151,7 +2143,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 36. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 38. Saving documentation as PDF files in Chrome</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -2479,7 +2471,7 @@ Do take a look at <a href="#Design-Logic">Section 3.3, &#8220;Logic Component&#8
 </div>
 <h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the desk board, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in Desk Board, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2496,7 +2488,7 @@ Do take a look at <a href="#Design-Model">Section 3.4, &#8220;Model Component&#8
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the desk board.</p>
+<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in Desk Board.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -2555,7 +2547,7 @@ Do take a look at <a href="#Design-Model">Section 3.4, &#8220;Model Component&#8
 </div>
 <h4 id="code-ui-code-component" class="discrete"><code>Ui</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your desk board application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last activity in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use CLIndar. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last activity in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2711,7 +2703,7 @@ Do take a look at <a href="#Design-Ui">Section 3.2, &#8220;UI Component&#8221;</
 </div>
 </li>
 <li>
-<p>Modify the <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in the desk board.</p>
+<p>Modify the <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in Desk Board.</p>
 <div class="paragraph">
 <p><strong>Before</strong></p>
 </div>
@@ -2740,7 +2732,7 @@ Do take a look at <a href="#Design-Ui">Section 3.2, &#8220;UI Component&#8221;</
 <p><a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
 </li>
 <li>
-<p><a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the desk board is updated.</p>
+<p><a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever Desk Board is updated.</p>
 </li>
 </ul>
 </div>
@@ -2776,7 +2768,7 @@ Do take a look at <a href="#Design-Ui">Section 3.2, &#8220;UI Component&#8221;</
 </div>
 <h4 id="code-storage-code-component" class="discrete"><code>Storage</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the desk board to the cloud. However, the current implementation of the application constantly saves the desk board after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the desk board storage.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving Desk Board to the cloud. However, the current implementation of the application constantly saves Desk Board after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for Desk Board storage.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2793,7 +2785,7 @@ Do take a look at <a href="#Design-Storage">Section 3.5, &#8220;Storage Componen
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a new method <code>backupAddressBook(ReadOnlyAddressBook)</code>, so that the desk board can be saved in a fixed temporary location.</p>
+<p>Add a new method <code>backupAddressBook(ReadOnlyAddressBook)</code>, so that Desk Board can be saved in a fixed temporary location.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -2862,7 +2854,7 @@ Removes the remark for the first activity.</p>
 <div class="sect3">
 <h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
 <div class="sect4">
-<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">A.2.2.1. [Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
+<h5 id="step-1-logic-teach-the-app-to-accept-code-remark-code-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-code-remark-code-which-does-nothing">A.2.2.1. [Step 1] Logic: Teach the app to accept <code>remark</code> which does nothing</a></h5>
 <div class="paragraph">
 <p>Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
 </div>
@@ -3929,7 +3921,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:29:24 UTC
+Last updated 2018-04-15 14:02:57 UTC
 </div>
 </div>
 </body>
