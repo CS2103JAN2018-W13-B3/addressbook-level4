@@ -1477,9 +1477,74 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
 </li>
 </ul>
 </div>
+<div class="sect4">
+<h5 id="selecting-a-task-or-event"><a class="link" href="#selecting-a-task-or-event">4.2.2.1. Selecting a task or event</a></h5>
+<div class="paragraph">
+<p><code>Task</code> objects can be selected through the use of the <code>SelectCommand</code> by specifying the `Task&#8217;s or `Event&#8217;s index reflected
+in the GUI.</p>
+</div>
+<div class="paragraph">
+<p>Below is a snippet of how the <code>execute()</code> of <code>SelectCommand</code> that select the specified activity.
+The code make use the <code>JumpToEventListRequestEvent</code> or <code>JumpToTaskListRequestEvent</code> to inform the GUI to select the specified <code>Task</code> or <code>Event</code>.</p>
+</div>
+<div class="paragraph">
+<p>[source,java]n</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    public CommandResult execute() throws CommandException {
+        CommandResult result = null;
+        if (type.equalsIgnoreCase(TYPE_TASK)) {
+            List&lt;Activity&gt; lastShownList = model.getFilteredTaskList();
+
+            if (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+            }
+
+            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex));
+            result = new CommandResult(String.format(MESSAGE_SELECT_ACTIVITY_SUCCESS, targetIndex.getOneBased()));
+        } else if (type.equalsIgnoreCase(TYPE_EVENT)) {
+            List&lt;Activity&gt; lastShownList = model.getFilteredEventList();
+
+            if (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+            }
+
+            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex));
+            result = new CommandResult(String.format(MESSAGE_SELECT_ACTIVITY_SUCCESS, targetIndex.getOneBased()));
+        } else {
+            assert false : "Type is neither task or event, this should not happened!";
+        }
+        return result;
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br></p>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.3. Design considerations</a></h4>
+<h4 id="overdue"><a class="link" href="#overdue">4.2.3. Overdue</a></h4>
+<div class="paragraph">
+<p>Overdue tasks can be viewed through the use of the <code>OverdueCommand</code>. Note that the <code>OverdueCommand</code> only
+lists down overdue tasks; overdue events are marked as completed automatically.</p>
+</div>
+<div class="paragraph">
+<p><code>OverdueCommand</code> makes use of the <code>LocalDateTime</code> class in Java to check if an ongoing task becomes overdue
+or not.</p>
+</div>
+<div class="paragraph">
+<p>There will be a class in the <code>Model</code> component, which has access to the <code>UniqueActivityList</code> class in that
+component. The class will go through the <code>UniqueActivityList</code> and obtain the <code>dueDateTime</code> of <code>Task</code>, and the <code>end
+DateTime</code> of <code>Event</code>. It will then perform a check of the <code>DateTime</code> with <code>LocalDateTime.now()</code>. If a <code>Task</code> is overdue, it will be marked so in the GUI.
+If the current date and time is past an <code>Event</code> <code>s `endDateTime</code>, the <code>Event</code> will be marked as completed.
+<br>
+<br></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.4. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the GUI features. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1530,13 +1595,13 @@ definitely the preferred approach here.
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.2.4. Current implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">4.2.5. Current implementation</a></h4>
 <div class="paragraph">
 <p>The management of Desk Board storage in CLIndar includes automatic saving and loading of data, as well as export and import operations.
 The following describes how each feature is implemented.</p>
 </div>
 <div class="sect4">
-<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">4.2.4.1. Storing <code>Task</code> and <code>Event</code> objects</a></h5>
+<h5 id="storing-code-task-code-and-code-event-code-objects"><a class="link" href="#storing-code-task-code-and-code-event-code-objects">4.2.5.1. Storing <code>Task</code> and <code>Event</code> objects</a></h5>
 <div class="paragraph">
 <p>In CLIndar, Desk Board data are stored using an xml file. For this purpose, <code>DeskBoard</code>, which is composed of <code>Task</code> and <code>Event</code> objects,
 is converted into <code>XmlSerializableDeskBoard</code> containing <code>XmlAdaptedTask</code> and <code>XmlAdaptedEvent</code> objects.
@@ -1632,7 +1697,7 @@ two separate lists.
 </div>
 </div>
 <div class="sect4">
-<h5 id="exporting-data"><a class="link" href="#exporting-data">4.2.4.2. Exporting data</a></h5>
+<h5 id="exporting-data"><a class="link" href="#exporting-data">4.2.5.2. Exporting data</a></h5>
 <div class="paragraph">
 <p><em>Figure ##</em> below shows the UML sequence diagram for export operation.</p>
 </div>
@@ -1663,7 +1728,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 </div>
 </div>
 <div class="sect4">
-<h5 id="importing-data"><a class="link" href="#importing-data">4.2.4.3. Importing data</a></h5>
+<h5 id="importing-data"><a class="link" href="#importing-data">4.2.5.3. Importing data</a></h5>
 <div class="paragraph">
 <p><em>Figure ##</em> below shows the sequence diagram for import operation.</p>
 </div>
@@ -1693,7 +1758,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.2.5. Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.2.6. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -4071,7 +4136,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:23:51 UTC
+Last updated 2018-04-15 14:38:30 UTC
 </div>
 </div>
 </body>

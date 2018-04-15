@@ -33,12 +33,12 @@
 <li><a href="#adding-an-event-code-event-code-code-as-of-v1-3-code">3.3. Adding an event: <code>event</code> <code>[As of  v1.3]</code></a></li>
 <li><a href="#edit-a-task-code-edit-task-code-code-as-of-v1-5-code">3.4. Edit a task: <code>edit task</code> <code>[As of v1.5]</code></a></li>
 <li><a href="#edit-an-event-code-edit-event-code-code-as-of-v1-5-code">3.5. Edit an event: <code>edit event</code> <code>[As of v1.5]</code></a></li>
-<li><a href="#listing-uncompleted-tasks-and-upcoming-events-code-ls-code-code-as-of-v1-4-code">3.6. Listing uncompleted tasks and upcoming events: <code>ls</code> <code>[As of  v1.4]</code></a></li>
+<li><a href="#listing-tasks-and-events-code-ls-code-code-as-of-v1-4-code">3.6. Listing tasks and events: <code>ls</code> <code>[As of  v1.4]</code></a></li>
 <li><a href="#removing-a-task-or-event-code-rm-code-code-as-of-v1-4-code">3.7. Removing a task or event: <code>rm</code> <code>[As of  v1.4]</code></a></li>
-<li><a href="#completing-a-task-code-complete-task-code-or-code-com-task-code-code-as-of-v1-5-code">3.8. Completing a task: <code>complete task</code> or <code>com task</code> <code>[As of  v1.5]</code></a></li>
-<li><a href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code">3.9. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code> <code>[Coming Soon in  v1.5]</code></a></li>
-<li><a href="#finding-task-by-name-code-find-task-code-code-as-of-v1-5-code">3.10. Finding task by name: <code>find task</code> <code>[As of v1.5]</code></a></li>
-<li><a href="#shows-overdue-tasks-code-overdue-code-code-coming-soon-in-v1-5-code">3.11. Shows overdue tasks: <code>overdue</code> <code>[Coming Soon in  v1.5]</code></a></li>
+<li><a href="#completing-a-task-code-complete-task-code-code-as-of-v1-5-code">3.8. Completing a task: <code>complete task</code> <code>[As of  v1.5]</code></a></li>
+<li><a href="#finding-task-by-name-code-find-task-code-code-as-of-v1-5-code">3.9. Finding task by name: <code>find task</code> <code>[As of v1.5]</code></a></li>
+<li><a href="#shows-overdue-tasks-code-overdue-code-code-as-of-v1-5-code">3.10. Shows overdue tasks: <code>overdue</code> <code>[As of v1.5]</code></a></li>
+<li><a href="#selecting-a-task-or-event-code-select-task-code-or-code-select-event-code-code-as-of-v1-5-code">3.11. Selecting a task or event: <code>select task</code> or <code>select event</code> <code>[As of  v1.5]</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code-code-coming-soon-in-v1-5-code">3.12. Listing entered commands : <code>history</code> <code>[Coming Soon in  v1.5]</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code-or-code-u-code">3.13. Undoing previous command : <code>undo</code> or <code>u</code></a></li>
 <li><a href="#redoing-previously-undone-command-code-redo-code-or-code-r-code">3.14. Redoing previously undone command : <code>redo</code> or <code>r</code></a></li>
@@ -46,10 +46,9 @@
 <li><a href="#exporting-data-code-export-code-code-as-of-v1-5-code">3.16. Exporting data : <code>export</code> <code>[As of v1.5]</code></a></li>
 <li><a href="#importing-data-code-import-code-code-as-of-v1-5rc-code">3.17. Importing data : <code>import</code> <code>[As of v1.5rc]</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code-code-as-of-v1-4-1-code">3.18. Exiting the program : <code>exit</code> <code>[As of v1.4.1]</code></a></li>
-<li><a href="#editing-a-task-code-edit-task-code-code-coming-soon-in-v2-0-code">3.19. Editing a task : <code>edit task</code> <code>[Coming Soon in v2.0]</code></a></li>
-<li><a href="#locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code">3.20. Locating task by name: <code>find task</code> <code>[Coming Soon in v2.0]</code></a></li>
-<li><a href="#listing-all-past-events-code-ls-past-event-code-code-coming-soon-in-v2-0-code">3.21. Listing all past events: <code>ls past event</code> <code>[Coming Soon in v2.0]</code></a></li>
-<li><a href="#saving-the-data">3.22. Saving the data</a></li>
+<li><a href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code">3.19. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code> <code>[Coming Soon in  v1.5]</code></a></li>
+<li><a href="#listing-all-past-events-code-ls-past-event-code-code-coming-soon-in-v2-0-code">3.20. Listing all past events: <code>ls past event</code> <code>[Coming Soon in v2.0]</code></a></li>
+<li><a href="#saving-the-data">3.21. Saving the data</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -362,7 +361,7 @@ As such <code>edit event INDEX r/</code> would remove all the <code>tags</code> 
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-uncompleted-tasks-and-upcoming-events-code-ls-code-code-as-of-v1-4-code"><a class="link" href="#listing-uncompleted-tasks-and-upcoming-events-code-ls-code-code-as-of-v1-4-code">3.6. Listing uncompleted tasks and upcoming events: <code>ls</code> <code>[As of  v1.4]</code></a></h3>
+<h3 id="listing-tasks-and-events-code-ls-code-code-as-of-v1-4-code"><a class="link" href="#listing-tasks-and-events-code-ls-code-code-as-of-v1-4-code">3.6. Listing tasks and events: <code>ls</code> <code>[As of  v1.4]</code></a></h3>
 <div class="paragraph">
 <p>Shows one or two lists of tasks and events in Desk Board as described below.</p>
 </div>
@@ -372,13 +371,13 @@ As such <code>edit event INDEX r/</code> would remove all the <code>tags</code> 
 <div class="ulist">
 <ul>
 <li>
-<p><code>ls task</code>: shows only uncompleted tasks.</p>
+<p><code>ls task</code>: shows only tasks.</p>
 </li>
 <li>
-<p><code>ls event</code>: shows only upcoming events.</p>
+<p><code>ls event</code>: shows only events.</p>
 </li>
 <li>
-<p><code>ls</code>: shows both uncompleted tasks and upcoming events in 2 separate lists.</p>
+<p><code>ls</code>: shows both tasks and events in 2 separate lists.</p>
 </li>
 </ul>
 </div>
@@ -428,12 +427,12 @@ Removes the 2nd task in Desk Board.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="completing-a-task-code-complete-task-code-or-code-com-task-code-code-as-of-v1-5-code"><a class="link" href="#completing-a-task-code-complete-task-code-or-code-com-task-code-code-as-of-v1-5-code">3.8. Completing a task: <code>complete task</code> or <code>com task</code> <code>[As of  v1.5]</code></a></h3>
+<h3 id="completing-a-task-code-complete-task-code-code-as-of-v1-5-code"><a class="link" href="#completing-a-task-code-complete-task-code-code-as-of-v1-5-code">3.8. Completing a task: <code>complete task</code> <code>[As of  v1.5]</code></a></h3>
 <div class="paragraph">
 <p>Completes the task at the specified <code>INDEX</code> based on the most recent listing.</p>
 </div>
 <div class="paragraph">
-<p><strong>Format:</strong> <code>complete task INDEX</code> or <code>com task INDEX</code></p>
+<p><strong>Format:</strong> <code>complete task INDEX</code></p>
 </div>
 <div class="paragraph">
 <p><strong>Examples:</strong></p>
@@ -445,25 +444,11 @@ Removes the 2nd task in Desk Board.</p>
 <code>complete task 3</code><br>
 Completes the 3rd task in Desk Board.</p>
 </li>
-<li>
-<p><code>ls task</code><br>
-<code>com task 2</code><br>
-Completes the 2nd task in Desk Board.</p>
-</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code"><a class="link" href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code">3.9. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code> <code>[Coming Soon in  v1.5]</code></a></h3>
-<div class="paragraph">
-<p>Shows a list of all completed tasks in Desk Board.<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Format:</strong> <code>ls complete task</code> or <code>ls com task</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="finding-task-by-name-code-find-task-code-code-as-of-v1-5-code"><a class="link" href="#finding-task-by-name-code-find-task-code-code-as-of-v1-5-code">3.10. Finding task by name: <code>find task</code> <code>[As of v1.5]</code></a></h3>
+<h3 id="finding-task-by-name-code-find-task-code-code-as-of-v1-5-code"><a class="link" href="#finding-task-by-name-code-find-task-code-code-as-of-v1-5-code">3.9. Finding task by name: <code>find task</code> <code>[As of v1.5]</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all tasks and/or event which contains any given keyword in its name.</p>
 </div>
@@ -519,12 +504,21 @@ Finds all tasks and event with name containing either <code>CS2101</code> or <co
 </div>
 </div>
 <div class="sect2">
-<h3 id="shows-overdue-tasks-code-overdue-code-code-coming-soon-in-v1-5-code"><a class="link" href="#shows-overdue-tasks-code-overdue-code-code-coming-soon-in-v1-5-code">3.11. Shows overdue tasks: <code>overdue</code> <code>[Coming Soon in  v1.5]</code></a></h3>
+<h3 id="shows-overdue-tasks-code-overdue-code-code-as-of-v1-5-code"><a class="link" href="#shows-overdue-tasks-code-overdue-code-code-as-of-v1-5-code">3.10. Shows overdue tasks: <code>overdue</code> <code>[As of v1.5]</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of tasks that remain uncompleted after their respective due dates.</p>
 </div>
 <div class="paragraph">
 <p><strong>Format:</strong> <code>overdue</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-task-or-event-code-select-task-code-or-code-select-event-code-code-as-of-v1-5-code"><a class="link" href="#selecting-a-task-or-event-code-select-task-code-or-code-select-event-code-code-as-of-v1-5-code">3.11. Selecting a task or event: <code>select task</code> or <code>select event</code> <code>[As of  v1.5]</code></a></h3>
+<div class="paragraph">
+<p>Select the task or event at the specified <code>INDEX</code> based on the most recent listing.</p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>select task INDEX</code> or <code>select event INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -695,19 +689,20 @@ If a file with the same name exists in the same directory as <code>FILE_PATH</co
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-task-code-edit-task-code-code-coming-soon-in-v2-0-code"><a class="link" href="#editing-a-task-code-edit-task-code-code-coming-soon-in-v2-0-code">3.19. Editing a task : <code>edit task</code> <code>[Coming Soon in v2.0]</code></a></h3>
+<h3 id="listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code"><a class="link" href="#listing-all-completed-tasks-code-ls-complete-task-code-or-code-ls-com-task-code-code-coming-soon-in-v1-5-code">3.19. Listing all completed tasks: <code>ls complete task</code> or <code>ls com task</code> <code>[Coming Soon in  v1.5]</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all completed tasks in Desk Board.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Format:</strong> <code>ls complete task</code> or <code>ls com task</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-past-events-code-ls-past-event-code-code-coming-soon-in-v2-0-code"><a class="link" href="#listing-all-past-events-code-ls-past-event-code-code-coming-soon-in-v2-0-code">3.20. Listing all past events: <code>ls past event</code> <code>[Coming Soon in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code"><a class="link" href="#locating-task-by-name-code-find-task-code-code-coming-soon-in-v2-0-code">3.20. Locating task by name: <code>find task</code> <code>[Coming Soon in v2.0]</code></a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="listing-all-past-events-code-ls-past-event-code-code-coming-soon-in-v2-0-code"><a class="link" href="#listing-all-past-events-code-ls-past-event-code-code-coming-soon-in-v2-0-code">3.21. Listing all past events: <code>ls past event</code> <code>[Coming Soon in v2.0]</code></a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.21. Saving the data</a></h3>
 <div class="paragraph">
 <p>The data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -893,6 +888,20 @@ There is no need to save manually.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Removes task at index 1</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select event</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="empty"></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select event INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select event 1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select event at index 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select task</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="empty"></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select task INDEX</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select task 1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select task at index 1</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>task</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="empty"></a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>task n/NAME d/DUE_DATE_TIME [r/REMARK] [t/TAGS]</code></p></td>
@@ -913,7 +922,7 @@ There is no need to save manually.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:23:51 UTC
+Last updated 2018-04-15 14:38:30 UTC
 </div>
 </div>
 </body>

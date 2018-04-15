@@ -29,16 +29,70 @@
 <div class="paragraph">
 <p><strong>Major enhancement</strong>: Modifying the Model component. This includes creation of Event and Task classes, as well as their superclass, Activity. Other classes relevant to tasks and events are also created, such as DateTime.</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Alter the model component to store the information related to <code>task</code> and <code>event</code> instead of orginal personal information</p>
+</li>
+<li>
+<p>Justification: This feature is crucial as it stores the records in the memory. APIs should be create so that other component can operate on the storage component.</p>
+</li>
+<li>
+<p>Highlights: This enhancement required in-depth understanding of the architecture of the program.
+As other components relies heavily on <code>model</code> component, hence when making changes to the <code>model</code> component, relavant changes need to be done to other component and relevant tests.</p>
+</li>
+<li>
+<p>Credit: In writing new classes, the code in the original <code>addressbook</code> application is reused as a template.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p><strong>Minor enhancement</strong>: Creating 'complete' command. This command marks a Task object as completed.</p>
+<p><strong>Minor enhancement</strong>: Creating 'complete' command. This command marks a Task object as completed.
+ Modified existing <code>edit</code> command, <code>find</code> command and <code>select</code> command to work in the CLIndar. Related testing is also reconstructed.
+* <strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/functional/YuanQLLer.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/test/YuanQLLer.md">Test code</a>]</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/functional/YuanQLLer.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-W13-B3/main/blob/master/collated/test/YuanQLLer.md">Test code</a>]</p>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.2</code> and <code>For Acceptance Test</code> version on GitHub.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p><strong>Other contributions</strong>:</p>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Modify <code>NameContainsKeywordPredicate</code> allows the keyword to match part of the <code>Name</code> of records.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/107">#107</a>
+<a href="https://github.com/CS2103JAN2018-W13-B3/main/pull/98">#98</a></p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class (examples: <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/176">#176</a>, <a href="https://github.com/CS2103JAN2018-T09-B2/main/issues/172">#172</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -365,6 +419,49 @@ The api is given as below:</p>
 <p><br></p>
 </div>
 </div>
+<div class="sect4">
+<h5 id="selecting-a-task-or-event"><a class="link" href="#selecting-a-task-or-event">Selecting a task or event</a></h5>
+<div class="paragraph">
+<p><code>Task</code> objects can be selected through the use of the <code>SelectCommand</code> by specifying the `Task&#8217;s or `Event&#8217;s index reflected
+in the GUI.</p>
+</div>
+<div class="paragraph">
+<p>Below is a snippet of how the <code>execute()</code> of <code>SelectCommand</code> that select the specified activity.
+The code make use the <code>JumpToEventListRequestEvent</code> or <code>JumpToTaskListRequestEvent</code> to inform the GUI to select the specified <code>Task</code> or <code>Event</code>.</p>
+</div>
+<div class="paragraph">
+<p>[source,java]n</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    public CommandResult execute() throws CommandException {
+        CommandResult result = null;
+        if (type.equalsIgnoreCase(TYPE_TASK)) {
+            List&lt;Activity&gt; lastShownList = model.getFilteredTaskList();
+
+            if (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+            }
+
+            EventsCenter.getInstance().post(new JumpToTaskListRequestEvent(targetIndex));
+            result = new CommandResult(String.format(MESSAGE_SELECT_ACTIVITY_SUCCESS, targetIndex.getOneBased()));
+        } else if (type.equalsIgnoreCase(TYPE_EVENT)) {
+            List&lt;Activity&gt; lastShownList = model.getFilteredEventList();
+
+            if (targetIndex.getZeroBased() &gt;= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_ACTIVITY_DISPLAYED_INDEX);
+            }
+
+            EventsCenter.getInstance().post(new JumpToEventListRequestEvent(targetIndex));
+            result = new CommandResult(String.format(MESSAGE_SELECT_ACTIVITY_SUCCESS, targetIndex.getOneBased()));
+        } else {
+            assert false : "Type is neither task or event, this should not happened!";
+        }
+        return result;
+    }</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -372,7 +469,7 @@ The api is given as below:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:23:51 UTC
+Last updated 2018-04-15 14:38:30 UTC
 </div>
 </div>
 </body>
