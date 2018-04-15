@@ -74,7 +74,10 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Open, tag, assign and close issues.</p>
+</li>
+<li>
+<p>Coming most of the user stories for the team&#8217;s major enhancements.</p>
 </li>
 </ul>
 </div>
@@ -84,10 +87,7 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Added 'esc' function feature whereby pressing 'esc' key allows deselection of list cell.</p>
 </li>
 </ul>
 </div>
@@ -97,7 +97,7 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Reviewed language and grammar for first half of the developer guide. Included pictures in the developer guide as well.</p>
 </li>
 </ul>
 </div>
@@ -107,16 +107,10 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
+<p>Reviewing teammate&#8217;s code before merging pull request.</p>
 </li>
 <li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
+<p>Resolving merge conflicts as a result of a few consecutive pull request.</p>
 </li>
 </ul>
 </div>
@@ -126,7 +120,7 @@ application worked.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
+<p>Integrated a third party library (CalendarFX) to the project</p>
 </li>
 <li>
 <p>Integrated a new Github plugin (CircleCI) to the team repo</p>
@@ -248,318 +242,250 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undoing-redoing-commands"><a class="link" href="#undoing-redoing-commands">Undoing/Redoing Commands</a></h3>
+<h3 id="managing-gui"><a class="link" href="#managing-gui">Managing GUI</a></h3>
 <div class="paragraph">
-<p>The current implementation and design considerations for the undo/redo feature are explained in this section.</p>
+<p>This section describes implementation of features related to the GUI.</p>
 </div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the desk board (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
+<p>There are 3 views for the GUI of CLIndar - <code>MainView</code>, <code>TaskView</code> and <code>EventView</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead. The following diagram shows the inheritance diagram for commands:</p>
+<p><code>MainView</code> displays both <code>Task</code> and <code>Event which is the default display for
+the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <code>EventListPanel</code> and <code>BrowserPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>TaskView</code> displays <code>Task</code> only on the GUI and comprises of <code>CalendarPanel</code>, <code>TaskListPanel</code> and <code>BrowserPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>EventView</code> displays <code>Event</code> only on the GUI and comprises of <code>CalendarPanel</code>, <code>EventListPanel</code> and <code>BrowserPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>centerStagePlaceholder</code> refers to the center stage of the GUI marked out by the red rectangle shown in <em>Figure 10</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
+<img src="../images/centerStagePlaceholder.png" alt="centerStagePlaceholder" width="650">
 </div>
-<div class="title">Figure 1. Class Diagram of a Logic Command</div>
-</div>
-<div class="paragraph">
-<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
+<div class="title">Figure 1. centerStagePlaceholder</div>
 </div>
 <div class="paragraph">
-<p>Commands that are not undoable are implemented this way:</p>
+<p>To facilitate switching of views, the .xfml file of relevant view will be added to <code>centerStagePlaceholder</code>.</p>
+</div>
+<div class="paragraph">
+<p>Following is a snippet that shows how <code>MainView</code> is added to <code>centerStagePlaceholder</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ListCommand</span> <span class="directive">extends</span> Command {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult execute() {
-        <span class="comment">// ... list logic ...</span>
-    }
-}</code></pre>
+<pre>    @Subscribe
+    private void handleShowActivityRequestEvent(ShowActivityRequestEvent event)    {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        centerStagePlaceholder.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+        view = "mainView";
+        mainView = new MainView(logic);
+        centerStagePlaceholder.getChildren().add(mainView.getRoot());
+    }</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>With the extra layer, the commands that are undoable are implemented this way:</p>
+<p><br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The calendar feature of the application makes use of the open source project - CalendarFX.</p>
+</div>
+<div class="paragraph">
+<p>Whenever <code>DeskboardChangedEvent</code> is fired from the <code>EventCenter</code>, meaning that an <code>Activity</code> has been added or removed,
+<code>CalendarPanel</code> receives it updates the calendar accordingly.</p>
+</div>
+<div class="paragraph">
+<p>The following is a snippet shows how <code>handleDeskBoardChangedEvent</code> synchronizes with <code>UniqueActivityList</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">abstract</span> <span class="type">class</span> <span class="class">UndoableCommand</span> <span class="directive">extends</span> Command {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult execute() {
-        <span class="comment">// ... undo logic ...</span>
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Subscribe</span>
+    <span class="directive">private</span> <span class="type">void</span> handleDeskBoardChangedEvent(DeskBoardChangedEvent event) {
+        syncCalendarWithActivities(event.data.getActivityList());
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>Next, <code>BrowserPanel</code> is hidden in the GUI when the application is first initialised. Selecting a cell in either of the
+cells in <code>TaskListPanel</code> or <code>EventListPanel</code> causes the <code>BrowserPanel</code> to appear.</p>
+</div>
+<div class="paragraph">
+<p>The following is a snippet of how the constructor of <code>BrowserPanel</code> hides itself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> BrowserPanel() {
 
-        executeUndoableCommand();
-    }
-}
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteCommand</span> <span class="directive">extends</span> UndoableCommand {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult executeUndoableCommand() {
-        <span class="comment">// ... delete logic ...</span>
-    }
-}</code></pre>
+        /...some code.../
+        browser.managedProperty().bind(browser.visibleProperty());
+        browser.setVisible(<span class="predefined-constant">false</span>);
+        /...some code.../
+    }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Suppose that the user has just launched the application. The <code>UndoRedoStack</code> will be empty at the beginning.</p>
+<p>Below is a snippet of how <code>BrowserPanel</code> displays the details of the <code>Task</code> selected in the GUI:</p>
 </div>
-<div class="paragraph">
-<p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th activity in the desk board. The current state of the desk board is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code> (the current state is saved together with the command).</p>
-</div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="type">void</span> showBrowserPanelTask(Task task) {
+        Platform.runLater(<span class="keyword">new</span> <span class="predefined-type">Runnable</span>() {
+            <span class="annotation">@Override</span>
+            <span class="directive">public</span> <span class="type">void</span> run() {
+                browser.setVisible(<span class="predefined-constant">true</span>);
+                browser.getChildren().setAll(setupBrowserPanelTask(task));
+            }
+        });
+    }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new activity.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not be pushed to the <code>UndoRedoStack</code> at all.
-</td>
-</tr>
-</table>
+<p><br>
+<br></p>
 </div>
 <div class="paragraph">
-<p>The user now decides that adding the activity was a mistake, and decides to undo that action using <code>undo</code>.</p>
-</div>
-<div class="paragraph">
-<p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the desk board to the state before the <code>add</code> command executed.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
-</div>
-<div class="title">Figure 2. 'Undo' stack pops into the 'Redo' Stack</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>undoStack</code> is empty, then there are no other commands left to be undone, and an <code>Exception</code> will be thrown when popping the <code>undoStack</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-<div class="title">Figure 3. 'Undo' and 'Redo' Stack Sequence Diagram</div>
-</div>
-<div class="paragraph">
-<p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>redoStack</code> is empty, then there are no other commands left to be redone, and an <code>Exception</code> will be thrown when popping the <code>redoStack</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The user now decides to execute a new command, <code>clear</code>. As before, <code>clear</code> will be pushed into the <code>undoStack</code>. This time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command (this is the behavior that most modern desktop applications follow).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
-</div>
-<div class="title">Figure 4. Adding 'ClearCommand' to the 'Undo' Stack</div>
-</div>
-<div class="paragraph">
-<p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
-</div>
-<div class="title">Figure 5. 'ListCommand' does not affect the 'Undo' Stack</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
-<div class="title">Figure 6. Activity Diagram for 'Undo' and 'Redo'</div>
+<p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe
+the implementation for each command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
+<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">Listing of tasks and events</a></h4>
 <div class="paragraph">
-<p>This section describes various design considerations related to the implementation of undo/redo feature. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
+<p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all
+the <code>Task</code> objects added by the user is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by
+user are displayed using <code>EventListPanel</code>. Below are examples of a <code>TaskListCard</code> and an <code>EventListCard</code>.</p>
 </div>
-<h5 id="aspect-implementation-of-code-undoablecommand-code" class="discrete">Aspect: Implementation of <code>UndoableCommand</code></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.</p>
-</li>
-<li>
-<p>Cons: It will be hard for new developers to understand the template pattern.</p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="../images/TaskCard.png" alt="TaskCard" width="650">
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Just override <code>execute()</code>.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: This does not involve the template pattern, easier for new developers to understand.</p>
-</li>
-<li>
-<p>Cons: Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
-</li>
-</ul>
+<div class="title">Figure 2. TaskListCard example</div>
 </div>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EventCard.png" alt="EventCard" width="650">
 </div>
-<h5 id="aspect-execution-of-undo-and-redo" class="discrete">Aspect: Execution of undo and redo</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Save the entire desk board.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: This is easy to implement.</p>
-</li>
-<li>
-<p>Cons: There may be performance issues in terms of memory usage.</p>
-</li>
-</ul>
+<div class="title">Figure 3. EventListCard example</div>
 </div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Make individual command know how to undo/redo itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: This will use less memory (e.g. for <code>delete</code>, just save the activity being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h5 id="aspect-type-of-commands-that-can-be-undone-redone" class="discrete">Aspect: Type of commands that can be undone/redone</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Only include commands that modifies the desk board (<code>add</code>, <code>clear</code>, <code>edit</code>).</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).</p>
-</li>
-<li>
-<p>Cons: User might think that undo also applies when the list is modified (undoing filtering for example), only to realize that it does not do that, after executing <code>undo</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Include all commands.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: This might be more intuitive to the user.</p>
-</li>
-<li>
-<p>Cons: User has no way of skipping such commands if he or she just want to reset the state of the desk board and not the view.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
-</li>
-</ul>
-</div>
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands" class="discrete">Aspect: Data structure to support the undo/redo commands</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: This is easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate stack, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: This requires dealing with commands that have already been undone: We must remember to skip these commands. This violates SRP and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
+</div>
+<div class="paragraph">
+<p><em>Figure 10</em> below shows how the relevant primary and secondary components interact
+in a scenario where the user issues the command <code>list task</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SDListCommand.png" alt="SDListCommand" width="650">
+</div>
+<div class="title">Figure 4. Relevant components interaction for <code>list task</code> command (part 1)</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
+results in 'centerStagePlaceholder` of the UI being updated to display <code>TaskView</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SDListCommandEventHandling.png" alt="SDListCommandEventHandling" width="650">
+</div>
+<div class="title">Figure 5. Relevant components interaction for <code>list task</code> command (part 2)</div>
+</div>
+<div class="paragraph">
+<p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> and/or <code>Event</code> objects in the GUI.
+If an invalid request for <code>ListCommand</code> happens, a <code>CommandException</code> will be thrown.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> CommandResult execute() <span class="directive">throws</span> CommandException {
+
+        <span class="keyword">switch</span>(commandRequest)  {
+        <span class="keyword">case</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">task</span><span class="delimiter">&quot;</span></span>:
+            EventsCenter.getInstance().post(<span class="keyword">new</span> ShowTaskOnlyRequestEvent());
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(MESSAGE_SUCCESS_TASK);
+        <span class="keyword">case</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">event</span><span class="delimiter">&quot;</span></span>:
+            EventsCenter.getInstance().post(<span class="keyword">new</span> ShowEventOnlyRequestEvent());
+            <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(MESSAGE_SUCCESS_EVENT);
+        <span class="comment">// ... some code ...</span>
+
+        <span class="keyword">default</span>:
+            <span class="keyword">throw</span> <span class="keyword">new</span> CommandException(<span class="predefined-type">String</span>.format(Messages.MESSAGE_INVALID_LIST_REQUEST, commandRequest));
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>ListCommand</code> is successful:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code> will show only <code>Task</code> objects;</p>
+</li>
+<li>
+<p><code>list event</code> will show only <code>Event</code> objects; and</p>
+</li>
+<li>
+<p><code>list</code> will show both <code>Task</code> and <code>Event</code> objects.</p>
+</li>
+</ul>
+</div>
+<h5 id="aspect-implementation-of-code-listcommand-code" class="discrete">Aspect: Implementation of <code>ListCommand</code></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Have 1 panel which will display the 2 classes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The coding required for this approach is much lesser.</p>
+</li>
+<li>
+<p>Cons: The UI will be messier and less appealing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong> Alternative 2 (current choice):</strong> Have 2 panels which will display the 2 classes separately.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The backend coding will be neater as the 2 classes do not have the same number of compulsory
+information tags. The design of the UI will be much more intuitive too.</p>
+</li>
+<li>
+<p>Cons: A lot more coding is required to create the 2 separate panel.
+<br>
+<br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We preferred the second alternative as it adheres more closely with fundamental design principles. The GUI
+has to be made as intuitive as possible to bring convenience and comfort to the user. As such, the second alternative is
+definitely the preferred approach here.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:28:27 UTC
+Last updated 2018-04-15 11:29:24 UTC
 </div>
 </div>
 </body>

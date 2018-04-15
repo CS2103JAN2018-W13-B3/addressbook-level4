@@ -592,13 +592,14 @@ is stored in the <code>seedu.address.commons</code> package.</p>
 </div>
 <h5 id="events-driven-nature-of-the-design" class="discrete">Events-Driven Nature of the Design</h5>
 <div class="paragraph">
-<p><em>Figure 9</em> below shows how the primary and secondary components interact in a scenario where the user issues the command <code>delete 1</code>.</p>
+<p><em>Figure 10</em> below shows how the primary and secondary components interact in a scenario
+where the user issues the command <code>delete 1</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/SDforDeleteActivity.png" alt="SDforDeleteActivity" width="800">
 </div>
-<div class="title">Figure 10. Component interactions for <code>delete 1</code> command (part 1)</div>
+<div class="title">Figure 10. Relevant Components interactions for <code>delete 1</code> command (part 1)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -607,7 +608,8 @@ is stored in the <code>seedu.address.commons</code> package.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>DeskBoardChangedEvent</code> when the Desk Board data are changed, instead of asking the <code>Storage</code> to save the updates into the hard disk.
+Note how the <code>Model</code> simply raises a <code>DeskBoardChangedEvent</code> when the Desk Board data
+are changed, instead of asking the <code>Storage</code> to save the updates into the hard disk.
 </td>
 </tr>
 </table>
@@ -619,7 +621,7 @@ Note how the <code>Model</code> simply raises a <code>DeskBoardChangedEvent</cod
 <div class="content">
 <img src="images/SDforDeleteActivityEventHandling.png" alt="SDforDeleteActivityEventHandling" width="800">
 </div>
-<div class="title">Figure 11. Component interactions for <code>delete 1</code> command (part 2)</div>
+<div class="title">Figure 11. Relevant Components interactions for <code>delete 1</code> command (part 2)</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -660,7 +662,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>TaskListPanel</code>, <code>EventListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The <code>UI</code> consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>MainView</code>
+<code>ResultDisplay</code>, <code>StatusBarFooter</code>,  etc. Note that <code>TaskListPanel</code>, <code>EventListPanel</code>, <code>BrowserPanel</code> and
+<code>CalendarPanel</code> are part of <code>MainView</code>. All these, including the <code>MainWindow</code>, inherit
+from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103JAN2018-W13-B3/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
@@ -1198,28 +1203,156 @@ We will need to write codes for classes and methods related to <code>Task</code>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">4.2.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe the implementation for each comman.</p>
+<p>There are 3 views for the GUI of CLIndar - <code>MainView</code>, <code>TaskView</code> and <code>EventView</code>.</p>
 </div>
-<div class="sect4">
-<h5 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">4.2.1.1. Listing of tasks and events</a></h5>
 <div class="paragraph">
-<p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all the <code>Task</code> objects added by the user
-is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by user are displayed using <code>EventListPanel</code>. Below are examples of a <code>TaskListCard</code> and an <code>EventListCard</code>.</p>
+<p><code>MainView</code> displays both <code>Task</code> and <code>Event which is the default display for
+the GUI. It comprises of `CalendarPanel</code>, <code>TaskListPanel</code>, <code>EventListPanel</code> and <code>BrowserPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>TaskView</code> displays <code>Task</code> only on the GUI and comprises of <code>CalendarPanel</code>, <code>TaskListPanel</code> and <code>BrowserPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>EventView</code> displays <code>Event</code> only on the GUI and comprises of <code>CalendarPanel</code>, <code>EventListPanel</code> and <code>BrowserPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>centerStagePlaceholder</code> refers to the center stage of the GUI marked out by the red rectangle shown in <em>Figure 10</em> below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/TaskCard.png" alt="TaskCard" width="550">
+<img src="images/centerStagePlaceholder.png" alt="centerStagePlaceholder" width="650">
 </div>
-<div class="title">Figure 21. TaskListCard example</div>
+<div class="title">Figure 21. centerStagePlaceholder</div>
+</div>
+<div class="paragraph">
+<p>To facilitate switching of views, the .xfml file of relevant view will be added to <code>centerStagePlaceholder</code>.</p>
+</div>
+<div class="paragraph">
+<p>Following is a snippet that shows how <code>MainView</code> is added to <code>centerStagePlaceholder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    @Subscribe
+    private void handleShowActivityRequestEvent(ShowActivityRequestEvent event)    {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        centerStagePlaceholder.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+        view = "mainView";
+        mainView = new MainView(logic);
+        centerStagePlaceholder.getChildren().add(mainView.getRoot());
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>The calendar feature of the application makes use of the open source project - CalendarFX.</p>
+</div>
+<div class="paragraph">
+<p>Whenever <code>DeskboardChangedEvent</code> is fired from the <code>EventCenter</code>, meaning that an <code>Activity</code> has been added or removed,
+<code>CalendarPanel</code> receives it updates the calendar accordingly.</p>
+</div>
+<div class="paragraph">
+<p>The following is a snippet shows how <code>handleDeskBoardChangedEvent</code> synchronizes with <code>UniqueActivityList</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="annotation">@Subscribe</span>
+    <span class="directive">private</span> <span class="type">void</span> handleDeskBoardChangedEvent(DeskBoardChangedEvent event) {
+        syncCalendarWithActivities(event.data.getActivityList());
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>Next, <code>BrowserPanel</code> is hidden in the GUI when the application is first initialised. Selecting a cell in either of the
+cells in <code>TaskListPanel</code> or <code>EventListPanel</code> causes the <code>BrowserPanel</code> to appear.</p>
+</div>
+<div class="paragraph">
+<p>The following is a snippet of how the constructor of <code>BrowserPanel</code> hides itself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">public</span> BrowserPanel() {
+
+        /...some code.../
+        browser.managedProperty().bind(browser.visibleProperty());
+        browser.setVisible(<span class="predefined-constant">false</span>);
+        /...some code.../
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below is a snippet of how <code>BrowserPanel</code> displays the details of the <code>Task</code> selected in the GUI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    <span class="directive">private</span> <span class="type">void</span> showBrowserPanelTask(Task task) {
+        Platform.runLater(<span class="keyword">new</span> <span class="predefined-type">Runnable</span>() {
+            <span class="annotation">@Override</span>
+            <span class="directive">public</span> <span class="type">void</span> run() {
+                browser.setVisible(<span class="predefined-constant">true</span>);
+                browser.getChildren().setAll(setupBrowserPanelTask(task));
+            }
+        });
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><br>
+<br></p>
+</div>
+<div class="paragraph">
+<p>There are two types of commands related to the GUI: <code>list</code> and <code>overdue</code>. The following sections will describe
+the implementation for each command.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-of-tasks-and-events"><a class="link" href="#listing-of-tasks-and-events">4.2.2. Listing of tasks and events</a></h4>
+<div class="paragraph">
+<p>A single <code>Task</code> or <code>Event</code> is displayed using a <code>TaskListCard</code> or <code>EventListCard</code> respectively. The list of all
+the <code>Task</code> objects added by the user is then displayed using the <code>TaskListPanel</code>, while <code>Event</code> objects added by
+user are displayed using <code>EventListPanel</code>. Below are examples of a <code>TaskListCard</code> and an <code>EventListCard</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EventCard.png" alt="EventCard" width="550">
+<img src="images/TaskCard.png" alt="TaskCard" width="650">
 </div>
-<div class="title">Figure 22. EventListCard example</div>
+<div class="title">Figure 22. TaskListCard example</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EventCard.png" alt="EventCard" width="650">
+</div>
+<div class="title">Figure 23. EventListCard example</div>
 </div>
 <div class="paragraph">
 <p><code>ListCommand</code> allows the user to only view <code>Task</code> only, <code>Event</code> only or both in the GUI.</p>
+</div>
+<div class="paragraph">
+<p><em>Figure 10</em> below shows how the relevant primary and secondary components interact
+in a scenario where the user issues the command <code>list task</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SDListCommand.png" alt="SDListCommand" width="650">
+</div>
+<div class="title">Figure 24. Relevant components interaction for <code>list task</code> command (part 1)</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 11</em> below shows how the <code>EventsCenter</code> reacts to that event, which eventually
+results in 'centerStagePlaceholder` of the UI being updated to display <code>TaskView</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SDListCommandEventHandling.png" alt="SDListCommandEventHandling" width="650">
+</div>
+<div class="title">Figure 25. Relevant components interaction for <code>list task</code> command (part 2)</div>
 </div>
 <div class="paragraph">
 <p>The following snippet shows how <code>execute()</code> of <code>ListCommand</code> displays <code>Task</code> and/or <code>Event</code> objects in the GUI.
@@ -1263,8 +1396,8 @@ If an invalid request for <code>ListCommand</code> happens, a <code>CommandExcep
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="overdue"><a class="link" href="#overdue">4.2.1.2. Overdue</a></h5>
+<div class="sect3">
+<h4 id="overdue"><a class="link" href="#overdue">4.2.3. Overdue</a></h4>
 <div class="paragraph">
 <p>Overdue tasks can be viewed through the use of the <code>OverdueCommand</code>. Note that the <code>OverdueCommand</code> only
 lists down overdue tasks; overdue events are marked as completed automatically.</p>
@@ -1282,9 +1415,8 @@ If the current date and time is past an <code>Event</code> <code>s `endDateTime<
 <br></p>
 </div>
 </div>
-</div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.2. Design considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.4. Design considerations</a></h4>
 <div class="paragraph">
 <p>This section describes various design considerations related to the GUI features. For each aspect, we will discuss the 2 alternatives considered and the pros and cons for each alternative.</p>
 </div>
@@ -1480,7 +1612,7 @@ two separate lists.
 <div class="content">
 <img src="images/ExportSequenceDiagram.png" alt="ExportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 23. Export sequence diagram</div>
+<div class="title">Figure 26. Export sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>As seen above, this operation requires the <code>Logic</code> component to access the <code>Storage</code> component.
@@ -1493,7 +1625,7 @@ The modifications made to classes in the <code>Logic</code> component are shown 
 <div class="content">
 <img src="images/LogicCommandClassDiagramModified.png" alt="LogicCommandClassDiagramModified" width="800">
 </div>
-<div class="title">Figure 24. Modification to <code>Logic</code> component</div>
+<div class="title">Figure 27. Modification to <code>Logic</code> component</div>
 </div>
 <div class="paragraph">
 <p>After <code>ExportCommand</code> gains access to the application&#8217;s <code>Storage</code> object, it can then call
@@ -1511,7 +1643,7 @@ the <code>saveDeskBoard()</code> method in <code>Storage</code> which allows Des
 <div class="content">
 <img src="images/ImportSequenceDiagram.png" alt="ImportSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 25. Import sequence diagram</div>
+<div class="title">Figure 28. Import sequence diagram</div>
 </div>
 <div class="paragraph">
 <p>Just like <code>ExportCommand</code>, <code>ImportCommand</code> also needs to have access to the application&#8217;s <code>Storage</code> object.
@@ -1525,7 +1657,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="content">
 <img src="images/AddActivitiesSequenceDiagram.png" alt="AddActivitiesSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 26. <code>addActivities()</code> sequence diagram</div>
+<div class="title">Figure 29. <code>addActivities()</code> sequence diagram</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -1624,7 +1756,7 @@ another <code>DeskBoard</code> object being added into the application&#8217;s <
 <div class="content">
 <img src="images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
 </div>
-<div class="title">Figure 27. Class Diagram of a Logic Command</div>
+<div class="title">Figure 30. Class Diagram of a Logic Command</div>
 </div>
 <div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the desk board before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
@@ -1705,7 +1837,7 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
-<div class="title">Figure 28. 'Undo' stack pops into the 'Redo' Stack</div>
+<div class="title">Figure 31. 'Undo' stack pops into the 'Redo' Stack</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1726,7 +1858,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 29. 'Undo' and 'Redo' Stack Sequence Diagram</div>
+<div class="title">Figure 32. 'Undo' and 'Redo' Stack Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The redo command does the exact opposite (pops from <code>redoStack</code>, pushes to <code>undoStack</code>, and restores the desk board to the state after the command is executed).</p>
@@ -1750,7 +1882,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
 </div>
-<div class="title">Figure 30. Adding 'ClearCommand' to the 'Undo' Stack</div>
+<div class="title">Figure 33. Adding 'ClearCommand' to the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
@@ -1759,7 +1891,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
-<div class="title">Figure 31. 'ListCommand' does not affect the 'Undo' Stack</div>
+<div class="title">Figure 34. 'ListCommand' does not affect the 'Undo' Stack</div>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -1768,7 +1900,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
-<div class="title">Figure 32. Activity Diagram for 'Undo' and 'Redo'</div>
+<div class="title">Figure 35. Activity Diagram for 'Undo' and 'Redo'</div>
 </div>
 </div>
 <div class="sect3">
@@ -2019,7 +2151,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 33. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 36. Saving documentation as PDF files in Chrome</div>
 </div>
 <div class="paragraph">
 <p><br></p>
@@ -3797,7 +3929,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:28:27 UTC
+Last updated 2018-04-15 11:29:24 UTC
 </div>
 </div>
 </body>
